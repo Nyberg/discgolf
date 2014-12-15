@@ -7,7 +7,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
         "laracasts/validation": "~1.0",
-        "intervention/image": "master-dev"
+        "intervention/image": "master-dev",
+        "zizaco/entrust": "1.2.*@dev"
 	},
 	"autoload": {
 		"classmap": [

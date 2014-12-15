@@ -1,38 +1,29 @@
-@extends('admin/admin')
+@extends('master')
 
 @section('content')
 
- <section id="main-content">
-          <section class="wrapper">
+                 <h4 class="mb"><i class="fa fa-angle-right"></i> All Courses</h4>
+         <table class="table table-hover">
+         <thead>
+         <th>Name</th>
+         <th>Location</th>
+         <th>Holes</th>
+         <th>Par</th>
+         </thead>
+         <tbody>
+                @foreach($courses as $course)
 
-              <div class="row">
-                  <div class="col-lg-12 main-chart">
-                        <div class="showback">
-                            <h4><i class="fa fa-angle-right"></i> Courses</h4>
+                <tr>
+                <td><a href="/course/{{$course->id}}/show">{{$course->name}}</a></td>
+                <td>{{$course->city . ', '. $course->state . ', ' . $course->country}}</td>
+                <td>{{$course->holes}}</td>
+                <td>{{$course->par}}</td>
+                </tr>
 
-                            @foreach($courses as $course)
-                            <a href="/course/{{$course->id}}/show">
-                            <div class="col-md-4 col-sm-4 mb">
-                            							<div class="weather pn">
-                            								<i class="fa fa-tree fa-4x"></i>
-                            								<h2>{{$course->name}}</h2>
-                            								<h4>{{$course->location}}</h4>
-                            								<h4>Holes: {{$course->holes}} | Par: {{$course->par}}</h4>
-                            				            </div>
-                            </div>
-                            </a>
+                @endforeach
+                      </tbody>
+                                              </table>
 
 
-                            @endforeach
-
-
-                  	<div class="row mtbox">
-
-                  	</div><!-- /row mt -->
-                    </div>
-                  </div>
-              </div>
-          </section>
- </section>
 
 @stop

@@ -33,7 +33,7 @@
 
                         <ul>
                         <li><strong>Score:</strong></li>
-                        <li>{{$round->total}}</li>
+                        <li>{{calcScore($round->total, $course->par)}}</li>
                         </ul>
 
                         <ul>

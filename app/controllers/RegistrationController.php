@@ -9,6 +9,8 @@ class RegistrationController extends \BaseController {
 
 	public function store(){       // validate the info, create rules for the inputs
 
+        $role = Role::where('name','User')->firstOrFail();
+
         $user = new User;
         $user->username =  Input::get('username');
         $user->password = Input::get('password');
@@ -16,11 +18,9 @@ class RegistrationController extends \BaseController {
         $user->save();
 
         $profile = new Profile;
-        $profile->phone = Input::get('phone');
-        $profile->adress = Input::get('adress');
-        $profile->info = Input::get('info');
-
         $profile->save();
+
+        $user->roles()->attach($role);
 
         $user->profile()->save($profile);
 

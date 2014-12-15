@@ -23,10 +23,10 @@ class RoundController extends \BaseController {
 
 	public function create()
 	{
-        $id = Input::get('id');
-
+        $x = Input::get('id');
+        $id = (int)$x;
         if(is_null($id)){
-            return Redirect::to('admin/round/add');
+            return Redirect::to('/round/add')->with('danger', 'Something went wrong!');
         }else {
 
             $course = Course::with('hole')->where('id', $id)->firstOrFail();
@@ -77,7 +77,7 @@ class RoundController extends \BaseController {
         $round->total = $total;
         $round->save();
 
-        return Redirect::to('/admin');
+        return Redirect::to('/dashboard');
 	}
 
 	public function show($id, $course_id)
@@ -91,9 +91,10 @@ class RoundController extends \BaseController {
 
 	public function edit($id)
 	{
-        $round = Round::whereId($id)->firstOrFail();
+        $round = Round::with('score')->whereId($id)->firstOrFail();
+        $course = Course::with('hole')->whereId($id)->firstOrFail();
         $courses = Course::lists('name', 'id');
-		return View::make('round.edit', ['round'=>$round, 'courses'=>$courses]);
+		return View::make('round.edit', ['round'=>$round, 'course'=>$course, 'courses'=>$courses]);
 	}
 
 	public function update($id)
@@ -101,7 +102,7 @@ class RoundController extends \BaseController {
         $round = Round::whereId($id)->firstOrFail();
 
         if (is_null($round)) {
-            return Redirect::route('/admin');
+            return Redirect::route('/dashboard');
         } else {
 
             $round = Round::whereId($id)->firstOrFail();

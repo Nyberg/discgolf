@@ -23,6 +23,13 @@ class AdminController extends \BaseController {
         return View::make('admin.settings');
     }
 
+    public function users(){
+
+        $users = User::with('roles')->get();
+
+        return View::make('admin.users', ['users'=>$users]);
+
+    }
 
 	/**
 	 * Show the form for creating a new resource.

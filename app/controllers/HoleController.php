@@ -57,15 +57,12 @@ class HoleController extends \BaseController {
         $hole->number = Input::get('number-'.$i.'');
         $hole->length = Input::get('length-'.$i.'');
         $hole->par = Input::get('par-'.$i.'');
-        $x = Input::get('par-'.$i.'');
         $hole->course_id = $course_id;
-        $par = $par + $x;
-
         $hole->save();
 
     };
         $course = Course::whereId($course_id)->firstOrFail();
-        $course->par = $par;
+        $course->par = Hole::where('course_id', $hole->course_id)->sum('par');
         $course->save();
 
         return Redirect::to('/admin/course');
@@ -121,17 +118,11 @@ class HoleController extends \BaseController {
             $hole->length = Input::get('length');
             $hole->par = Input::get('par');
             $hole->course_id = Input::get('course_id');
-            $new_par = Input::get('par');
+
             $hole->save();
 
-
-            $course_par = Course::whereId($id)->pluck('par');
-
-            $old_par = $y;
-            $par = ($course_par + $new_par) - $old_par;
-
             $course = Course::whereId($id)->firstOrFail();
-            $course->par = $par;
+            $course->par = Hole::where('course_id', $hole->course_id)->sum('par');
             $course->save();
 
             $detail = new Detail;

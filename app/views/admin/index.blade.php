@@ -31,7 +31,7 @@
                            <div class="col-md-2 col-sm-2 box0">
                             <div class="box1">
                                 <span class="li_tag"></span>
-                                <h3>0</h3>
+                                <h3>4</h3>
                             </div>
                                 <p>You have 4 pending tasks!</p>
                         </div>

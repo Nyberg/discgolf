@@ -27,19 +27,16 @@ class SessionController extends \BaseController {
 
         if(Auth::attempt($input))
         {
-            return Redirect::intended('/admin');
+            return Redirect::intended('/')->with('success', 'You are succesfully logged in!');
         }
 
-        return Redirect::back()->withInput()->withFlashMessage('Dina inloggninsuppgifter stämde inte.');
+        return Redirect::back()->withInput()->with('danger', 'Your input was not correct..');
     }
-
-
 
     public function destroy($id = null)
     {
         Auth::logout();
-        return Redirect::to('/login')->withFlashMessage('You are successfully logged out!');
-
+        return Redirect::to('/')->with('success', 'You are successfully logged out!');
     }
 
 

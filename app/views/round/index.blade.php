@@ -1,14 +1,8 @@
-@extends('admin/admin')
+@extends('master')
 
 
 @section('content')
 
- <section id="main-content">
-          <section class="wrapper">
-
-              <div class="row">
-                  <div class="col-lg-12 main-chart">
-                  <div class="showback">
 
                           <h4><i class="fa fa-angle-right"></i> All Rounds</h4><hr>
                           <table class="table table-hover">
@@ -37,14 +31,6 @@
                               </tbody>
                           </table>
 
-                      	    </div>
-                      	 </div><!-- --/content-panel ---->
-                      </div><!-- --/content-panel ---->
-                  </div>
 
-                  </div>
-              </div>
-          </section>
- </section>
 
 @stop

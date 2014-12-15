@@ -12,13 +12,12 @@
 
                   	  <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Round</h4>
                   	  <div class="form-horizontal style-form">
-                  	   {{Form::model($round, ['method'=>'PATCH', 'route'=> ['round.update', $round->id]])}}
+
 
 
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Pick Course</label>
+                              <label class="col-sm-2 col-sm-2 control-label"> {{$course->name}}</label>
                               <div class="col-sm-10">
-                            {{Form::select('course', $courses,'',array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
 
                               </div>
                           </div>
@@ -26,13 +25,43 @@
                           <div class="form-group">
                                   <label class="col-sm-2 col-sm-2 control-label">Comment</label>
                                   <div class="col-sm-10">
-                                    {{Form::text('comment', null, ['class'=>'form-control'])}}
+
                                     </div>
                           </div>
 
-                            {{Form::submit('Save', ['class'=>'btn btn-primary'])}}
-                              {{Form::close()}}
-                         </div>
+
+                              <br/>
+                              <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Score</h4>
+                              <table class="table table-hover">
+                              <thead>
+                              <tr>
+                                  <th>#</th>
+                                  <th>Length</th>
+                                  <th>Par</th>
+                                  <th>Score</th>
+
+                                  <th>Edit</th>
+
+                              </tr>
+                              </thead>
+                              <tbody>
+                            @foreach($round->score as $score)
+                              <tr>
+                                  <td>{{$score->hole->number}}</td>
+                                  <td>{{convert($score->hole->length)}}</td>
+                                  <td>{{$score->par}}</td>
+                                  <td>{{$score->score}}</td>
+
+
+
+                                  <td><a href="/admin/score/{{$score->id}}/edit"><span class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></span></a></td>
+                                @endforeach
+                              </tr>
+
+
+                              </tbody>
+                          </table>
+</div>
                       </div>
             </div>
 

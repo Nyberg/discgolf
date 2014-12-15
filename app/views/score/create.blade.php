@@ -51,15 +51,15 @@
                {{Form::hidden('par-'.$hole->number.'', $hole->par)}}
 
                       <div class="form-group">
-                           <label class="col-sm-1 col-sm-1 control-label">Hole</label>
-                           <div class="col-sm-1">
+                           <label class="col-sm-2 col-sm-2 control-label">Hole</label>
+                           <div class="col-sm-4">
 
-                            {{Form::number('number-'.$hole->id.'', $hole->id, array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control','readonly'))}}
+                            {{Form::number('number-'.$hole->number.'', $hole->number, array('class'=>'form-control'))}}
 
                            </div>
 
-                           <label class="col-sm-1 col-sm-1 control-label">Score</label>
-                           <div class="col-sm-3">
+                           <label class="col-sm-2 col-sm-2 control-label">Score</label>
+                           <div class="col-sm-4">
                         {{Form::number('score-'.$hole->number.'', null, ['class'=>'form-control'])}}
                           </div>
                        </div>

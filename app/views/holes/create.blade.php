@@ -56,19 +56,17 @@
                          <label class="col-sm-1 col-sm-1 control-label">Hole </label>
 
                          <div class="col-sm-3">
-
-            {{Form::select('number-'.$i.'', array('1' => '1', '2' => '2', '3'=>'3', '4' => '4','5' => '5', '6' => '6', '7' => '7','8' => '8', '9' => '9', '10' => '10','11' => '11', '12' => '12', '13' => '13','14' => '14', '15' => '15', '16' => '16','17' => '17', '18' => '18', '19' => '19'),'',
-                        array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
+                    {{Form::number('number-'.$i.'', $i, ['class'=>'form-control', 'readonly'])}}
 
                     </div>
                         <label class="col-sm-1 col-sm-1 control-label">Length</label>
                          <div class="col-sm-3">
 
-                             {{Form::number('length-'.$i.'', '',['class'=>'form-control', 'placeholder'=>'Length'])}}
+                             {{Form::number('length-'.$i.'', '',['class'=>'form-control'])}}
                          </div>
                          <label class="col-sm-1 col-sm-1 control-label">Par</label>
                          <div class="col-sm-3">
-                      {{Form::number('par-'.$i.'', '', ['class'=>'form-control', 'placeholder'=>'Par'])}}
+                      {{Form::number('par-'.$i.'', '', ['class'=>'form-control'])}}
                         </div>
 
 

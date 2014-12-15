@@ -43,7 +43,7 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('/');
+			return Redirect::guest('/')->with('danger', 'You need to be logged in to do that!');
 		}
 	}
 });
@@ -87,4 +87,22 @@ Route::filter('csrf', function()
 	{
 		throw new Illuminate\Session\TokenMismatchException;
 	}
+});
+
+
+Route::filter('checkAdmin', function(){
+
+    $user = Auth::user();
+
+
+    if($user){
+        if(!$user->hasRole("Admin")){
+
+            return Redirect::to('/dashboard');
+        }
+
+    }else{
+        return Redirect::to('/')->with('danger', 'You need to be logged in to do that!');;
+    }
+
 });

@@ -14,10 +14,12 @@ class ScoreController extends \BaseController {
 
 	public function create()
 	{
-        $id = Input::get('id');
+        $x = Input::get('id');
+        $id = (int)$x;
+
 
         if(is_null($id)){
-            return Redirect::to('admin/round/add');
+            return Redirect::to('round/add')->with('danger', 'Something went wrong!');
         }else {
        $course = Course::with('hole')->where('id', $id)->firstOrFail();
 
@@ -53,7 +55,7 @@ class ScoreController extends \BaseController {
         $round->total = $total;
         $round->save();
 
-        return Redirect::to('/admin/course');
+        return Redirect::to('/course');
 	}
 
 
@@ -79,7 +81,9 @@ class ScoreController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$score = Score::with('hole')->whereId($id)->firstOrFail();
+
+        return View::make('score.edit', ['score'=>$score]);
 	}
 
 
@@ -91,7 +95,20 @@ class ScoreController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+        $round_id = Input::get('round_id');
+
+            $score = Score::whereId($id)->firstOrFail();
+
+            $score->score = Input::get('score');
+            $score->save();
+
+            $round = Round::whereId($round_id)->firstOrFail();
+            $total = Score::where('round_id', $round_id)->sum('score');
+
+        $round->total = $total;
+        $round->save();
+
+        return Redirect::to('/admin');
 	}
 
 

@@ -114,7 +114,7 @@ class CourseController extends \BaseController {
 		$course = Course::whereId($id)->firstOrFail();
         $course->delete();
 
-        $holes = Hole::where('course_id', $id)->get();
+        $holes = Hole::with('score')->where('course_id', $id)->get();
         foreach($holes as $hole){
             $hole->delete();
         }

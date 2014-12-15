@@ -10,7 +10,7 @@
           	<div class="row mt">
 
           		<div class="col-lg-12">
-            <div class="content-panel">
+            <div class="showback">
                                       <h4><i class="fa fa-angle-right"></i> Courses Admin</h4><hr><table class="table table-striped table-advance table-hover">
 
 
@@ -20,7 +20,8 @@
                                               <th class="hidden-phone"><i class="fa fa-globe"></i> Location</th>
                                               <th><i class="fa fa-bullseye"></i> Holes</th>
                                               <th><i class=" fa fa-star"></i> Par</th>
-                                              <th></th>
+                                              <th>Edit</th>
+                                              <th>Delete</th>
                                           </tr>
                                           </thead>
                                           <tbody>
@@ -29,13 +30,15 @@
 
                                           <tr>
                                               <td><a href="/course/{{$course->id}}/show">{{$course->name}}</a></td>
-                                              <td class="hidden-phone">{{$course->location}}</td>
+                                              <td>{{$course->city . ', '. $course->state . ', ' . $course->country}}</td>
                                               <td>{{$course->holes}}</td>
-                                              <td><span class="label label-info label-mini">{{$course->par}}</span></td>
+                                              <td>{{$course->par}}</td>
 
                                               <td>
 
                                               <a href="/admin/course/{{$course->id}}/edit"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+                                             </td>
+                                             <td>
                                               {{Form::open(['method'=>'DELETE', 'route'=>['course.destroy', $course->id]])}}
                                               {{Form::submit('Delete', ['class'=>'btn btn-danger btn-xs'])}}
                                               {{Form::close()}}
