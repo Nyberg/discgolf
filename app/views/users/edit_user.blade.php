@@ -1,22 +1,18 @@
-@extends('admin/admin')
+@extends('master')
 
 @section('content')
 
- <section id="main-content">
-          <section class="wrapper">
-
-          	<!-- BASIC FORM ELELEMNTS -->
-          	<div class="row mt">
-          		<div class="col-lg-12">
 
 
-
-
-                    <div class="form-panel">
                         <div class="bs-example">
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#sectionA">Settings</a></li>
                             <li><a data-toggle="tab" href="#sectionB">Profile</a></li>
+
+                            @if(Auth::user()->hasRole('Admin'))
+                            <li><a data-toggle="tab" href="#sectionC">Permissions</a></li>
+                            @else
+                            @endif
 
                         </ul>
                   <div class="form-horizontal style-form">
@@ -125,7 +121,7 @@
                                                      <div class="form-group">
                                                         <label class="col-sm-2 col-sm-2 control-label">Information</label>
                                                         <div class="col-sm-10">
-                                                            {{Form::text('information', null, ['class'=>'form-control'])}}
+                                                            {{Form::textarea('information', null, ['class'=>'form-control'])}}
 
                                                         </div>
                                                     </div>
@@ -135,13 +131,36 @@
 
 
                         </div>
+                        <div id="sectionC" class="tab-pane fade">
+                        <br/>
+                            <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Permissions</h4>
 
+                             {{Form::model($user->role, ['method'=>'PATCH', 'route'=> ['user.update', $user->id]])}}
+                        <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">Current Permission</label>
+                          <div class="col-sm-10">
+                        @foreach($user->roles as $role)
+                        {{$role->name}}
+                        @endforeach
+                        </div>
+                        </div>
+
+                              <div class="form-group">
+                                  <label class="col-sm-2 col-sm-2 control-label">Permissions</label>
+                                  <div class="col-sm-10">
+                               {{Form::select('role',$roles, null, array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}} </div>
+
+                                  </div>
+
+
+                          {{Form::submit('Update Permissions', ['class'=>'btn btn-primary'])}}
+                         {{Form::close()}}
+                         </div>
+                        </div>
+                         </div>
+
+                        </div>
                     </div>
                 </div>
-                </div></div>
 
-          	</div><!-- /row -->
-
-		</section><! --/wrapper -->
-      </section><!-- /MAIN CONTENT -->
 @stop

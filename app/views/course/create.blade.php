@@ -57,7 +57,7 @@
                            <div class="form-group">
                                               <label class="col-sm-2 col-sm-2 control-label">Information</label>
                                               <div class="col-sm-10">
-                                                  {{Form::text('information', '', ['class'=>'form-control', 'id'=>'submit_holes'])}} </div>
+                                                  {{Form::textarea('information', '', ['class'=>'form-control'])}} </div>
 
                                               <label class="col-sm-2 col-sm-2 control-label"></label>
                                               <div class="col-sm-10">
@@ -67,7 +67,7 @@
                                 <div class="form-group">
                                                    <label class="col-sm-2 col-sm-2 control-label">Club</label>
                                                    <div class="col-sm-10">
-                                                       {{Form::text('club', '', ['class'=>'form-control', 'id'=>'submit_holes'])}} </div>
+                                                       {{Form::select('club',$clubs ,'',array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}} </div>
 
                                                    <label class="col-sm-2 col-sm-2 control-label"></label>
                                                    <div class="col-sm-10">

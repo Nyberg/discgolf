@@ -1,15 +1,10 @@
 
 
-@extends('admin/admin')
+@extends('master')
 
 @section('content')
 
- <section id="main-content">
-          <section class="wrapper">
 
-              <div class="row">
-                  <div class="col-lg-12 main-chart">
-                  <div class="showback">
                                       <h4><i class="fa fa-angle-right"></i> User Admin</h4><hr><table class="table table-striped table-advance table-hover">
 
 
@@ -29,7 +24,7 @@
 
                                           <tr>
                                               <td>{{$user->id}}</td>
-                                              <td class="hidden-phone"><a href="/user/{{$user->id}}/edit">{{$user->username}}</a></td>
+                                              <td><a href="/user/{{$user->id}}/show">{{$user->username}}</a></td>
                                               <td>{{$user->email}}</td>
                                               <td>
 
@@ -40,7 +35,7 @@
                                              </td>
 
                                               <td>
-                                                <a href="/admin/user/{{$user->id}}/edit"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+                                                <a href="/user/{{$user->id}}/edit"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
                                               </td>
                                           </tr>
 
@@ -48,10 +43,7 @@
 
                                           </tbody>
                                       </table>
-                                  </div>
-          		</div><!-- col-lg-12-->
-          	</div><!-- /row -->
 
-		</section><! --/wrapper -->
-      </section><!-- /MAIN CONTENT -->
+
+
 @stop

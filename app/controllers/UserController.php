@@ -40,17 +40,31 @@ class UserController extends \BaseController {
 
 	public function edit($id)
 	{
+        $roles = Role::lists('name', 'id');
         $user = User::with('profile')->whereId($id)->firstOrFail();
 
-        return View::make('users/edit_user')->withUser($user);
+        return View::make('users/edit_user', ['user'=>$user, 'roles'=>$roles]);
 	}
 
 	public function update($id){
 
-        if(Auth::User()->id == $id){
+        if(Auth::User()->id == $id || Auth::user()->hasRole('Admin')){
 
         $check = Input::get('country');
 
+        $role_id = Input::get('role');
+
+            if(!empty($role_id)){
+
+                $user = User::whereId($id)->firstOrFail();
+                $role = Role::whereId($role_id)->firstOrFail();
+
+                $user->roles()->detach();
+                $user->roles()->attach($role);
+
+                return Redirect::to('/admin/users')->with('success', 'Permission changed!');
+
+            }
 
             if(!empty($check)){
 
@@ -67,7 +81,7 @@ class UserController extends \BaseController {
 
                 $user->profile->save();
 
-                return Redirect::back();
+                return Redirect::to('/dashboard')->with('success', 'Profile updated!');
 
             }
 
@@ -79,7 +93,7 @@ class UserController extends \BaseController {
             $user->metric = Input::get('metric');
             $user->save();
 
-            return Redirect::to('/admin');
+            return Redirect::to('/dashboard')->with('success', 'Settings updated!');
         }
         return Redirect::back()->withFlashMessage('You cant edit that!');
     }

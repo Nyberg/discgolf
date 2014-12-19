@@ -22,15 +22,6 @@
 
                      <h5><i class="fa fa-angle-right"></i> Ob Rules</h5><br/>
 
-                    @if(is_null($hole->detail['ob']))
-
-                    <p>No Ob-rules on this hole</p>
-
-                    @else
-
-                    <p>{{$hole->detail['ob']}}</p>
-
-                    @endif
 
                     </div>
                     <div class="col-lg-4">

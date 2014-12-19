@@ -25,7 +25,7 @@ function checkScore($id, $par){
     if($sum == 1){
         return 'warning';
     }
-    if($sum == 2){
+    if($sum >= 2){
         return 'danger';
     }
 }
@@ -39,10 +39,14 @@ function calcScore($score, $total){
 
 function convert($length){
 
-    if(Auth::User()->metric != 'f'){
+    if(!Auth::user()){
+        return $length . 'm';
+    }
+    if(Auth::user()->metric != 'f'){
         return $length . 'm';
     }else{
         $sum = $length * 3.280;
         return round($sum, 0) . ' ft';
     }
 }
+

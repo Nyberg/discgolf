@@ -54,8 +54,26 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">Holes</label>
+                        <div class="col-sm-10">
+                            {{Form::textarea('information', null, ['class'=>'form-control'])}} </div>
 
+                        <label class="col-sm-2 col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <span class="help-block">Insert number of holes, example: 18</span>
+                        </div>
+                    </div>
+                         <div class="form-group">
+                           <label class="col-sm-2 col-sm-2 control-label">Club</label>
+                           <div class="col-sm-10">
+                               {{Form::select('club',$clubs ,null,array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}} </div>
 
+                           <label class="col-sm-2 col-sm-2 control-label"></label>
+                           <div class="col-sm-10">
+                               <span class="help-block">The club/organisation that maintenance the course</span>
+                           </div>
+                       </div>
 
                      <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">Options</label>

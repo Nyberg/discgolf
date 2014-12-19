@@ -2,14 +2,8 @@
 
 class CourseController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
-
         $courses = Course::all();
 		return View::make('course.index', ['courses' => $courses]);
 	}
@@ -22,22 +16,12 @@ class CourseController extends \BaseController {
         return View::make('admin.course', ['courses'=>$courses]);
     }
 
-    /**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
 	public function create()
 	{
-		return View::make('course.create');
+        $clubs = Club::lists('name', 'id');
+		return View::make('course.create', ['clubs'=>$clubs]);
 	}
 
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function store()
 	{
 
@@ -86,7 +70,8 @@ class CourseController extends \BaseController {
             return Redirect::route('course.admin/course');
         }else{
 
-        return View::make('course.edit', ['course'=>$course]);
+        $clubs = Club::lists('name', 'id');
+        return View::make('course.edit', ['course'=>$course, 'clubs'=>$clubs]);
 	    }
     }
 
@@ -102,6 +87,7 @@ class CourseController extends \BaseController {
             $course->state = Input::get('state');
             $course->city = Input::get('city');
             $course->holes = Input::get('holes');
+            $course->information = Input::get('information');
 
             $course->save();
 

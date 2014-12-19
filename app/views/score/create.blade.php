@@ -48,6 +48,8 @@
 
                @foreach($course->hole as $hole)
 
+               {{Form::hidden('hole_id-'.$hole->number.'', $hole->id)}}
+
                {{Form::hidden('par-'.$hole->number.'', $hole->par)}}
 
                       <div class="form-group">

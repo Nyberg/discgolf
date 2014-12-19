@@ -32,7 +32,7 @@
                                 <td><a href="/user/{{$round->user_id}}/show">{{$round->user}}</a></td>
                                 <td><a href="/course/{{$round->course_id}}/show">{{$round->course['name']}}</a></td>
                                 <td>{{$round->total}}</td>
-                               <td><a href="/round/{{$round->id}}/edit"><span class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></span></a></td>
+                               <td><a href="/round/{{$round->id}}/edit/{{$round->course_id}}"><span class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></span></a></td>
 
                                 <td>
 

@@ -2,22 +2,11 @@
 
 class HoleController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
 		//
 	}
 
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
 	public function create($id)
 	{
         $course = Course::with('hole')->whereId($id)->firstOrFail();
@@ -37,12 +26,6 @@ class HoleController extends \BaseController {
 
 	}
 
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function store()
 	{
         $number = Input::get('hidden_holes');
@@ -69,27 +52,13 @@ class HoleController extends \BaseController {
 
 	}
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function show($id)
 	{
-		$hole = Hole::with('detail')->whereId($id)->firstOrFail();
+		$hole = Hole::with('shot')->whereId($id)->firstOrFail();
 
         return View::make('holes.show', ['hole'=>$hole]);
 	}
 
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function edit($id)
 	{
         $hole = Hole::whereId($id)->firstOrFail();
@@ -97,13 +66,6 @@ class HoleController extends \BaseController {
         return View::make('holes.edit', ['hole'=>$hole]);
 	}
 
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function update($id)
 	{
         $hole = Hole::whereId($id)->firstOrFail();
@@ -136,13 +98,6 @@ class HoleController extends \BaseController {
         }
 	}
 
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
         $hole = Hole::whereId($id)->firstOrFail();

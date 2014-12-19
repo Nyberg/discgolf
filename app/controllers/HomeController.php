@@ -22,4 +22,11 @@ class HomeController extends BaseController {
 
     }
 
+    public function dashboard(){
+        $id = Auth::User()->id;
+        $user = User::with('profile')->whereId($id)->firstOrFail();
+        $rounds = Round::where('user_id', $id)->count();
+        return View::make('dashboard.dashboard', ['user'=>$user, 'rounds'=>$rounds]);
+    }
+
 }

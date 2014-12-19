@@ -1,53 +1,36 @@
-@extends('admin/admin')
+@extends('master')
 
 
 @section('content')
 
- <section id="main-content">
-          <section class="wrapper">
+      <h4><i class="fa fa-angle-right"></i> All Users</h4><hr>
+      <table class="table table-hover">
+          <thead>
+          <tr>
 
-              <div class="row">
-                  <div class="col-lg-12 main-chart">
-                  <div class="showback">
+            <th>Full Name</th>
+            <th>Member Since</th>
+            <th>Pdga</th>
+            <th>Pdga Rating</th>
+            <th>Sponsor</th>
+            <th>Rounds</th>
 
-                          <h4><i class="fa fa-angle-right"></i> All users</h4><hr>
-                          <table class="table table-hover">
-                              <thead>
-                              <tr>
+          </tr>
 
-                                <th>Full Name</th>
-                                <th>Member Since</th>
-                                <th>Pdga</th>
-                                <th>Pdga Rating</th>
-                                <th>Sponsor</th>
-                                <th>Rounds</th>
+          </thead>
+          <tbody>
+          @foreach($users as $user)
+           <tr>
 
-                              </tr>
-
-                              </thead>
-                              <tbody>
-                              @foreach($users as $user)
-                               <tr>
-
-                                <td><a href="/user/{{$user->id}}/show">{{$user->username}}</a></td>
-                                <td>{{$user->created_at->format('Y-m-d')}}</td>
-                                <td>#1000000</td>
-                                <td>900</td>
-                                <td>Prodigy</td>
-                                <td>10</td>
-                               </tr>
-                               @endforeach
-                              </tbody>
-                          </table>
-
-                      	    </div>
-                      	 </div><!-- --/content-panel ---->
-                      </div><!-- --/content-panel ---->
-                  </div>
-
-                  </div>
-              </div>
-          </section>
- </section>
+            <td><a href="/user/{{$user->id}}/show">{{$user->username}}</a></td>
+            <td>{{$user->created_at->format('Y-m-d')}}</td>
+            <td>#1000000</td>
+            <td>900</td>
+            <td>Prodigy</td>
+            <td>10</td>
+           </tr>
+           @endforeach
+          </tbody>
+      </table>
 
 @stop

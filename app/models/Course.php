@@ -36,4 +36,8 @@ class Course extends Eloquent implements UserInterface, RemindableInterface {
     public function round(){
         return $this->hasMany('Round');
     }
+
+    public function club(){
+        return $this->belongsTo('Club');
+    }
 }

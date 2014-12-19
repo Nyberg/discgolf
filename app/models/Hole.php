@@ -17,6 +17,14 @@ class Hole extends Eloquent implements UserInterface, RemindableInterface  {
         return $this->belongsTo('Course');
     }
 
+    public function score(){
+        return $this->hasMany('Score');
+    }
+
+    public function shot(){
+        return $this->hasMany('Shot');
+    }
+
     public function detail(){
         return $this->hasOne('Detail');
     }

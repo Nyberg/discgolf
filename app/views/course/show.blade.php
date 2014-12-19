@@ -101,6 +101,7 @@
                                <th>Length</th>
                                @foreach($course->hole as $hole)
                                <td>{{convert($hole->length)}}</td>
+
                                @endforeach
                                <td></td>
 

@@ -123,7 +123,9 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'Laracasts\Validation\ValidationServiceProvider',
         'Intervention\Image\ImageServiceProvider',
-        'Zizaco\Entrust\EntrustServiceProvider'
+        'Zizaco\Entrust\EntrustServiceProvider',
+        'Jleach\Laravelmce\LaravelmceServiceProvider'
+
 
 	),
 
@@ -193,6 +195,7 @@ return array(
 		'View'              => 'Illuminate\Support\Facades\View',
         'Image'             => 'Intervention\Image\Facades\Image',
         'Entrust'           => 'Zizaco\Entrust\EntrustFacade',
+
 
 	),
 

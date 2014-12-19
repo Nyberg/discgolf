@@ -19,4 +19,9 @@ class Score extends Eloquent implements UserInterface, RemindableInterface {
     public function round(){
         return $this->belongsTo('Round');
     }
+
+    public function shot(){
+        return $this->hasMany('Shot');
+    }
+
 }

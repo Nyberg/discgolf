@@ -13,7 +13,12 @@
                   <!--  notification start -->
                   <ul class="nav top-menu">
 
+                  @if(!Auth::user())
 
+                  @elseif(Auth::user()->hasRole("Admin"))
+                     <li><a href="/admin"><i class=" fa fa-dashboard"></i></a></li>
+                  @else
+                  @endif
                   </ul>
                   <!--  notification end -->
               </div>
@@ -36,55 +41,43 @@
                 <ul class="sidebar-menu" id="nav-accordion">
 
                 @if(Auth::user())
-
-           	  <p class="centered"><a href="/user/{{Auth::user()->id}}">
-
+           	    <p class="centered"><a href="/user/{{Auth::user()->id}}/show">
            	    @else
-
-           	      <p class="centered"><a href="/registration">
+           	    <p class="centered"><a href="/registration">
            	    @endif
-                    	  @if(!empty(Auth::user()->image))
 
+                @if(!empty(Auth::user()->image))
+                <img src="/img/{{Auth::user()->image}}" class="img-circle" width="60">
+                @else
+                <img src="/img/avatar.png" class="img-circle" width="60">
+                @endif
+                </a></p>
 
-                    	   <img src="/img/{{Auth::user()->image}}" class="img-circle" width="60">
+                @if(Auth::user())
+                <h5 class="centered">{{Auth::user()->username}}</h5>
+                @else
+                <h5 class="centered">Welcome, Guest!</h5>
+                @endif
 
-                    	  @else
+                <li class="mt">
+                @if(Auth::user())
+                <a class="active" href="/dashboard">
+                    <i class="fa fa-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+                @else
+                @endif
 
-                    	  <img src="/img/avatar.png" class="img-circle" width="60">
-
-                    	  @endif
-                    	   </a></p>
-
-                	   @if(Auth::user())
-                	    <h5 class="centered">{{Auth::user()->username}}</h5>
-
-                	   @else
-                	 <h5 class="centered">Welcome, Guest!</h5>
-                        @endif
-                    <li class="mt">
-
-                    @if(Auth::user())
-
-                        <a class="active" href="/admin">
-                            <i class="fa fa-dashboard"></i>
-                            <span>Dashboard</span>
-                        </a>
-
-                    @else
-
-                    @endif
                     </li>
-
                     <li class="sub-menu">
-                                            <a href="javascript:;" >
-                                                <i class=" fa fa-bar-chart-o"></i>
-                                                <span>Statistics</span>
-                                            </a>
-                                            <ul class="sub">
-                                                <li><a  href="morris.html">Morris</a></li>
-                                                <li><a  href="chartjs.html">Chartjs</a></li>
-                                            </ul>
-                                        </li>
+                        <a href="javascript:;" >
+                            <i class=" fa fa-bar-chart-o"></i>
+                            <span>Statistics</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a  href="/">Site Statistics</a></li>
+                        </ul>
+                    </li>
 
                     <li class="sub-menu">
                         <a href="javascript:;" >
@@ -102,7 +95,6 @@
                         </ul>
                     </li>
 
-
                     <li class="sub-menu">
                         <a href="javascript:;" >
                             <i class="fa fa-tree"></i>
@@ -110,22 +102,19 @@
                         </a>
                         <ul class="sub">
                         <li><a  href="/course">All Courses</a></li>
-                            <li><a  href="blank.html">Find Course</a></li>
-
-
-                            <li><a  href="lock_screen.html">Favorite Courses</a></li>
+                            <li><a  href="/">Find Course</a></li>
+                            <li><a  href="/">Favorite Courses</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">
                         <a href="javascript:;" >
                             <i class="fa fa-users"></i>
-                            <span>Players</span>
+                            <span>Players & Clubs</span>
                         </a>
                         <ul class="sub">
-                            <li><a  href="form_component.html">Find players</a></li>
+                            <li><a  href="/clubs">Clubs</a></li>
                             <li><a  href="/users">All Players</a></li>
                             <li><a  href="/users">Your Friends</a></li>
-
                         </ul>
                     </li>
                     <li class="sub-menu">
@@ -134,50 +123,39 @@
                             <span>Tournaments</span>
                         </a>
                         <ul class="sub">
-                            <li><a  href="basic_table.html">Basic Table</a></li>
-                            <li><a  href="responsive_table.html">Responsive Table</a></li>
+                            <li><a  href="/">Basic Table</a></li>
+                            <li><a  href="/">Responsive Table</a></li>
                         </ul>
                     </li>
 
 
-                   @if(Auth::user())  <li class="sub-menu">
-                                            <a href="javascript:;" >
-                                                <i class="fa fa-cogs"></i>
-                                                <span>Settings</span>
-                                            </a>
-                                            <ul class="sub">
-                                                <li><a  href="calendar.html">Your settings</a></li>
-                                                <li><a  href="gallery.html">Your profile</a></li>
-                                                <li><a  href="todo_list.html">Item 3</a></li>
-                                            </ul>
-                                        </li>
-                    @else
-                    @endif
-
-                    <li class="sub-menu">
-
-                    @if(Auth::user())
-
-                    @else
-
-                    <a class="" href="/registration"><i class="fa fa-user"></i>Sign Up</a></li>
-
-
+                   @if(Auth::user())
+                   <li class="sub-menu">
+                        <a href="javascript:;" >
+                            <i class="fa fa-cogs"></i>
+                            <span>Settings</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a  href="/user/{{Auth::user()->id}}/edit">Your Settings/Profile</a></li>
+                        </ul>
                     </li>
+                    @else
+                    @endif
 
+                    <li class="sub-menu">
+                    @if(Auth::user())
+                    @else
+                    <a class="" href="/registration"><i class="fa fa-user"></i>Sign Up</a></li>
+                    </li>
                     @endif
 
 
                     <li class="sub-menu">
 
                     @if(Auth::user())
-
                     <a class="logout" href="/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
-
                     @else
-
                      <a class="login" href="/login"><i class="fa fa-sign-in"></i>Login</a></li>
-
                     @endif
                 </ul>
                 <!-- sidebar menu end-->

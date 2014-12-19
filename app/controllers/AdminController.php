@@ -31,6 +31,14 @@ class AdminController extends \BaseController {
 
     }
 
+    public function clubs(){
+
+        $clubs = Club::get();
+
+        return View::make('admin/clubs', ['clubs'=>$clubs]);
+
+    }
+
 	/**
 	 * Show the form for creating a new resource.
 	 *

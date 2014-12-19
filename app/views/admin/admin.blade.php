@@ -19,6 +19,13 @@
 {{HTML::script('js/jquery-1.11.0.min.js')}}
 {{HTML::script('js/lightbox.min.js')}}
 {{HTML::script('admin_js/chart-master/Chart.js')}}
+{{ HTML::script('packages/jleach/laravelmce/js/tinymce/tinymce.min.js') }}
+
+<script>
+tinymce.init({
+    selector: "textarea"
+});
+</script>
 
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>

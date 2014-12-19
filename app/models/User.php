@@ -14,9 +14,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	protected $hidden = array('password', 'remember_token');
 
-
-
-
     public function getRememberTokenName()
     {
         return 'remember_token';
@@ -25,6 +22,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function profile()
     {
     return $this->HasOne('Profile');
+    }
+
+    public function club(){
+        return $this->belongsTo('Club');
     }
 
     public function setPasswordAttribute($password){
