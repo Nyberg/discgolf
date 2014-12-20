@@ -9,7 +9,8 @@
         "laracasts/validation": "~1.0",
         "intervention/image": "master-dev",
         "zizaco/entrust": "1.2.*@dev",
-        "jleach/laravelmce": "dev-master"
+        "jleach/laravelmce": "dev-master",
+        "appitventures/phpgmaps": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

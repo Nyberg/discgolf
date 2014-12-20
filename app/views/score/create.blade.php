@@ -45,6 +45,7 @@
             {{Form::open(['route'=>'round.store', 'class'=>'form-horizontal style-form'])}}
             {{Form::hidden('course_id', $course->id)}}
             {{Form::hidden('holes', $course->holes)}}
+            {{Form::hidden('round_id', $round->id)}}
 
                @foreach($course->hole as $hole)
 

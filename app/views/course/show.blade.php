@@ -1,55 +1,39 @@
-@extends('admin/admin')
 
+
+@extends('master')
 
 @section('content')
 
- <section id="main-content">
-          <section class="wrapper">
 
-              <div class="row">
-                  <div class="col-lg-12 main-chart">
-                  <div class="showback">
-                  <h4 class="mb"><i class="fa fa-angle-right"></i> {{$course->name}}</h4>
+
+
+
+                  <h4 class="mb"><i class="fa fa-angle-right"></i> {{$course->name . ' - ' . $club->name}}</h4>
                     <div class="row">
-                  <img class="" src="/img/dg/{{$course->image}}" width="100%"/>
-
+                  <img class="" src="{{$course->image}}" width="100%"/>
+                        <span class="span-h2 col-lg-3">{{$course->city . ', ' . $course->state}}</span><span class="span-h2 col-lg-2">{{'Baskets: '. $course->holes}}</span>
+                        <span class="span-h2 col-lg-2">{{'Par: ' . $course->par}}</span><span class="span-h2 col-lg-3">{{'Course Record: '.$record->total}}</span>
+                        <span class="span-h2 col-lg-2">{{checkFee($course->fee)}}
                     </div>
                     <br/><br/>
 
                     <div class="row">
                     <div class="col-lg-6">
-                    <h4><i class="fa fa-angle-right"></i> Information</h4><br/>
+                    <h4><i class="fa fa-comments"></i> Information</h4><br/>
 
-                    <ul>
-                    <li><strong>Location:</strong></li>
-                    <li>{{$course->location}}</li>
-                    </ul>
 
-                    <ul>
+                    <p>{{$course->information}}</p>
 
-                    <li><strong>Description:</strong></li>
-                      <li>{{$course->information}}</li>
-                    </ul>
 
-                    <ul>
-                    <li><strong>Club:</strong></li>
-                    <li>{{$course->club}}</li>
-                    </ul>
+                   <h5>Club:</h5>
+                   <a href="/club/{{$club->id}}/show">{{$club->name}}</a>
 
-                    <ul>
-                    <li><strong>Fee:</strong></li>
-                    @if($course->fee == null || '')
-                    <td>Free</td>
-                    @else
-                    <td>{{$course->fee}}</td>
-                    @endif
-                    </ul>
-                    <br/>
+                    <br/><br/>
                     <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                       Show Course Map
                     </button>
 
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                     						  <div class="modal-dialog">
                     						    <div class="modal-content">
                     						      <div class="modal-header">
@@ -58,7 +42,7 @@
                     						      </div>
 
                     						      <div class="modal-body">
-                                                    <img src="/img/dg/banskiss.jpg" width="100%"/>
+                                                    <img src="{{$course->course_map}}" width="100%"/>
                     						      </div>
                     						      <div class="modal-footer">
                     						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -66,15 +50,16 @@
                     						      </div>
                     						    </div>
                     						  </div>
-                    						</div>
+                            </div>
                     </div>
                     <div class="col-lg-6">
-
-
-                    <h4><i class="fa fa-angle-right"></i> Location</h4>
-
+                     <h4><i class="fa fa-globe"></i> Location</h4><br/>
+                    <div id="map-canvas"></div>
                     </div>
                     </div>
+
+                    <p id="long">{{$course->long}}</p>
+                    <p id="lat">{{$course->lat}}</p>
                     <br/>
                           <h4><i class="fa fa-angle-right"></i> Course Hole Information</h4><hr>
                           <table class="table table-hover">
@@ -82,7 +67,7 @@
                               <tr>
                                 <th>Hole</th>
                                 @foreach($course->hole as $hole)
-                                <td><a href="/hole/{{$hole->id}}/show">{{$hole->number}}</a></td>
+                                <td><a href="/img/dg/test.gif" data-lightbox="image-1" data-title="{{'Basket '.$hole->number. ', '.$course->name.'. Length ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></td>
                                 @endforeach
                               </tr>
 
@@ -109,6 +94,7 @@
                                </tr>
                               </tbody>
                           </table>
+
 
                       	    </div>
                       	 </div><!-- --/content-panel ---->
@@ -152,11 +138,9 @@
                                     	    </div>
                                     	 </div><!-- --/content-panel ---->
                                     </div><!-- --/content-panel ---->
-                                </div>
 
-                                </div>
-                            </div>
-          </section>
- </section>
+
+
+
 
 @stop

@@ -12,45 +12,34 @@ class ScoreController extends \BaseController {
 		//
 	}
 
-	public function create()
+	public function create($id, $course_id)
 	{
-        $x = Input::get('id');
-        $id = (int)$x;
+        $course = Course::with('hole')->where('id', $course_id)->firstOrFail();
+        $round = Round::whereId($id)->firstOrFail();
 
+        return View::make('score.create', ['course'=>$course, 'round'=>$round]);
+    }
 
-        if(is_null($id)){
-            return Redirect::to('round/add')->with('danger', 'Something went wrong!');
-        }else {
-       $course = Course::with('hole')->where('id', $id)->firstOrFail();
-
-      //  $holes = Hole::where('course_id', $course_id)->lists('number', 'id');
-
-		return View::make('score.create', ['course'=>$course]);
-            }
-	}
 
 	public function store()
 	{
         $number = Input::get('course_number');
-       // $course_id = Input::get('course_id');
         $id = Input::get('round_id');
-        $total = 0;
 
         for($i = 1; $i <= $number; $i++){
 
             $score = new Score();
-
             $score->round_id = Input::get('round_id');
             $score->user_id = Auth::User()->id;
             $score->hole_id = Input::get('number-'.$i.'');
-            $score->total = Input::get('score-'.$i.'');
-            $x = Input::get('score-'.$i.'');
-
-            $total = (int)$total + (int)$x;
+            $score->score = Input::get('score-'.$i.'');
+            $score->par = Input::get('par-'.$i.'');
+            $score->score_added = 0;
             $score->save();
 
         };
 
+        $total = Score::where('round_id', $id)->sum('score');
         $round = Round::whereId($id)->firstOrFail();
         $round->total = $total;
         $round->save();
@@ -108,7 +97,24 @@ class ScoreController extends \BaseController {
         $round->total = $total;
         $round->save();
 
-        return Redirect::to('/admin');
+        $shots = Shot::where(['round_id'=>(int)$round_id, 'hole_id'=>$score->hole_id])->get();
+
+        if($shots){
+
+        foreach($shots as $shot){
+
+            $shot = Shot::whereId($shot->id)->firstOrFail();
+            $shot->delete();
+
+            $score = Score::whereId($id)->firstOrFail();
+            $score->score_added = 0;
+            $score->save();
+
+        }
+
+        }
+
+        return Redirect::to('/round/'.$round_id.'/edit/'.$score->hole_id.'')->with('success', 'Score updated!');
 	}
 
 

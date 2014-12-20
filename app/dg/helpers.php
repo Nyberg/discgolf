@@ -50,3 +50,38 @@ function convert($length){
     }
 }
 
+function getStatus($status){
+    if($status == 0){
+        return 'Inactive';
+    }else{
+        return 'Active';
+    }
+}
+
+function checkShot($score_added){
+
+    if($score_added == 0){
+        return 'add';
+    }else{
+        return 'edit';
+    }
+
+}
+
+function setIcon($score_added){
+
+    if($score_added == 0){
+        return 'plus';
+    }else{
+        return 'pencil';
+    }
+
+}
+
+function checkFee($fee){
+    if($fee == null || '0'){
+        return 'Free to play!';
+    }else{
+        return 'Fee: ' . $fee;
+    }
+}

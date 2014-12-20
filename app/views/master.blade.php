@@ -19,13 +19,46 @@
 {{HTML::script('js/jquery-1.11.0.min.js')}}
 {{HTML::script('js/lightbox.min.js')}}
 {{HTML::script('admin_js/chart-master/Chart.js')}}
-{{ HTML::script('packages/jleach/laravelmce/js/tinymce/tinymce.min.js') }}
+{{HTML::script('packages/jleach/laravelmce/js/tinymce/tinymce.min.js')}}
+{{HTML::script('https://maps.googleapis.com/maps/api/js?key=AIzaSyAqPB9cgeF7VZw7JTd2qYD2K4TPbCNDicc&sensor=false')}}
+
+
+
+
+<script type="text/javascript">
+function initialize() {
+
+   document.getElementById('lat').style.display = 'none';
+   document.getElementById('long').style.display = 'none';
+
+   var long = document.getElementById('long').textContent;
+   var lat = document.getElementById('lat').textContent;
+
+
+
+  var myLatlng = new google.maps.LatLng(long, lat);
+  var mapOptions = {
+    zoom: 10,
+    center: myLatlng
+  }
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+  var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'Hello World!'
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 
 <script>
 tinymce.init({
     selector: "textarea"
 });
 </script>
+
 
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -35,7 +68,7 @@ tinymce.init({
     <link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet">
      <link href="assets/css/style.css" rel="stylesheet"> -->
 
-  <body data-spy="scroll" data-target=".bs-docs-sidebar" onload="initialize()">
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
 
     <section id="container" >
 

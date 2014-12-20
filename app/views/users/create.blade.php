@@ -12,11 +12,13 @@
 
     <div class="col-md-12">
 
-        <h1>HEJ</h1>
+        <h4>Registration</h4>
 
         {{Form::open(['route'=>'registration.store'])}}
-        {{Form::label('username', 'Användarnamn')}}
-        {{Form::text('username', null, ['class'=>'form-control'])}}
+        {{Form::label('first_name', 'First Name')}}
+        {{Form::text('first_name', null, ['class'=>'form-control'])}}
+        {{Form::label('last_name', 'Last Name')}}
+                {{Form::text('last_name', null, ['class'=>'form-control'])}}
          {{Form::label('email', 'Email')}}
         {{Form::email('email', null, ['class'=>'form-control'])}}
      {{Form::label('password', 'Lösenord')}}

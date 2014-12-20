@@ -1,14 +1,7 @@
-@extends('admin/admin')
+@extends('master')
 
 @section('content')
 
- <section id="main-content">
-          <section class="wrapper">
-
-          	<!-- BASIC FORM ELELEMNTS -->
-          	<div class="row mt">
-          		<div class="col-lg-12">
-                  <div class="form-panel">
                   	  <h4 class="mb"><i class="fa fa-angle-right"></i> Add Course</h4>
                   	   {{Form::open(['route'=>'course.store', 'class'=>'form-horizontal style-form', 'files' => true])}}
 
@@ -43,6 +36,21 @@
                               </div>
                           </div>
 
+                            <div class="form-group">
+                              <label class="col-sm-12 col-sm-12 control-label">Google Maps Location</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Longitude</label>
+                              <div class="col-sm-4">
+                                  {{Form::text('long', '', ['class'=>'form-control'])}} </div>
+                                   <label class="col-sm-2 col-sm-2 control-label">Longitude</label>
+                                                                <div class="col-sm-4">
+                                                                    {{Form::text('lat', '', ['class'=>'form-control'])}} </div>
+
+                              <label class="col-sm-2 col-sm-2 control-label"></label>
+                              <div class="col-sm-10">
+                                  <span class="help-block">Go to <a href="http://maps.google.com" target="_blank">Google Maps</a> and grab the longitude and latitude coordinates (ex 59.371892, 13.392974).</span>
+                              </div>
+                          </div>
+
                          <div class="form-group">
                          <label class="col-sm-2 col-sm-2 control-label">Holes</label>
                          <div class="col-sm-10">
@@ -74,20 +82,26 @@
                                                        <span class="help-block">The club/organisation that maintenance the course</span>
                                                    </div>
                                                </div>
-                                                     <div class="form-group">
-                                                                        <label class="col-sm-2 col-sm-2 control-label">Fee</label>
-                                                                        <div class="col-sm-10">
-                                                                            {{Form::text('fee', '', ['class'=>'form-control', 'id'=>'submit_holes'])}} </div>
 
-                                                                        <label class="col-sm-2 col-sm-2 control-label"></label>
-                                                                        <div class="col-sm-10">
-                                                                            <span class="help-block">Add fee to play, if it's free, leave empty</span>
-                                                                        </div>
-                                                                    </div>
+
+                                                      <div class="form-group">
+                                                        <label class="col-sm-2 col-sm-2 control-label">Fee</label>
+                                                        <div class="col-sm-10">
+                                                            {{Form::text('fee', '', ['class'=>'form-control', 'id'=>'submit_holes'])}} </div>
+
+                                                        <label class="col-sm-2 col-sm-2 control-label"></label>
+                                                        <div class="col-sm-10">
+                                                            <span class="help-block">Add fee to play, if it's free, leave empty</span>
+                                                        </div>
+                                                    </div>
+
+
+
                                       <div class="form-group">
                                                          <label class="col-sm-2 col-sm-2 control-label">Course Map</label>
                                                          <div class="col-sm-10">
-                                                             {{Form::text('course_map', '', ['class'=>'form-control', 'id'=>'submit_holes'])}} </div>
+                                                             {{Form::file('course_map', '', ['class'=>'form-control'])}} </div>
+
 
                                                          <label class="col-sm-2 col-sm-2 control-label"></label>
                                                          <div class="col-sm-10">
@@ -107,19 +121,5 @@
                       {{Form::submit('Save', ['class'=>'btn btn-primary'])}}
                         {{Form::close()}}
 
-                      </div>
 
-
-
-
-
-                  </div>
-
-
-
-          		</div><!-- col-lg-12-->
-          	</div><!-- /row -->
-
-		</section><! --/wrapper -->
-      </section><!-- /MAIN CONTENT -->
 @stop

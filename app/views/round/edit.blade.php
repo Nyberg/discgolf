@@ -5,6 +5,7 @@
       <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Round</h4>
       <div class="form-horizontal style-form">
 
+
        {{Form::model($round, ['method'=>'PATCH', 'route'=> ['round.update', $round->id]])}}
        {{Form::hidden('course_id', $course->id)}}
 
@@ -35,23 +36,24 @@
           <th>Par</th>
           <th>Score</th>
 
-          <th>Edit</th>
-          <th>Add Shots</th>
+          <th>Score</th>
+          <th>Throws</th>
 
       </tr>
       </thead>
       <tbody>
     @foreach($round->score as $score)
-      <tr>
+
+    <tr>
           <td>{{$score->hole->number}}</td>
           <td>{{convert($score->hole->length)}}</td>
           <td>{{$score->par}}</td>
           <td>{{$score->score}}</td>
 
+          <td><a href="/score/{{$score->id}}/edit"><span class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></span></a></td>
 
 
-          <td><a href="/admin/score/{{$score->id}}/edit"><span class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></span></a></td>
-          <td><a href="/shots/{{$round->id}}/add/{{$score->hole_id}}"><span class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></span></a></td>
+          <td><a href="/shots/{{$round->id}}/{{checkShot($score->score_added)}}/{{$score->hole_id}}"><span class="btn btn-primary btn-xs"><i class="fa fa-{{setIcon($score->score_added)}}"></i></span></a></td>
         @endforeach
       </tr>
 

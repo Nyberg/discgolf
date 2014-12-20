@@ -124,7 +124,8 @@ return array(
         'Laracasts\Validation\ValidationServiceProvider',
         'Intervention\Image\ImageServiceProvider',
         'Zizaco\Entrust\EntrustServiceProvider',
-        'Jleach\Laravelmce\LaravelmceServiceProvider'
+        'Jleach\Laravelmce\LaravelmceServiceProvider',
+        'Appitventures\Phpgmaps\PhpgmapsServiceProvider'
 
 
 	),
@@ -195,6 +196,8 @@ return array(
 		'View'              => 'Illuminate\Support\Facades\View',
         'Image'             => 'Intervention\Image\Facades\Image',
         'Entrust'           => 'Zizaco\Entrust\EntrustFacade',
+        'Gmaps'             => 'Appitventures\Phpgmaps\Facades\Phpgmaps'
+
 
 
 	),

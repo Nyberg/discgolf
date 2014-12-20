@@ -10,7 +10,7 @@
           		<div class="col-lg-12">
                   <div class="form-panel">
                   	  <h4 class="mb"><i class="fa fa-angle-right"></i> Add Round</h4>
-                  	   {{Form::open(['url'=>'/round/add/score', 'class'=>'form-horizontal style-form'])}}
+                  	   {{Form::open(['method'=>'POST', 'route'=>['round-add-score'], 'class'=>'form-horizontal style-form'])}}
 
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Pick Course</label>

@@ -78,22 +78,42 @@ class UserController extends \BaseController {
                 $user->profile->website = Input::get('website');
                 $user->profile->info = Input::get('info');
 
-
                 $user->profile->save();
 
                 return Redirect::to('/dashboard')->with('success', 'Profile updated!');
 
+            }else {
+
+                $this->userSettingsForm->validate($input = Input::only('username', 'email'));
+
+                $user = User::whereId($id)->firstOrFail();
+                $user->first_name = Input::get('first_name');
+                $user->last_name = Input::get('last_name');
+                $user->email = Input::get('email');
+                $user->metric = Input::get('metric');
+
+                if(Input::hasFile('file')) {
+
+                    try
+                    {
+                        $file = Input::file('file');
+
+                        $filepath = '/img/user/';
+                        $filename = time() . '-course.jpg';
+
+                        $file = $file->move(public_path($filepath), ($filename));
+                        $user->image = $filepath.$filename;
+                    }
+                    catch(Exception $e)
+                    {
+                        return 'Något gick snett mannen: ' .$e;
+                    }
+                }
+
+                $user->save();
+
+                return Redirect::back()->with('success', 'Settings updated!');
             }
-
-            $this->userSettingsForm->validate($input = Input::only('username', 'email'));
-
-            $user = User::whereId($id)->firstOrFail();
-            $user->username = Input::get('username');
-            $user->email = Input::get('email');
-            $user->metric = Input::get('metric');
-            $user->save();
-
-            return Redirect::to('/dashboard')->with('success', 'Settings updated!');
         }
         return Redirect::back()->withFlashMessage('You cant edit that!');
     }

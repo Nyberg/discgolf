@@ -11,7 +11,7 @@
                 <div class="form-panel">
                     <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Course {{$course->name}}</h4>
                     <div class="form-horizontal style-form">
-                    {{Form::model($course, ['method'=>'PATCH', 'route'=> ['course.update', $course->id]])}}
+                    {{Form::model($course, ['method'=>'PATCH', 'route'=> ['course.update', $course->id], 'files'=>true])}}
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">Name</label>
                         <div class="col-sm-10">
@@ -42,6 +42,21 @@
                             <span class="help-block">Please add city and location, example:  Stockholm, Sweden</span>
                         </div>
                     </div>
+
+                <div class="form-group">
+                       <label class="col-sm-12 col-sm-12 control-label">Google Maps Location</label>
+                       <label class="col-sm-2 col-sm-2 control-label">Longitude</label>
+                       <div class="col-sm-4">
+                           {{Form::text('long', null, ['class'=>'form-control'])}} </div>
+                            <label class="col-sm-2 col-sm-2 control-label">Longitude</label>
+                                                         <div class="col-sm-4">
+                                                             {{Form::text('lat', null, ['class'=>'form-control'])}} </div>
+
+                       <label class="col-sm-2 col-sm-2 control-label"></label>
+                       <div class="col-sm-10">
+                           <span class="help-block">Go to <a href="http://maps.google.com" target="_blank">Google Maps</a> and grab the longitude and latitude coordinates (ex 59.371892, 13.392974).</span>
+                       </div>
+                   </div>
 
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">Holes</label>
@@ -74,6 +89,41 @@
                                <span class="help-block">The club/organisation that maintenance the course</span>
                            </div>
                        </div>
+
+                         <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">Status</label>
+                          <div class="col-sm-10">
+                              {{Form::select('status', [0=>'Inactive', 1=>'Active'], null, array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
+                            </div>
+                          <label class="col-sm-2 col-sm-2 control-label"></label>
+                          <div class="col-sm-10">
+                              <span class="help-block">If course is inactive, no one can add rounds to it.</span>
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                      <label class="col-sm-2 col-sm-2 control-label">Course Map</label>
+                           <div class="col-sm-10">
+                               {{Form::file('file-2', null, ['class'=>'form-control'])}} </div>
+
+
+                           <label class="col-sm-2 col-sm-2 control-label"></label>
+                           <div class="col-sm-10">
+                               <span class="help-block"></span>
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Image</label>
+                                              <div class="col-sm-10">
+                                                  {{Form::file('file', null, ['class'=>'form-control'])}} </div>
+
+                                              <label class="col-sm-2 col-sm-2 control-label"></label>
+                                              <div class="col-sm-10">
+                                                  <span class="help-block"></span>
+                                              </div>
+                                    </div>
+
 
                      <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">Options</label>

@@ -10,13 +10,16 @@ class ShotController extends \BaseController {
 	public function create($round_id, $id)
 	{
 		$hole = Hole::with('score')->whereId($id)->firstOrFail();
-
         $total = Score::where(['round_id'=> $round_id, 'hole_id'=>$id])->pluck('score');
+        $discs = Disc::whereBag_id(Auth::user()->id)->orderBy('name','asc')->lists('mixed', 'id');
 
-        return View::make('shot.add', ['hole'=>$hole, 'total'=>$total, 'round_id'=>$round_id]);
+        return View::make('shot.add', ['hole'=>$hole, 'total'=>$total, 'round_id'=>$round_id, 'discs'=>$discs]);
 	}
 
-	public function store()
+    /**
+     * @return mixed
+     */
+    public function store()
 	{
         $number = Input::get('total');
 
@@ -29,8 +32,10 @@ class ShotController extends \BaseController {
             $shot->x = Input::get('x-'.$i.'');
             $shot->y = Input::get('y-'.$i.'');
             $shot->number = Input::get('number-'.$i.'');
-
+            $shot->disc_id = Input::get('disc-'.$i.'');
             $shot->save();
+
+
 
         };
 
@@ -40,24 +45,57 @@ class ShotController extends \BaseController {
         $shot->hole_id = Input::get('hole_id');
         $shot->x = Input::get('last-x');
         $shot->y = Input::get('last-y');
+        $shot->disc_id = Input::get('last-disc');
         $shot->number = $number;
 
         $shot->save();
-        return Redirect::to('/dashboard')->with('success', 'Throws added!');
+
+        $score = Score::where(['round_id'=>$shot->round_id, 'hole_id'=>$shot->hole_id])->firstOrFail();
+        $score->score_added = 1;
+        $score->save();
+
+        $round = Round::whereId($shot->round_id)->firstOrFail();
+
+        return Redirect::to('/round/'.$shot->round_id.'/edit/'.$round->course_id)->with('success', 'Throws added!');
 	}
 
 	public function show($id, $round_id)
 	{
-        $score = Score::with('hole')->where('hole_id', $id)->firstOrFail();
-        $round = Round::whereId($round_id)->firstOrFail();
-        $shots = Shot::where('hole_id', $id)->get();
+        $shots = Shot::with('disc')->where(['round_id'=>$round_id,'hole_id'=>$id])->get();
 
-        return View::make('shot.show', ['shots'=>$shots, 'score'=>$score, 'round'=>$round]);
+        if(!$shots->isEmpty()){
+
+            $round = Round::whereId($round_id)->firstOrFail();
+
+            $score = Score::with('hole')->where('hole_id', $id)->firstOrFail();
+
+            return View::make('shot.show', ['shots' => $shots, 'score' => $score, 'round' => $round]);
+
+
+
+        }else {
+            return Redirect::back()->with('danger', 'There is not shots added to this hole..');
+
+        }
 	}
 
-	public function edit($id)
+	public function edit($round_id, $hole_id)
 	{
-		//
+
+        $round = Round::whereId($round_id)->firstOrFail();
+        $hole = Hole::with('score')->whereId($hole_id)->firstOrFail();
+        $shots = Shot::where('hole_id', $hole_id)->get();
+        $discs = Disc::whereBag_id(Auth::user()->id)->orderBy('name','asc')->lists('mixed', 'id');
+
+        foreach($shots as $shot) {
+            $shot = Shot::whereId($shot->id)->firstOrFail();
+
+            $shot->delete();
+        };
+
+        $total = Score::where(['round_id'=> $round_id, 'hole_id'=>$hole_id])->pluck('score');
+
+        return View::make('shot.edit', ['hole'=>$hole, 'total'=>$total, 'round'=>$round, 'discs'=>$discs]);
 	}
 
 	public function update($id)

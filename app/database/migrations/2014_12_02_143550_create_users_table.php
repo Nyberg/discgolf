@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration {
             $table->string('password', '255');
             $table->string('image', '255')->nullable();
             $table->string('metric', '255')->nullable();
+            $table->integer('club_id');
             $table->string('remember_token')->nullable();
             $table->timestamps();
         });

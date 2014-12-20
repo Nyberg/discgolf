@@ -4,7 +4,7 @@ class CourseController extends \BaseController {
 
 	public function index()
 	{
-        $courses = Course::all();
+        $courses = Course::whereStatus(1)->get();
 		return View::make('course.index', ['courses' => $courses]);
 	}
 
@@ -23,43 +23,68 @@ class CourseController extends \BaseController {
 	}
 
 	public function store()
-	{
+    {
 
-            $course = new Course;
-            $course->name = Input::get('name');
-            $course->country = Input::get('country');
-            $course->state = Input::get('state');
-            $course->city = Input::get('city');
-            $course->holes = Input::get('holes');
+        $course = new Course;
+        $course->name = Input::get('name');
+        $course->country = Input::get('country');
+        $course->state = Input::get('state');
+        $course->city = Input::get('city');
+        $course->holes = Input::get('holes');
 
-            $course->information = Input::get('information');
-            $course->club = Input::get('club');
-            $course->fee = Input::get('fee');
-            $course->course_map = Input::get('course_map');
+        $course->information = Input::get('information');
+        $course->club = Input::get('club');
+        $course->fee = Input::get('fee');
+        $course->long = Input::get('long');
+        $course->lat = Input::get('lat');
+        $course->status = 0;
 
-            $file = Input::file('file');
+        if (Input::hasFile('course_map')) {
 
-            $filename = $file->getClientOriginalName();
-            $filename = str_random(8) . $filename;
+            try {
 
-            $uploadSuccess = Input::file('file')->move('img/dg/', $filename);
+                $map = Input::get('course_map');
+                $filepath = '/img/course/';
+                $filename = time() . '-course_map.jpg';
 
-        if( $uploadSuccess ) {
-            $course->image = $filename;
-            $course->save();
-            return Redirect::to('/admin/course');
-        } else {
-            return Response::json('error', 400);
+                $map = $map->move(public_path($filepath), ($filename));
+                $course->course_map = $filepath . $filename;
+            } catch (Exeption $e) {
+                Return 'Something went wrong..';
+            }
         }
 
+        if(Input::hasFile('file')) {
+
+            try
+            {
+            $file = Input::file('file');
+
+            $filepath = '/img/dg/';
+            $filename = time() . '-course.jpg';
+
+            $file = $file->move(public_path($filepath), ($filename));
+            $course->image = $filepath.$filename;
+            }
+            catch(Exception $e)
+            {
+                return 'Något gick snett mannen: ' .$e;
+            }
+        }
+
+            $course->save();
+
+            return Redirect::to('/admin/course')->with('success', 'Course added!');
 	}
 
 	public function show($id)
 	{
         $course = Course::with('hole')->whereId($id)->firstOrFail();
         $rounds = Round::where('course_id', $id)->get();
+        $club = Club::whereId($course->club)->firstOrFail();
+        $record = Round::where('course_id', $id)->orderBy('total', 'desc')->groupBy('total')->firstOrFail();
 
-		return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds]);
+		return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'club'=>$club, 'record'=>$record]);
 	}
 
 	public function edit($id)
@@ -88,10 +113,48 @@ class CourseController extends \BaseController {
             $course->city = Input::get('city');
             $course->holes = Input::get('holes');
             $course->information = Input::get('information');
+            $course->status = Input::get('status');
+            $course->long = Input::get('long');
+            $course->lat = Input::get('lat');
+
+            if (Input::hasFile('file-2')) {
+
+                try {
+
+                    $file = Input::file('file-2');
+
+                    $filepath = '/img/dg/course/';
+                    $filename = time() . '-course.jpg';
+
+                    $file = $file->move(public_path($filepath), ($filename));
+                    $course->course_map = $filepath.$filename;
+                } catch (Exception $e) {
+                    Return 'Something went wrong..';
+                }
+            }
+
+            if(Input::hasFile('file')) {
+
+                try
+                {
+                    $file = Input::file('file');
+
+                    $filepath = '/img/dg/';
+                    $filename = time() . '-course.jpg';
+
+                    $file = $file->move(public_path($filepath), ($filename));
+                    $course->image = $filepath.$filename;
+                }
+                catch(Exception $e)
+                {
+                    return 'Något gick snett mannen: ' .$e;
+                }
+            }
+
 
             $course->save();
 
-            return Redirect::to('/admin/course');
+            return Redirect::to('/admin/course')->with('success', 'Course updated!');
         }
     }
 

@@ -12,7 +12,8 @@ class RegistrationController extends \BaseController {
         $role = Role::where('name','User')->firstOrFail();
 
         $user = new User;
-        $user->username =  Input::get('username');
+        $user->first_name =  Input::get('first_name');
+        $user->last_name =  Input::get('last_name');
         $user->password = Input::get('password');
         $user->email = Input::get('email');
         $user->save();

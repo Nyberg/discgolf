@@ -23,36 +23,34 @@ class RoundController extends \BaseController {
 
 	public function create()
 	{
-        $x = Input::get('id');
-        $id = (int)$x;
-        if(is_null($id)){
-            return Redirect::to('/round/add')->with('danger', 'Something went wrong!');
-        }else {
 
-            $course = Course::with('hole')->where('id', $id)->firstOrFail();
+        $name = Auth::user()->first_name.' '. Auth::user()->last_name;
 
-            return View::make('score.create', ['course' => $course]);
+        $round = new Round();
+        $round->course_id = Input::get('id');
+        $round->user_id = Auth::User()->id;
+        $round->user = $name;
+        $round->status = 0;
+        $round->save();
+
+        $course = Course::with('hole')->whereId($round->course_id)->firstOrFail();
+
+        return Redirect::to('/round/'.$round->id.'/course/'.$course->id.'/score/add');
+            //return View::make('score.create', ['course' => $course, 'id'=>$round->course_id]);
         }
-	}
 
     public function getCourse(){
 
-        $courses = Course::lists('name', 'id');
+        $courses = Course::whereStatus(1)->lists('name', 'id');
 
         return View::make('round.create')->with('courses', $courses);
     }
 
 	public function store()
 	{
-		$round = new Round();
-        $round->course_id = Input::get('course_id');
-        $round->user_id = Auth::User()->id;
-        $round->user = Auth::User()->username;
-     // $round->comment = Input::get('comment');
-        $round->save();
-
         $total = 0;
         $number = Input::get('holes');
+        $id = Input::get('round_id');
 
         for($i = 1; $i <= $number; $i++){
 
@@ -60,7 +58,7 @@ class RoundController extends \BaseController {
 
             $score->user_id = Auth::User()->id;
             $score->hole_id = Input::get('hole_id-'.$i.'');
-            $score->round_id;
+            $score->round_id = Input::get('round_id');
             $score->score = Input::get('score-'.$i.'');
             $score->par = Input::get('par-'.$i.'');
             $x = Input::get('score-'.$i.'');
@@ -68,11 +66,10 @@ class RoundController extends \BaseController {
             $total = (int)$total + (int)$x;
 
             $score->save();
-            $round->score()->save($score);
 
         };
 
-        $round = Round::whereId($round->id)->firstOrFail();
+        $round = Round::whereId($id)->firstOrFail();
 
         $round->total = $total;
         $round->save();
@@ -84,8 +81,11 @@ class RoundController extends \BaseController {
 	{
         $round = Round::with('score')->whereId($id)->firstOrFail();
         $course = Course::with('hole')->whereId($course_id)->firstOrFail();
+        $scores = Score::with('hole')->where('round_id', $id)->get();
+        $shots = Shot::with('disc')->where('round_id', $id)->get();
+        $record = Round::where('course_id', $id)->orderBy('total', 'desc')->groupBy('total')->firstOrFail();
 
-		return View::make('round.show', ['round'=>$round, 'course'=>$course]);
+		return View::make('round.show', ['round'=>$round, 'course'=>$course, 'shots'=>$shots, 'scores'=>$scores, 'record'=>$record]);
 	}
 
 
@@ -94,6 +94,7 @@ class RoundController extends \BaseController {
         $round = Round::with('score')->whereId($id)->firstOrFail();
         $course = Course::with('hole')->whereId($course_id)->firstOrFail();
         $courses = Course::lists('name', 'id');
+
 		return View::make('round.edit', ['round'=>$round, 'course'=>$course, 'courses'=>$courses]);
 	}
 

@@ -43,6 +43,15 @@
                               </div>
                           </div>
 
+                               <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">Website</label>
+                                <div class="col-sm-10">
+                                    {{Form::text('website', '', ['class'=>'form-control'])}}
+
+                                </div>
+                            </div>
+
+
                            <div class="form-group">
                                               <label class="col-sm-2 col-sm-2 control-label">Information</label>
                                               <div class="col-sm-10">
@@ -53,9 +62,10 @@
                                                   <span class="help-block"></span>
                                               </div>
                                           </div>
+                                          {{Form::submit('Save', ['class'=>'btn btn-primary'])}}
+                                                                  {{Form::close()}}
                 </div>
-                      {{Form::submit('Save', ['class'=>'btn btn-primary'])}}
-                        {{Form::close()}}
+
 
                       </div>
 

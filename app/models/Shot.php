@@ -25,4 +25,8 @@ class Shot extends Eloquent implements UserInterface, RemindableInterface {
         return $this->belongsTo('Score');
     }
 
+    public function disc(){
+        return $this->belongsTo('Disc');
+    }
+
 }

@@ -22,14 +22,18 @@
                                <br/>
                            	  <h4 class="mb"><i class="fa fa-angle-right"></i> Edit User</h4>
 
-                                      	  {{Form::model($user, ['method'=>'PATCH', 'route'=> ['user.update', $user->id]])}}
+                                      	  {{Form::model($user, ['method'=>'PATCH', 'route'=> ['user.update', $user->id], 'files'=>true])}}
 
                                               <div class="form-group">
-                                                  <label class="col-sm-2 col-sm-2 control-label">Username</label>
-                                                  <div class="col-sm-10">
+                                                  <label class="col-sm-2 col-sm-2 control-label">Name</label>
+                                                  <div class="col-sm-5">
 
-                                                      {{Form::text('username', null, ['class'=>'form-control'])}}
-                                                      {{errors_for('username', $errors)}}
+                                                      {{Form::text('first_name', null, ['class'=>'form-control'])}}
+                                                      {{errors_for('first_name', $errors)}}
+                                                      </div>
+                                                      <div class="col-sm-5">
+                                                      {{Form::text('last_name', null, ['class'=>'form-control'])}}
+                                                      {{errors_for('last_name', $errors)}}
                                                   </div>
                                               </div>
 
@@ -52,6 +56,17 @@
 
                                                 </div>
                                             </div>
+
+                                               <div class="form-group">
+                                                                    <label class="col-sm-2 col-sm-2 control-label">Profile Image</label>
+                                                                      <div class="col-sm-10">
+                                                                          {{Form::file('file', '', ['class'=>'form-control'])}} </div>
+
+                                                                      <label class="col-sm-2 col-sm-2 control-label"></label>
+                                                                      <div class="col-sm-10">
+                                                                          <span class="help-block"></span>
+                                                                      </div>
+                                                            </div>
 
                                               {{Form::submit('Save Settings', ['class'=>'btn btn-primary'])}}
                                              {{Form::close()}}

@@ -44,7 +44,8 @@ Route::group(['before'=>'auth'], function(){
     #   Round       #
     Route::get('/round/add', 'RoundController@getCourse');
     Route::get('/rounds/{id}/user', 'RoundController@user_round');
-    Route::post('/round/add/score', array('uses' => 'RoundController@create'));
+    Route::post('/round/add/{id}/score', array('as'=>'round-add-score','uses' => 'RoundController@create'));
+    Route::get('/round/{id}/course/{course_id}/score/add', 'ScoreController@create');
     Route::get('/round/{id}/edit/{course_id}', 'RoundController@edit');
 
     #   Score       #
@@ -55,6 +56,17 @@ Route::group(['before'=>'auth'], function(){
 
     #   Shots       #
     Route::get('/shots/{round_id}/add/{id}', 'ShotController@create');
+    Route::get('/shots/{round_id}/edit/{hole_id}', 'ShotController@edit');
+
+    #   Bag         #
+    Route::get('/bag/add', 'BagController@create');
+    Route::get('/bag/{id}/edit', 'BagController@edit');
+    Route::get('/user/{id}/bags', 'BagController@user');
+
+    #   Disc        #
+    Route::get('/disc/add', 'DiscController@create');
+    Route::get('/disc/{id}/edit', 'DiscController@edit');
+    Route::get('/user/{id}/discs', 'DiscController@user');
 
 });
 
@@ -79,6 +91,10 @@ Route::get('/hole/{id}/show', 'HoleController@show');
 // Shot
 Route::get('/hole/{id}/score/{score_id}', 'ShotController@show');
 
+// Bag
+Route::get('/bags', 'BagController@index');
+Route::get('/bags/{id}/show', 'BagController@show');
+
 // Users
 Route::get('/users', 'UserController@index');
 Route::get('/user/{id}/show', 'UserController@show');
@@ -93,9 +109,32 @@ Route::resource('round', 'RoundController');
 Route::resource('score', 'ScoreController');
 Route::resource('club', 'ClubController');
 Route::resource('shot', 'ShotController');
+Route::resource('bag', 'BagController');
+Route::resource('disc', 'DiscController');
 
 # Permissions and Roles
 
+Route::get('/test', function(){
+    $config = array();
+    $config['center'] = 'auto';
+    $config['onboundschanged'] = 'if (!centreGot) {
+
+            marker_0.setOptions({
+                position: new google.maps.LatLng(37.4419, 13.392947)
+            });
+        }
+        centreGot = true;';
+
+    Gmaps::initialize($config);
+
+    // set up the marker ready for positioning
+    // once we know the users location
+    $marker = array();
+    Gmaps::add_marker($marker);
+
+    $map = Gmaps::create_map();
+    echo "<html><head>".$map['js']."</head><body>".$map['html']."</body></html>";
+});
 
 Route::get('/create-role', function(){
 

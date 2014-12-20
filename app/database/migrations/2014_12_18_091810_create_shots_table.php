@@ -20,7 +20,7 @@ class CreateShotsTable extends Migration {
             $table->integer('user_id');
             $table->integer('x');
             $table->integer('y');
-            $table->integer('disc');
+            $table->integer('disc_id');
             $table->integer('comment');
             $table->timestamps();
         });

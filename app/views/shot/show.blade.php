@@ -6,18 +6,14 @@
 <div class="col-lg-8">
  <table class="table table-hover">
     <thead>
-    <th>Hole</th>
-    <th>Length</th>
-    <th>Par</th>
-    <th>Score</th>
 
     </thead>
     <tbody>
 
-    <tr>
-      <td>{{$score->hole['number']}}</td>
-      <td>{{convert($score->hole['length'])}}</td>
-      <td>{{$score->par}}</td>
+    <tr class="text-center">
+      <th>Hole</th><td>{{$score->hole['number']}}</td>
+      <th>Length</th><td>{{convert($score->hole['length'])}}</td>
+      <th>Score/Par</th><td class="{{checkScore($score->score, $score->par)}}">{{$score->score . ' ('.$score->par.')'}}</td>
       <td id="score">{{$score->score}}</td>
     </tr>
 
@@ -26,7 +22,8 @@
    <thead>
    <th>Shot</th>
    <th>Disc</th>
-   <th>Comment</th>
+   <th>Condition</th>
+   <th>Manufactorer</th>
 
    </thead>
    <tbody>
@@ -35,8 +32,9 @@
 
     <tr>
      <td>{{$shot->number}}</td>
-     <td>{{$shot->disc}}</td>
-     <td>{{$shot->comment}}</td>
+     <td>{{$shot->disc->plastic . ' ' . $shot->disc->name . ' ' . $shot->disc->weight . 'g'}}</td>
+     <td>{{$shot->disc->condition}}</td>
+     <td>{{$shot->disc->author}}</td>
       </tr>
 
     @endforeach
@@ -79,7 +77,8 @@
         var width = canvas.width;
         var height = canvas.height;
 
-            document.getElementById('table_cord').style.display = 'none';
+        document.getElementById('table_cord').style.display = 'none';
+        document.getElementById('score').style.display = 'none';
 
         var imageObj = new Image();
 
@@ -116,43 +115,6 @@
             context.fillText(i, coords_x[i], coords_y[i]);
             }
 
-
-
-</script>
-
-
-<script type="text/javascript">
-
-    /*    var canvas = document.getElementById('myCanvas');
-        var context = canvas.getContext('2d');
-
-        context.font = 'bold 12pt Arial';
-        context.fillStyle = 'red';
-        var x = 0;
-        var y = 0;
-        var width = canvas.width;
-        var height = canvas.height;
-
-        var imageObj = new Image();
-
-        imageObj.onload = function() {
-          context.drawImage(imageObj, x, y, width, height);
-        };
-        imageObj.src = '/img/dg/test.gif';
-
-       canvas.addEventListener("click", setPoint, false);
-
-        function setPoint(e) {
-
-        var x, y;
-
-        canoffset = $(canvas).offset();
-            x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
-            y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
-            document.getElementById('coord').innerHTML = x + ' ' + y;
-            context.fillText('1', x, y);
-        return [x,y];
-             } */
 </script>
 
 @stop

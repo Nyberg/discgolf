@@ -20,6 +20,7 @@ class CreateRoundTable extends Migration {
             $table->string('user');
             $table->integer('total');
             $table->longText('comment');
+            $table->boolean('status');
             $table->timestamps();
 
         });

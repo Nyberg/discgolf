@@ -30,9 +30,6 @@ class HoleController extends \BaseController {
 	{
         $number = Input::get('hidden_holes');
         $course_id = Input::get('course_id');
-        $par = 0;
-        $x = 0;
-       // dd($course_id);
 
         for($i = 1; $i <= $number; $i++){
 
@@ -46,6 +43,7 @@ class HoleController extends \BaseController {
     };
         $course = Course::whereId($course_id)->firstOrFail();
         $course->par = Hole::where('course_id', $hole->course_id)->sum('par');
+        $course->status = 1;
         $course->save();
 
         return Redirect::to('/admin/course');

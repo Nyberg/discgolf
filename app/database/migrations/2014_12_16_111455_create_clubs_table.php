@@ -22,6 +22,7 @@ class CreateClubsTable extends Migration {
             $table->string('website', '255')->nullable();
             $table->longText('information', '2000');
             $table->integer('members');
+            $table->boolean('status');
             $table->timestamps();
         });
 	}

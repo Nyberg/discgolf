@@ -47,29 +47,36 @@
 
  <div class="form-group">
      <label class="col-sm-2 col-sm-2 control-label ">Shot {{$i}}</label>
-     <div class="col-sm-5">
+     <div class="col-sm-2">
 
      {{Form::number('x-'.$i.'', '', ['class'=>'form-control', 'readonly', 'id'=>'x-'.$i.''])}}
 
      </div>
-      <div class="col-sm-5">
+      <div class="col-sm-2">
 
       {{Form::number('y-'.$i.'', '', ['class'=>'form-control', 'readonly', 'id'=>'y-'.$i.''])}}
 
       </div>
-
+    <label class="col-sm-1 col-sm-1 control-label ">Disc</label>
+    <div class="col-sm-5">
+       {{Form::select('disc-'.$i.'', $discs, '', array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
+    </div>
  </div>
 
 @endfor
 
  <div class="form-group">
      <label class="col-sm-2 col-sm-2 control-label">Last Shot</label>
-     <div class="col-sm-5">
+     <div class="col-sm-4">
 
      {{Form::number('last', '', ['class'=>'form-control', 'readonly', 'placeholder'=>'To basket'])}}
        {{Form::hidden('last-x', 0)}}
        {{Form::hidden('last-y', 0)}}
      </div>
+         <label class="col-sm-1 col-sm-1 control-label ">Disc</label>
+         <div class="col-sm-5">
+            {{Form::select('last-disc', $discs, '', array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
+         </div>
 
  </div>
           <div class="form-group">

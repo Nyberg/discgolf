@@ -20,6 +20,7 @@ class CreateScoreTable extends Migration {
             $table->integer('hole_id');
             $table->integer('score');
             $table->integer('par');
+            $table->integer('score_added');
             $table->timestamps();
 
 	});

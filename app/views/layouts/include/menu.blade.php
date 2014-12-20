@@ -47,14 +47,14 @@
            	    @endif
 
                 @if(!empty(Auth::user()->image))
-                <img src="/img/{{Auth::user()->image}}" class="img-circle" width="60">
+                <img src="{{Auth::user()->image}}" class="img-circle" width="60">
                 @else
                 <img src="/img/avatar.png" class="img-circle" width="60">
                 @endif
                 </a></p>
 
                 @if(Auth::user())
-                <h5 class="centered">{{Auth::user()->username}}</h5>
+                <h5 class="centered">{{Auth::user()->first_name .' '. Auth::user()->last_name}}</h5>
                 @else
                 <h5 class="centered">Welcome, Guest!</h5>
                 @endif
@@ -88,6 +88,7 @@
                             <li><a  href="/round/add">Add round</a></li>
                             @if(Auth::user())
                             <li><a  href="/rounds/{{Auth::User()->id}}/user">Your rounds</a></li>
+                            <li><a href="/user/{{Auth::user()->id}}/bags">Your Bag</a></li>
                             @else
 
                             @endif

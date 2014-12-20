@@ -13,7 +13,6 @@ class CreateDetailsTable extends Migration {
 	public function up()
 	{
 		Schema::create('details', function(Blueprint $table){
-
         $table->increments('id');
         $table->integer('hole_id');
         $table->longText('ob', '2000')->nullable();

@@ -20,4 +20,8 @@ class Club extends Eloquent implements UserInterface, RemindableInterface {
     public function course(){
         return $this->hasMany('Course');
     }
+
+    public function image(){
+        return $this->hasMany('Image');
+    }
 }

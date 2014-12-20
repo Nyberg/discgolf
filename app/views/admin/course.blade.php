@@ -1,16 +1,11 @@
 
 
-@extends('admin/admin')
+@extends('master')
 
 @section('content')
 
- <section id="main-content">
-          <section class="wrapper">
-          	<!-- BASIC FORM ELELEMNTS -->
-          	<div class="row mt">
 
-          		<div class="col-lg-12">
-            <div class="showback">
+
                                       <h4><i class="fa fa-angle-right"></i> Courses Admin</h4><hr><table class="table table-striped table-advance table-hover">
 
 
@@ -20,6 +15,7 @@
                                               <th class="hidden-phone"><i class="fa fa-globe"></i> Location</th>
                                               <th><i class="fa fa-bullseye"></i> Holes</th>
                                               <th><i class=" fa fa-star"></i> Par</th>
+                                              <th>Status</th>
                                               <th>Edit</th>
                                               <th>Delete</th>
                                           </tr>
@@ -33,7 +29,7 @@
                                               <td>{{$course->city . ', '. $course->state . ', ' . $course->country}}</td>
                                               <td>{{$course->holes}}</td>
                                               <td>{{$course->par}}</td>
-
+                                              <td>{{getStatus($course->status)}}</td>
                                               <td>
 
                                               <a href="/admin/course/{{$course->id}}/edit"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
@@ -50,10 +46,5 @@
 
                                           </tbody>
                                       </table>
-                                  </div>
-          		</div><!-- col-lg-12-->
-          	</div><!-- /row -->
 
-		</section><! --/wrapper -->
-      </section><!-- /MAIN CONTENT -->
 @stop
