@@ -1,14 +1,8 @@
-@extends('admin/admin')
+@extends('master')
 
 @section('content')
 
-<section id="main-content">
-    <section class="wrapper">
 
-        <!-- BASIC FORM ELELEMNTS -->
-        <div class="row mt">
-            <div class="col-lg-12">
-                <div class="form-panel">
                     <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Course {{$course->name}}</h4>
                     <div class="form-horizontal style-form">
                     {{Form::model($course, ['method'=>'PATCH', 'route'=> ['course.update', $course->id], 'files'=>true])}}
@@ -17,40 +11,58 @@
                         <div class="col-sm-10">
 
                             {{Form::text('name', null, ['class'=>'form-control'])}}
+                            {{errors_for('name', $errors)}}
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">Country</label>
                         <div class="col-sm-10">
                             {{Form::text('country', null, ['class'=>'form-control'])}}
-                            <span class="help-block">Please add city and location, example:  Stockholm, Sweden</span>
+                            {{errors_for('country', $errors)}}
+
                         </div>
+                          <label class="col-sm-2 col-sm-2 control-label"></label>
+                             <div class="col-sm-10">
+                             <span class="help-block">Please add city and location, example:  Stockholm, Sweden</span>
+                             </div>
                     </div>
 
                      <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">Country</label>
                         <div class="col-sm-10">
                             {{Form::text('state', null, ['class'=>'form-control'])}}
-                            <span class="help-block">Please add city and location, example:  Stockholm, Sweden</span>
+                            {{errors_for('state', $errors)}}
+
                         </div>
+                        <label class="col-sm-2 col-sm-2 control-label"></label>
+                         <div class="col-sm-10">
+                         <span class="help-block">Please add city and location, example:  Stockholm, Sweden</span>
+                         </div>
                     </div>
 
                      <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">Country</label>
                         <div class="col-sm-10">
                             {{Form::text('city', null, ['class'=>'form-control'])}}
-                            <span class="help-block">Please add city and location, example:  Stockholm, Sweden</span>
+                            {{errors_for('city', $errors)}}
+
                         </div>
+                        <label class="col-sm-2 col-sm-2 control-label"></label>
+                             <div class="col-sm-10">
+                             <span class="help-block">Please add city and location, example:  Stockholm, Sweden</span>
+                             </div>
                     </div>
 
                 <div class="form-group">
                        <label class="col-sm-12 col-sm-12 control-label">Google Maps Location</label>
                        <label class="col-sm-2 col-sm-2 control-label">Longitude</label>
                        <div class="col-sm-4">
-                           {{Form::text('long', null, ['class'=>'form-control'])}} </div>
+                           {{Form::text('long', null, ['class'=>'form-control'])}}
+                           {{errors_for('long', $errors)}}</div>
                             <label class="col-sm-2 col-sm-2 control-label">Longitude</label>
                                                          <div class="col-sm-4">
-                                                             {{Form::text('lat', null, ['class'=>'form-control'])}} </div>
+                                                             {{Form::text('lat', null, ['class'=>'form-control'])}}
+                                                             {{errors_for('lat', $errors)}}</div>
 
                        <label class="col-sm-2 col-sm-2 control-label"></label>
                        <div class="col-sm-10">
@@ -61,7 +73,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">Holes</label>
                         <div class="col-sm-10">
-                            {{Form::number('holes', null, ['class'=>'form-control'])}} </div>
+                            {{Form::number('holes', null, ['class'=>'form-control'])}}
+                             {{errors_for('holes', $errors)}}</div>
 
                         <label class="col-sm-2 col-sm-2 control-label"></label>
                         <div class="col-sm-10">
@@ -72,7 +85,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">Holes</label>
                         <div class="col-sm-10">
-                            {{Form::textarea('information', null, ['class'=>'form-control'])}} </div>
+                            {{Form::textarea('information', null, ['class'=>'form-control'])}}
+                             </div>
 
                         <label class="col-sm-2 col-sm-2 control-label"></label>
                         <div class="col-sm-10">
@@ -82,7 +96,8 @@
                          <div class="form-group">
                            <label class="col-sm-2 col-sm-2 control-label">Club</label>
                            <div class="col-sm-10">
-                               {{Form::select('club',$clubs ,null,array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}} </div>
+                               {{Form::select('club',$clubs ,null,array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
+                               {{errors_for('club', $errors)}}</div>
 
                            <label class="col-sm-2 col-sm-2 control-label"></label>
                            <div class="col-sm-10">
@@ -164,18 +179,4 @@
                     	                          </table>
                     	                  	  </div>
 
-
-
-                    </div>
-
-                </div>
-                </div>
-
-
-
-            </div><!-- col-lg-12-->
-        </div><!-- /row -->
-
-    </section><! --/wrapper -->
-</section><!-- /MAIN CONTENT -->
 @stop

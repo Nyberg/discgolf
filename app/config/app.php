@@ -124,10 +124,7 @@ return array(
         'Laracasts\Validation\ValidationServiceProvider',
         'Intervention\Image\ImageServiceProvider',
         'Zizaco\Entrust\EntrustServiceProvider',
-        'Jleach\Laravelmce\LaravelmceServiceProvider',
-        'Appitventures\Phpgmaps\PhpgmapsServiceProvider'
-
-
+        'Way\Generators\GeneratorsServiceProvider'
 	),
 
 	/*

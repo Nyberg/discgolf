@@ -17,6 +17,10 @@ class Course extends Eloquent implements UserInterface, RemindableInterface {
         return $this->hasMany('Hole');
     }
 
+    public function review(){
+        return $this->hasMany('Review');
+    }
+
     public function round(){
         return $this->hasMany('Round');
     }
@@ -25,8 +29,12 @@ class Course extends Eloquent implements UserInterface, RemindableInterface {
         return $this->belongsTo('Club');
     }
 
-    public function image()
+    public function photos()
     {
-        return $this->morphMany('Image', 'imageable');
+        return $this->morphMany('Photo', 'imageable');
+    }
+
+    public function comments(){
+        return $this->morphMany('Comment', 'commentable');
     }
 }

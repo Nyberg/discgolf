@@ -43,7 +43,7 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('/')->with('danger', 'You need to be logged in to do that!');
+			return Redirect::guest('/')->with('headsup', 'You need to be logged in to do that!');
 		}
 	}
 });
@@ -67,7 +67,7 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+	if (Auth::check()) return Redirect::to('/')->with('headsup', 'You need to be logged in to do that!');
 });
 
 /*
@@ -94,7 +94,6 @@ Route::filter('checkAdmin', function(){
 
     $user = Auth::user();
 
-
     if($user){
         if(!$user->hasRole("Admin")){
 
@@ -106,3 +105,21 @@ Route::filter('checkAdmin', function(){
     }
 
 });
+
+Route::filter('checkClubOwner', function(){
+
+    $user = Auth::user();
+
+    if($user){
+        if(!$user->hasRole("ClubOwner")){
+
+            return Redirect::to('/dashboard')->with('danger', 'FUUU');
+        }
+
+    }else{
+        return Redirect::to('/')->with('danger', 'You dont have the permissions to do that!');;
+    }
+
+});
+
+

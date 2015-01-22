@@ -1,17 +1,9 @@
 <?php
 
-use Illuminate\Auth\UserTrait;
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableTrait;
-use Illuminate\Auth\Reminders\RemindableInterface;
-
-class Club extends Eloquent implements UserInterface, RemindableInterface {
-
-    use UserTrait, RemindableTrait;
+class Club extends Eloquent {
 
     protected $table = 'clubs';
     protected $fillable = ['name', 'website', 'country', 'state', 'par'];
-
 
     public function user(){
         return $this->hasMany('User');
@@ -21,7 +13,12 @@ class Club extends Eloquent implements UserInterface, RemindableInterface {
         return $this->hasMany('Course');
     }
 
-    public function image(){
-        return $this->hasMany('Image');
+    public function comments(){
+        return $this->morphMany('Comment', 'commentable');
     }
+
+    public function photos(){
+        return $this->morphMany('Photo', 'imageable');
+    }
+
 }

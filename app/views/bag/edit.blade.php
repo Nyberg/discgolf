@@ -18,7 +18,49 @@
 
                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                       Add Disc to Bag
-                    </button>
+                    </button><hr/>
+
+                    <div class="row">
+                      <div class="col-lg-12">
+                      <h4>Discs In {{$bag->type}}</h4>
+
+
+
+                    <div class="col-lg-3">
+                      <h5>Putters</h5>
+                          @foreach($bag->disc as $disc)
+                          @if($disc->type == 'Putter')
+                          <p>{{$disc->author.' '.$disc->plastic.' '. $disc->name . ', '.$disc->weight.'g'}}</p>
+                          @endif
+                          @endforeach
+                    </div>
+                    <div class="col-lg-3">
+                      <h5>Midranges</h5>
+                          @foreach($bag->disc as $disc)
+                          @if($disc->type == 'Midrange')
+                          <p>{{$disc->author.' '.$disc->plastic.' '. $disc->name . ', '.$disc->weight.'g'}}</p>
+                          @endif
+                          @endforeach
+                    </div>
+                    <div class="col-lg-3">
+                      <h5>Fiarway Drivers</h5>
+                          @foreach($bag->disc as $disc)
+                          @if($disc->type == 'Fairway')
+                          <p>{{$disc->author.' '.$disc->plastic.' '. $disc->name . ', '.$disc->weight.'g'}}</p>
+                          @endif
+                          @endforeach
+                    </div>
+                    <div class="col-lg-3">
+                      <h5>Drivers</h5>
+                          @foreach($bag->disc as $disc)
+                          @if($disc->type == 'Driver')
+                          <p>{{$disc->author.' '.$disc->plastic.' '. $disc->name . ', '.$disc->weight.'g'}}</p>
+                          @endif
+                          @endforeach
+                    </div>
+                   </div>
+                   </div>
+
 
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                     						  <div class="modal-dialog">
@@ -38,6 +80,15 @@
                                                                       {{Form::text('name', '', ['class'=>'form-control'])}}
                                                                   </div>
                                                               </div>
+
+                                                  <div class="form-group">
+                                                      <label class="col-sm-2 col-sm-2 control-label">Type</label>
+                                                      <div class="col-sm-10">
+
+                                                          {{Form::select('type', ['Putter'=>'Putter', 'Midrange'=>'Midrange', 'Fairway'=>'Fairway Driver', 'Driver'=>'Driver'], null, array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
+
+                                                      </div>
+                                                  </div>
 
                     						      <div class="form-group">
                                                         <label class="col-sm-2 col-sm-2 control-label">Manufacturer</label>

@@ -5,7 +5,10 @@
 @section('content')
 
 
-  <h4><i class="fa fa-angle-right"></i> User Admin</h4><hr><table class="table table-striped table-advance table-hover">
+  <h4><i class="fa fa-angle-right"></i> User Admin</h4>
+
+
+  <table class="table table-striped table-advance table-hover">
 
 
       <thead>
@@ -15,7 +18,7 @@
           <th><i class="fa fa-envelope"></i> Email</th>
           <th><i class=" fa fa-gavel"></i> Role</th>
           <th>Edit</th>
-          <th></th>
+          <th>Rättigheter</th>
       </tr>
       </thead>
       <tbody>
@@ -36,6 +39,9 @@
 
           <td>
             <a href="/user/{{$user->id}}/edit"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+          </td>
+          <td>
+          <a href="/admin/user/{{$user->id}}/roles/edit"><button class="btn btn-primary btn-xs"><i class="fa fa-key"></i></button></a>
           </td>
       </tr>
 

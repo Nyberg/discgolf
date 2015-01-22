@@ -39,6 +39,17 @@ class AdminController extends \BaseController {
 
     }
 
+    public function clubOwners(){
+
+        $clubs = Club::get();
+        $users = User::whereHas('roles', function($q){
+            $q->where('name', 'ClubOwner');
+        })->get();
+
+        return View::make('admin.clubsowner', ['users'=>$users]);
+
+    }
+
 	/**
 	 * Show the form for creating a new resource.
 	 *

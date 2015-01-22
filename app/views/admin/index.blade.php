@@ -1,59 +1,63 @@
-@extends('admin/admin')
+@extends('master')
 
 @section('content')
 
-
-      <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
-      <!--main content start-->
-      <section id="main-content">
-          <section class="wrapper">
-
-              <div class="row mt">
-
-               <div class="col-lg-12 main-chart">
-
-                <div class="col-lg-3">
-               <h4 class="mb"><i class="fa fa-angle-right"></i> Users</h4>
-                <a href="/admin/users"><span class="btn btn-primary btn-block">Edit User</span></a>
+            <div class="row mtbox">
+                <div class="col-md-23 col-sm-2 col-md-offset-1 box0">
+                  <a  href="/admin/users">  <div class="box1">
+                        <span class="li_user"></span>
+                        <h4>Användare</h4>
+                    </div>
+                        <p>Redigera användare</p></a>
+                </div>
+                <div class="col-md-2 col-sm-2 box0">
+                   <a href="/admin/clubs/"> <div class="box1">
+                        <span class="li_star"></span>
+                        <h4>Klubbar</h4>
+                    </div>
+                        <p>Hantera klubbar</p></a>
+                </div>
+                   <div class="col-md-2 col-sm-2 box0">
+                    <a  href="/admin/course/"> <div class="box1">
+                        <span class="li_cloud"></span>
+                        <h4>Banor</h4>
+                    </div>
+                        <p>Hantera banor</p></a>
                 </div>
 
-
-                  	<div class="col-lg-3">
-                    <h4 class="mb"><i class="fa fa-angle-right"></i> Club</h4>
-                  	 <a href="/admin/club/add"><span class="btn btn-primary btn-block" style="margin-top: 5px;">Add Club</span></a>
-                  	<a href="/admin/clubs"><span class="btn btn-primary btn-block" style="margin-top: 5px;">Edit Club</span></a>
-                  	</div>
-
-                  	<div class="col-lg-3">
-                    <h4 class="mb"><i class="fa fa-angle-right"></i> Course</h4>
-                    <a href="/admin/course/add"><span class="btn btn-primary btn-block" style="margin-top: 5px;">Add Course</span></a>
-                    <a href="/admin/course"><span class="btn btn-primary btn-block" style="margin-top: 5px;">Edit Course</span></a>
+                    <div class="col-md-2 col-sm-2 box0">
+                      <a href="#">  <div class="box1">
+                            <span class="li_bubble"></span>
+                            <h4>Kommentarer</h4>
+                        </div>
+                            <p>Hantera kommentarer</p></a>
+                    </div>
+                      <div class="col-md-2 col-sm-2 box0">
+                      <a href="/admin/club/owners">  <div class="box1">
+                            <span class="li_lock"></span>
+                            <h4>Klubbägare</h4>
+                        </div>
+                            <p>Visa klubbägare</p></a>
                     </div>
 
-           </div><!-- /row -->
 
 
-					<div class="row">
 
-					</div><!-- /row -->
-
-					<div class="row mt">
-
-					</div><!-- /row -->
-
-                  </div><!-- /col-lg-9 END SECTION MIDDLE -->
+            </div><!-- /row mt -->
 
 
-      <!-- **********************************************************************************************************************************************************
-      RIGHT SIDEBAR CONTENT
-      *********************************************************************************************************************************************************** -->
+              <div class="row mt">
+            </div><!-- /row -->
 
 
-              </div><! --/row -->
-          </section>
-      </section>
+            <div class="row">
+
+            </div><!-- /row -->
+
+            <div class="row mt">
+
+            </div><!-- /row -->
+
 
 
 @stop

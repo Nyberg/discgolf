@@ -4,9 +4,6 @@ use dg\Forms\LoginForm;
 
 class SessionController extends \BaseController {
 
-    /**
-     * @var LoginForm
-     */
     private $loginForm;
 
     public function create()
@@ -22,7 +19,6 @@ class SessionController extends \BaseController {
 
     public function store()
     {
-
         $this->loginForm->validate($input = Input::only('email', 'password'));
 
         if(Auth::attempt($input))

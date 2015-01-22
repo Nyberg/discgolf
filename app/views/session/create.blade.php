@@ -1,4 +1,4 @@
-@extends('layouts/login')
+@extends('login')
 
 @section('content')
 
@@ -10,7 +10,8 @@
 	  	<div class="container">
 
 		     {{Form::open(['route' => 'session.store', 'class'=>'form-login'])}}
-		        <h2 class="form-login-heading">sign in now</h2>
+
+		        <h2 class="form-login-heading">logga in</h2>
 
 		        <div class="login-wrap">
 
@@ -20,19 +21,20 @@
 
 		            <label class="checkbox">
 		                <span class="pull-right">
-		                    <a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a>
+		                    <a data-toggle="modal" href="login.html#myModal">Glömt Lösenord?</a>
 
 		                </span>
 		            </label>
-		            {{Form::submit('Log in', ['class'=>'btn btn-primary btn-block'])}}
+		            {{Form::submit('Logga in', ['class'=>'btn btn-primary btn-block'])}}
+
 		               {{Form::close()}}
 		            <hr>
 
 
 		            <div class="registration">
-		                Don't have an account yet?<br/>
+		                Är du inte medlem?<br/>
 		                <a class="" href="/registration">
-		                    Create an account
+		                    Skapa användare
 		                </a>
 		            </div>
 
@@ -44,17 +46,27 @@
 		                  <div class="modal-content">
 		                      <div class="modal-header">
 		                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                          <h4 class="modal-title">Forgot Password ?</h4>
-		                      </div>
-		                      <div class="modal-body">
-		                          <p>Enter your e-mail address below to reset your password.</p>
-		                          <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+
+		                          <h4 class="modal-title">Glömt Lösenord?</h4>
 
 		                      </div>
-		                      <div class="modal-footer">
-		                          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-		                          <button class="btn btn-theme" type="button">Submit</button>
+
+		                      <div class="modal-body">
+
+                                <p>Skriv in din email-adress nedan för att återställa ditt lösenord.</p>
+                               <form action="{{ action('RemindersController@postRemind') }}" method="POST">
+
+                                {{Form::email('email', null,['class'=>'form-control placeholder-no-fix', 'placeholder'=>'Email', 'autocomplete'=>'off','autofocus'])}}
+
+                                </div>
+                                <div class="modal-footer">
+                                <input type="submit" class="btn btn-theme" value="Återställ">
+
+                                <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+
+
 		                      </div>
+
 		                  </div>
 		              </div>
 		          </div>
@@ -65,13 +77,6 @@
 	  	</div>
 	  </div>
 
-
-
-
-
-
-
-
-           @stop
+@stop
 
 

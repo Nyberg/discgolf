@@ -18,7 +18,7 @@
 {{HTML::style('css/lightbox.css')}}
 {{HTML::script('js/jquery-1.11.0.min.js')}}
 {{HTML::script('js/lightbox.min.js')}}
-{{HTML::script('admin_js/chart-master/Chart.js')}}
+{{HTML::script(Charts.js')}}
 {{ HTML::script('packages/jleach/laravelmce/js/tinymce/tinymce.min.js') }}
 
 <script>

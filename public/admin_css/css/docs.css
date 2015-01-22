@@ -1,0 +1,228 @@
+
+.bs-docs-example {
+  position: relative;
+  margin: 15px 0;
+  padding: 39px 19px 14px;
+  *padding-top: 19px;
+  background-color: #fff !important;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 2px;
+     -moz-border-radius: 2px;
+          border-radius: 2px;
+}
+
+/* Echo out a label for the example */
+.bs-docs-example:after {
+  content: "Example";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  padding: 3px 7px;
+  font-size: 12px;
+  word-spacing: 2px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #9da0a4;
+  -webkit-border-radius: 2px 0 2px 0;
+     -moz-border-radius: 2px 0 2px 0;
+          border-radius: 2px 0 2px 0;
+}
+
+.bs-docs-example.doc-dark {
+	background: #474747 !important;
+	border: 1px solid #000;
+}
+
+.bs-docs-example.doc-dark:after {
+	background: #303030 !important;
+	border: 1px solid #000;
+}
+
+/* Remove spacing between an example and it's code */
+.bs-docs-example + .prettyprint {
+  margin-top: -20px;
+  padding-top: 15px;
+}
+
+/* Tweak examples
+------------------------- */
+.bs-docs-example > p:last-child {
+  margin-bottom: 0;
+}
+.bs-docs-example .table,
+.bs-docs-example .progress,
+.bs-docs-example .well,
+.bs-docs-example .alert,
+.bs-docs-example .hero-unit,
+.bs-docs-example .pagination,
+.bs-docs-example .navbar,
+.bs-docs-example > .nav {
+  margin-bottom: 5px;
+}
+.bs-docs-example .pagination {
+  margin-top: 0;
+}
+.bs-navbar-top-example,
+.bs-navbar-bottom-example {
+  z-index: 1;
+  padding: 0;
+  height: 90px;
+  overflow: hidden; /* cut the drop shadows off */
+}
+.bs-navbar-top-example .navbar-fixed-top,
+.bs-navbar-bottom-example .navbar-fixed-bottom {
+  margin-left: 0;
+  margin-right: 0;
+}
+.bs-navbar-top-example {
+  -webkit-border-radius: 0 0 4px 4px;
+     -moz-border-radius: 0 0 4px 4px;
+          border-radius: 0 0 4px 4px;
+}
+.bs-navbar-top-example:after {
+  top: auto;
+  bottom: -1px;
+  -webkit-border-radius: 0 4px 0 4px;
+     -moz-border-radius: 0 4px 0 4px;
+          border-radius: 0 4px 0 4px;
+}
+.bs-navbar-bottom-example {
+  -webkit-border-radius: 4px 4px 0 0;
+     -moz-border-radius: 4px 4px 0 0;
+          border-radius: 4px 4px 0 0;
+}
+.bs-navbar-bottom-example .navbar {
+  margin-bottom: 0;
+}
+form.bs-docs-example {
+  padding-bottom: 19px;
+}
+
+/* Images */
+.bs-docs-example-images img {
+  margin: 10px;
+  display: inline-block;
+}
+
+/* Tooltips */
+.bs-docs-tooltip-examples {
+  text-align: center;
+  margin: 0 0 10px;
+  list-style: none;
+}
+.bs-docs-tooltip-examples li {
+  display: inline;
+  padding: 0 10px;
+}
+
+/* Popovers */
+.bs-docs-example-popover {
+  padding-bottom: 24px;
+  background-color: #f9f9f9;
+}
+.bs-docs-example-popover .popover {
+  position: relative;
+  display: block;
+  float: left;
+  width: 260px;
+  margin: 20px;
+}
+
+/* Dropdowns */
+.bs-docs-example-submenus {
+  min-height: 180px;
+}
+.bs-docs-example-submenus > .pull-left + .pull-left {
+  margin-left: 20px;
+}
+.bs-docs-example-submenus .dropup > .dropdown-menu,
+.bs-docs-example-submenus .dropdown > .dropdown-menu {
+  display: block;
+  position: static;
+  margin-bottom: 5px;
+  *width: 180px;
+}
+
+
+
+/* Sidenav for Docs
+-------------------------------------------------- */
+
+.tab-right {
+	text-indent: 10px;
+}
+
+.bs-docs-sidenav {
+  width: 228px;
+  margin: 30px 0 0;
+  padding: 0;
+  background-color: #FCFCFF;
+  border: 1px solid #C7C7C7;
+  border-bottom-width: 4px;
+  -webkit-border-radius: 3px;
+  	 -moz-border-radius: 3px;
+  		  border-radius: 3px;
+}
+
+.bs-docs-sidenav > li > a,
+.bs-docs-sidenav > li > ul > li > a {
+  display: block;
+  width: 190px \9;
+  padding: 10px 14px;
+  border-top: 1px solid white;
+  border-bottom: 1px solid #e5e5e5;
+  color: #555;
+  margin: 0;
+  
+}
+.bs-docs-sidenav > li:first-child > a {}
+.bs-docs-sidenav > li:last-child > a {}
+.bs-docs-sidenav .active > a {
+  position: relative;
+  z-index: 2;
+  padding: 10px 15px;
+    border-bottom: 1px solid #e5e5e5;
+  text-shadow: 0 1px 0 rgba(0,0,0,.15);
+}
+/* Chevrons */
+.bs-docs-sidenav .icon-chevron-right {
+  float: left;
+  margin-top: 5px;
+  margin-right: 6px;
+  opacity: .25;
+}
+.bs-docs-sidenav > li > a:hover {
+  background-color: #f5f5f5;
+}
+.bs-docs-sidenav a:hover .icon-chevron-right {
+  opacity: .5;
+}
+.bs-docs-sidenav .active .icon-chevron-right,
+.bs-docs-sidenav .active a:hover .icon-chevron-right {
+  /*background-image: url(../img/glyphicons-halflings-white.png);*/
+  opacity: 1;
+}
+.bs-docs-sidenav.affix {
+  top: 40px;
+}
+.bs-docs-sidenav.affix-bottom {
+  position: absolute;
+  top: auto;
+  bottom: 270px;
+}
+
+li.sidebar-title > a,
+li.sidebar-title > a:hover {
+	background-color: #424a5d !important;
+	border-color: #4d576e;
+	border-bottom: 4px solid #404A60;
+	text-shadow: 0 0 0 #000;
+	font-size: 16px;
+	color: #fff;
+}
+
+.sidebar-title i {
+	margin-top: 0px !important;
+	
+}
+

@@ -5,20 +5,20 @@
 
 
 
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Club</h4>
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Redigera Klubb - {{$club->name}}</h4>
                   	    <div class="form-horizontal style-form">
 
-                  	  {{Form::model($club, ['method'=>'PATCH', 'route'=> ['club.update', $club->id]])}}
+                  	  {{Form::model($club, ['method'=>'PATCH', 'route'=> ['club.update', $club->id], 'files' => true])}}
 
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Name</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Namn</label>
                               <div class="col-sm-10">
 
                                   {{Form::text('name', null, ['class'=>'form-control'])}}
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Country</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Land</label>
                               <div class="col-sm-10">
                                   {{Form::text('country', null, ['class'=>'form-control'])}}
 
@@ -26,7 +26,7 @@
                           </div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">State/Region</label>
+                            <label class="col-sm-2 col-sm-2 control-label">Landskap</label>
                             <div class="col-sm-10">
                                 {{Form::text('state', null, ['class'=>'form-control'])}}
 
@@ -34,7 +34,7 @@
                         </div>
 
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">City</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Stad</label>
                               <div class="col-sm-10">
                                   {{Form::text('city', null, ['class'=>'form-control'])}}
 
@@ -42,9 +42,24 @@
                           </div>
 
                            <div class="form-group">
-                                <label class="col-sm-2 col-sm-2 control-label">Website</label>
+                                <label class="col-sm-2 col-sm-2 control-label">Hemsida</label>
                                 <div class="col-sm-10">
                                     {{Form::text('website', null, ['class'=>'form-control'])}}
+
+                                </div>
+                            </div>
+
+                           <div class="form-group">
+                               <label class="col-sm-2 col-sm-2 control-label">Nuvarande header</label>
+                               <div class="col-sm-10">
+                                  <img src="{{$club->image}}" width="100%"/>
+                               </div>
+                           </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">Header</label>
+                                <div class="col-sm-10">
+                                    {{Form::file('file', '', ['class'=>'form-control'])}}
 
                                 </div>
                             </div>

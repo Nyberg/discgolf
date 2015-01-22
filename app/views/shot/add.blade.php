@@ -23,6 +23,8 @@
 
    </tbody></table>
 
+   <p id="img-obj">{{$hole->image}}</p>
+
   <h4 class="mb"><i class="fa fa-angle-right"></i> Add Shots</h4>
    {{Form::open(['route'=>'shot.store', 'class'=>'form-horizontal style-form'])}}
 
@@ -116,7 +118,9 @@
         imageObj.onload = function() {
           context.drawImage(imageObj, x, y, width, height);
         };
-        imageObj.src = '/img/dg/test.gif';
+
+        imageObj.src = document.getElementById('img-obj').textContent;
+        document.getElementById('img-obj').style.display = 'none';
 
        canvas.addEventListener("click", setPoint, false);
 

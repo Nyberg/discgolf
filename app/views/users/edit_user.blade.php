@@ -8,11 +8,7 @@
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#sectionA">Settings</a></li>
                             <li><a data-toggle="tab" href="#sectionB">Profile</a></li>
-
-                            @if(Auth::user()->hasRole('Admin'))
-                            <li><a data-toggle="tab" href="#sectionC">Permissions</a></li>
-                            @else
-                            @endif
+                            <li class="pull-right"><a data-toggle="" href="/account/user/password/">Change Password</a></li>
 
                         </ul>
                   <div class="form-horizontal style-form">
@@ -47,6 +43,15 @@
 
                                             </div>
 
+                                            <div class="form-group">
+                                                  <label class="col-sm-2 col-sm-2 control-label">Club</label>
+                                                  <div class="col-sm-10">
+
+                                               {{Form::select('club',$clubs , $user->club_id, ['data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'])}}
+
+                                                  </div>
+                                              </div>
+
                                              <div class="form-group">
                                                 <label class="col-sm-2 col-sm-2 control-label">Metric</label>
                                                 <div class="col-sm-10">
@@ -60,7 +65,10 @@
                                                <div class="form-group">
                                                                     <label class="col-sm-2 col-sm-2 control-label">Profile Image</label>
                                                                       <div class="col-sm-10">
+                                                                         <img src="{{$user->image}}" class="img-thumbnail" width="100px" height="100px"/>
+
                                                                           {{Form::file('file', '', ['class'=>'form-control'])}} </div>
+
 
                                                                       <label class="col-sm-2 col-sm-2 control-label"></label>
                                                                       <div class="col-sm-10">
@@ -71,6 +79,9 @@
                                               {{Form::submit('Save Settings', ['class'=>'btn btn-primary'])}}
                                              {{Form::close()}}
 
+
+
+
                          </div>
 
 
@@ -78,7 +89,7 @@
                         <div id="sectionB" class="tab-pane fade">
                         <br/>
                             <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Profile</h4>
-                                              	  {{Form::model($user->profile, ['method'=>'PATCH', 'route'=> ['user.update', $user->id]])}}
+                                              	  {{Form::model($user->profile, ['method'=>'PATCH', 'route'=> ['user.update', $user->id], 'files'=>true])}}
 
                                                       <div class="form-group">
                                                           <label class="col-sm-2 col-sm-2 control-label">Country</label>
@@ -104,6 +115,14 @@
                                                                   {{errors_for('city', $errors)}}
                                                               </div>
                                                           </div>
+                                                      <div class="form-group">
+                                                           <label class="col-sm-2 col-sm-2 control-label">Address</label>
+                                                           <div class="col-sm-10">
+
+                                                               {{Form::text('location', null, ['class'=>'form-control'])}}
+                                                               {{errors_for('location', $errors)}}
+                                                           </div>
+                                                       </div>
 
                                                     <div class="form-group">
                                                         <label class="col-sm-2 col-sm-2 control-label">Phone</label>
@@ -114,15 +133,6 @@
                                                         </div>
 
                                                     </div>
-
-                                                    <div class="form-group">
-                                                          <label class="col-sm-2 col-sm-2 control-label">Club</label>
-                                                          <div class="col-sm-10">
-
-                                                              {{Form::text('club', null, ['class'=>'form-control'])}}
-                                                              {{errors_for('club', $errors)}}
-                                                          </div>
-                                                      </div>
 
                                                       <div class="form-group">
                                                             <label class="col-sm-2 col-sm-2 control-label">Website</label>
@@ -136,9 +146,20 @@
                                                      <div class="form-group">
                                                         <label class="col-sm-2 col-sm-2 control-label">Information</label>
                                                         <div class="col-sm-10">
-                                                            {{Form::textarea('information', null, ['class'=>'form-control'])}}
+                                                            {{Form::textarea('info', null, ['class'=>'form-control'])}}
 
                                                         </div>
+                                                    </div>
+
+                                                     <div class="form-group">
+                                                            <label class="col-sm-2 col-sm-2 control-label">Profile Header Image</label>
+                                                              <div class="col-sm-10">
+                                                                  {{Form::file('file', '', ['class'=>'form-control'])}} </div>
+
+                                                              <label class="col-sm-2 col-sm-2 control-label"></label>
+                                                              <div class="col-sm-10">
+                                                                  <span class="help-block"></span>
+                                                              </div>
                                                     </div>
 
                                                       {{Form::submit('Update Profile', ['class'=>'btn btn-primary'])}}
@@ -146,31 +167,9 @@
 
 
                         </div>
-                        <div id="sectionC" class="tab-pane fade">
-                        <br/>
-                            <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Permissions</h4>
-
-                             {{Form::model($user->role, ['method'=>'PATCH', 'route'=> ['user.update', $user->id]])}}
-                        <div class="form-group">
-                          <label class="col-sm-2 col-sm-2 control-label">Current Permission</label>
-                          <div class="col-sm-10">
-                        @foreach($user->roles as $role)
-                        {{$role->name}}
-                        @endforeach
-                        </div>
-                        </div>
-
-                              <div class="form-group">
-                                  <label class="col-sm-2 col-sm-2 control-label">Permissions</label>
-                                  <div class="col-sm-10">
-                               {{Form::select('role',$roles, null, array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}} </div>
-
-                                  </div>
 
 
-                          {{Form::submit('Update Permissions', ['class'=>'btn btn-primary'])}}
-                         {{Form::close()}}
-                         </div>
+
                         </div>
                          </div>
 

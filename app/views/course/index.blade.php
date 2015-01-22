@@ -2,12 +2,15 @@
 
 @section('content')
 
-                 <h4 class="mb"><i class="fa fa-angle-right"></i> All Courses</h4>
+         <h4 class="mb"><i class="fa fa-angle-right"></i> Banor</h4>
+              <div class="row">
+           <img class="" src="/img/header-page.jpg" width="100%" height="60%"/>
+            </div>
          <table class="table table-hover">
          <thead>
-         <th>Name</th>
+         <th>Namn</th>
          <th>Location</th>
-         <th>Holes</th>
+         <th>Antal hål</th>
          <th>Par</th>
          </thead>
          <tbody>

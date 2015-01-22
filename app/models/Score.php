@@ -24,4 +24,8 @@ class Score extends Eloquent implements UserInterface, RemindableInterface {
         return $this->hasMany('Shot');
     }
 
+    public function comments(){
+        return $this->morphMany('Comment', 'commentable');
+    }
+
 }

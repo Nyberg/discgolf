@@ -8,7 +8,7 @@ class LoginForm extends FormValidator{
 
     protected $rules = [
 
-        'email'    => 'required',
+        'email'    => 'required|email',
         'password' => 'required'
 
     ];

@@ -1,4 +1,3 @@
-<?php
 
 @extends('admin/admin')
 

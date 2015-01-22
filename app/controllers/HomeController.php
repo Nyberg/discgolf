@@ -2,31 +2,41 @@
 
 class HomeController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
+    public function index(){
 
-    public function index()
-    {
+        if(Auth::check()){
 
-        return View::make('index.startsida');
+            $rounds = Round::where('status', 1)->limit(6)->get();
+            $reviews = Review::with('course')->limit(5)->get();
 
+            return View::make('index.loggedin', ['rounds'=>$rounds, 'reviews'=>$reviews]);
+        }else{
+            return View::make('index.startsida');
+        }
     }
 
     public function dashboard(){
         $id = Auth::User()->id;
         $user = User::with('profile')->whereId($id)->firstOrFail();
         $rounds = Round::where('user_id', $id)->count();
-        return View::make('dashboard.dashboard', ['user'=>$user, 'rounds'=>$rounds]);
+        $club = Club::whereId(Auth::user()->club_id)->firstOrFail();
+        return View::make('dashboard.dashboard', ['user'=>$user, 'rounds'=>$rounds, 'club'=>$club]);
+    }
+
+    public function rules(){
+        return View::make('index.rules');
+    }
+
+    public function links(){
+        return View::make('index.links');
+    }
+
+    public function discgolf(){
+        return View::make('index.discgolf');
+    }
+
+    public function about(){
+        return View::make('index.about');
     }
 
 }

@@ -19,13 +19,33 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return 'remember_token';
     }
 
+    public function roles(){
+        return $this->belongsToMany('Role', 'assigned_roles');
+    }
+
     public function profile()
     {
     return $this->HasOne('Profile');
     }
 
+    public function round(){
+        return $this->hasMany('Rounds');
+    }
+
+    public function sponsor(){
+        return $this->hasMany('Sponsor');
+    }
+
     public function club(){
         return $this->belongsTo('Club');
+    }
+
+    public function comments(){
+        return $this->morphMany('Comment', 'commentable');
+    }
+
+    public function photos(){
+        return $this->morphMany('Photo', 'imageable');
     }
 
     public function setPasswordAttribute($password){

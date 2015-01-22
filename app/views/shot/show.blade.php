@@ -57,7 +57,7 @@
         </tr>
       @endforeach
       <tr>
-      <td id="img-obj">/img/dg/test.gif</td>
+      <td id="img-obj">{{$score->hole['image']}}</td>
     </tr>
 
     </tbody></table>
@@ -66,7 +66,60 @@
 <div class="col-lg-4">
 <canvas id="myCanvas" width="300" height="450"></canvas>
 </div>
-</div>
+</div> </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+    <div class="showback">
+     <h4 class="mb"><i class="fa fa-comments-o"></i> Comments
+        @if(Auth::user())
+        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#comment">
+         Add Comment
+        </button>
+        @endif
+     </h4>
+
+     <div class="row">
+       <div class="col-lg-12">
+
+        @foreach($score->comments as $comment)
+
+        @include('layouts/include/comment')
+
+        @endforeach
+
+        </div></div>
+
+
+        <div class="modal fade" id="comment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title" id="myModalLabel">Add Comment</h4>
+                                  </div>
+
+                                  <div class="modal-body">
+                                  {{Form::open(['route'=>'comment.store', 'class'=>'form-horizontal style-form'])}}
+                                    {{Form::hidden('type_id', $score->id)}}
+                                    {{Form::hidden('model', 'score')}}
+                                   <div class="form-group">
+                                                     <label class="col-sm-2 col-sm-2 control-label">Comment</label>
+                                                     <div class="col-sm-10">
+
+                                                         {{Form::text('body', '', ['class'=>'form-control'])}}
+                                                     </div>
+                                                 </div>
+
+
+                                  <div class="modal-footer">
+                                      {{Form::submit('Save Comment', ['class'=>'btn btn-primary'])}}
+                                          {{Form::close()}}
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                 </div>
+                               </div>
+
 
 <script type="text/javascript">
 

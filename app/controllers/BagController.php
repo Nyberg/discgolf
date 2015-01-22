@@ -16,27 +16,17 @@ class BagController extends \BaseController {
 
     public function user($id){
 
-        $bags = Bag::whereUser_id($id)->get();
+        $bags = Bag::with('disc')->where('user_id', $id)->get();
 
         return View::make('bag.user', ['bags'=>$bags]);
 
     }
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
+
 	public function create()
 	{
 		return View::make('bag.add');
 	}
 
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function store()
 	{
 		$bag = New bag();
@@ -73,7 +63,7 @@ class BagController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$bag = Bag::whereId($id)->firstOrFail();
+		$bag = Bag::with('disc')->whereId($id)->firstOrFail();
 
         return View::make('bag.edit', ['bag'=>$bag]);
 	}
@@ -86,7 +76,8 @@ class BagController extends \BaseController {
 	 * @return Response
 	 */
 	public function update($id)
-	{
+    {
+
 		$bag = Bag::whereId($id)->firstOrFail();
 
         $bag->type = Input::get('type');
@@ -107,7 +98,7 @@ class BagController extends \BaseController {
         $bag = Bag::whereId($id)->firstOrFail();
         $bag->delete();
 
-        return Redirect::to('/user/'.Auth::user()->id.'/bags')->with('success', 'Bag deleted!');
+        return Redirect::to('/user/'.Auth::user()->id.'/bags')->with('success', 'Bag ' . $bag->type . ' deleted!');
 	}
 
 

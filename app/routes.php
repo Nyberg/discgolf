@@ -17,6 +17,17 @@ Route::group(['before'=>'checkAdmin'], function(){
         Route::get('/admin/user/{id}', 'UserController@adminshow');
         Route::get('/admin/users', 'AdminController@users');
 
+        #   Roles       #
+        Route::group(['before'=>'csrf'], function() {
+            Route::post('/user/change-roles/', array(
+                'as' => 'change-roles',
+                'uses' => 'UserController@addRoles'
+            ));
+
+        });
+
+        Route::get('/admin/user/{id}/roles/edit', 'UserController@addRole');
+
         #   Settings    #
         Route::get('/admin/settings', 'AdminController@settings');
 
@@ -31,9 +42,20 @@ Route::group(['before'=>'checkAdmin'], function(){
 
         #   Club        #
         Route::get('/admin/club/add', 'ClubController@create');
-        Route::get('/admin/club/{id}/edit', 'ClubController@edit');
         Route::get('/admin/clubs', 'AdminController@clubs');
+        Route::get('/admin/club/owners', 'AdminController@clubOwners');
     }
+);
+
+Route::group(['before'=>'checkClubOwner'], function(){
+
+        #   Course      #
+        Route::get('/admin/course/add', 'CourseController@create');
+        Route::get('/admin/course/{id}/edit', 'CourseController@edit');
+
+        #   Club        #
+        Route::get('/admin/club/{id}/edit', 'ClubController@edit');
+}
 );
 
 Route::group(['before'=>'auth'], function(){
@@ -42,38 +64,76 @@ Route::group(['before'=>'auth'], function(){
     Route::get('/dashboard', 'HomeController@dashboard');
 
     #   Round       #
-    Route::get('/round/add', 'RoundController@getCourse');
-    Route::get('/rounds/{id}/user', 'RoundController@user_round');
-    Route::post('/round/add/{id}/score', array('as'=>'round-add-score','uses' => 'RoundController@create'));
-    Route::get('/round/{id}/course/{course_id}/score/add', 'ScoreController@create');
-    Route::get('/round/{id}/edit/{course_id}', 'RoundController@edit');
+    Route::get('/account/round/add', 'RoundController@getCourse');
+    Route::get('/account/rounds/{id}/user', 'RoundController@user_round');
+    Route::post('/account/round/add/{id}/score', array('as'=>'account-round-add-score','uses' => 'RoundController@create'));
+    Route::get('/account/round/{id}/course/{course_id}/score/add', 'ScoreController@create');
+    Route::get('/account/round/{id}/edit/{course_id}', 'RoundController@edit');
 
     #   Score       #
-    Route::get('/score/{id}/edit', 'ScoreController@edit');
+    Route::get('/account/score/{id}/edit', 'ScoreController@edit');
 
     #   User        #
-    Route::get('/edit/{id}/user', 'UserController@edit');
+    Route::get('/account/edit/{id}/user', 'UserController@edit');
+
+    Route::group(['before'=>'csrf'], function(){
+
+        Route::post('/account/user/change-password/', array(
+            'as' => 'account-change-password',
+            'uses' => 'UserController@changePassword'
+        ));
+
+    });
+
+    Route::get('/account/user/password/', 'UserController@password');
 
     #   Shots       #
-    Route::get('/shots/{round_id}/add/{id}', 'ShotController@create');
-    Route::get('/shots/{round_id}/edit/{hole_id}', 'ShotController@edit');
+    Route::get('/account/shots/{round_id}/add/{id}', 'ShotController@create');
+    Route::get('/account/shots/{round_id}/edit/{hole_id}', 'ShotController@edit');
 
     #   Bag         #
-    Route::get('/bag/add', 'BagController@create');
-    Route::get('/bag/{id}/edit', 'BagController@edit');
-    Route::get('/user/{id}/bags', 'BagController@user');
+    Route::get('/account/bag/add', 'BagController@create');
+    Route::get('/account/bag/{id}/edit', 'BagController@edit');
+    Route::get('/account/user/{id}/bags', 'BagController@user');
 
     #   Disc        #
-    Route::get('/disc/add', 'DiscController@create');
-    Route::get('/disc/{id}/edit', 'DiscController@edit');
-    Route::get('/user/{id}/discs', 'DiscController@user');
+    Route::get('/account/disc/add', 'DiscController@create');
+    Route::get('/account/disc/{id}/edit', 'DiscController@edit');
+    Route::get('/account/user/{id}/discs', 'DiscController@user');
+
+    #   Comments    #
+    Route::get('/comments/course/', 'CommentController@course_store');
+    Route::get('/comments/course/', 'CommentController@course_store');
+    Route::get('/comments/course/', 'CommentController@course_store');
+
+    #   Sponsors    #
+    Route::get('/account/sponsor/add', 'SponsorController@create');
+    Route::get('/account/sponsor/{id}/edit/', 'SponsorController@edit');
+
+    #   Reviews     #
+    Route::get('/account/review/add', 'ReviewController@create');
+    Route::get('/account/review/{id}/edit', 'ReviewController@edit');
 
 });
 
+#   Sök     #
+Route::get('/query', 'SearchController@query');
+Route::get('/searchresult', ['as' => 'searchresult', 'uses' => 'SearchController@searchResult']);
+Route::get('/search/{result}','SearchController@search');
+
+#   App     #
+
+Route::get('/app', 'RoundController@app');
+
+#   Sidor   #
+Route::get('/about-discgol/', 'HomeController@discgolf');
+Route::get('/rules-discgolf/', 'HomeController@rules');
+Route::get('/about/', 'HomeController@about');
+Route::get('/links/', 'HomeController@links');
 
 // Course
 Route::get('/course/{id}/show' , 'CourseController@show');
-Route::get('/course' , 'CourseController@index');
+Route::get('/courses' , 'CourseController@index');
 
 #   Clubs
 Route::get('/clubs', 'ClubController@index');
@@ -100,6 +160,12 @@ Route::get('/users', 'UserController@index');
 Route::get('/user/{id}/show', 'UserController@show');
 Route::get('/registration', 'RegistrationController@create');
 
+#   Password    #
+Route::controller('password', 'RemindersController');
+
+#   Sponsors    #
+Route::get('/sponsor/{id}/redirect/', 'SponsorController@redirect');
+
 Route::resource('session','SessionController', ['only'=>['create', 'store', 'destroy']]);
 Route::resource('registration', 'RegistrationController', ['only'=>['store']]);
 Route::resource('user','UserController');
@@ -111,30 +177,12 @@ Route::resource('club', 'ClubController');
 Route::resource('shot', 'ShotController');
 Route::resource('bag', 'BagController');
 Route::resource('disc', 'DiscController');
+Route::resource('comment', 'CommentController');
+Route::resource('news', 'NewsController');
+Route::resource('sponsor', 'SponsorController');
+Route::resource('role', 'RoleController');
+Route::resource('review', 'ReviewController');
 
-# Permissions and Roles
-
-Route::get('/test', function(){
-    $config = array();
-    $config['center'] = 'auto';
-    $config['onboundschanged'] = 'if (!centreGot) {
-
-            marker_0.setOptions({
-                position: new google.maps.LatLng(37.4419, 13.392947)
-            });
-        }
-        centreGot = true;';
-
-    Gmaps::initialize($config);
-
-    // set up the marker ready for positioning
-    // once we know the users location
-    $marker = array();
-    Gmaps::add_marker($marker);
-
-    $map = Gmaps::create_map();
-    echo "<html><head>".$map['js']."</head><body>".$map['html']."</body></html>";
-});
 
 Route::get('/create-role', function(){
 

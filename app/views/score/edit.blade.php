@@ -1,14 +1,8 @@
-@extends('admin/admin')
+@extends('master')
 
 @section('content')
 
- <section id="main-content">
-          <section class="wrapper">
 
-          	<!-- BASIC FORM ELELEMNTS -->
-          	<div class="row mt">
-          		<div class="col-lg-12">
-          		 <div class="form-panel">
 
           		 <h4><i class="fa fa-angle-right"></i> Edit Score - Basket {{$score->hole->number}}</h4><hr>
                    <div class="form-horizontal style-form">
@@ -36,9 +30,5 @@
              {{Form::submit('Update Score', ['class'=>'btn btn-primary'])}}
              {{Form::close()}}
                 </div>
-          		</div><!-- col-lg-12-->
-    	</div><!-- /row -->
 
-		</section><! --/wrapper -->
-      </section><!-- /MAIN CONTENT -->
 @stop

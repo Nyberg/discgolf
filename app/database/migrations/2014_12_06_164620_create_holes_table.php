@@ -5,11 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateHolesTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
 	public function up()
 	{
 		Schema::create('holes', function(Blueprint $table){
@@ -20,15 +15,13 @@ class CreateHolesTable extends Migration {
             $table->integer('length')->nullable();
             $table->integer('par')->nullable();
             $table->string('name')->nullable();
+            $table->string('image', '255');
+            $table->integer('check');
             $table->timestamps();
 
 	    });
     }
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
+
 	public function down()
 	{
 		Schema::drop('holes');

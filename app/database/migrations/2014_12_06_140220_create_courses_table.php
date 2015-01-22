@@ -24,7 +24,7 @@ class CreateCoursesTable extends Migration {
             $table->string('image', '200');
             $table->string('fee', '255');
             $table->longText('information', '2000');
-            $table->integer('club');
+            $table->integer('club_id');
             $table->string('course_map', '255');
             $table->boolean('status');
             $table->string('long', '255');

@@ -1,14 +1,7 @@
-@extends('admin/admin')
+@extends('master')
 
 @section('content')
 
- <section id="main-content">
-          <section class="wrapper">
-
-          	<!-- BASIC FORM ELELEMNTS -->
-          	<div class="row mt">
-          		<div class="col-lg-12">
-          		 <div class="form-panel">
 
           		 <h4><i class="fa fa-angle-right"></i> Existing Holes at {{$course->name}}</h4><hr>
                                           <table class="table table-hover">
@@ -46,10 +39,11 @@
                         {{Form::open(['route'=>'hole.store', 'class'=>'form-horizontal style-form'])}}
                         {{Form::hidden('hidden_holes', $course->holes)}}
                         {{Form::hidden('course_id', $course->id)}}
+                        {{Form::hidden('number', $number)}}
 
 
 
-                       @for($i = 1; $i<=$total; $i++)
+                       @for($i = $number+1; $i<=$course->holes; $i++)
 
 
                     <div class="form-group">
@@ -78,10 +72,5 @@
                        @endfor
                         {{Form::submit('Save', ['class'=>'btn btn-primary btn-xs'])}}
                        {{Form::close()}}
-                </div>
-          		</div><!-- col-lg-12-->
-          	</div><!-- /row -->
 
-		</section><! --/wrapper -->
-      </section><!-- /MAIN CONTENT -->
 @stop

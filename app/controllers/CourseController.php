@@ -1,6 +1,14 @@
 <?php
 
+use dg\Forms\CourseAddForm;
+
 class CourseController extends \BaseController {
+
+    private $courseAddForm;
+
+    public function __construct(CourseAddForm $courseAddForm){
+        $this->courseAddForm = $courseAddForm;
+    }
 
 	public function index()
 	{
@@ -25,6 +33,8 @@ class CourseController extends \BaseController {
 	public function store()
     {
 
+        $this->courseAddForm->validate($input = Input::all());
+
         $course = new Course;
         $course->name = Input::get('name');
         $course->country = Input::get('country');
@@ -33,11 +43,19 @@ class CourseController extends \BaseController {
         $course->holes = Input::get('holes');
 
         $course->information = Input::get('information');
-        $course->club = Input::get('club');
+        $course->club_id = Input::get('club');
         $course->fee = Input::get('fee');
         $course->long = Input::get('long');
         $course->lat = Input::get('lat');
         $course->status = 0;
+
+        $course->save();
+
+        $course = Course::whereId($course->id)->firstOrFail();
+
+        $photo = new Photo();
+        $photo->user_id = Auth::user()->id;
+        $photo->imageable_id = $course->id;
 
         if (Input::hasFile('course_map')) {
 
@@ -64,12 +82,13 @@ class CourseController extends \BaseController {
             $filename = time() . '-course.jpg';
 
             $file = $file->move(public_path($filepath), ($filename));
-            $course->image = $filepath.$filename;
+            $photo->url = $filepath.$filename;
             }
             catch(Exception $e)
             {
                 return 'Något gick snett mannen: ' .$e;
             }
+            $course->photos()->save($photo);
         }
 
             $course->save();
@@ -81,17 +100,32 @@ class CourseController extends \BaseController {
 	{
         $course = Course::with('hole')->whereId($id)->firstOrFail();
         $rounds = Round::where('course_id', $id)->get();
-        $club = Club::whereId($course->club)->firstOrFail();
-        $record = Round::where('course_id', $id)->orderBy('total', 'desc')->groupBy('total')->firstOrFail();
+        $total = Round::where('course_id', $id)->count();
+        $club = Club::whereId($course->club_id)->firstOrFail();
+        $reviews = Review::where('course_id', $id)->get();
 
-		return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'club'=>$club, 'record'=>$record]);
-	}
+        if($total > 0 ){
+            $record = Round::where('course_id', $id)->orderBy('total', 'desc')->firstOrFail();
+            $rec = $record->total;
+        }else{
+            $rec = 0;
+        }
+
+        $sum = Hole::where('course_id', $id)->sum('length');
+        $x = ($sum / $course->holes);
+        $avg = round($x,2);
+
+        return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'club'=>$club, 'rec'=>$rec, 'sum'=>$sum, 'avg'=>$avg, 'reviews'=>$reviews]);
+	
+}
+
 
 	public function edit($id)
 	{
         $course = Course::with('hole')->whereId($id)->firstOrFail();
         if (is_null($course))
         {
+
             return Redirect::route('course.admin/course');
         }else{
 
@@ -102,6 +136,8 @@ class CourseController extends \BaseController {
 
 	public function update($id)
     {
+        $this->courseAddForm->validate($input = Input::all());
+
         $course = Course::whereId($id)->firstOrFail();
         if (is_null($course)) {
             return Redirect::route('/admin/course');
@@ -116,6 +152,15 @@ class CourseController extends \BaseController {
             $course->status = Input::get('status');
             $course->long = Input::get('long');
             $course->lat = Input::get('lat');
+
+            $course->save();
+
+            $course = Course::whereId($course->id)->firstOrFail();
+
+            $photo = new Photo();
+            $photo->user_id = Auth::user()->id;
+            $photo->imageable_id = $course->id;
+
 
             if (Input::hasFile('file-2')) {
 
@@ -137,20 +182,30 @@ class CourseController extends \BaseController {
 
                 try
                 {
-                    $file = Input::file('file');
 
+                    foreach($course->photos as $photo){
+
+                        if($photo->url == '/img/dg/header.jpg'){
+
+                        }else{
+                            $photo->delete();
+                            File::delete(public_path().$photo->url);
+                        }
+                    }
+
+                    $file = Input::file('file');
                     $filepath = '/img/dg/';
                     $filename = time() . '-course.jpg';
-
                     $file = $file->move(public_path($filepath), ($filename));
-                    $course->image = $filepath.$filename;
+                    $photo->url = $filepath.$filename;
                 }
                 catch(Exception $e)
                 {
                     return 'Något gick snett mannen: ' .$e;
                 }
-            }
 
+                $course->photos()->save($photo);
+            }
 
             $course->save();
 
