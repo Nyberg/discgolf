@@ -1,9 +1,9 @@
-@extends('master')
+@extends('db')
 
 @section('content')
 
 
-
+<div class="showback">
 
                   	  <h4 class="mb"><i class="fa fa-angle-right"></i> Redigera Klubb - {{$club->name}}</h4>
                   	    <div class="form-horizontal style-form">

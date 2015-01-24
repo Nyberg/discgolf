@@ -1,7 +1,8 @@
-@extends('master')
+@extends('db')
 
 @section('content')
 
+    <div class="showback">
 
       <h4 class="mb"><i class="fa fa-angle-right"></i> Add Bag</h4>
        {{Form::model($bag, ['method'=>'PATCH', 'route'=> ['bag.update', $bag->id]])}}
@@ -59,6 +60,8 @@
                           @endforeach
                     </div>
                    </div>
+                   </div>
+
                    </div>
 
 

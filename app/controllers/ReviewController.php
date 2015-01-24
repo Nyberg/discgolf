@@ -53,9 +53,11 @@ class ReviewController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show()
 	{
-		//
+		$reviews = Review::where('user_id', Auth::id())->get();
+
+        return View::make('review.show', ['reviews'=>$reviews]);
 	}
 
 	public function edit($id)
@@ -81,12 +83,17 @@ class ReviewController extends \BaseController {
 
         $review->save();
 
-        return Redirect::to('/course/'.$review->course_id.'/show')->with('success', 'Din recension är uppdaterad!');
+        return Redirect::to('/account/review/user')->with('success', 'Din recension är uppdaterad!');
 	}
 
 	public function destroy($id)
 	{
-		//
+		$review = Review::whereId($id)->firstOrFail();
+
+        $review->delete();
+
+        return Redirect::back()->with('success', 'Recension '.$review->head.' borttagen');
+
 	}
 
 

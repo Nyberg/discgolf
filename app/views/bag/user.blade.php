@@ -1,9 +1,12 @@
-@extends('master')
+@extends('db')
 
 
 @section('content')
 
-<h4><i class="fa fa-angle-right"></i> All Your Bags</h4>
+<div class="showback">
+
+<h4><i class="fa fa-angle-right"></i> Dina Bags</h4>
+    <p>Klicka på namnet för att visa väskans discar.</p>
       <div class="row">
            <div class="col-lg-12">
                   <table class="table table-hover ">
@@ -11,9 +14,9 @@
                   <tr>
                   <th>Bag</th>
                   <th>Discs</th>
-                  <th>Add Disc</th>
-                  <th>Edit</th>
-                  <th>Delete </th>
+                  <th>Lägg till disc</th>
+                  <th>Redigera</th>
+                  <th>Ta bort </th>
                   </tr>
                   </thead>
                   <tbody>
@@ -59,12 +62,12 @@
                 <table class="table table-hover ">
                    <thead>
                    <tr>
-                   <th>Plastic</th>
-                   <th>Name</th>
-                   <th>Weight</th>
-                   <th>Type</th>
-                   <th>Edit</th>
-                   <th>Delete</th>
+                   <th>Plast</th>
+                   <th>Namn</th>
+                   <th>Vikt</th>
+                   <th>Typ</th>
+                   <th>Redigera</th>
+                   <th>Ta bort</th>
 
                    </tr>
                    </thead>
@@ -80,7 +83,7 @@
                    <td>
 
                    {{Form::open(['method'=>'DELETE', 'route'=>['disc.destroy', $disc->id]])}}
-                     {{Form::submit('Delete', ['class'=>'btn btn-danger btn-xs'])}}
+                     {{Form::submit('Ta bort', ['class'=>'btn btn-danger btn-xs'])}}
                      {{Form::close()}}
                      </td>
                    </tr>
@@ -95,7 +98,7 @@
       <div class="modal-content">
       <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h4 class="modal-title" id="myModalLabel">Edit Bag</h4>
+      <h4 class="modal-title" id="myModalLabel">Redigera Bag</h4>
       </div>
 
       <div class="modal-body">
@@ -103,7 +106,7 @@
        {{Form::model($bag, ['method'=>'PATCH', 'route'=> ['bag.update', $bag->id]])}}
 
       <div class="form-group">
-      <label class="col-sm-2 col-sm-2 control-label">Name</label>
+      <label class="col-sm-2 col-sm-2 control-label">Namn</label>
       <div class="col-sm-10">
 
       {{Form::text('type', $bag->type, ['class'=>'form-control'])}}
@@ -112,9 +115,9 @@
 
 
       <div class="modal-footer">
-      {{Form::submit('Save Bag', ['class'=>'btn btn-primary'])}}
+      {{Form::submit('Spara', ['class'=>'btn btn-primary'])}}
       {{Form::close()}}
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
 
       </div>
       </div>
@@ -131,7 +134,7 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                      <h4 class="modal-title" id="myModalLabel">Add Disc to {{$bag->type}}</h4>
+                      <h4 class="modal-title" id="myModalLabel">Lägg till disc i {{$bag->type}}</h4>
                     </div>
 
                     <div class="modal-body">
@@ -141,35 +144,35 @@
 
 
                      <div class="form-group">
-                           <label class="col-sm-2 col-sm-2 control-label">Name</label>
+                           <label class="col-sm-2 col-sm-2 control-label">Namn</label>
                            <div class="col-sm-10">
 
                                {{Form::text('name', '', ['class'=>'form-control'])}}
                            </div>
                        </div>
                        <div class="form-group">
-                          <label class="col-sm-2 col-sm-2 control-label">Manufacturer</label>
+                          <label class="col-sm-2 col-sm-2 control-label">Tillverkare</label>
                           <div class="col-sm-10">
 
                               {{Form::text('author', '', ['class'=>'form-control'])}}
                           </div>
                       </div>
                      <div class="form-group">
-                          <label class="col-sm-2 col-sm-2 control-label">Plastic</label>
+                          <label class="col-sm-2 col-sm-2 control-label">Plast</label>
                           <div class="col-sm-10">
 
                               {{Form::text('plastic', '', ['class'=>'form-control'])}}
                           </div>
                       </div>
                      <div class="form-group">
-                          <label class="col-sm-2 col-sm-2 control-label">Weight</label>
+                          <label class="col-sm-2 col-sm-2 control-label">Vikt</label>
                           <div class="col-sm-10">
 
                               {{Form::text('weight', '', ['class'=>'form-control'])}}
                           </div>
                       </div>
                  <div class="form-group">
-                                   <label class="col-sm-2 col-sm-2 control-label">Type</label>
+                                   <label class="col-sm-2 col-sm-2 control-label">Typ</label>
                                    <div class="col-sm-10">
 
                                       {{Form::select('type', ['Putter'=>'Putter', 'Midrange'=>'Midrange', 'Fairway Driver'=>'Fairway Driver', 'Driver'=>'Driver'], null, array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
@@ -179,9 +182,9 @@
                                </div>
 
                     <div class="modal-footer">
-                        {{Form::submit('Add Disc', ['class'=>'btn btn-primary'])}}
+                        {{Form::submit('Lägg till disk', ['class'=>'btn btn-primary'])}}
                             {{Form::close()}}
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
 
                    </div>
                  </div>
@@ -203,7 +206,7 @@
                                      <div class="modal-content">
                                        <div class="modal-header">
                                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                         <h4 class="modal-title" id="myModalLabel">Edit Disc {{$disc->name}}</h4>
+                                         <h4 class="modal-title" id="myModalLabel"Redigera disc - {{$disc->name}}</h4>
                                        </div>
 
                                        <div class="modal-body">
@@ -213,35 +216,35 @@
 
 
                                         <div class="form-group">
-                                              <label class="col-sm-2 col-sm-2 control-label">Name</label>
+                                              <label class="col-sm-2 col-sm-2 control-label">Namn</label>
                                               <div class="col-sm-10">
 
                                                   {{Form::text('name', null, ['class'=>'form-control'])}}
                                               </div>
                                           </div>
                                           <div class="form-group">
-                                             <label class="col-sm-2 col-sm-2 control-label">Manufacturer</label>
+                                             <label class="col-sm-2 col-sm-2 control-label">Tillverkare</label>
                                              <div class="col-sm-10">
 
                                                      {{Form::text('author',null, ['class'=>'form-control'])}}
                                              </div>
                                          </div>
                                         <div class="form-group">
-                                             <label class="col-sm-2 col-sm-2 control-label">Plastic</label>
+                                             <label class="col-sm-2 col-sm-2 control-label">Plast</label>
                                              <div class="col-sm-10">
 
                                                  {{Form::text('plastic', null, ['class'=>'form-control'])}}
                                              </div>
                                          </div>
                                         <div class="form-group">
-                                             <label class="col-sm-2 col-sm-2 control-label">Weight</label>
+                                             <label class="col-sm-2 col-sm-2 control-label">Vikt</label>
                                              <div class="col-sm-10">
 
                                                  {{Form::text('weight', null, ['class'=>'form-control'])}}
                                              </div>
                                          </div>
                                     <div class="form-group">
-                                                      <label class="col-sm-2 col-sm-2 control-label">Type</label>
+                                                      <label class="col-sm-2 col-sm-2 control-label">Typ</label>
                                                       <div class="col-sm-10">
 
                                                          {{Form::select('type', ['Putter'=>'Putter', 'Midrange'=>'Midrange', 'Fairway Driver'=>'Fairway Driver', 'Driver'=>'Driver'], $disc->type, array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
@@ -250,9 +253,9 @@
                                                   </div>
 
                                        <div class="modal-footer">
-                                           {{Form::submit('Save Disc', ['class'=>'btn btn-primary'])}}
+                                           {{Form::submit('Spara disc', ['class'=>'btn btn-primary'])}}
                                                {{Form::close()}}
-                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                         <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
 
                                       </div>
                                     </div>
@@ -269,14 +272,14 @@
 
 </div>
 
-     <!-- <div class="row">
-      <hr/>
+     <div class="row">
+
       <div class="col-lg-12">
-     <a href="/bag/add"><span class="btn btn-primary">Add Another Bag</span></a>
+     <a href="/account/bag/add"><span class="btn btn-primary">Skapa ny bag</span></a>
 
       </div>
-        </div> -->
-
+        </div>
+</div>
 
 
 

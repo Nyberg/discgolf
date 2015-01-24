@@ -1,6 +1,8 @@
-@extends('master')
+@extends('db')
 
 @section('content')
+
+<div class="showback">
 
   <h4 class="mb"><i class="fa fa-angle-right"></i> Skapa recension</h4>
    {{Form::open(['method'=>'POST', 'route'=>['review.store'], 'class'=>'form-horizontal style-form'])}}

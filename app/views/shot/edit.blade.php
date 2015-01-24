@@ -1,8 +1,9 @@
-@extends('master')
+@extends('db')
 
 @section('content')
 
 <div class="row">
+<div class="showback">
 <div class="col-lg-8">
  <h4 class="mb"><i class="fa fa-angle-right"></i> Hole {{$hole->number}}</h4>
  <table class="table table-hover">

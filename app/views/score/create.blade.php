@@ -1,15 +1,17 @@
-@extends('master')
+@extends('db')
 
 @section('content')
 
+    	<div class="showback">
 
-    <h4><i class="fa fa-angle-right"></i> Create Round - {{$course->name}}</h4><hr>
+
+    <h4><i class="fa fa-angle-right"></i> Skapa Runda - {{$course->name}}</h4><hr>
       <table class="table table-hover">
 
 
           <thead>
           <tr>
-            <th>Hole</th>
+            <th>Hål</th>
             @foreach($course->hole as $hole)
             <td>{{$hole->number}}</td>
             @endforeach
@@ -26,7 +28,7 @@
             @endforeach
            </tr>
            <tr>
-           <th>Length</th>
+           <th>Längd</th>
            @foreach($course->hole as $hole)
            <td>{{$hole->length}}m</td>
            @endforeach
@@ -34,7 +36,7 @@
           </tbody>
       </table>
 
-        <h4 class="mb"><i class="fa fa-angle-right"></i> Add Score</h4>
+        <h4 class="mb"><i class="fa fa-angle-right"></i> Lägg till resultat</h4>
             {{Form::open(['route'=>'round.store', 'class'=>'form-horizontal style-form'])}}
             {{Form::hidden('course_id', $course->id)}}
             {{Form::hidden('holes', $course->holes)}}
@@ -61,7 +63,7 @@
               </div>
 
             @endforeach
-            {{Form::submit('Next', ['class'=>'btn btn-primary'])}}
+            {{Form::submit('Spara', ['class'=>'btn btn-primary'])}}
             {{Form::close()}}
         </div>
         </div>

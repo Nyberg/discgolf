@@ -27,7 +27,7 @@ class ClubController extends \BaseController {
 
         $club->save();
 
-        return Redirect::to('/admin');
+        return Redirect::to('/dashboard')->with('success', 'Klubb tillagd!');
 
 	}
 
@@ -104,6 +104,14 @@ class ClubController extends \BaseController {
             return Redirect::back()->with('danger', 'Något gick snett..');
         }
 	}
+
+    public function clubCourses($id){
+
+        $club = Club::with('course')->whereId($id)->firstOrFail();
+
+        return View::make('club.courses', ['club'=>$club]);
+
+    }
 
 	public function destroy($id)
 	{

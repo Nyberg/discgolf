@@ -124,6 +124,11 @@ google.maps.event.addDomListener(window, 'load', initialize);
         source: '/query',
         minLength: 1
     });
+
+        $('#getPlayer').autocomplete({
+            source: '/getplayer',
+            minLength: 1
+        });
 </script>
 
 <script type="text/javascript">

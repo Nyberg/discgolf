@@ -55,6 +55,11 @@ Route::group(['before'=>'checkClubOwner'], function(){
 
         #   Club        #
         Route::get('/admin/club/{id}/edit', 'ClubController@edit');
+        Route::get('/admin/club/{id}/courses', 'ClubController@clubCourses');
+
+        #   Hole        #
+        Route::get('/admin/holes/{id}/add', 'HoleController@create');
+        Route::get('/admin/holes/{id}/edit', 'HoleController@edit');
 }
 );
 
@@ -68,6 +73,7 @@ Route::group(['before'=>'auth'], function(){
     Route::get('/account/rounds/{id}/user', 'RoundController@user_round');
     Route::post('/account/round/add/{id}/score', array('as'=>'account-round-add-score','uses' => 'RoundController@create'));
     Route::get('/account/round/{id}/course/{course_id}/score/add', 'ScoreController@create');
+    Route::get('/account/round/{id}/course/{course_id}/par/', 'RoundController@createPar');
     Route::get('/account/round/{id}/edit/{course_id}', 'RoundController@edit');
 
     #   Score       #
@@ -103,22 +109,30 @@ Route::group(['before'=>'auth'], function(){
 
     #   Comments    #
     Route::get('/comments/course/', 'CommentController@course_store');
-    Route::get('/comments/course/', 'CommentController@course_store');
-    Route::get('/comments/course/', 'CommentController@course_store');
+    Route::get('/account/comment/user', 'CommentController@index');
 
     #   Sponsors    #
     Route::get('/account/sponsor/add', 'SponsorController@create');
     Route::get('/account/sponsor/{id}/edit/', 'SponsorController@edit');
+    Route::get('/account/sponsor/user/', 'SponsorController@show');
 
     #   Reviews     #
     Route::get('/account/review/add', 'ReviewController@create');
     Route::get('/account/review/{id}/edit', 'ReviewController@edit');
+    Route::get('/account/review/user', 'ReviewController@show');
 
 });
 
 #   Sök     #
 Route::get('/query', 'SearchController@query');
 Route::get('/searchresult', ['as' => 'searchresult', 'uses' => 'SearchController@searchResult']);
+Route::get('/search/{result}','SearchController@search');
+
+#   Hämta medspelare     #
+Route::get('/getplayer', 'SearchController@getplayer');
+Route::get('/searchplayer', ['as' => 'searchplayer', 'uses' => 'SearchController@searchPlayer']);
+
+
 Route::get('/search/{result}','SearchController@search');
 
 #   App     #

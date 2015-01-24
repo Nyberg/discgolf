@@ -1,6 +1,8 @@
-@extends('master')
+@extends('db')
 
 @section('content')
+
+    <div class="showback">
 
      <h4 class="mb"><i class="fa fa-angle-right"></i> Alla Klubbar</h4>
      <div class="row">
@@ -32,5 +34,7 @@
             @endforeach
           </tbody>
       </table>
+
+      </div>
 
 @stop

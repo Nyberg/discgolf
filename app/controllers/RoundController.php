@@ -21,21 +21,52 @@ class RoundController extends \BaseController {
 
     }
 
+    public function createPar($id, $course_id){
+        $round = Round::whereId($id)->firstOrFail();
+        $user = User::whereId(Auth::id())->firstOrFail();
+        $course = Course::whereId($course_id)->firstOrFail();
+        $users = User::get();
+
+        $result = [];
+
+        foreach($users as $user){
+            $result[] = $user->first_name .' '.$user->last_name;
+        }
+
+        return View::make('round.par', ['user'=>$user, 'course'=>$course, 'result'=>$result, 'round'=>$round]);
+
+    }
+
 	public function create()
 	{
         $name = Auth::user()->first_name.' '. Auth::user()->last_name;
 
-        $round = new Round();
-        $round->course_id = Input::get('id');
-        $round->user_id = Auth::User()->id;
-        $round->user = $name;
-        $round->status = 0;
-        $round->save();
+        if(Input::get('type') == 'Singel'){
 
-        $course = Course::with('hole')->whereId($round->course_id)->firstOrFail();
+            $round = new Round();
+            $round->course_id = Input::get('id');
+            $round->user_id = Auth::User()->id;
+            $round->user = $name;
+            $round->status = 0;
+            $round->save();
 
-        return Redirect::to('/account/round/'.$round->id.'/course/'.$course->id.'/score/add');
-            //return View::make('score.create', ['course' => $course, 'id'=>$round->course_id]);
+            $course = Course::with('hole')->whereId($round->course_id)->firstOrFail();
+
+            return Redirect::to('/account/round/'.$round->id.'/course/'.$course->id.'/score/add');
+        }else{
+
+            $round = new Round();
+            $round->course_id = Input::get('id');
+            $round->user_id = Auth::User()->id;
+            $round->user = $name;
+            $round->status = 0;
+            $round->save();
+
+
+            $course = Course::with('hole')->whereId($round->course_id)->firstOrFail();
+            return Redirect::to('/account/round/'.$round->id.'/course/'.$course->id.'/par/')->with('success', 'So far, so good!');
+        }
+
         }
 
     public function getCourse(){
@@ -99,7 +130,7 @@ class RoundController extends \BaseController {
 
             return View::make('round.edit', ['round' => $round, 'course' => $course, 'courses' => $courses]);
         }else{
-            return Redirect::to('/')->with('danger', 'You cant edit that.');
+            return Redirect::to('/')->with('danger', 'Du kan inte redigera det!');
         }
 	}
 
@@ -108,7 +139,7 @@ class RoundController extends \BaseController {
         $round = Round::whereId($id)->firstOrFail();
 
         if (is_null($round)) {
-            return Redirect::back()->with('danger', 'Something went wrong!');
+            return Redirect::back()->with('danger', 'Något gick snett!');
         } else {
 
             $round = Round::whereId($id)->firstOrFail();
@@ -118,7 +149,7 @@ class RoundController extends \BaseController {
 
             $round->save();
 
-            return Redirect::back()->with('success', 'Round updated!');
+            return Redirect::back()->with('success', 'Runda uppdaterad!');
         }
 	}
 
@@ -139,7 +170,7 @@ class RoundController extends \BaseController {
         return Redirect::back();
 
         }else{
-            return Redirect::to('/')->with('danger', 'You cant delete that.');
+            return Redirect::to('/')->with('danger', 'Du kan inte redigera det!');
         }
 	}
 

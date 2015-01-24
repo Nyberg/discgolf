@@ -1,8 +1,10 @@
-@extends('master')
+@extends('db')
 
 @section('content')
 
-      <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Round</h4>
+	<div class="showback">
+
+      <h4 class="mb"><i class="fa fa-angle-right"></i> Redigera Runda</h4>
       <div class="form-horizontal style-form">
 
 
@@ -10,7 +12,7 @@
        {{Form::hidden('course_id', $course->id)}}
 
           <div class="form-group">
-              <label class="col-sm-2 col-sm-2 control-label"> Course</label>
+              <label class="col-sm-2 col-sm-2 control-label"> Bana</label>
               <div class="col-sm-10">
               {{Form::text('course', $course->name, ['class'=>'form-control', 'readonly'])}}
               </div>
@@ -25,7 +27,7 @@
             </div>
 
           <div class="form-group">
-              <label class="col-sm-2 col-sm-2 control-label">Comment</label><br/>
+              <label class="col-sm-2 col-sm-2 control-label">Kommentar</label><br/>
               <div class="col-sm-12">
                {{Form::textarea('comment', null, ['class'=>'form-control'])}}
               </div>
@@ -35,17 +37,17 @@
        {{Form::close()}}
 
       <br/>
-      <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Score</h4>
+      <h4 class="mb"><i class="fa fa-angle-right"></i> Redigera Resultat</h4>
       <table class="table table-hover">
       <thead>
       <tr>
           <th>#</th>
-          <th>Length</th>
+          <th>Längd</th>
           <th>Par</th>
-          <th>Score</th>
+          <th>Resultat</th>
 
-          <th>Score</th>
-          <th>Throws</th>
+          <th>Redigera</th>
+          <th>Kast</th>
 
       </tr>
       </thead>
@@ -58,10 +60,10 @@
           <td>{{$score->par}}</td>
           <td>{{$score->score}}</td>
 
-          <td><a href="/score/{{$score->id}}/edit"><span class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></span></a></td>
+          <td><a href="/account/score/{{$score->id}}/edit"><span class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></span></a></td>
 
 
-          <td><a href="/shots/{{$round->id}}/{{checkShot($score->score_added)}}/{{$score->hole_id}}"><span class="btn btn-primary btn-xs"><i class="fa fa-{{setIcon($score->score_added)}}"></i></span></a></td>
+          <td><a href="/account/shots/{{$round->id}}/{{checkShot($score->score_added)}}/{{$score->hole_id}}"><span class="btn btn-primary btn-xs"><i class="fa fa-{{setIcon($score->score_added)}}"></i></span></a></td>
         @endforeach
       </tr>
 

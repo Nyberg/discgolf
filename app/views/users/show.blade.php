@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <h4><i class="fa fa-angle-right"></i> {{$user->first_name .' '.$user->last_name}} - <a href="/club/{{$club->id}}/show">{{$club->name}}</a></h4>
+  <h4 class="rubrik"><i class="fa fa-angle-right"></i> {{$user->first_name .' '.$user->last_name}} - <a href="/club/{{$club->id}}/show">{{$club->name}}</a></h4>
      <div class="row">
         <img class="img-responsive" src="{{$user->profile['image']}}" width="100%"/>
      </div>

@@ -55,7 +55,7 @@ class HoleController extends \BaseController {
         $course->status = 1;
         $course->save();
 
-        return Redirect::to('/admin/course')->with('success', 'Holes added!');
+        return Redirect::to('/dashboard')->with('success', 'Hål tillagda!');
 
 	}
 
@@ -104,7 +104,7 @@ class HoleController extends \BaseController {
 
                 }catch(Exception $e){
 
-                    return Redirect::back()->with('danger', 'Something went wrong!');
+                    return Redirect::back()->with('danger', 'Något gick snett!');
 
                 }
             }
@@ -132,7 +132,7 @@ class HoleController extends \BaseController {
             $course->par = Hole::where('course_id', $hole->course_id)->sum('par');
             $course->save();
 
-            return Redirect::to('/admin/course/'.$hole->course_id.'/edit')->with('success','Hål uppdaterat!');
+            return Redirect::to('/dashboard'.$hole->course_id.'/edit')->with('success','Hål uppdaterat!');
         }
 	}
 
@@ -141,7 +141,25 @@ class HoleController extends \BaseController {
         $hole = Hole::whereId($id)->firstOrFail();
         $hole->delete();
 
-        return Redirect::back()->with('success', 'Hole deleted!');
+        $rounds = Round::with('score')->where('course_id', $hole->course_id)->get();
+        $scores = Score::where('hole_id', $id)->get();
+
+
+        foreach ($scores as $score) {
+            $score->delete();
+        }
+
+        foreach($rounds as $round) {
+            $round = Round::whereId($round->id)->firstOrFail();
+            $round->total = Score::where('round_id', $round->id)->sum('score');
+            $round->save();
+        }
+
+        $course = Course::whereId($hole->course_id)->firstOrFail();
+        $course->par = Hole::where('course_id', $hole->course_id)->sum('par');
+        $course->save();
+
+        return Redirect::back()->with('success', 'Hål raderat!');
 	}
 
 

@@ -6,8 +6,8 @@ Website: http://blacktie.co
 Premium: http://www.gridgum.com
 */
 
-/* Import fonts
-@import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900); */
+/* Import fonts */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
 /* BASIC THEME CONFIGURATION */
 body {
@@ -16,6 +16,8 @@ body {
     padding: 0px !important;
     margin: 0px !important;
     font-size:1.2em;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
 }
 
 .hole-in-one{

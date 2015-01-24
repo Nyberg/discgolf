@@ -1,16 +1,17 @@
-@extends('master')
+@extends('ob')
 
 
 @section('content')
 
-      <h4><i class="fa fa-angle-right"></i> All Bags</h4><hr>
+    <div class="showback">
+      <h4><i class="fa fa-angle-right"></i> Dina Bags</h4><hr>
       <table class="table table-hover">
           <thead>
           <tr>
 
-           <th>Type</th>
+           <th>Namn</th>
             <th>Discs</th>
-            <th>User</th>
+            <th>Användare</th>
 
           </tr>
 
@@ -27,5 +28,6 @@
            @endforeach
           </tbody>
       </table>
+    </div>
 
 @stop

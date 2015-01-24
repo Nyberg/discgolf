@@ -129,6 +129,12 @@ class UserController extends \BaseController {
                         $filename = time() . '-header.png';
                         $file = $file->move(public_path($filepath), ($filename));
                         $user->profile->image = $filepath.$filename;
+                        $img = Image::make(public_path($user->profile->image));
+
+                        $img->save();
+
+                        $img->destroy();
+
 
                     }
                     catch(Exception $e)
@@ -138,12 +144,6 @@ class UserController extends \BaseController {
                 }
 
                 $user->profile->save();
-
-                $img = Image::make(public_path($user->profile->image));
-
-                $img->save();
-
-                $img->destroy();
 
                 if($old->profile->image == '/img/dg/header.jpg'){
 
@@ -162,7 +162,13 @@ class UserController extends \BaseController {
                 $user->last_name = Input::get('last_name');
                 $user->email = Input::get('email');
                 $user->metric = Input::get('metric');
-                $user->club_id = Input::get('club');
+
+                if(Auth::user()->hasRole('ClubOwner')){
+                    $user->club_id = $user->club_id;
+                }else{
+                    $user->club_id = Input::get('club');
+                }
+
 
 
                 if(Input::hasFile('file')) {
@@ -174,6 +180,16 @@ class UserController extends \BaseController {
                         $filename = time() . '-user-'.$user->first_name.'.jpg';
                         $file = $file->move(public_path($filepath), ($filename));
                         $user->image = $filepath.$filename;
+                        $img = Image::make(public_path($user->image))->resize(180,180);
+                        $img->save();
+
+                        $img->destroy();
+
+                        if($old->image == '/img/avatar.png'){
+
+                        }else{
+                            File::delete(public_path().$old->image);
+                        }
                     }
                     catch(Exception $e)
                     {
@@ -182,18 +198,6 @@ class UserController extends \BaseController {
                 }
 
                 $user->save();
-
-                $img = Image::make(public_path($user->image))->resize(180,180);
-
-                $img->save();
-
-                $img->destroy();
-
-                if($old->image == '/img/avatar.png'){
-
-                }else{
-                    File::delete(public_path().$old->image);
-                }
 
                 return Redirect::back()->with('success', 'Settings updated!');
             }

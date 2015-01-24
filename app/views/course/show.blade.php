@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h4 class="mb"><i class="fa fa-angle-right"></i> {{$course->name . ' - '}} <a href="/club/{{$club->id}}/show">{{$club->name}}</a></h4>
+<h4><i class="fa fa-angle-right"></i> {{$course->name . ' - '}} <a href="/club/{{$club->id}}/show">{{$club->name}}</a></h4>
 <div class="row">
 
 @foreach($course->photos as $photo)

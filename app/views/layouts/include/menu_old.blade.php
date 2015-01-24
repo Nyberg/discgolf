@@ -1,162 +1,138 @@
-  <!-- **********************************************************************************************************************************************************
-        TOP BAR CONTENT & NOTIFICATIONS
-        *********************************************************************************************************************************************************** -->
-        <!--header start-->
-        <header class="header black-bg">
-                <div class="sidebar-toggle-box">
-                    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-                </div>
-              <!--logo start-->
-              <a href="/" class="logo"><b>Another Awesome Site</b></a>
-              <!--logo end-->
-              <div class="nav notify-row" id="top_menu">
-                  <!--  notification start -->
-                  <ul class="nav top-menu">
-
-                  @if(!Auth::user())
-
-                  @elseif(Auth::user()->hasRole("Admin"))
-                     <li><a href="/admin"><i class=" fa fa-dashboard"></i></a></li>
-                  @else
-                  @endif
-                  </ul>
-                  <!--  notification end -->
+   <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
-              <div class="top-menu">
-              	<ul class="nav pull-right top-menu">
-
-                         {{Form::open(['route' => 'searchresult', 'method' => 'GET', 'class' => 'navbar-form navbar-left'])}}
-                                   <div class="form-group">
-                                        <input type="text" class="form-control input-sm" name="auto" id="auto" placeholder="Search Course">
-                                   </div>
-                                         {{Form::submit('Search Course', ['class' => 'btn btn-primary btn-sm'])}}
-                                   {{Form::close()}}
-
-              	</ul>
-              </div>
-          </header>
-        <!--header end-->
-
-        <!-- **********************************************************************************************************************************************************
-        MAIN SIDEBAR MENU
-        *********************************************************************************************************************************************************** -->
-        <!--sidebar start-->
-        <aside>
-            <div id="sidebar"  class="nav-collapse ">
-                <!-- sidebar menu start-->
-                <ul class="sidebar-menu" id="nav-accordion">
-
-                @if(Auth::user())
-           	    <p class="centered"><a href="/user/{{Auth::user()->id}}/show">
-           	    @else
-           	    <p class="centered"><a href="/registration">
-           	    @endif
-
-                @if(!empty(Auth::user()->image))
-                <img src="{{Auth::user()->image}}" class="img-circle" width="60">
-                @else
-                <img src="/img/avatar.png" class="img-circle" width="60">
-                @endif
-                </a></p>
-
-
-                @if(Auth::user())
-                <h5 class="centered">{{Auth::user()->first_name .' '. Auth::user()->last_name}}</h5>
-                @else
-                <h5 class="centered">Welcome, Guest!</h5>
-                @endif
-
-                <li class="mt">
-                @if(Auth::user())
-                <a class="active" href="/dashboard">
-                    <i class="fa fa-dashboard"></i>
-                    <span>Dashboard</span>
-                </a>
-                @else
-                @endif
-
-                    </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;" >
-                            <i class=" fa fa-bar-chart-o"></i>
-                            <span>Statistics</span>
-                        </a>
-                        <ul class="sub">
-                            <li><a  href="/">Site Statistics</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="sub-menu">
-                        <a href="javascript:;" >
-                            <i class="fa fa-bullseye"></i>
-                            <span>Discgolf</span>
-                        </a>
-                        <ul class="sub">
-                            <li><a  href="/round/add">Add round</a></li>
-                            @if(Auth::user())
-                            <li><a  href="/rounds/{{Auth::User()->id}}/user">Your rounds</a></li>
-                            <li><a href="/user/{{Auth::user()->id}}/bags">Your Bag</a></li>
-                            @else
-
-                            @endif
-                            <li><a  href="/rounds">All rounds</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="sub-menu">
-                        <a href="javascript:;" >
-                            <i class="fa fa-tree"></i>
-                            <span>Courses</span>
-                        </a>
-                        <ul class="sub">
-                        <li><a  href="/course">All Courses</a></li>
-                            <li><a  href="/">Find Course</a></li>
-                            <li><a  href="/">Favorite Courses</a></li>
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;" >
-                            <i class="fa fa-users"></i>
-                            <span>Players & Clubs</span>
-                        </a>
-                        <ul class="sub">
-                            <li><a  href="/clubs">Clubs</a></li>
-                            <li><a  href="/users">All Players</a></li>
-                            <li><a  href="/users">Your Friends</a></li>
-                        </ul>
-                    </li>
-
-                   @if(Auth::user())
-                   <li class="sub-menu">
-                        <a href="javascript:;" >
-                            <i class="fa fa-cogs"></i>
-                            <span>Settings</span>
-                        </a>
-                        <ul class="sub">
-                            <li><a  href="/user/{{Auth::user()->id}}/edit">Your Settings/Profile</a></li>
-                        </ul>
-                    </li>
-                    @else
-                    @endif
-
-                    <li class="sub-menu">
-                    @if(Auth::user())
-                    @else
-                    <a class="" href="/registration"><i class="fa fa-user"></i>Sign Up</a></li>
-                    </li>
-                    @endif
-
-
-                    <li class="sub-menu">
-
-                    @if(Auth::user())
-                    <a class="logout" href="/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
-                    @else
-                     <a class="login" href="/login"><i class="fa fa-sign-in"></i>Login</a></li>
-                    @endif
-                </ul>
-                <!-- sidebar menu end-->
+            <!--logo start-->
+            <a href="/" class="logo"><b>Penguin Project - Dashboard</b></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
             </div>
-        </aside>
-        <!--sidebar end-->
+            <div class="top-menu">
+            	<ul class="nav pull-right top-menu">
+                    <li class=""><a class="logout" href="/">Tillbaka till startsidan</a></li>
+            	</ul>
+            </div>
+        </header>
+      <!--header end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      MAIN SIDEBAR MENU
+      *********************************************************************************************************************************************************** -->
+      <!--sidebar start-->
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+              
+              	  <p class="centered"><a href="/user/{{Auth::id()}}/show"><img src="{{Auth::user()->image}}" class="img-circle" width="60"></a></p>
+              	  <h5 class="centered">{{Auth::user()->first_name . ' ' . Auth::user()->last_name}}</h5>
+              	  	
+                  <li class="mt">
 
+                  @if(Auth::user()->hasRole('Admin'))
+                        <a class="active" href="/admin">
+                        <i class="fa fa-dashboard"></i>
+                        <span>Adminpanel</span>
+                    </a>
+                  @else
+                      <a class="active" href="/dashboard">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Dashboard</span>
+                      </a>
+                  @endif
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-tree"></i>
+                          <span>Rundor</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="/account/round/add">Lägg till runda</a></li>
+                          <li><a  href="/account/rounds/{{Auth::id()}}/user">Hantera dina rundor</a></li>
+                      </ul>
+                  </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;" >
+                            <i class="fa fa-spinner"></i>
+                            <span>Bag</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a  href="/account/user/{{Auth::id()}}/bags">Hantera dina bags</a></li>
+
+                        </ul>
+                    </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-home"></i>
+                          <span>Klubb</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="/club/{{Auth::user()->club_id}}/show">Besök din klubb</a></li>
+                          @if(Auth::user()->hasRole('ClubOwner'))
+                          <li><a  href="/admin/club/{{Auth::user()->club_id}}/edit">Redigera din klubb</a></li>
+                          <li><a  href="/admin/club/{{Auth::user()->club_id}}/courses">Hantera din klubbs banor</a></li>
+                          <li><a  href="/admin/course/add">Lägg till bana</a></li>
+                          @else
+                          @endif
+
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-money"></i>
+                          <span>Sponsorer</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="/account/sponsor/add">Lägg till en sponsor</a></li>
+                          <li><a  href="/account/sponsor/user">Hantera dina sponsorer</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-pencil"></i>
+                          <span>Recensioner</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="/account/review/add">Skriv en recension</a></li>
+                          <li><a  href="/account/review/user">Hantera dina recensioner</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-comment-o"></i>
+                          <span>Kommentarer</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="/account/comment/user/">Hantera dina kommentarer</a></li>
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-user"></i>
+                          <span>Profil</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="/account/edit/{{Auth::id()}}/user">Redigera din profil</a></li>
+                          <li><a  href="/account/user/password/">Byt lösenord</a></li>
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="/logout" >
+                          <i class=" fa fa-sign-out"></i>
+                          <span>Logga ut</span>
+                      </a>
+                  </li>
+
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+      

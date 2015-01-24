@@ -64,16 +64,11 @@ class SponsorController extends \BaseController {
 
 	}
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
+	public function show()
 	{
-		//
+		$sponsors = Sponsor::where('user_id', Auth::id())->get();
+
+        return View::make('sponsor.show', ['sponsors'=>$sponsors]);
 	}
 
 

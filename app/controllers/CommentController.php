@@ -5,7 +5,9 @@ class CommentController extends \BaseController
 
     public function index()
     {
-        //
+        $comments = Comment::where('user_id', Auth::id())->get();
+
+        return View::make('comment.index', ['comments'=>$comments]);
     }
 
     public function create()
@@ -81,12 +83,17 @@ class CommentController extends \BaseController
 
 	public function edit($id)
 	{
-		//
+
 	}
 
 	public function update($id)
 	{
-		//
+        $comment = Comment::whereId($id)->firstOrFail();
+
+        $comment->body = Input::get('body');
+        $comment->save();
+
+        return Redirect::back()->with('success', 'Kommentar uppdaterad');
 	}
 
 	public function destroy($id)

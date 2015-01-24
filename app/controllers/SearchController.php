@@ -24,6 +24,23 @@ class SearchController extends Controller {
 
 	}
 
+    public function getPlayer()
+    {
+        $s = Input::get('term');
+
+        $players = User::where('first_name', 'LIKE', "%$s%")->get();
+
+        $result = [];
+
+        foreach($players as $player)
+        {
+            $result[] = $player->first_name;
+        }
+
+        return Response::json($result);
+
+    }
+
     public function searchResult(){
 
         try{

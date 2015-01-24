@@ -1,11 +1,13 @@
 
 
-@extends('master')
+@extends('db')
 
 @section('content')
 
 
 <div class="row">
+
+    <div class="showback">
     <div class="col-lg-12">
                             <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Permissions</h4>
 
@@ -54,6 +56,7 @@
     {{Form::submit('Lägg till rättighet', ['class'=>'btn btn-primary'])}}
     {{Form::close()}}
         </div>
+    </div>
     </div>
     </div>
     </div>

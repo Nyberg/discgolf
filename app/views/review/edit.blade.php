@@ -1,12 +1,10 @@
-@extends('master')
+@extends('db')
 
 @section('content')
 
-<div class="row">
+<div class="showback">
 
-    <div class="col-lg-12">
-
-  <h4 class="mb"><i class="fa fa-angle-right"></i> Skapa recension</h4>
+  <h4 class="mb"><i class="fa fa-angle-right"></i> Redigera recension - {{$review->head}}</h4>
   <div class="form-horizontal">
      {{Form::model($review, ['method'=>'PATCH', 'route'=> ['review.update', $review->id]])}}
 
@@ -19,14 +17,14 @@
              </div>
          </div>
 
-               <div class="form-group">
-                   <label class="col-sm-2 col-sm-2 control-label">Rubrik</label>
-                   <div class="col-sm-10">
+       <div class="form-group">
+           <label class="col-sm-2 col-sm-2 control-label">Rubrik</label>
+           <div class="col-sm-10">
 
-                      {{Form::text('head', null, ['class'=>'form-control'])}}
-                    {{errors_for('head', $errors)}}
-                   </div>
-               </div>
+              {{Form::text('head', null, ['class'=>'form-control'])}}
+            {{errors_for('head', $errors)}}
+           </div>
+       </div>
 
       <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">Din recension</label>
@@ -48,10 +46,9 @@
         </div>
 
 
-        {{Form::submit('Next', ['class'=>'btn btn-primary'])}}
+        {{Form::submit('Spara', ['class'=>'btn btn-primary'])}}
      {{Form::close()}}
     </div>
-        </div>
-     </div>
+</div>
 
 @stop

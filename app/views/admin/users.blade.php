@@ -1,10 +1,10 @@
 
 
-@extends('master')
+@extends('db')
 
 @section('content')
 
-
+    <div class="showback">
   <h4><i class="fa fa-angle-right"></i> User Admin</h4>
 
 
@@ -49,6 +49,8 @@
 
       </tbody>
   </table>
+
+  </div>
 
 
 

@@ -1,8 +1,8 @@
-@extends('master')
+@extends('db')
 
 @section('content')
 
-
+<div class="showback">
 
                         <div class="bs-example">
                         <ul class="nav nav-tabs">
@@ -47,7 +47,19 @@
                                                   <label class="col-sm-2 col-sm-2 control-label">Club</label>
                                                   <div class="col-sm-10">
 
-                                               {{Form::select('club',$clubs , $user->club_id, ['data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'])}}
+                                                  @if(Auth::user()->hasRole('ClubOwner'))
+
+                                               {{Form::select('club',$clubs , $user->club_id, ['data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control', 'disabled'])}}
+
+                                                         <span class="help-block">Du är klubbägare. Du kan därför inte ändra din klubb.</span>
+
+
+                                                @else
+
+                                                {{Form::select('club',$clubs , $user->club_id, ['data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'])}}
+                                                @endif
+
+
 
                                                   </div>
                                               </div>
@@ -67,7 +79,7 @@
                                                                       <div class="col-sm-10">
                                                                          <img src="{{$user->image}}" class="img-thumbnail" width="100px" height="100px"/>
 
-                                                                          {{Form::file('file', '', ['class'=>'form-control'])}} </div>
+                                                                          {{Form::file('file', null, ['class'=>'form-control'])}} </div>
 
 
                                                                       <label class="col-sm-2 col-sm-2 control-label"></label>

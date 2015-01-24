@@ -1,6 +1,8 @@
-@extends('master')
+@extends('db')
 
 @section('content')
+
+<div class="showback">
 
 <h4 class="mb"><i class="fa fa-angle-right"></i> Change Password</h4>
     {{Form::open(['route'=>'account-change-password', 'class'=>'form-horizontal style-form'])}}

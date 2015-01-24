@@ -1,7 +1,10 @@
-@extends('master')
+@extends('db')
 
 
 @section('content')
+
+
+     		<div class="showback">
 
       <h4><i class="fa fa-angle-right"></i> Dina rundor</h4><hr>
       <table class="table table-hover">
@@ -39,5 +42,6 @@
           </tbody>
       </table>
 
+      </div>
 
 @stop

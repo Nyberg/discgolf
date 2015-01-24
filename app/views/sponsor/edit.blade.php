@@ -1,6 +1,8 @@
-@extends('master')
+@extends('db')
 
 @section('content')
+
+<div class="showback">
 
   <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Sponsor {{$sponsor->name}}</h4>
   {{Form::model($sponsor, ['method'=>'PATCH', 'route'=> ['sponsor.update', $sponsor->id], 'files'=>true])}}
