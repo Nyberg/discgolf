@@ -35,10 +35,6 @@
 
     @yield('content')
 
-
-
-@include('layouts.include.footer')
-
     <!-- js placed at the end of the document so the pages load faster -->
     {{HTML::script('admin_js/jquery.js')}}
     {{HTML::script('admin_js/jquery-1.8.3.min.js')}}
