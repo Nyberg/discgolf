@@ -27,6 +27,15 @@ class ClubController extends \BaseController {
 
         $club->save();
 
+        $group = new ForumGroup;
+
+        $group->title = $club->name;
+        $group->author_id = Auth::id();
+        $group->desc = 'Klubbforum. Endast klubbens medlemmar kan se detta.';
+        $group->club_id = $club->id;
+
+        $group->save();
+
         return Redirect::to('/dashboard')->with('success', 'Klubb tillagd!');
 
 	}

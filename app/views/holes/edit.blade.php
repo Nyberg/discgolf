@@ -1,11 +1,13 @@
-@extends('master')
+@extends('db')
 
 @section('content')
+
+    <div class="showback">
 
                                           	  <h4 class="mb"><i class="fa fa-angle-right"></i> Edit hole {{$hole->number}}</h4>
                         <div class="form-horizontal style-form">
                                             {{Form::model($hole, ['method'=>'PATCH', 'route'=> ['hole.update', 'hole'=>$hole->id], 'files'=>true])}}
-                                            {{Form::hidden('course_id', $hole->course->id)}}
+                                            {{Form::hidden('tee_id', $hole->tee_id)}}
 
                                             {{Form::hidden('hole_par', $hole->par)}}
 
@@ -58,7 +60,9 @@
 
                                              </div>
 
-                        {{Form::submit('Save', ['class'=>'btn btn-primary btn-xs'])}}
+                        {{Form::submit('Spara', ['class'=>'btn btn-primary btn-xs'])}}
                        {{Form::close()}}
+
+                       </div>
 
 @stop

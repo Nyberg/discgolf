@@ -115,6 +115,7 @@
             <tr>
             <th>Datum</th>
             <th>Bana</th>
+            <th>Typ</th>
             <th>Resultat</th>
             </tr>
             </thead>
@@ -122,8 +123,16 @@
       @foreach($rounds as $round)
             <tr>
                 <td><a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->created_at->format('Y-m-d')}}</a></td>
-                <td><a href="/course/{{$round->course_id}}/show">{{$round->course['name']}}</a></td>
-                <td>{{calcScore($round->total, $round->course['par'])}}</td>
+                <td><a href="/course/{{$round->course_id}}/show">{{$round->course['name']. ' - ' .$round->tee['color']}}</a></td>
+                <td>{{$round->type}}
+
+                    @if($round->type == 'Par')
+                    {{' | '. getParPlayer($round->par_id, $user->id, $round->user_id)}}
+                    @else
+                    @endif
+
+                </td>
+                <td>{{calcScore($round->total, $round->tee['par'])}}</td>
             </tr>
        @endforeach
             </tbody>

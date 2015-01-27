@@ -14,7 +14,6 @@ class CourseAddForm extends FormValidator{
         'city'          => 'required',
         'long'          => 'required',
         'lat'           => 'required',
-        'holes'         => 'required',
         'club'          => 'required'
 
     ];

@@ -6,6 +6,31 @@ function errors_for($attribute, $errors){
 
 }
 
+function getParPlayer($par_id, $show, $user_id){
+
+    if($par_id == $show){
+
+            $user = User::whereId($user_id)->firstOrFail();
+
+            return '<a href="/user/'.$user->id.'/show">'.$user->first_name . ' ' . $user->last_name . '</a>';
+
+    }else{
+        $user = User::whereId($par_id)->firstOrFail();
+
+        return '<a href="/user/'.$user->id.'/show">'.$user->first_name . ' ' . $user->last_name . '</a>';
+    }
+
+}
+
+function showPar($par_id, $user_id){
+
+    $user1 = User::whereId($par_id)->firstOrFail();
+    $user2 = User::whereId($user_id)->firstOrFail();
+
+    return '<a href="/user/'.$user2->id.'/show">'.$user2->first_name . ' ' . $user2->last_name.'</a> & <a href="/user/'.$user1->id.'/show">'.$user1->first_name . ' '.$user1->last_name.'</a>';
+
+}
+
 function checkScore($id, $par){
 
     $sum = $id - $par;
@@ -51,10 +76,10 @@ function calcRecord($total, $par){
 function convert($length){
 
     if(!Auth::user()){
-        return $length . 'm';
+        return $length . ' m';
     }
     if(Auth::user()->metric != 'f'){
-        return $length . 'm';
+        return $length . ' m';
     }else{
         $sum = $length * 3.280;
         return round($sum, 0) . ' ft';

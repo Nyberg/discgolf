@@ -44,34 +44,38 @@ class RoundController extends \BaseController {
         if(Input::get('type') == 'Singel'){
 
             $round = new Round();
-            $round->course_id = Input::get('id');
+            $round->course_id = Input::get('course');
+            $round->tee_id = Input::get('teepad');
             $round->user_id = Auth::User()->id;
             $round->user = $name;
             $round->status = 0;
+            $round->type = 'Singel';
             $round->save();
 
-            $course = Course::with('hole')->whereId($round->course_id)->firstOrFail();
+            $course = Tee::with('hole')->whereId($round->tee_id)->firstOrFail();
 
             return Redirect::to('/account/round/'.$round->id.'/course/'.$course->id.'/score/add');
         }else{
 
             $round = new Round();
-            $round->course_id = Input::get('id');
+            $round->course_id = Input::get('course');
+            $round->tee_id = Input::get('teepad');
             $round->user_id = Auth::User()->id;
             $round->user = $name;
             $round->status = 0;
+            $round->type = 'Par';
+            $round->par_id = Input::get('players');
             $round->save();
 
-
-            $course = Course::with('hole')->whereId($round->course_id)->firstOrFail();
-            return Redirect::to('/account/round/'.$round->id.'/course/'.$course->id.'/par/')->with('success', 'So far, so good!');
+            $course = Tee::with('hole')->whereId($round->tee_id)->firstOrFail();
+            return Redirect::to('/account/round/'.$round->id.'/course/'.$course->id.'/score/add');
         }
 
         }
 
     public function getCourse(){
 
-        $courses = Course::whereStatus(1)->lists('name', 'id');
+        $courses = Course::whereStatus(1)->get();
 
         return View::make('round.create')->with('courses', $courses);
     }
@@ -104,19 +108,20 @@ class RoundController extends \BaseController {
         $round->status = 1;
         $round->save();
 
-        return Redirect::to('/dashboard');
+        return Redirect::to('/dashboard')->with('success', 'Runda tillagd!');
 	}
 
     public function show($id, $course_id)
     {
         $round = Round::with('score')->whereId($id)->firstOrFail();
-        $course = Course::with('hole')->whereId($course_id)->firstOrFail();
+        $course = Course::whereId($course_id)->firstOrFail();
+        $tee = Tee::with('hole')->where('course_id', $course_id)->firstOrFail();
         $scores = Score::with('hole')->where('round_id', $id)->get();
         $shots = Shot::with('disc')->where('round_id', $id)->get();
         $record = Round::where('course_id', $course_id)->orderBy('total', 'desc')->firstOrFail();
-        $sum = Hole::where('course_id', $id)->sum('length');
+        $sum = Hole::where('tee_id', $id)->sum('length');
 
-        return View::make('round.show', ['round'=>$round, 'course'=>$course, 'shots'=>$shots, 'scores'=>$scores, 'record'=>$record, 'sum'=>$sum]);
+        return View::make('round.show', ['round'=>$round, 'tee'=>$tee, 'shots'=>$shots, 'scores'=>$scores, 'record'=>$record, 'sum'=>$sum, 'course'=>$course]);
     }
 
 	public function edit($id, $course_id)
@@ -125,10 +130,10 @@ class RoundController extends \BaseController {
 
         if($round->user_id == Auth::user()->id) {
 
-            $course = Course::with('hole')->whereId($course_id)->firstOrFail();
+            $tee = Tee::with('hole')->where('course_id',$course_id)->firstOrFail();
             $courses = Course::lists('name', 'id');
 
-            return View::make('round.edit', ['round' => $round, 'course' => $course, 'courses' => $courses]);
+            return View::make('round.edit', ['round' => $round, 'tee' => $tee, 'courses' => $courses]);
         }else{
             return Redirect::to('/')->with('danger', 'Du kan inte redigera det!');
         }
@@ -143,7 +148,7 @@ class RoundController extends \BaseController {
         } else {
 
             $round = Round::whereId($id)->firstOrFail();
-            $round->course_id = Input::get('course_id');
+            $round->tee_id = Input::get('tee_id');
             $round->comment = Input::get('comment');
             $round->status = Input::get('status');
 
@@ -167,7 +172,7 @@ class RoundController extends \BaseController {
             $score->delete();
         }
 
-        return Redirect::back();
+        return Redirect::back()->with('success', 'Runda borttagen!');
 
         }else{
             return Redirect::to('/')->with('danger', 'Du kan inte redigera det!');

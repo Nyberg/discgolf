@@ -13,12 +13,14 @@ class Course extends Eloquent implements UserInterface, RemindableInterface {
     protected $table = 'courses';
     protected $fillable = ['name', 'location', 'holes', 'par'];
 
-    public function hole(){
-        return $this->hasMany('Hole');
-    }
+
 
     public function review(){
         return $this->hasMany('Review');
+    }
+
+    public function tee(){
+        return $this->hasMany('Tee');
     }
 
     public function round(){

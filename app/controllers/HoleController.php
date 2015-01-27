@@ -7,12 +7,14 @@ class HoleController extends \BaseController {
 		//
 	}
 
-	public function create($id)
+	public function create($course_id, $id)
 	{
-        $course = Course::with('hole')->whereId($id)->firstOrFail();
+        $course = Course::whereId($course_id)->firstOrFail();
+        $tee = Tee::with('hole')->whereId($id)->firstOrFail();
 
-        $number = Hole::whereCourseId($id)->count();
-        $holes = Course::whereId($id)->pluck('holes');
+
+        $number = Hole::whereTeeId($id)->count();
+        $holes = Tee::whereId($id)->pluck('holes');
 
         $total = $holes - $number;
 
@@ -20,7 +22,7 @@ class HoleController extends \BaseController {
             return Redirect::to('/admin/course');
         }else{
 
-            return View::make('holes.create')->with(['course'=>$course, 'total'=>$total, 'number'=>$number]);
+            return View::make('holes.create')->with(['course'=>$course, 'total'=>$total, 'number'=>$number, 'tee'=>$tee]);
         }
 
 
@@ -31,6 +33,7 @@ class HoleController extends \BaseController {
         $hidden_holes = Input::get('hidden_holes');
         $course_id = Input::get('course_id');
         $number = Input::get('number');
+        $id = Input::get('id');
 
         for($i = $number+1; $i <= $hidden_holes; $i++){
 
@@ -38,7 +41,7 @@ class HoleController extends \BaseController {
         $hole->number = Input::get('number-'.$i.'');
         $hole->length = Input::get('length-'.$i.'');
         $hole->par = Input::get('par-'.$i.'');
-        $hole->course_id = $course_id;
+        $hole->tee_id = $id;
         $hole->image = '/img/ipad.png';  # This needs to be changed later #
         $hole->save();
 
@@ -50,10 +53,10 @@ class HoleController extends \BaseController {
             $hole->detail()->save($detail);
 
     };
-        $course = Course::whereId($course_id)->firstOrFail();
-        $course->par = Hole::where('course_id', $hole->course_id)->sum('par');
-        $course->status = 1;
-        $course->save();
+        $tee = Tee::whereId($id)->firstOrFail();
+        $tee->par = Hole::where('tee_id', $hole->tee_id)->sum('par');
+        $tee->status = 1;
+        $tee->save();
 
         return Redirect::to('/dashboard')->with('success', 'Hål tillagda!');
 
@@ -78,7 +81,7 @@ class HoleController extends \BaseController {
         $hole = Hole::whereId($id)->firstOrFail();
         $old = Hole::whereId($id)->firstOrFail();
         $y = Input::get('hole_par');
-        $x = Input::get('course_id');
+        $x = Input::get('tee_id');
         $id = $x;
 
         if(is_null($hole)){
@@ -87,7 +90,7 @@ class HoleController extends \BaseController {
             $hole->number = Input::get('number');
             $hole->length = Input::get('length');
             $hole->par = Input::get('par');
-            $hole->course_id = Input::get('course_id');
+            $hole->tee_id = Input::get('tee_id');
             $hole->check = Input::get('check');
 
             if(Input::hasFile('file')){
@@ -128,11 +131,11 @@ class HoleController extends \BaseController {
             $detail->ob = Input::get('ob');
             $detail->save();
 
-            $course = Course::whereId($id)->firstOrFail();
-            $course->par = Hole::where('course_id', $hole->course_id)->sum('par');
-            $course->save();
+            $tee = Tee::whereId($id)->firstOrFail();
+            $tee->par = Hole::where('tee_id', $hole->tee_id)->sum('par');
+            $tee->save();
 
-            return Redirect::to('/dashboard'.$hole->course_id.'/edit')->with('success','Hål uppdaterat!');
+            return Redirect::back()->with('success','Hål uppdaterat!');
         }
 	}
 

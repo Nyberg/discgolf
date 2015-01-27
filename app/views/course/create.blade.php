@@ -59,21 +59,6 @@
                               </div>
                           </div>
 
-                         <div class="form-group">
-                         <label class="col-sm-2 col-sm-2 control-label">Antal hål</label>
-                         <div class="col-sm-10">
-                             {{Form::number('holes', '', ['class'=>'form-control', 'id'=>'submit_holes'])}}
-                              {{errors_for('holes', $errors)}}
-                          </div>
-
-
-                         <label class="col-sm-2 col-sm-2 control-label"></label>
-                         <div class="col-sm-10">
-                             <span class="help-block">Skriv in antal hål, tex 18</span>
-                         </div>
-
-                     </div>
-
                            <div class="form-group">
                                               <label class="col-sm-2 col-sm-2 control-label">Information</label>
                                               <div class="col-sm-10">

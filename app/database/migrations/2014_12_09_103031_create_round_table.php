@@ -16,9 +16,11 @@ class CreateRoundTable extends Migration {
 
             $table->increments('id');
             $table->integer('course_id');
+            $table->integer('tee_id');
             $table->integer('user_id');
             $table->string('user');
             $table->integer('total');
+            $table->integer('par_id');
             $table->longText('comment');
             $table->boolean('status');
             $table->timestamps();

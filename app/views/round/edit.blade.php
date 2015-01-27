@@ -9,14 +9,8 @@
 
 
        {{Form::model($round, ['method'=>'PATCH', 'route'=> ['round.update', $round->id]])}}
-       {{Form::hidden('course_id', $course->id)}}
+       {{Form::hidden('tee_id', $tee->id)}}
 
-          <div class="form-group">
-              <label class="col-sm-2 col-sm-2 control-label"> Bana</label>
-              <div class="col-sm-10">
-              {{Form::text('course', $course->name, ['class'=>'form-control', 'readonly'])}}
-              </div>
-          </div>
             <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label"> Status</label>
                 <div class="col-sm-10">

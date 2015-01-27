@@ -1,13 +1,19 @@
 <?php
 
 use dg\Forms\CourseAddForm;
+use dg\statistics\Stat;
 
 class CourseController extends \BaseController {
 
     private $courseAddForm;
+    /**
+     * @var Stat
+     */
+    private $stat;
 
-    public function __construct(CourseAddForm $courseAddForm){
+    public function __construct(CourseAddForm $courseAddForm, Stat $stat){
         $this->courseAddForm = $courseAddForm;
+        $this->stat = $stat;
     }
 
 	public function index()
@@ -19,7 +25,7 @@ class CourseController extends \BaseController {
 
     public function admin(){
 
-        $courses = Course::all();
+        $courses = Course::with('tee')->get();
 
         return View::make('admin.course', ['courses'=>$courses]);
     }
@@ -40,7 +46,7 @@ class CourseController extends \BaseController {
         $course->country = Input::get('country');
         $course->state = Input::get('state');
         $course->city = Input::get('city');
-        $course->holes = Input::get('holes');
+        //$course->holes = Input::get('holes');
 
         $course->information = Input::get('information');
         $course->club_id = Input::get('club');
@@ -98,31 +104,26 @@ class CourseController extends \BaseController {
 
 	public function show($id)
 	{
-        $course = Course::with('hole')->whereId($id)->firstOrFail();
+        $course = Course::with('tee')->whereId($id)->firstOrFail();
+        $tees = Tee::with('hole')->where('course_id', $id)->get();
+
         $rounds = Round::where('course_id', $id)->get();
         $total = Round::where('course_id', $id)->count();
         $club = Club::whereId($course->club_id)->firstOrFail();
         $reviews = Review::where('course_id', $id)->get();
 
-        if($total > 0 ){
-            $record = Round::where('course_id', $id)->orderBy('total', 'desc')->firstOrFail();
-            $rec = $record->total;
-        }else{
-            $rec = 0;
-        }
+        $holes = Hole::where('course_id', $id)->get();
 
-        $sum = Hole::where('course_id', $id)->sum('length');
-        $x = ($sum / $course->holes);
-        $avg = round($x,2);
+        $data = $this->stat->generateInfo($holes, $tees);
 
-        return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'club'=>$club, 'rec'=>$rec, 'sum'=>$sum, 'avg'=>$avg, 'reviews'=>$reviews]);
+        return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'club'=>$club,'reviews'=>$reviews, 'tees'=>$tees, 'data'=>$data]);
 	
 }
 
 
 	public function edit($id)
 	{
-        $course = Course::with('hole')->whereId($id)->firstOrFail();
+        $course = Course::with('tee')->whereId($id)->firstOrFail();
         if (is_null($course))
         {
 
@@ -147,7 +148,7 @@ class CourseController extends \BaseController {
             $course->country = Input::get('country');
             $course->state = Input::get('state');
             $course->city = Input::get('city');
-            $course->holes = Input::get('holes');
+         //   $course->holes = Input::get('holes');
             $course->information = Input::get('information');
             $course->status = Input::get('status');
             $course->long = Input::get('long');

@@ -10,7 +10,7 @@ class CreateHolesTable extends Migration {
 		Schema::create('holes', function(Blueprint $table){
 
             $table->increments('id');
-            $table->integer('course_id');
+            $table->integer('tee_id');
             $table->integer('number')->nullable();
             $table->integer('length')->nullable();
             $table->integer('par')->nullable();

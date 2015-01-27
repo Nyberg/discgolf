@@ -10,11 +10,17 @@ class CreateTeesTable extends Migration {
 	 *
 	 * @return void
 	 */
-	public function up()
-	{
-		//
-	}
-
+    public function up()
+    {
+        Schema::create('tees', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('course_id');
+            $table->string('color');
+            $table->integer('par');
+            $table->integer('holes');
+            $table->timestamps();
+        });
+    }
 	/**
 	 * Reverse the migrations.
 	 *

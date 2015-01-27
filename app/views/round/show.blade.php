@@ -3,27 +3,31 @@
 
     @section('content')
 
-    <h4 class="mb"><i class="fa fa-angle-right"></i> <a href="/course/{{$course->id}}/show">{{$course->name}}</a>, {{$round->created_at->format('Y-m-d')}} by <a href="/user/{{$round->user_id}}/show">{{$round->user}}</a> </h4>
+    <h4 class="rub"><i class="fa fa-angle-right"></i> <a href="/course/{{$course->id}}/show">{{$course->name . ' - ' . $tee->color}}</a>, {{$round->created_at->format('Y-m-d')}} by
+                        @if($round->type == 'Par')
+                       <td>{{showPar($round->par_id, $round->user_id)}}</td>
+                        @else
+                        <a href="/user/{{$round->user_id}}/show">{{$round->user}}</a>
+                        @endif
+     </h4>
     <div class="row">
     @foreach($course->photos as $photo)
          <img class="" src="{{$photo->url}}" width="100%"/>
     @endforeach
                <span class="span-h2 col-lg-3">{{$course->city . ', ' . $course->state}}</span>
-               <span class="span-h2 col-lg-2">{{'Baskets: '. $course->holes}}</span>
-               <span class="span-h2 col-lg-2">{{'Par: ' . $course->par}}</span>
-               <span class="span-h2 col-lg-3">{{'Best Score: '.calcRecord($record->total, $course->par)}}</span>
+               <span class="span-h2 col-lg-2">{{'Baskets: '. $tee->holes}}</span>
+               <span class="span-h2 col-lg-2">{{'Par: ' . $tee->par}}</span>
+               <span class="span-h2 col-lg-3">{{'Best Score: '.calcRecord($record->total, $tee->par)}}</span>
                <span class="span-h2 col-lg-2">{{checkFee($course->fee)}}</span>
            </div>
 
-           <br/><br/>
-
-    <h4 id="hole-gallery"><i class="fa fa-angle-right"></i> Score:</h4>
+    <h4 class="tab-rub" id="hole-gallery"><i class="fa fa-angle-right"></i> Score:</h4>
     <table class="table table-hover text-center">
     <thead>
     <tr>
     <th>Hole</th>
-    @foreach($course->hole as $hole)
-             <td><a href="{{$hole->image}}" data-toggle="lightbox" data-gallery="hole-gallery" data-parent="" data-footer="" data-title="{{'Basket '.$hole->number. ', '.$course->name.'.<br/>Length ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></td>
+    @foreach($tee->hole as $hole)
+             <td><a href="{{$hole->image}}" data-toggle="lightbox" data-gallery="hole-gallery" data-parent="" data-footer="" data-title="{{'Basket '.$hole->number. ', '.$course->name.' - ' . $tee->color . '.<br/>Length ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></td>
 
     @endforeach
     </tr>
@@ -41,7 +45,7 @@
     </tr>
     <tr>
     <th>Length</th>
-    @foreach($course->hole as $hole)
+    @foreach($tee->hole as $hole)
     <td>{{convert($hole->length)}}</td>
     @endforeach
 

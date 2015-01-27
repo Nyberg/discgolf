@@ -14,6 +14,7 @@
            <th>Datum</th>
             <th>Användare</th>
             <th>Bana</th>
+            <th>Typ</th>
             <th>Resultat</th>
             <th>Redigera</th>
             <th>Ta bort</th>
@@ -26,8 +27,15 @@
            <tr>
             <td><a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->created_at->format('Y-m-d')}}</a></td>
             <td><a href="/user/{{$round->user_id}}/show">{{$round->user}}</a></td>
-            <td><a href="/course/{{$round->course_id}}/show">{{$round->course['name']}}</a></td>
-            <td>{{calcScore($round->total, $round->course['par'])}}</td>
+            <td><a href="/course/{{$round->course_id}}/show">{{$round->course['name'] . ' - ' . $round->tee['color']}}</a></td>
+            <td>{{$round->type}}
+
+            @if($round->type == 'Par')
+
+            @else
+            @endif
+            </td>
+            <td>{{calcScore($round->total, $round->tee['par'])}}</td>
            <td><a href="/account/round/{{$round->id}}/edit/{{$round->course_id}}"><span class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></span></a></td>
 
             <td>

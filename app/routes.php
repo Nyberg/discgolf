@@ -10,6 +10,30 @@ Route::get('/logout', 'SessionController@destroy');
 
 Route::group(['before'=>'checkAdmin'], function(){
 
+        #   Forum       #
+        Route::group(['prefix' => '/forum'], function(){
+            Route::get('/', 'ForumsController@index');
+            Route::get('/category/{id}', ['as' => 'forum-group', 'uses' => 'ForumsController@category']);
+            Route::get('/thread/{id}', ['as' => 'forum-thread', 'uses' => 'ForumsController@thread']);
+            Route::get('/new/thread/{id}', ['as' => 'newThread', 'uses' => 'ForumsController@newThread']);
+            Route::get('/thread/edit/{id}', ['as' => 'thread.edit', 'uses' => 'ForumsController@editThread']);
+            Route::get('/thread/{id}/delete', ['as' => 'forum-delete-comment', 'uses' => 'ForumsController@deleteThread']);
+            Route::group(['before' => 'csrf'], function(){
+                Route::post('/category/add', ['as' => 'forum-store-category', 'uses' => 'ForumsController@storeCategory']);
+                Route::post('/group', ['as' => 'forum-store-group', 'uses' => 'ForumsController@storeGroup']);
+                Route::post('/group', ['as' => 'forum-store-club-group', 'uses' => 'ForumsController@storeClubGroup']);
+                Route::post('/new/thread/save/{id}', ['as' => 'newThread.store', 'uses' => 'ForumsController@newThreadStore']);
+                Route::post('/thread/update/{id}', ['as' => 'threadUpdate', 'uses' => 'ForumsController@updateThread']);
+                Route::post('/thread/new/comment/{id}', ['as' => 'forum-store-comment', 'uses' => 'ForumsController@storeComment']);
+            });
+            Route::group(['before' => 'checkRole'], function(){
+                Route::get('/group/{id}/delete', ['as'=> 'forum-delete-group', 'uses' => 'ForumsController@deleteGroup']);
+                Route::get('/category/{id}/delete', ['as' => 'forum-delete-category', 'uses' => 'ForumsController@deleteCategory']);
+                Route::get('/comment/{id}/delete', ['as' => 'forum-delete-comment', 'uses' => 'ForumsController@deleteComment']);
+            });
+        });
+
+
         #   Dashboard   #
         Route::get('/admin','AdminController@index');
 
@@ -53,12 +77,16 @@ Route::group(['before'=>'checkClubOwner'], function(){
         Route::get('/admin/course/add', 'CourseController@create');
         Route::get('/admin/course/{id}/edit', 'CourseController@edit');
 
+        #   Tee         #
+        Route::get('/admin/tee/{id}/add', 'TeeController@create');
+        Route::get('/admin/tee/{id}/edit', 'TeeController@edit');
+
         #   Club        #
         Route::get('/admin/club/{id}/edit', 'ClubController@edit');
         Route::get('/admin/club/{id}/courses', 'ClubController@clubCourses');
 
         #   Hole        #
-        Route::get('/admin/holes/{id}/add', 'HoleController@create');
+        Route::get('/admin/holes/{course_id}/tee/{id}/add', 'HoleController@create');
         Route::get('/admin/holes/{id}/edit', 'HoleController@edit');
 }
 );
@@ -75,6 +103,10 @@ Route::group(['before'=>'auth'], function(){
     Route::get('/account/round/{id}/course/{course_id}/score/add', 'ScoreController@create');
     Route::get('/account/round/{id}/course/{course_id}/par/', 'RoundController@createPar');
     Route::get('/account/round/{id}/edit/{course_id}', 'RoundController@edit');
+
+    Route::post('/getTees', 'TeeController@getTeepads');
+    Route::get('/getUsers', 'UserController@getPlayers');
+    Route::post('/getScore', 'ScoreController@getScore');
 
     #   Score       #
     Route::get('/account/score/{id}/edit', 'ScoreController@edit');
@@ -180,6 +212,8 @@ Route::controller('password', 'RemindersController');
 #   Sponsors    #
 Route::get('/sponsor/{id}/redirect/', 'SponsorController@redirect');
 
+
+
 Route::resource('session','SessionController', ['only'=>['create', 'store', 'destroy']]);
 Route::resource('registration', 'RegistrationController', ['only'=>['store']]);
 Route::resource('user','UserController');
@@ -196,6 +230,8 @@ Route::resource('news', 'NewsController');
 Route::resource('sponsor', 'SponsorController');
 Route::resource('role', 'RoleController');
 Route::resource('review', 'ReviewController');
+Route::resource('tee', 'TeeController');
+Route::resource('forum', 'ForumsController');
 
 
 Route::get('/create-role', function(){

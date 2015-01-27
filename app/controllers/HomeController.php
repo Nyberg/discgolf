@@ -6,7 +6,7 @@ class HomeController extends BaseController {
 
         if(Auth::check()){
 
-            $rounds = Round::where('status', 1)->limit(6)->get();
+            $rounds = Round::where('status', 1)->limit(5)->get();
             $reviews = Review::with('course')->limit(5)->get();
 
             return View::make('index.loggedin', ['rounds'=>$rounds, 'reviews'=>$reviews]);

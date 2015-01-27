@@ -304,4 +304,34 @@ class Stat {
             }
         }
     }
+
+    public function generateInfo($holes, $tees){
+
+        $data = ['longest'=>0, 'shortest'=>10000000, 'avg'=>0, 'total'=>0];
+
+        foreach($holes as $hole){
+
+            if($hole->length <= $data['shortest']){
+
+                $data['shortest'] = $hole->length;
+
+            }
+
+            if($hole->length > $data['shortest']){
+
+                if($hole->length > $data['longest']){
+                    $data['longest'] = $hole->length;
+                }
+
+            }
+
+            $data['total'] = $data['total'] + $hole->length / count($tees);
+            $data['avg'] = $data['total'] / count($holes);
+
+        }
+
+        return $data;
+
+    }
+
 } 

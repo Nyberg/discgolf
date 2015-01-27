@@ -37,8 +37,8 @@ class UserController extends \BaseController {
         if($total >= 4){
 
             $scores = Score::where('user_id', $id)->get();
-            $courses_played = Round::where('user_id', $id)->lists('course_id');
-            $rounds = Round::with('score')->where(['user_id' => $id, 'status' => 1])->get();
+            $courses_played = Round::where('user_id', $id)->lists('tee_id');
+            $rounds = Round::with('score')->where('user_id', $id)->where('status', 1)->orWhere('par_id',$id)->get();
 
             $data = $this->stat->calc($scores);
             $shots = $this->stat->calcShots($scores);
@@ -50,7 +50,7 @@ class UserController extends \BaseController {
 
             $user = User::with('profile')->whereId($id)->firstOrFail();
 
-            $rounds = Round::with('course')->where(['user_id' => $id, 'status' => 1])->get();
+            $rounds = Round::with('tee')->where('user_id', $id)->where('status', 1)->orWhere('par_id', $id)->get();
             $club = Club::whereId($user->club_id)->firstOrFail();
             $bags = Bag::with('disc')->where('user_id', $id)->get();
             $sponsors = Sponsor::where('user_id', $id)->get();
@@ -71,9 +71,7 @@ class UserController extends \BaseController {
                 $shots = 0;
                 $data = 0;
 
-                $rounds = Round::with('course')->where(['user_id' => $id, 'status' => 1])->get();
-
-
+                $rounds = Round::with('tee')->where('user_id', $id)->where('status', 1)->orWhere('par_id', $id)->get();
                 $user = User::with('profile')->whereId($id)->firstOrFail();
                 $club = Club::whereId($user->club_id)->firstOrFail();
                 $bags = Bag::with('disc')->where('user_id', $id)->get();
@@ -254,4 +252,11 @@ class UserController extends \BaseController {
     }
 
 
+    public function getPlayers()
+    {
+
+        $users = User::get();
+
+        return Response::json($users);
+    }
 }

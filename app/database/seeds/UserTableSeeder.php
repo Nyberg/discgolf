@@ -15,8 +15,9 @@
                     'password'      => 'v9hq9evg',
                     'email'         => 'johannes.nyb@gmail.com',
                     'metric'        => 'f',
-                    'image'         => 'me.png',
-                    'club_id'       => ''
+                    'image'         => '/img/me.png',
+                    'club_id'       => '1'
+
 
                 ]
 

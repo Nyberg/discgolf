@@ -12,6 +12,11 @@ class Round extends Eloquent implements UserInterface, RemindableInterface {
     protected $table = 'rounds';
     protected $fillable = ['course_id', 'user_id', 'comment'];
 
+    public function tee()
+    {
+        return $this->belongsTo('Tee');
+    }
+
     public function course()
     {
         return $this->belongsTo('Course');

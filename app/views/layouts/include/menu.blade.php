@@ -15,7 +15,7 @@
     <div id="navbar" class="navbar-collapse collapse col-md-offset-1">
 
           <ul class="nav navbar-nav">
-                <li class=""><a href="/">Startsida</a></li>
+                <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="/">Startsida</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Discgolf <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
@@ -48,7 +48,7 @@
                   </ul>
                 </li>
 
-                 <li class=""><a href="/">Forum</a></li>
+                 <li class="{{ Request::is('forum','forum/*') ? 'active' : '' }}"><a href="/forum">Forum</a></li>
           </ul>
 
         <ul class="nav navbar-nav navbar-right pull-right col-lg-offset-right-1">

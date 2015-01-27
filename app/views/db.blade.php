@@ -100,6 +100,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 {{HTML::script('admin_js/bootstrap-datepicker.js')}}
 <!--script for this page-->
 {{HTML::script('admin_js/sparkline-chart.js')}}
+{{HTML::script('admin_js/round/round.js')}}
 
 @yield('scripts')
 

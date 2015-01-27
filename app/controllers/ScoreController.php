@@ -12,12 +12,12 @@ class ScoreController extends \BaseController {
 		//
 	}
 
-	public function create($id, $course_id)
+	public function create($id, $tee_id)
 	{
-        $course = Course::with('hole')->where('id', $course_id)->firstOrFail();
+        $tee = Tee::with('hole')->where('id', $tee_id)->firstOrFail();
         $round = Round::whereId($id)->firstOrFail();
 
-        return View::make('score.create', ['course'=>$course, 'round'=>$round]);
+        return View::make('score.create', ['tee'=>$tee, 'round'=>$round]);
     }
 
 
@@ -114,7 +114,7 @@ class ScoreController extends \BaseController {
 
         }
 
-        return Redirect::to('/round/'.$round_id.'/edit/'.$score->hole_id.'')->with('success', 'Score updated!');
+        return Redirect::to('/account/round/'.$round_id.'/edit/'.$round->course_id.'')->with('success', 'Score updated!');
 	}
 
 
@@ -128,6 +128,14 @@ class ScoreController extends \BaseController {
 	{
 		//
 	}
+
+    public function getScore(){
+
+        $holes = Hole::where('tee_id', Input::get('id'))->get();
+
+        return Response::json($holes);
+
+    }
 
 
 }

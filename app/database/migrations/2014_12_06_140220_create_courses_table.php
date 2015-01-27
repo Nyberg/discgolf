@@ -19,8 +19,6 @@ class CreateCoursesTable extends Migration {
             $table->string('country', '255');
             $table->string('state', '255');
             $table->string('city', '255');
-            $table->integer('par');
-            $table->integer('holes');
             $table->string('image', '200');
             $table->string('fee', '255');
             $table->longText('information', '2000');

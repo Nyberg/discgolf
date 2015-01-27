@@ -36,7 +36,6 @@
                 <div class="col-lg-7">
                     <div class="col-lg-12">
                         <h4><i class="fa fa-info"></i> Nyheter</h4>
-                        <br/>
 
                         @foreach($news as $new)
                         <div class="row">
@@ -67,7 +66,6 @@
                 @foreach($club->course as $course)
 
                 @foreach($course->photos as $photo)
-                <br/>
                 <h5>  {{$course->name}}</h5>
 
                 <div class="row">

@@ -13,12 +13,20 @@ class Club extends Eloquent {
         return $this->hasMany('Course');
     }
 
+    public function tee(){
+        return $this->hasMany('Tee');
+    }
+
     public function comments(){
         return $this->morphMany('Comment', 'commentable');
     }
 
     public function photos(){
         return $this->morphMany('Photo', 'imageable');
+    }
+
+    public function categories(){
+        return $this->hasMany('ForumCategory', 'group_id');
     }
 
 }

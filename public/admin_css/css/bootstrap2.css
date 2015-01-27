@@ -46,6 +46,12 @@ template {
 a {
   background-color: transparent;
     font-size: 1em;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 a:active,
 a:hover {
@@ -2773,6 +2779,12 @@ select[multiple].form-group-lg .form-control {
   background-image: none;
   border: 1px solid transparent;
   border-radius: 4px;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 .btn:focus,
 .btn:active:focus,
@@ -4391,44 +4403,44 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   color: #777;
 }
 .pagination {
-  display: inline-block;
-  padding-left: 0;
-  margin: 20px 0;
-  border-radius: 4px;
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
 }
 .pagination > li {
-  display: inline;
+    display: inline;
 }
 .pagination > li > a,
 .pagination > li > span {
-  position: relative;
-  float: left;
-  padding: 6px 12px;
-  margin-left: -1px;
-  line-height: 1.42857143;
-  color: #337ab7;
-  text-decoration: none;
-  background-color: #fff;
-  border: 1px solid #ddd;
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #424a5d;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
 }
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
-  margin-left: 0;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+    margin-left: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
 }
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 .pagination > li > a:hover,
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-  color: #23527c;
-  background-color: #eee;
-  border-color: #ddd;
+    color: #2a6496;
+    background-color: #eee;
+    border-color: #ddd;
 }
 .pagination > .active > a,
 .pagination > .active > span,
@@ -4436,11 +4448,11 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-  z-index: 2;
-  color: #fff;
-  cursor: default;
-  background-color: #337ab7;
-  border-color: #337ab7;
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #ffd777;
+    border-color: #ddd;
 }
 .pagination > .disabled > span,
 .pagination > .disabled > span:hover,
@@ -4448,40 +4460,40 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > .disabled > a,
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
-  color: #777;
-  cursor: not-allowed;
-  background-color: #fff;
-  border-color: #ddd;
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #ddd;
 }
 .pagination-lg > li > a,
 .pagination-lg > li > span {
-  padding: 10px 16px;
-  font-size: 18px;
+    padding: 10px 16px;
+    font-size: 18px;
 }
 .pagination-lg > li:first-child > a,
 .pagination-lg > li:first-child > span {
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
 }
 .pagination-lg > li:last-child > a,
 .pagination-lg > li:last-child > span {
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
 }
 .pagination-sm > li > a,
 .pagination-sm > li > span {
-  padding: 5px 10px;
-  font-size: 12px;
+    padding: 5px 10px;
+    font-size: 12px;
 }
 .pagination-sm > li:first-child > a,
 .pagination-sm > li:first-child > span {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 .pagination-sm > li:last-child > a,
 .pagination-sm > li:last-child > span {
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 .pager {
   padding-left: 0;
@@ -4894,9 +4906,17 @@ a.thumbnail.active {
   vertical-align: bottom;
 }
 .media-heading {
-  margin-top: 0;
+  margin-top: 6px;
   margin-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
 }
+
+.media img{
+    margin-left: 5px;
+    padding-top: 3px;
+}
+
 .media-list {
   padding-left: 0;
   list-style: none;
@@ -5074,25 +5094,22 @@ a.list-group-item-danger.active:focus {
 .panel {
   margin-bottom: 20px;
   background-color: #fff;
-  border: 1px solid transparent;
-  border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
           box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }
 .panel-body {
-  padding: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 .panel-heading {
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
 }
 .panel-heading > .dropdown .dropdown-toggle {
   color: inherit;
 }
 .panel-title {
-  margin-top: 0;
+  margin-top: 6px;
   margin-bottom: 0;
   font-size: 16px;
   color: inherit;
@@ -5280,7 +5297,6 @@ a.list-group-item-danger.active:focus {
 }
 .panel-group .panel {
   margin-bottom: 0;
-  border-radius: 4px;
 }
 .panel-group .panel + .panel {
   margin-top: 5px;
@@ -5303,7 +5319,7 @@ a.list-group-item-danger.active:focus {
 }
 .panel-default > .panel-heading {
   color: #333;
-  background-color: #f5f5f5;
+  background-color: #ffd777;
   border-color: #ddd;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {

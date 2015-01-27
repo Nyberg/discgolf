@@ -5,14 +5,14 @@
     	<div class="showback">
 
 
-    <h4><i class="fa fa-angle-right"></i> Skapa Runda - {{$course->name}}</h4><hr>
+    <h4><i class="fa fa-angle-right"></i> Skapa Runda - {{$tee->course['name'] . ' - ' . $tee->color}}</h4><hr>
       <table class="table table-hover">
 
 
           <thead>
           <tr>
             <th>Hål</th>
-            @foreach($course->hole as $hole)
+            @foreach($tee->hole as $hole)
             <td>{{$hole->number}}</td>
             @endforeach
           </tr>
@@ -21,7 +21,7 @@
           <tbody>
            <tr>
            <th>Par</th>
-           @foreach($course->hole as $hole)
+           @foreach($tee->hole as $hole)
            <td>{{$hole->par}}</td>
 
 
@@ -29,7 +29,7 @@
            </tr>
            <tr>
            <th>Längd</th>
-           @foreach($course->hole as $hole)
+           @foreach($tee->hole as $hole)
            <td>{{$hole->length}}m</td>
            @endforeach
            </tr>
@@ -38,13 +38,13 @@
 
         <h4 class="mb"><i class="fa fa-angle-right"></i> Lägg till resultat</h4>
             {{Form::open(['route'=>'round.store', 'class'=>'form-horizontal style-form'])}}
-            {{Form::hidden('course_id', $course->id)}}
-            {{Form::hidden('holes', $course->holes)}}
+            {{Form::hidden('course_id', $tee->course['id'])}}
+            {{Form::hidden('holes', $tee->holes)}}
             {{Form::hidden('round_id', $round->id)}}
 
              <div class="row">
 
-            @foreach($course->hole as $hole)
+            @foreach($tee->hole as $hole)
 
             {{Form::hidden('hole_id-'.$hole->number.'', $hole->id)}}
 

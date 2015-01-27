@@ -12,9 +12,9 @@ class Hole extends Eloquent implements UserInterface, RemindableInterface  {
     protected $table = 'holes';
     protected $fillable = ['number', 'length', 'par', 'name'];
 
-    public function course()
+    public function tee()
     {
-        return $this->belongsTo('Course');
+        return $this->belongsTo('Tee');
     }
 
     public function comments(){

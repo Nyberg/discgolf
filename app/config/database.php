@@ -55,7 +55,7 @@ return array(
 		'mysql2' => array(
 			'driver'    => 'mysql',
 			'host'      => '127.0.0.1',
-			'database'  => 'discgolf',
+			'database'  => 'rad',
 			'username'  => 'homestead',
 			'password'  => 'secret',
 			'charset'   => 'utf8',

@@ -1,16 +1,18 @@
-@extends('master')
+@extends('db')
 
 @section('content')
 
+<div class="showback">
 
-          		 <h4><i class="fa fa-angle-right"></i> Existerande hål vid {{$course->name}}</h4>
+
+          		 <h4><i class="fa fa-angle-right"></i> Existerande hål vid {{$course->name . ' - ' . $tee->color}}</h4>
                                           <table class="table table-hover">
 
 
                                               <thead>
                                               <tr>
                                                 <th>Hål</th>
-                                                @foreach($course->hole as $hole)
+                                                @foreach($tee->hole as $hole)
                                                 <td>{{$hole->number}}</td>
                                                 @endforeach
                                               </tr>
@@ -19,7 +21,7 @@
                                               <tbody>
                                                <tr>
                                                <th>Par</th>
-                                               @foreach($course->hole as $hole)
+                                               @foreach($tee->hole as $hole)
                                                <td>{{$hole->par}}</td>
 
 
@@ -27,25 +29,26 @@
                                                </tr>
                                                <tr>
                                                <th>Längd</th>
-                                               @foreach($course->hole as $hole)
+                                               @foreach($tee->hole as $hole)
                                                <td>{{$hole->length}}m</td>
                                                @endforeach
                                                </tr>
                                               </tbody>
                                           </table>
 
-                        @if($number == $course->holes)
+                        @if($number == $tee->holes)
                         @else
-                      <h4 class="mb"><i class="fa fa-angle-right"></i> Lägg till {{$total}} mer hål vid {{$course->name}}</h4>
+                      <h4 class="mb"><i class="fa fa-angle-right"></i> Lägg till {{$total}} mer hål vid {{$course->name . ' - ' . $tee->color}}</h4>
 
                         {{Form::open(['route'=>'hole.store', 'class'=>'form-horizontal style-form'])}}
-                        {{Form::hidden('hidden_holes', $course->holes)}}
+                        {{Form::hidden('hidden_holes', $tee->holes)}}
                         {{Form::hidden('course_id', $course->id)}}
                         {{Form::hidden('number', $number)}}
+                        {{Form::hidden('id', $tee->id)}}
                         @endif
 
 
-                       @for($i = $number+1; $i<=$course->holes; $i++)
+                       @for($i = $number+1; $i<=$tee->holes; $i++)
 
 
                     <div class="form-group">
@@ -73,12 +76,14 @@
 
                        @endfor
 
-                       @if($number == $course->holes)
+                       @if($number == $tee->holes)
                        <p>Du kan inte lägga till fler hål till denna banan.</p>
                        <a href=""><span class="btn btn-theme" role="button" onclick="window.history.go(-1); return false;">Tillbaka</span></a>
                        @else
                         {{Form::submit('Save', ['class'=>'btn btn-primary btn-xs'])}}
                        {{Form::close()}}
                        @endif
+
+</div>
 
 @stop

@@ -21,9 +21,8 @@
       <tr>
           <th><i class="fa fa-tree"></i> Course</th>
           <th class="hidden-phone"><i class="fa fa-globe"></i> Location</th>
-          <th><i class="fa fa-bullseye"></i> Holes</th>
-          <th><i class=" fa fa-star"></i> Par</th>
-          <th>Status</th>
+          <th><i class="fa fa-bullseye"></i> Tees (Par)</th>
+           <th><i class=" fa fa-star"></i> Lägg till tee</th>
           <th>Edit</th>
           <th>Delete</th>
       </tr>
@@ -35,9 +34,15 @@
       <tr>
           <td><a href="/course/{{$course->id}}/show">{{$course->name}}</a></td>
           <td>{{$course->city . ', '. $course->state . ', ' . $course->country}}</td>
-          <td>{{$course->holes}}</td>
-          <td>{{$course->par}}</td>
-          <td>{{getStatus($course->status)}}</td>
+          <td>
+
+          @foreach($course->tee as $tee)
+
+          {{$tee->color .' (' . $tee->par . ') '}}
+
+          @endforeach
+          </td>
+          <td> <a href="/admin/tee/{{$course->id}}/add"><button class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></button></a></td>
           <td>
 
           <a href="/admin/course/{{$course->id}}/edit"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
