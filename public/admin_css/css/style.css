@@ -20,6 +20,10 @@ body {
     font-weight: 200;
 }
 
+#Container .mix{
+    display: none;
+}
+
 .thread-options{
     font-size: .8em;
     margin-top: 10px;

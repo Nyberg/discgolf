@@ -1,6 +1,6 @@
 <?php
 
-class ForumGroupController extends \BaseController {
+class StatesController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.

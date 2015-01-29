@@ -19,7 +19,8 @@ class UserController extends \BaseController {
 	public function index()
 	{
 		$users = User::with('profile')->get();
-        return View::make('users.users', ['users'=>$users]);
+        $clubs = Club::get();
+        return View::make('users.users', ['users'=>$users, 'clubs'=>$clubs]);
 	}
 
 	public function adminshow($id)

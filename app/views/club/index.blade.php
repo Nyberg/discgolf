@@ -22,7 +22,7 @@
                 <td><a href="/club/{{$club->id}}/show">{{$club->name}}</a></td>
                 <td>{{$club->city . ', '. $club->state . ', ' . $club->country}}</td>
                 <td>{{count($club->tee)}}</td>
-                <td>{{count($club->user)}}</td>
+                <td>{{count($club->users)}}</td>
                 <td><a href="{{$club->website}}" target="_blank">{{$club->website}}</a></td>
                 </tr>
 

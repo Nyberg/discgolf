@@ -18,9 +18,12 @@
 {{HTML::style('admin_css/css/ekko-lightbox.css')}}
 {{HTML::style('admin_css/css/ekko-lightbox.min.css')}}
 {{HTML::script('http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js')}}
+{{HTML::script('http://code.jquery.com/jquery-1.11.0.min.js')}}
+
 {{HTML::script('admin_js/Chart.js')}}
 {{HTML::script('admin_js/Chart.min.js')}}
 {{HTML::script('admin_js/jquery-1.11.0.min.js')}}
+{{HTML::script('admin_js/jquery.mixitup.js')}}
 {{HTML::script('admin_js/ekko-lightbox.js')}}
 {{HTML::script('admin_js/ekko-lightbox.min.js')}}
 {{HTML::script('admin_js/jquery-ui.min.js')}}

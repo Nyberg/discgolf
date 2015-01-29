@@ -6,9 +6,6 @@ use dg\statistics\Stat;
 class CourseController extends \BaseController {
 
     private $courseAddForm;
-    /**
-     * @var Stat
-     */
     private $stat;
 
     public function __construct(CourseAddForm $courseAddForm, Stat $stat){
@@ -19,7 +16,10 @@ class CourseController extends \BaseController {
 	public function index()
 	{
         $courses = Course::whereStatus(1)->get();
-		return View::make('course.index', ['courses' => $courses]);
+        $countries = Country::get();
+        $states = State::get();
+        $cities = City::get();
+		return View::make('course.index', ['courses' => $courses, 'countries'=>$countries, 'states'=>$states, 'cities'=>$cities]);
 	}
 
 
@@ -33,7 +33,10 @@ class CourseController extends \BaseController {
 	public function create()
 	{
         $clubs = Club::lists('name', 'id');
-		return View::make('course.create', ['clubs'=>$clubs]);
+        $countries = Country::get();
+        $states = State::get();
+        $cities = City::get();
+		return View::make('course.create', ['clubs'=>$clubs, 'countries'=>$countries, 'states'=>$states, 'cities'=>$cities]);
 	}
 
 	public function store()
@@ -43,9 +46,9 @@ class CourseController extends \BaseController {
 
         $course = new Course;
         $course->name = Input::get('name');
-        $course->country = Input::get('country');
-        $course->state = Input::get('state');
-        $course->city = Input::get('city');
+        $course->country_id = Input::get('country');
+        $course->state_id = Input::get('state');
+        $course->city_id = Input::get('city');
         //$course->holes = Input::get('holes');
 
         $course->information = Input::get('information');
@@ -131,7 +134,10 @@ class CourseController extends \BaseController {
         }else{
 
         $clubs = Club::lists('name', 'id');
-        return View::make('course.edit', ['course'=>$course, 'clubs'=>$clubs]);
+            $countries = Country::get();
+            $states = State::get();
+            $cities = City::get();
+        return View::make('course.edit', ['course'=>$course, 'clubs'=>$clubs, 'countries'=>$countries, 'states'=>$states, 'cities'=>$cities]);
 	    }
     }
 
@@ -145,9 +151,9 @@ class CourseController extends \BaseController {
         } else {
             $course = Course::whereId($id)->firstOrFail();
             $course->name = Input::get('name');
-            $course->country = Input::get('country');
-            $course->state = Input::get('state');
-            $course->city = Input::get('city');
+            $course->country_id = Input::get('country');
+            $course->state_id = Input::get('state');
+            $course->city_id = Input::get('city');
          //   $course->holes = Input::get('holes');
             $course->information = Input::get('information');
             $course->status = Input::get('status');

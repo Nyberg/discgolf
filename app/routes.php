@@ -78,6 +78,10 @@ Route::group(['before'=>'checkClubOwner'], function(){
         #   Hole        #
         Route::get('/admin/holes/{course_id}/tee/{id}/add', 'HoleController@create');
         Route::get('/admin/holes/{id}/edit', 'HoleController@edit');
+
+        #   Membership  #
+        Route::get('/admin/accept/{user_id}/club/{club_id}/', 'MembershipController@accept');
+        Route::get('/admin/deny/{user_id}/club/', 'MembershipController@deny');
 }
 );
 
@@ -144,7 +148,7 @@ Route::group(['before'=>'auth'], function(){
     Route::get('/account/review/user', 'ReviewController@show');
 
     # Request       #
-    Route::post('/account/request/{id}/club', ['as'=>'club-request', 'uses'=> 'RequestController@store']);
+    Route::post('/account/request/{id}/club', ['as'=>'club-request', 'uses'=> 'MembershipController@store']);
 
     #   Forum       #
     Route::group(['prefix' => '/forum'], function(){

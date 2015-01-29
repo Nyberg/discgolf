@@ -33,7 +33,7 @@
 
       <tr>
           <td><a href="/course/{{$course->id}}/show">{{$course->name}}</a></td>
-          <td>{{$course->city . ', '. $course->state . ', ' . $course->country}}</td>
+          <td>{{$course->city->city . ', '. $course->state->state . ', ' . $course->country->country}}</td>
           <td>
 
           @foreach($course->tee as $tee)

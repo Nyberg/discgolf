@@ -4,30 +4,33 @@
 @section('content')
 
       <h4 class="mb"><i class="fa fa-angle-right"></i> Användare</h4>
-          <div class="row">
-             <img class="" src="/img/header-page.jpg" width="100%" height="60%"/>
-          </div>
-      <table class="table table-hover">
-          <thead>
-              <tr>
-                <th>Namn</th>
-                <th>Medlem sedan</th>
-                <th>Pdga</th>
-                <th>Pdga Rating</th>
-                <th>Antal rundor</th>
-              </tr>
-          </thead>
-          <tbody>
-              @foreach($users as $user)
-               <tr>
-                <td><a href="/user/{{$user->id}}/show">{{$user->first_name . ' ' . $user->last_name}}</a></td>
-                <td>{{$user->created_at->format('Y-m-d')}}</td>
-                <td>#1000000</td>
-                <td>900</td>
-                <td>{{count($user->rounds)}}</td>
-               </tr>
-               @endforeach
-          </tbody>
-      </table>
+
+<div class="row">
+
+    <div class="col-md-12">
+
+    <div class="col-md-12" id="Container">
+        @foreach($users as $user)
+        <div class="col-sm-2 text-center thread mix">
+           <img src="{{$user->image}}" class="img-responsive thumbnail center-block" width="100px"/>
+           <p><a href="/user/{{$user->id}}/show">{{$user->first_name . ' ' . $user->last_name}}</a></p>
+           <small>Klubb: <a href="/club/{{$user->club_id}}/show">{{$user->club->name}}</a></small>
+        </div>
+        @endforeach
+    </div>
+
+</div>
+
+      @section('scripts')
+      <script>
+      $(function(){
+
+      	// Instantiate MixItUp:
+
+      	$('#Container').mixItUp();
+
+      });
+      </script>
+      @stop
 
 @stop

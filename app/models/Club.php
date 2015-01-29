@@ -33,4 +33,8 @@ class Club extends Eloquent {
         return $this->hasMany('news');
     }
 
+    public function membership(){
+        return $this->hasMany('Membership');
+    }
+
 }

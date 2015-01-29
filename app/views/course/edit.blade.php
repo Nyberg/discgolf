@@ -25,7 +25,12 @@
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">Land</label>
                         <div class="col-sm-10">
-                            {{Form::text('country', null, ['class'=>'form-control'])}}
+                            <select name="country" class="form-control teepads" id="teepads">
+                                 <option value="{{$course->country->id}}">{{$course->country->country}}</option>
+                                 @foreach($countries as $country)
+                                 <option id="{{$country->id}}" value="{{$country->id}}">{{$country->country}}</option>
+                                 @endforeach
+                                 </select>
                             {{errors_for('country', $errors)}}
 
                         </div>
@@ -38,7 +43,12 @@
                      <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">Landskap</label>
                         <div class="col-sm-10">
-                            {{Form::text('state', null, ['class'=>'form-control'])}}
+                            <select name="state" class="form-control teepads" id="teepads">
+                                  <option value="{{$course->state->id}}">{{$course->state->state}}</option>
+                                  @foreach($states as $state)
+                                  <option id="{{$state->id}}" value="{{$state->id}}">{{$state->state}}</option>
+                                  @endforeach
+                                  </select>
                             {{errors_for('state', $errors)}}
 
                         </div>
@@ -51,7 +61,12 @@
                      <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">Stad</label>
                         <div class="col-sm-10">
-                            {{Form::text('city', null, ['class'=>'form-control'])}}
+                            <select name="city" class="form-control teepads" id="teepads">
+                               <option value="{{$course->city->id}}">{{$course->city->city}}</option>
+                               @foreach($cities as $city)
+                               <option id="{{$city->id}}" value="{{$city->id}}">{{$city->city}}</option>
+                               @endforeach
+                               </select>
                             {{errors_for('city', $errors)}}
 
                         </div>

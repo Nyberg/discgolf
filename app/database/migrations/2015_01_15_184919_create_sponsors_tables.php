@@ -33,7 +33,7 @@ class CreateSponsorsTables extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('sponsors');
 	}
 
 }

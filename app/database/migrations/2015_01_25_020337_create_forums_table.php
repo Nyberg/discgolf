@@ -29,8 +29,8 @@ class CreateForumsTable extends Migration {
             $table->integer('status');
             $table->integer('club_id');
             $table->integer('views');
-            $table->integer('status');
             $table->timestamps();
+
         });
         Schema::create('forum_comments', function(Blueprint $table)
         {
