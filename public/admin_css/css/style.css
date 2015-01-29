@@ -20,6 +20,11 @@ body {
     font-weight: 200;
 }
 
+.thread-options{
+    font-size: .8em;
+    margin-top: 10px;
+}
+
 .hole-in-one{
     background: #6AB9FF;
 }

@@ -6,9 +6,6 @@ use dg\Mailer\ActivationEmail;
 class RegistrationController extends \BaseController {
 
     private $registrationForm;
-    /**
-     * @var ActivationEmail
-     */
     private $activationEmail;
 
     public function __construct(RegistrationForm $registrationForm, ActivationEmail $activationEmail){
@@ -38,12 +35,7 @@ class RegistrationController extends \BaseController {
         $user->password = Input::get('password');
         $user->email = Input::get('email');
         $user->image = '/img/avatar.png';
-
-        if(Input::get('club') == 0){
-            $user->club_id = 3;
-        }else{
-            $user->club_id = Input::get('club');
-        }
+        $user->club_id = 0;
 
         $user->save();
 
@@ -57,7 +49,7 @@ class RegistrationController extends \BaseController {
 
         $this->activationEmail->activate($user);
 
-        return Redirect::to('/login')->withFlashMessage('User created! You can now login.');
+        return Redirect::to('/login')->withFlashMessage('Användare skapad. Du kan nu logga in :)');
 
 	}
 

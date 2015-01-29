@@ -122,4 +122,14 @@ Route::filter('checkClubOwner', function(){
 
 });
 
+/* Route::filter('checkClub', function(){
+
+    $user = Auth::user();
+
+    if($user){
+        if()
+    }
+
+}); */
+
 

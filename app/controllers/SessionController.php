@@ -23,16 +23,16 @@ class SessionController extends \BaseController {
 
         if(Auth::attempt($input))
         {
-            return Redirect::intended('/')->with('success', 'You are succesfully logged in!');
+            return Redirect::intended('/')->with('success', 'Du är nu inloggad. Välkommen!');
         }
 
-        return Redirect::back()->withInput()->with('danger', 'Your input was not correct..');
+        return Redirect::back()->withInput()->with('danger', 'Dina uppgifter stämde inte..');
     }
 
     public function destroy($id = null)
     {
         Auth::logout();
-        return Redirect::to('/')->with('success', 'You are successfully logged out!');
+        return Redirect::to('/')->with('success', 'Du är utloggad!');
     }
 
 

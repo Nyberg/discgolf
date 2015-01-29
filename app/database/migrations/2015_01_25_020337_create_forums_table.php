@@ -14,6 +14,8 @@ class CreateForumsTable extends Migration {
             $table->string('subtitle');
             $table->integer('group_id');
             $table->integer('author_id');
+            $table->integer('club_id');
+            $table->integer('views');
             $table->timestamps();
         });
         Schema::create('forum_threads', function(Blueprint $table)
@@ -24,6 +26,9 @@ class CreateForumsTable extends Migration {
             $table->integer('group_id');
             $table->integer('author_id');
             $table->integer('category_id');
+            $table->integer('status');
+            $table->integer('club_id');
+            $table->integer('views');
             $table->integer('status');
             $table->timestamps();
         });
@@ -43,6 +48,7 @@ class CreateForumsTable extends Migration {
             $table->string('title');
             $table->string('desc');
             $table->integer('author_id');
+            $table->integer('club_id');
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ class CreateTeesTable extends Migration {
             $table->string('color');
             $table->integer('par');
             $table->integer('holes');
+            $table->integer('status');
             $table->timestamps();
         });
     }

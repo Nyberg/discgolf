@@ -17,7 +17,7 @@
 
                                         {{Form::email('email', null,['class'=>'input-fw input-flat form-control', 'placeholder'=>'Email', 'autofocus'])}}
 		     <br>
-                                        {{Form::password('password', ['class'=>'input-fw input-flat form-control', 'placeholder'=>'Password', 'autofocus'])}}
+                                        {{Form::password('password', ['class'=>'input-fw input-flat form-control', 'placeholder'=>'Lösenord', 'autofocus'])}}
 
 		            <label class="checkbox">
 		                <span class="pull-right">

@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-sm-12">
-        <h3 class="text-center">Skapa ny tråd</h3>
+        <h4>Redigera tråd - {{$thread->title}}</h4>
     </div>
     <div class="col-sm-12">
         {{Form::model($thread,['method' => 'POST', 'route' => ['threadUpdate', $thread->id]])}}
@@ -12,11 +12,11 @@
         {{Form::text('title', null, ['class' => 'form-control'])}}
         </div>
         <div class="form-group">
-        {{Form::label('bory' , 'Innehåll')}}
+        {{Form::label('body' , 'Innehåll')}}
         {{Form::textarea('body', null, ['class' => 'form-control'])}}
         </div>
-        <div class="form-group text-center">
-        {{Form::submit('Spara', ['class' => 'btn btn-primary btn-sm'])}}
+        <div class="form-group">
+        {{Form::submit('Spara', ['class' => 'btn btn-primary btn-primary'])}}
         </div>
         {{Form::close()}}
     </div>

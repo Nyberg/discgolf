@@ -12,27 +12,16 @@ Route::group(['before'=>'checkAdmin'], function(){
 
         #   Forum       #
         Route::group(['prefix' => '/forum'], function(){
-            Route::get('/', 'ForumsController@index');
-            Route::get('/category/{id}', ['as' => 'forum-group', 'uses' => 'ForumsController@category']);
-            Route::get('/thread/{id}', ['as' => 'forum-thread', 'uses' => 'ForumsController@thread']);
-            Route::get('/new/thread/{id}', ['as' => 'newThread', 'uses' => 'ForumsController@newThread']);
-            Route::get('/thread/edit/{id}', ['as' => 'thread.edit', 'uses' => 'ForumsController@editThread']);
-            Route::get('/thread/{id}/delete', ['as' => 'forum-delete-comment', 'uses' => 'ForumsController@deleteThread']);
             Route::group(['before' => 'csrf'], function(){
                 Route::post('/category/add', ['as' => 'forum-store-category', 'uses' => 'ForumsController@storeCategory']);
+                Route::post('/category/edit/{id}', ['as' => 'categoryUpdate', 'uses' => 'ForumsController@updateCategory']);
                 Route::post('/group', ['as' => 'forum-store-group', 'uses' => 'ForumsController@storeGroup']);
-                Route::post('/group', ['as' => 'forum-store-club-group', 'uses' => 'ForumsController@storeClubGroup']);
-                Route::post('/new/thread/save/{id}', ['as' => 'newThread.store', 'uses' => 'ForumsController@newThreadStore']);
-                Route::post('/thread/update/{id}', ['as' => 'threadUpdate', 'uses' => 'ForumsController@updateThread']);
-                Route::post('/thread/new/comment/{id}', ['as' => 'forum-store-comment', 'uses' => 'ForumsController@storeComment']);
+                Route::post('/thread/{id}/lock', ['as' => 'forum-lock-thread', 'uses' => 'ForumsController@lockThread']);
             });
             Route::group(['before' => 'checkRole'], function(){
                 Route::get('/group/{id}/delete', ['as'=> 'forum-delete-group', 'uses' => 'ForumsController@deleteGroup']);
-                Route::get('/category/{id}/delete', ['as' => 'forum-delete-category', 'uses' => 'ForumsController@deleteCategory']);
-                Route::get('/comment/{id}/delete', ['as' => 'forum-delete-comment', 'uses' => 'ForumsController@deleteComment']);
             });
         });
-
 
         #   Dashboard   #
         Route::get('/admin','AdminController@index');
@@ -153,6 +142,32 @@ Route::group(['before'=>'auth'], function(){
     Route::get('/account/review/{id}/edit', 'ReviewController@edit');
     Route::get('/account/review/user', 'ReviewController@show');
 
+    #   Forum       #
+    Route::group(['prefix' => '/forum'], function(){
+        Route::get('/new/thread/{id}', ['as' => 'newThread', 'uses' => 'ForumsController@newThread']);
+        Route::get('/thread/edit/{id}', ['as' => 'thread.edit', 'uses' => 'ForumsController@editThread']);
+        Route::get('/thread/{id}/delete', ['as' => 'forum-delete-comment', 'uses' => 'ForumsController@deleteThread']);
+        Route::get('/comment/{id}/delete', ['as' => 'forum-delete-comment', 'uses' => 'ForumsController@deleteComment']);
+        Route::get('/comment/{id}/edit', 'ForumsController@editComment');
+
+
+        Route::group(['before' => 'csrf'], function(){
+            Route::post('/group/club', ['as' => 'forum-store-club-group', 'uses' => 'ForumsController@storeClubGroup']);
+            Route::post('/new/thread/save/{id}', ['as' => 'newThread.store', 'uses' => 'ForumsController@newThreadStore']);
+            Route::post('/thread/update/{id}', ['as' => 'threadUpdate', 'uses' => 'ForumsController@updateThread']);
+            Route::post('/thread/new/comment/{id}', ['as' => 'forum-store-comment', 'uses' => 'ForumsController@storeComment']);
+            Route::post('/comment/{id}/update', ['as'=>'forum-update-comment', 'uses'=>'ForumsController@updateComment']);
+        });
+
+    });
+
+});
+
+#   Forum       #
+Route::group(['prefix' => '/forum'], function(){
+    Route::get('/', 'ForumsController@index');
+    Route::get('/category/{id}', ['as' => 'forum-group', 'uses' => 'ForumsController@category']);
+    Route::get('/thread/{id}', ['as' => 'forum-thread', 'uses' => 'ForumsController@thread']);
 });
 
 #   Sök     #

@@ -16,7 +16,7 @@
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#sectionA"><i class="fa fa-info"></i> {{$club->name}}</a></li>
             <li><a data-toggle="tab" href="#sectionB"><i class="fa fa-microphone"></i> Om {{$club->name}}</a></li>
-            <li><a data-toggle="tab" href="#sectionC"><i class="fa fa-user"></i> Medlemmar ({{count($club->user)}})</a></li>
+            <li><a data-toggle="tab" href="#sectionC"><i class="fa fa-user"></i> Medlemmar ({{count($club->users)}})</a></li>
             <li><a data-toggle="tab" href="#sectionE"><i class="fa fa-money"></i> Sponsorer</a></li>
             <li><a data-toggle="tab" href="#sectionG"><i class="fa fa-comments"></i> Kommentarer ({{count($club->comments)}})</a></li>
             @if(Auth::check())
@@ -37,12 +37,12 @@
                     <div class="col-lg-12">
                         <h4><i class="fa fa-info"></i> Nyheter</h4>
 
-                        @foreach($news as $new)
+                        @foreach($club->news as $new)
                         <div class="row">
                             <div class="col-lg-12">
 
-                                <h4>{{$new->head}}</h4><small>Skapad {{$new->created_at->format('Y-m-d')}}</small><br/>
-                                <br/>
+                                <h4>{{$new->head}}<small class="pull-right"> Skapad {{$new->created_at->format('Y-m-d')}}</small></h4>
+
                                 <p>{{$new->body}}</p>
 
                                 @if(Auth::check())
@@ -93,7 +93,7 @@
             <div id="sectionC" class="tab-pane fade in">
             <div class="col-lg-12 wrapper-parent">
 
-            @foreach($members as $member)
+            @foreach($club->users as $member)
 
             <div class="col-lg-2 center">
 

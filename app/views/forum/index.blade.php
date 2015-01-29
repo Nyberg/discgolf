@@ -15,27 +15,29 @@
         @foreach($groups as $group)
             <tbody class="panel-heading">
             <tr>
-                <th><p class="panel-title">{{$group->title}}</p></th>
+                <th><h5 class="panel-title">{{$group->title}}</h5></th>
                 <td><h6>Trådar</h6></td>
                 <td><h6>Inlägg</h6></td>
+
             </tr>
             </tbody>
             <tbody class="panel-body">
                 @foreach($group->categories as $category)
                 <tr>
-                    <td><strong><p class="cat-name"><a href="/forum/category/{{$category->id}}" >{{$category->title}}</a><br/><small>{{$category->subtitle}}</small></p></strong></td>
+                    <td><p class="cat-name"><a href="/forum/category/{{$category->id}}" >{{$category->title}}</a><br/><small>{{$category->subtitle}}</small></p></td>
                     <td><p  class="cat-count">{{count($category->threads)}}</p> </td>
                     <td><p  class="cat-count">{{count($category->comments)}}</p></td>
-
                 </tr>
                 @endforeach
                 </tbody>
             @endforeach
 
+        @if(Auth::check())
+
         @foreach($clubs as $club)
                 <tbody class="panel-heading">
                 <tr>
-                    <th><p class="panel-title">{{$club->title}}</p></th>
+                    <th><h5 class="panel-title">{{$club->title}}</h5></th>
                     <td><h6>Trådar</h6></td>
                     <td><h6>Inlägg</h6></td>
                 </tr>
@@ -43,15 +45,14 @@
                 <tbody class="panel-body">
                     @foreach($club->categories as $clubcat)
                     <tr>
-                        <td><strong><p class="cat-name"><a href="/forum/category/{{$clubcat->id}}" >{{$clubcat->title}}</a><br/><small>{{$clubcat->subtitle}}</small></p></strong></td>
+                        <td><p class="cat-name"><a href="/forum/category/{{$clubcat->id}}" >{{$clubcat->title}}</a><br/><small>{{$clubcat->subtitle}}</small></p></td>
                         <td><p  class="cat-count">{{count($clubcat->threads)}}</p> </td>
                         <td><p  class="cat-count">{{count($clubcat->comments)}}</p></td>
-
                     </tr>
                     @endforeach
                     </tbody>
                 @endforeach
-
+        @endif
 
 
             <tr class="panel-footer">
@@ -62,7 +63,7 @@
                          <a id="" href="#" class="btn btn-danger btn-sm delete_group" data-toggle="modal" data-target="#group_delete">Hantera forum</a>
                     @endif
                     @if(Auth::check() && Auth::user()->hasRole('ClubOwner'))
-                        <a class="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#club_group_form">Lägg till Kategori</a>
+                        <a class="btn btn-default btn-sm" href="#" data-toggle="modal" data-target="#club_group_form">Lägg till Kategori i {{Auth::user()->club->name}}</a>
                     @endif
                 </td>
                 <td></td>
@@ -88,13 +89,12 @@
                         {{Form::open(['method' => 'post', 'route' => ['forum-store-group'], 'id' => 'target_form'])}}
                         <div class="form-group">
                         {{Form::label('title','Namn')}}
-                        {{Form::text('title', null, ['class' => 'form-control'])}}
+                        {{Form::text('title', '', ['class' => 'form-control'])}}
                         </div>
-
+                     {{Form::close()}}
                     </div>
                     <div class="modal-footer">
-                        {{Form::submit('Spara', ['class'=>'btn btn-primary'])}}
-                        {{Form::close()}}
+                        <button type="button" class=" btn btn-primary" data-dismiss="modal" id="form_submit">Spara</button>
                        <button type="button" class=" btn btn-danger" data-dismiss="modal">Stäng</button>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                             <h4 class="modal-title">Lägg till Grupp</h4>
                         </div>
                         <div class="modal-body">
-                            {{Form::open(['method' => 'post', 'route' => ['forum-store-club-group'], 'id' => 'target_form'])}}
+                            {{Form::open(['method' => 'post', 'route' => ['forum-store-club-group'], 'id' => 'club_target_form'])}}
                             <div class="form-group">
                             {{Form::label('title','Namn')}}
                             {{Form::text('title', '', ['class' => 'form-control'])}}
@@ -131,15 +131,16 @@
                                 <option value="{{ $club->id}}">{{$club->title}}</option>
                                 @endforeach
                              </select>
-
+                             {{Form::close()}}
                             </div>
                         <div class="modal-footer">
-                            {{Form::submit('Spara', ['class'=>'btn btn-primary'])}}
-                            {{Form::close()}}
+
+                           <button type="button" class=" btn btn-primary" data-dismiss="modal" id="club_form_submit">Spara</button>
                            <button type="button" class=" btn btn-danger" data-dismiss="modal">Stäng</button>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         @endif
     @if(Auth::check() && Auth::user()->hasRole('Admin'))

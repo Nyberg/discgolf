@@ -5,7 +5,7 @@ class Club extends Eloquent {
     protected $table = 'clubs';
     protected $fillable = ['name', 'website', 'country', 'state', 'par'];
 
-    public function user(){
+    public function users(){
         return $this->hasMany('User');
     }
 
@@ -27,6 +27,10 @@ class Club extends Eloquent {
 
     public function categories(){
         return $this->hasMany('ForumCategory', 'group_id');
+    }
+
+    public function news(){
+        return $this->hasMany('news');
     }
 
 }
