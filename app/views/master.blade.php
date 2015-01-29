@@ -94,9 +94,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
       </section><!--/wrapper -->
     </section><!-- /MAIN CONTENT -->
 
-
-
-
 <footer class="site-footer">
 
     @include('layouts/include/footer')

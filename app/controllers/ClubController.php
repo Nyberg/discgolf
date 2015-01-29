@@ -119,6 +119,13 @@ class ClubController extends \BaseController {
 
     }
 
+    public function clubUsers($id){
+
+        $club = Club::with('users')->whereId($id)->firstOrFail();
+
+        return View::make('club.users', ['club'=>$club]);
+    }
+
 	public function destroy($id)
 	{
 		$club = Club::whereId($id)->firstOrFail();

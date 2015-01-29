@@ -74,6 +74,7 @@
                           <li><a  href="/club/{{Auth::user()->club_id}}/show">Besök din klubb</a></li>
                           @if(Auth::user()->hasRole('ClubOwner'))
                           <li><a  href="/admin/club/{{Auth::user()->club_id}}/edit">Redigera din klubb</a></li>
+                          <li><a  href="/admin/club/{{Auth::user()->club_id}}/users">Hantera medlemmar</a></li>
                           <li><a  href="/admin/club/{{Auth::user()->club_id}}/courses">Hantera din klubbs banor</a></li>
                           <li><a  href="/admin/course/add">Lägg till bana</a></li>
                           @else

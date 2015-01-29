@@ -72,8 +72,8 @@ class UserController extends \BaseController {
                 $data = 0;
 
                 $rounds = Round::with('tee')->where('user_id', $id)->where('status', 1)->orWhere('par_id', $id)->get();
-                $user = User::with('profile')->whereId($id)->firstOrFail();
-                $club = Club::whereId($user->club_id)->firstOrFail();
+                $user = User::with('profile', 'club')->whereId($id)->firstOrFail();
+               # $club = Club::whereId($user->club_id)->firstOrFail();
                 $bags = Bag::with('disc')->where('user_id', $id)->get();
                 $sponsors = Sponsor::where('user_id', $id)->get();
 
@@ -81,7 +81,7 @@ class UserController extends \BaseController {
                     $sponsor->views++;
                     $sponsor->save();
                 }
-                return View::make('users.show', ['user' => $user, 'rounds' => $rounds, 'club' => $club, 'bags' => $bags, 'sponsors' => $sponsors, 'data' => $data, 'shots' => $shots, 'cp' => $cp, 'bfr' => $bfr, 'avg' => $avg, 'birdies' => $birdies]);
+                return View::make('users.show', ['user' => $user, 'rounds' => $rounds, 'bags' => $bags, 'sponsors' => $sponsors, 'data' => $data, 'shots' => $shots, 'cp' => $cp, 'bfr' => $bfr, 'avg' => $avg, 'birdies' => $birdies]);
 
 
         }

@@ -2,6 +2,9 @@ $(document).ready(function(){
     $("#form_submit").click(function(){
         $("#target_form").submit();
     });
+    $("#request_form_submit").click(function(){
+        $("#request_form").submit();
+    });
     $("#form_category_submit").click(function(){
         $("#target_category_form").submit();
     });

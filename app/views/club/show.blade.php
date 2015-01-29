@@ -2,7 +2,11 @@
 
 @section('content')
 
-  <h4><i class="fa fa-angle-right"></i> {{$club->name}}</h4>
+  <h4><i class="fa fa-angle-right"></i> {{$club->name}}
+  @if(Auth::check() && Auth::user()->club_id == 0)
+  <a href="#" data-toggle="modal" data-target="#club_request_form" class="btn btn-primary btn-sm pull-right">Ansök om medlemskap</a>
+  @endif
+  </h4>
         <div class="row">
      <img class="" src="{{$club->image}}" width="100%"/>
       </div>
@@ -202,6 +206,31 @@
                     </div>
                 </div>
             </div><!-- --/Modal-panel ---->
+
+                @if(Auth::check())
+                    <div class="modal fade" id="club_request_form" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                    </button>
+                                    <h4 class="modal-title">Ansök om medlemskap</h4>
+                                </div>
+                                <div class="modal-body">
+                                    {{Form::open(['method' => 'post', 'route' => ['club-request', $club->id], 'id' => 'request_form'])}}
+                                <p>När du gör en ansökan behandlas det av respektives klubbs ledning. Är du medlem i klubben kommer dom acceptera dig. Detta är för att forumen ska fungera korrekt, samt att klubben ska kunna hantera sina medlemmar.</p>
+                                </div>
+                                <div class="modal-footer">
+                                   {{Form::submit('Ansök', ['class'=>'btn btn-primary'])}}
+                                                                   {{Form::close()}}
+                                   <button type="button" class=" btn btn-danger" data-dismiss="modal">Stäng</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
     </div>
 </div>
 
