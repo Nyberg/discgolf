@@ -57,12 +57,9 @@
 
 
 <footer class="site-footer">
-          <div class="text-center">
-             Johannes Nyberg
-              <a href="" class="go-top">
-                  <i class="fa fa-angle-up"></i>
-              </a>
-          </div>
+
+     @include('layouts/include/footer')
+
       </footer>
 
     <!-- js placed at the end of the document so the pages load faster -->

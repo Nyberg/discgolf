@@ -28,6 +28,7 @@
                     <li class="footer-heading">Partners</li>
                     <li class="footer-child"><a href="#">Kodatron IT</a></li>
                     <li class="footer-child"><a href="#">bjorngrunde.se</a></li>
+                    <li class="footer-child"><a href="#">Annonsera</a></li>
                 </ul>
             </div>
         </div>

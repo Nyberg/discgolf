@@ -8,4 +8,11 @@ class City extends \Eloquent {
         return $this->belongsToMany('Course');
     }
 
+    public function profile(){
+        return $this->belongsToMany('Profile');
+    }
+
+    public function club(){
+        return $this->belongsToMany('Club');
+    }
 }

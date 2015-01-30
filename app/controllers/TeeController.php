@@ -42,7 +42,7 @@ class TeeController extends \BaseController {
         $tee->status = 0;
         $tee->save();
 
-        return Redirect::to('/dashboard')->with('success', 'Tee tillagd');
+        return Redirect::to('/admin/course')->with('success', 'Tee tillagd');
 	}
 
 

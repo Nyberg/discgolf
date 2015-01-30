@@ -328,7 +328,11 @@ class Stat {
             $data['total'] = $data['total'] + $hole->length / count($tees);
             $data['avg'] = $data['total'] / count($holes);
 
+
+
         }
+
+       # print_r($data['longest'] . ' - ' . $data['shortest'] . ' - ' . $data['total'] . ' - ' . $data['avg']);
 
         return $data;
 

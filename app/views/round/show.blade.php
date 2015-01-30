@@ -7,18 +7,18 @@
                         @if($round->type == 'Par')
                        <td>{{showPar($round->par_id, $round->user_id)}}</td>
                         @else
-                        <a href="/user/{{$round->user_id}}/show">{{$round->user}}</a>
+                        <a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a>
                         @endif
      </h4>
     <div class="row">
     @foreach($course->photos as $photo)
          <img class="" src="{{$photo->url}}" width="100%"/>
     @endforeach
-               <span class="span-h2 col-lg-3">{{$course->city . ', ' . $course->state}}</span>
-               <span class="span-h2 col-lg-2">{{'Baskets: '. $tee->holes}}</span>
-               <span class="span-h2 col-lg-2">{{'Par: ' . $tee->par}}</span>
-               <span class="span-h2 col-lg-3">{{'Best Score: '.calcRecord($record->total, $tee->par)}}</span>
-               <span class="span-h2 col-lg-2">{{checkFee($course->fee)}}</span>
+               <span class="text-center span-h2 col-lg-3">{{$course->city->city . ', ' . $course->state->state}}</span>
+               <span class="text-center span-h2 col-lg-2">{{'Baskets: '. $tee->holes}}</span>
+               <span class="text-center span-h2 col-lg-2">{{'Par: ' . $tee->par}}</span>
+               <span class="text-center span-h2 col-lg-3">{{'Best Score: '.calcRecord($record->total, $tee->par)}}</span>
+               <span class="text-center span-h2 col-lg-2">{{checkFee($course->fee)}}</span>
            </div>
 
     <h4 class="tab-rub" id="hole-gallery"><i class="fa fa-angle-right"></i> Score:</h4>

@@ -6,10 +6,12 @@
 
 </div>
 <div class="row">
+    <div class="col-md-12">
+
+                    <h2 class="text-center page-header-custom">Forum</h2>
+                    <div class="divider-header"></div>
+    </div>
     <div class="col-md-10">
-
-    <h4 class="tab-rub">Välkommen till Penguin Projects Forum!</h4>
-
     <div class="table-responsive">
         <table class="table panel panel-default">
         @foreach($groups as $group)

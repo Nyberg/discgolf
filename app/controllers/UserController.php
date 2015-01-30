@@ -18,9 +18,9 @@ class UserController extends \BaseController {
 
 	public function index()
 	{
-		$users = User::with('profile')->get();
+		$users = User::with('profile')->paginate(18);
         $clubs = Club::get();
-        return View::make('users.users', ['users'=>$users, 'clubs'=>$clubs]);
+        return View::make('users.users',compact('users'), ['clubs'=>$clubs]);
 	}
 
 	public function adminshow($id)
@@ -94,7 +94,10 @@ class UserController extends \BaseController {
         $roles = Role::lists('name', 'id');
         $user = User::with('profile')->whereId($id)->firstOrFail();
         $clubs = Club::lists('name', 'id');
-        return View::make('users/edit_user', ['user'=>$user, 'roles'=>$roles, 'clubs'=>$clubs]);
+        $countries = Country::get();
+        $states = State::get();
+        $cities = City::get();
+        return View::make('users/edit_user', ['user'=>$user, 'roles'=>$roles, 'clubs'=>$clubs, 'countries'=>$countries, 'states'=>$states, 'cities'=>$cities]);
 	}
 
 	public function update($id){
@@ -110,10 +113,10 @@ class UserController extends \BaseController {
 
 
                 $user->profile->phone = Input::get('phone');
-                $user->profile->country = Input::get('country');
-                $user->profile->state = Input::get('state');
+                $user->profile->country_id = Input::get('country');
+                $user->profile->state_id = Input::get('state');
                 $user->profile->location = Input::get('location');
-                $user->profile->city = Input::get('city');
+                $user->profile->city_id = Input::get('city');
                 $user->profile->club = Input::get('club');
                 $user->profile->website = Input::get('website');
                 $user->profile->info = Input::get('info');

@@ -11,7 +11,7 @@ class SearchController extends Controller {
 	{
 		$s = Input::get('term');
 
-        $courses = Course::where('name', 'LIKE', "%$s%")->orWhere('city', 'LIKE', "%$s%")->orWhere('state', 'LIKE', "%$s%")->orWhere('country', 'LIKE', "%$s%")->get();
+        $courses = Course::where('name', 'LIKE', "%$s%")->get();
 
         $result = [];
 
@@ -45,7 +45,7 @@ class SearchController extends Controller {
 
         try{
             $result = Input::get('auto');
-            $courses = Course::where('name', 'LIKE', "%$result%")->orWhere('city', 'LIKE', "%$result%")->orWhere('state', 'LIKE', "%$result%")->orWhere('country', 'LIKE', "%$result%")->get();
+            $courses = Course::where('name', 'LIKE', "%$result%")->get();
         }catch(ModelNotFoundException $e){
             return Response::view('errors.404',[], 404);
         }
@@ -56,15 +56,14 @@ class SearchController extends Controller {
 
         if(count($courses) == 1){
 
-            $course = Course::where('name', 'LIKE', "%$result%")->orWhere('city', 'LIKE', "%$result%")->orWhere('state', 'LIKE', "%$result%")->orWhere('country', 'LIKE', "%$result%")->firstOrFail();
+            $course = Course::where('name', 'LIKE', "%$result%")->firstOrFail();
 
           return Redirect::to('/course/'.$course->id.'/show');
 
         }if(count($courses) > 1){
 
             $objects = [];
-            $objs = Course::where('name', 'LIKE', "%$result%")->orWhere('city', 'LIKE', "%$result%")->orWhere('state', 'LIKE', "%$result%")->orWhere('country', 'LIKE', "%$result%")->get();
-
+            $objs = Course::where('name', 'LIKE', "%$result%")->get();
             foreach($objs as $obj)
             {
                 $x = Course::whereId($obj->id)->firstOrFail();
@@ -78,8 +77,8 @@ class SearchController extends Controller {
 
     public function search($result){
 
-        $courses = Course::where('name', 'LIKE', "%$result%")->orWhere('city', 'LIKE', "%$result%")->orWhere('state', 'LIKE', "%$result%")->orWhere('country', 'LIKE', "%$result%")->paginate(3);
-        $y = Course::where('name', 'LIKE', "%$result%")->orWhere('city', 'LIKE', "%$result%")->orWhere('state', 'LIKE', "%$result%")->orWhere('country', 'LIKE', "%$result%")->get();
+        $courses = Course::where('name', 'LIKE', "%$result%")->paginate(3);
+        $y = Course::where('name', 'LIKE', "%$result%")->get();
         $num = count($y);
 
         return View::make('search.search', compact('courses'))->with(['num'=>$num, 'result'=>$result]);

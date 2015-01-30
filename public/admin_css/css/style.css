@@ -24,6 +24,36 @@ body {
     display: none;
 }
 
+.mixup-content{
+    padding-bottom: 20px;
+    min-height: 120px;
+}
+
+.mixup-content p{
+    padding-top: 8px;
+    margin: 0;
+}
+
+.divider-header {
+    background: none repeat scroll 0% 0% #424A5D;
+}
+
+.divider-header {
+    display: block;
+    width: 40px;
+    height: 2px;
+    margin: 0px auto 30px;
+}
+
+.page-header-custom {
+    color: #424A5D;
+    font-size: 24px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
 .thread-options{
     font-size: .8em;
     margin-top: 10px;

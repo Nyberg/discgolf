@@ -6,7 +6,7 @@
   <div class="col-lg-12">
   {{Form::open(['route' => 'searchresult', 'method' => 'GET', 'class' => ''])}}
     <div class="input-group">
-      <input type="text" class="form-control"  name="auto" id="auto" placeholder="Sök banor efter namn, stad eller landskap..">
+      <input type="text" class="form-control"  name="auto" id="auto" placeholder="Sök banor efter namn..">
             <span class="input-group-btn">
               {{Form::button('<i class="fa fa-search"></i>', ['type'=>'submit', 'class' => 'btn btn-default'])}}
             </span>

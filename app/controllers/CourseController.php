@@ -56,7 +56,7 @@ class CourseController extends \BaseController {
         $course->fee = Input::get('fee');
         $course->long = Input::get('long');
         $course->lat = Input::get('lat');
-        $course->status = 0;
+        $course->status = Input::get('status');
 
         $course->save();
 
@@ -108,8 +108,7 @@ class CourseController extends \BaseController {
 	public function show($id)
 	{
         $course = Course::with('tee')->whereId($id)->firstOrFail();
-        $tees = Tee::with('hole')->where('course_id', $id)->get();
-
+        $tees = Tee::where('course_id', $id)->get();
         $rounds = Round::where('course_id', $id)->get();
         $total = Round::where('course_id', $id)->count();
         $club = Club::whereId($course->club_id)->firstOrFail();
@@ -119,7 +118,7 @@ class CourseController extends \BaseController {
 
         $data = $this->stat->generateInfo($holes, $tees);
 
-        return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'club'=>$club,'reviews'=>$reviews, 'tees'=>$tees, 'data'=>$data]);
+        return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'tees'=>$tees, 'club'=>$club,'reviews'=>$reviews, 'data'=>$data]);
 	
 }
 

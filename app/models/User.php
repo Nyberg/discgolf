@@ -29,7 +29,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
 
     public function round(){
-        return $this->hasMany('Rounds');
+        return $this->hasMany('Round');
     }
 
     public function sponsor(){

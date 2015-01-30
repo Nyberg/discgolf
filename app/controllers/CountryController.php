@@ -9,7 +9,11 @@ class CountryController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+        $countries = Country::get();
+        $states = State::get();
+        $cities = City::get();
+
+        return View::make('admin.location', ['countries'=>$countries, 'states'=>$states, 'cities'=>$cities]);
 	}
 
 
@@ -31,7 +35,32 @@ class CountryController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+        $type = Input::get('type');
+
+        if($type == 'Country'){
+
+            $country = New country;
+            $country->country = Input::get('name');
+            $country->save();
+
+            return Redirect::back()->with('success', 'Land '. $country->country . ' tillagt!');
+        }
+        if($type == 'State'){
+
+            $state = New state;
+            $state->state = Input::get('name');
+            $state->save();
+
+            return Redirect::back()->with('success', 'Landskap '. $state->state . ' tillagt!');
+        }
+        if($type == 'City'){
+
+            $city = New city;
+            $city->city = Input::get('name');
+            $city->save();
+
+            return Redirect::back()->with('success', 'Stad '. $city->city . ' tillagt!');
+        }
 	}
 
 
@@ -79,7 +108,29 @@ class CountryController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+        $type = Input::get('type');
+
+		if($type == 'country'){
+
+            $country = Country::find($id);
+            $country->delete();
+
+            return Redirect::back()->with('success', 'Land '. $country->country . ' borttagen!');
+        }
+        if($type == 'state'){
+
+            $state = State::find($id);
+            $state->delete();
+
+            return Redirect::back()->with('success', 'Landskap '. $state->state . ' borttagen!');
+        }
+        if($type == 'city'){
+
+            $city = City::find($id);
+            $city->delete();
+
+            return Redirect::back()->with('success', 'Stad '. $city->city . ' borttagen!');
+        }
 	}
 
 

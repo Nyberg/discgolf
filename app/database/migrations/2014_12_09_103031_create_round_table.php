@@ -18,7 +18,8 @@ class CreateRoundTable extends Migration {
             $table->integer('course_id');
             $table->integer('tee_id');
             $table->integer('user_id');
-            $table->string('user');
+            $table->string('username');
+            $table->string('type');
             $table->integer('total');
             $table->integer('par_id');
             $table->longText('comment');

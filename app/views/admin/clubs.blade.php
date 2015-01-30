@@ -22,7 +22,7 @@
             @foreach($clubs as $club)
             <tr>
                 <td><a href="/club/{{$club->id}}/show">{{$club->name}}</a></td>
-                <td>{{$club->city . ', '. $club->state . ', ' . $club->country}}</td>
+                <td>{{$club->city->city . ', '. $club->state->state . ', ' . $club->country->country}}</td>
                 <td>{{$club->website}}</td>
                 <td><a href="/admin/club/{{$club->id}}/edit"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a></td>
                 <td>

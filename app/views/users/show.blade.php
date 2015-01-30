@@ -48,8 +48,8 @@
                     <h4><i class="fa fa-globe"></i> Kontakt</h4>
                     <address>
                        <strong>{{$user->first_name . ' ' . $user->last_name;}}</strong><br>
-                      {{$user->profile['location'] . ', ' . $user->profile['city'] }}<br>
-                       {{$user->profile['state'] . ', ' .$user->profile['country']}}<br>
+                      {{$user->profile['location'] . ', ' . $user->profile->city->city}}<br>
+                       {{$user->profile->state->state . ', ' .$user->profile->country->country}}<br>
 
                        <abbr title="Phone">Telefon:</abbr> {{$user->profile['phone']}}<br/>
                         Email: <a href="mailto:{{$user->email}}">{{$user->email}}</a>

@@ -38,7 +38,7 @@
 
         <h4 class="mb"><i class="fa fa-angle-right"></i> Lägg till resultat</h4>
             {{Form::open(['route'=>'round.store', 'class'=>'form-horizontal style-form'])}}
-            {{Form::hidden('course_id', $tee->course['id'])}}
+            {{Form::hidden('course_id', $tee->course->id)}}
             {{Form::hidden('holes', $tee->holes)}}
             {{Form::hidden('round_id', $round->id)}}
 

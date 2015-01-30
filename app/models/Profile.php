@@ -12,4 +12,16 @@ class Profile extends Eloquent{
         return $this->belongsTo('User');
     }
 
+    public function country(){
+        return $this->belongsTo('Country');
+    }
+
+    public function state(){
+        return $this->belongsTo('State');
+    }
+
+    public function city(){
+        return $this->belongsTo('City');
+    }
+
 }

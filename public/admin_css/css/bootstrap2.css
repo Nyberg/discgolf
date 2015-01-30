@@ -3332,6 +3332,11 @@ tbody.collapse.in {
     left: 0;
   }
 }
+
+.btn-group i{
+    color: #fff;
+}
+
 .btn-group,
 .btn-group-vertical {
   position: relative;
@@ -3364,7 +3369,7 @@ tbody.collapse.in {
 }
 .btn-toolbar .btn-group,
 .btn-toolbar .input-group {
-  float: left;
+    display:inline-block;
 }
 .btn-toolbar > .btn,
 .btn-toolbar > .btn-group,

@@ -42,6 +42,7 @@ class HoleController extends \BaseController {
         $hole->length = Input::get('length-'.$i.'');
         $hole->par = Input::get('par-'.$i.'');
         $hole->tee_id = $id;
+        $hole->course_id = $course_id;
         $hole->image = '/img/ipad.png';  # This needs to be changed later #
         $hole->save();
 

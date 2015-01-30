@@ -11,7 +11,7 @@
 
 @endforeach
 
-          <span class="text-center span-h2 col-lg-4">{{$course->city . ', ' . $course->state}}</span>
+          <span class="text-center span-h2 col-lg-4">{{$course->city->city . ', ' . $course->state->state}}</span>
                <span class="text-center span-h2 col-lg-4">{{'Tees: '. count($course->tee)}}</span>
                <span class="text-center span-h2 col-lg-4">{{checkFee($course->fee)}}</span>
 
@@ -97,7 +97,7 @@
     <table class="table table-hover">
         <thead>
             <tr>
-            <th>Hål</th>
+            <td>Hål</td>
             @foreach($tee->hole as $hole)
             <td><a href="{{$hole->image}}" data-toggle="lightbox" data-gallery="hole-gallery-{{$tee->id}}" data-parent="" data-footer="<a href='/hole/{{$hole->id}}/show'>Klicka här för att visa mer information</a>" data-title="{{'Basket '.$hole->number. ', '.$course->name.' - '.$tee->color.'.<br/>Length ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></td>
             @endforeach
@@ -159,7 +159,7 @@
 <tr>
 <td><a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->created_at->format('Y-m-d')}}</a></td>
 @if($round->type == 'Singel')
-<td><a href="/user/{{$round->user_id}}/show">{{$round->user}}</a></td>
+<td><a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a></td>
 @else
 <td>{{showPar($round->par_id, $round->user_id)}}</td>
 @endif

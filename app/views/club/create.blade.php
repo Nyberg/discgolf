@@ -8,36 +8,55 @@
                   	  <h4 class="mb"><i class="fa fa-angle-right"></i> Skapa Klubb</h4>
                   	   {{Form::open(['route'=>'club.store', 'class'=>'form-horizontal style-form', 'files' => true])}}
 
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Namn</label>
-                              <div class="col-sm-10">
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">Namn</label>
+                          <div class="col-sm-10">
 
-                                  {{Form::text('name', '', ['class'=>'form-control'])}}
-                              </div>
+                              {{Form::text('name', '', ['class'=>'form-control'])}}
+                              {{errors_for('name', $errors)}}
                           </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Land</label>
-                              <div class="col-sm-10">
-                                  {{Form::text('country', '', ['class'=>'form-control'])}}
+                      </div>
 
-                              </div>
-                          </div>
+                    <div class="form-group">
+                                                <label class="col-sm-2 col-sm-2 control-label">Land</label>
+                                                <div class="col-sm-10">
+                                                          <select name="country" class="form-control teepads" id="teepads">
+                                                                               <option value="0">Välj Land</option>
+                                                                               @foreach($countries as $country)
+                                                                               <option id="{{$country->id}}" value="{{$country->id}}">{{$country->country}}</option>
+                                                                               @endforeach
+                                                                               </select>
+                                                           {{errors_for('country', $errors)}}
+                                                           </div>
+                                                </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">Landskap</label>
-                            <div class="col-sm-10">
-                                {{Form::text('state', '', ['class'=>'form-control'])}}
 
-                            </div>
-                        </div>
+                                          <div class="form-group">
+                                              <label class="col-sm-2 col-sm-2 control-label">Landskap</label>
+                                              <div class="col-sm-10">
+                                                    <select name="state" class="form-control teepads" id="teepads">
+                                                       <option value="0">Välj Landskap</option>
+                                                       @foreach($states as $state)
+                                                       <option id="{{$state->id}}" value="{{$state->id}}">{{$state->state}}</option>
+                                                       @endforeach
+                                                       </select>
+                                                   {{errors_for('state', $errors)}}
+                                                   </div>
+                                              </div>
 
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Stad</label>
-                              <div class="col-sm-10">
-                                  {{Form::text('city', '', ['class'=>'form-control'])}}
 
-                              </div>
-                          </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 col-sm-2 control-label">Stad</label>
+                                                <div class="col-sm-10">
+                                                      <select name="city" class="form-control teepads" id="teepads">
+                                                         <option value="0">Välj Stad</option>
+                                                         @foreach($cities as $city)
+                                                         <option id="{{$city->id}}" value="{{$city->id}}">{{$city->city}}</option>
+                                                         @endforeach
+                                                         </select>
+                                                     {{errors_for('city', $errors)}}
+                                                     </div>
+                                                </div>
 
                                <div class="form-group">
                                 <label class="col-sm-2 col-sm-2 control-label">Hemsida</label>

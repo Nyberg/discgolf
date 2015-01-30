@@ -37,4 +37,16 @@ class Club extends Eloquent {
         return $this->hasMany('Membership');
     }
 
+    public function country(){
+        return $this->belongsTo('Country');
+    }
+
+    public function state(){
+        return $this->belongsTo('State');
+    }
+
+    public function city(){
+        return $this->belongsTo('City');
+    }
+
 }

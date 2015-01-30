@@ -10,13 +10,13 @@
 
 
                 [
-                    'last_name'     => 'Nyberg',
-                    'first_name'    =>  'Johannes',
+                    'last_name'     => 'Allansson',
+                    'first_name'    =>  'Allan',
                     'password'      => 'v9hq9evg',
                     'email'         => 'johannes.nyb@gmail.com',
                     'metric'        => 'f',
-                    'image'         => '/img/me.png',
-                    'club_id'       => '1'
+                    'image'         => '/img/avatar.png',
+                    'club_id'       => '1000000'
 
 
                 ]
@@ -25,8 +25,9 @@
 
             foreach($users as $user)
             {
-
-                User::create($user);
+                for($i=0; $i<40; $i++){
+                    User::create($user);
+                }
             }
 
 

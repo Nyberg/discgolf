@@ -57,6 +57,10 @@ Route::group(['before'=>'checkAdmin'], function(){
         Route::get('/admin/club/add', 'ClubController@create');
         Route::get('/admin/clubs', 'AdminController@clubs');
         Route::get('/admin/club/owners', 'AdminController@clubOwners');
+
+
+        #   Land, Landskap & Stad   #
+        Route::get('/admin/location/', 'CountryController@index');
     }
 );
 
@@ -256,6 +260,7 @@ Route::resource('review', 'ReviewController');
 Route::resource('tee', 'TeeController');
 Route::resource('forum', 'ForumsController');
 Route::resource('request', 'RequestController');
+Route::resource('country', 'CountryController');
 
 
 Route::get('/create-role', function(){

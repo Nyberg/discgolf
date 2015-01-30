@@ -35,7 +35,7 @@ class RegistrationController extends \BaseController {
         $user->password = Input::get('password');
         $user->email = Input::get('email');
         $user->image = '/img/avatar.png';
-        $user->club_id = 0;
+        $user->club_id = 1000000;
 
         $user->save();
 

@@ -1,34 +1,43 @@
 @extends('master')
 
+
 @section('content')
 
-  <h4><i class="fa fa-angle-right"></i> Rundor</h4>
-      <div class="row">
-        <img class="" src="/img/header-page.jpg" width="100%" height="60%"/>
-      </div>
-  <table class="table table-hover">
-      <thead>
-      <tr>
+              <h2 class="text-center page-header-custom">Rundor</h2>
+              <div class="divider-header"></div>
 
-       <th>Datum</th>
-        <th>Användare</th>
+<div class="row">
 
-        <th>Bana</th>
-        <th>Resultat</th>
+    <div class="col-md-12">
 
-      </tr>
+    <div class="col-md-12" id="Container">
+        @foreach($rounds as $round)
+        <div class="col-sm-2 text-center thread mix">
+           <a href="/round/{{$round->id}}/course/{{$round->course_id}}/">
+           @foreach($round->course->photos as $photo)
+           <img src="{{$photo->url}}" class="img-responsive thumbnail center-block" width="100%"/>
+           @endforeach</a>
+           <p><a href="/round/{{$round->id}}/course/{{$round->course_id}}/">{{$round->course->name .' - '. $round->tee->color . ' av ' . $round->user->first_name . ' ' . $round->user->last_name}}</a></p>
+        <p><a href="/round/{{$round->id}}/course/{{$round->course_id}}">Score: {{calcScore($round->total, $round->tee->par)}}</a></p>
 
-      </thead>
-      <tbody>
-      @foreach($rounds as $round)
-       <tr>
-        <td><a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->created_at->format('Y-m-d')}}</a></td>
-        <td><a href="/user/{{$round->user_id}}/show">{{$round->user}}</a></td>
-        <td><a href="/course/{{$round->course_id}}/show">{{$round->course['name'] . ' - ' . $round->tee['color']}}</a></td>
-        <td>{{calcScore($round->total, $round->tee['par'])}}</td>
-       </tr>
-       @endforeach
-      </tbody>
-  </table>
+        </div>
+        @endforeach
+    </div>
 
+</div>
+
+
+
+@stop
+
+@section('scripts')
+    <script>
+    $(function(){
+
+    // Instantiate MixItUp:
+
+    $('#Container').mixItUp();
+
+    });
+    </script>
 @stop

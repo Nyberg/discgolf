@@ -11,16 +11,19 @@ class ClubController extends \BaseController {
 
 	public function create()
 	{
-		return View::make('club.create');
+        $countries = Country::get();
+        $states = State::get();
+        $cities = City::get();
+		return View::make('club.create', ['countries'=>$countries, 'states'=>$states, 'cities'=>$cities]);
 	}
 
 	public function store()
 	{
 		$club = new Club;
         $club->name = Input::get('name');
-        $club->country = Input::get('country');
-        $club->state = Input::get('state');
-        $club->city = Input::get('city');
+        $club->country_id = Input::get('country');
+        $club->state_id = Input::get('state');
+        $club->city_id = Input::get('city');
         $club->website = Input::get('website');
         $club->information = Input::get('information');
         $club->image = '/img/dg/header.jpg';
@@ -50,10 +53,14 @@ class ClubController extends \BaseController {
 	{
         $user = User::whereId(Auth::user()->id)->firstOrFail();
 
+        $countries = Country::get();
+        $states = State::get();
+        $cities = City::get();
+
         if($user->club_id == $id || Auth::user()->hasRole('Admin')){
             $club = Club::whereId($id)->firstOrFail();
 
-            return View::make('club/edit', ['club'=>$club]);
+            return View::make('club/edit', ['club'=>$club,'countries'=>$countries, 'states'=>$states, 'cities'=>$cities]);
         }else {
             return Redirect::to('/')->with('danger', 'Du har inte behörighet för detta.');
         }
@@ -67,9 +74,9 @@ class ClubController extends \BaseController {
         if($club){
 
             $club->name = Input::get('name');
-            $club->country = Input::get('country');
-            $club->state = Input::get('state');
-            $club->city = Input::get('city');
+            $club->country_id = Input::get('country');
+            $club->state_id = Input::get('state');
+            $club->city_id = Input::get('city');
             $club->website = Input::get('website');
             $club->information = Input::get('information');
 

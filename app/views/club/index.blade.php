@@ -2,34 +2,37 @@
 
 @section('content')
 
-         <h4 class="mb"><i class="fa fa-angle-right"></i> Klubbar</h4>
-                 <div class="row">
-              <img class="" src="/img/header-page.jpg" width="100%" height="60%"/>
-               </div>
+                 <h2 class="text-center page-header-custom">Klubbar</h2>
+                 <div class="divider-header"></div>
 
-         <table class="table table-hover">
-         <thead>
-         <th>Namn</th>
-         <th>Location</th>
-         <th>Banor</th>
-         <th>Medlemmar</th>
-          <th>Hemsida</th>
-         </thead>
-         <tbody>
-                @foreach($clubs as $club)
+<div class="row">
 
-                <tr>
-                <td><a href="/club/{{$club->id}}/show">{{$club->name}}</a></td>
-                <td>{{$club->city . ', '. $club->state . ', ' . $club->country}}</td>
-                <td>{{count($club->tee)}}</td>
-                <td>{{count($club->users)}}</td>
-                <td><a href="{{$club->website}}" target="_blank">{{$club->website}}</a></td>
-                </tr>
+    <div class="col-md-12">
 
-                @endforeach
-                      </tbody>
-                                              </table>
+    <div class="col-md-12" id="Container">
+        @foreach($clubs as $club)
+        <div class="col-sm-3 text-center thread mix">
+           <img src="{{$club->image}}" class="img-responsive thumbnail center-block" width="100%"/>
+           <p><a href="/club/{{$club->id}}/show">{{$club->name}}</a></p>
+           <small>Medlemmar: {{count($club->users)}}</small>
+        </div>
+        @endforeach
+    </div>
+
+</div>
 
 
 
+@stop
+
+@section('scripts')
+    <script>
+    $(function(){
+
+    // Instantiate MixItUp:
+
+    $('#Container').mixItUp();
+
+    });
+    </script>
 @stop
