@@ -12,7 +12,7 @@ class News extends Eloquent implements UserInterface, RemindableInterface  {
     protected $table = 'news';
     protected $fillable = ['club_id', 'body', 'head'];
 
-    public function course()
+    public function club()
     {
         return $this->belongsTo('Club');
     }

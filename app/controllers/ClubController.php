@@ -45,8 +45,11 @@ class ClubController extends \BaseController {
 
 	public function show($id)
 	{
-		$club = Club::with('course', 'news', 'users')->whereId($id)->firstOrFail();
-        return View::make('club.show', ['club'=>$club]);
+		$club = Club::with('course', 'users')->whereId($id)->firstOrFail();
+        $news = News::where('club_id', $id)->orderBy('created_at', 'desc')->limit(5)->get();
+		$users = User::where('club_id', $id)->limit(18)->get();
+
+        return View::make('club.show', ['club'=>$club, 'users'=>$users, 'news'=>$news]);
 	}
 
 	public function edit($id)

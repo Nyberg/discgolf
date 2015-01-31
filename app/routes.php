@@ -74,6 +74,10 @@ Route::group(['before'=>'checkClubOwner'], function(){
         Route::get('/admin/tee/{id}/add', 'TeeController@create');
         Route::get('/admin/tee/{id}/edit', 'TeeController@edit');
 
+        # News          #
+        Route::get('/admin/add/news', 'NewsController@create');
+        Route::get('/admin/news/{id}/edit', 'NewsController@edit');
+
         #   Club        #
         Route::get('/admin/club/{id}/edit', 'ClubController@edit');
         Route::get('/admin/club/{id}/courses', 'ClubController@clubCourses');
@@ -108,6 +112,9 @@ Route::group(['before'=>'auth'], function(){
 
     #   Score       #
     Route::get('/account/score/{id}/edit', 'ScoreController@edit');
+
+    #   Lost & Found    #
+    Route::get('/account/lost/add', 'LostController@create');
 
     #   User        #
     Route::get('/account/edit/{id}/user', 'UserController@edit');
@@ -213,9 +220,17 @@ Route::get('/clubs', 'ClubController@index');
 Route::get('/club/{id}/edit', 'ClubController@edit');
 Route::get('/club/{id}/show', 'ClubController@show');
 
+# Lost & Found  #
+Route::get('/lost-and-found', 'LostController@index');
+
+#   News    #
+
+Route::get('/club/news/{id}/show', 'NewsController@show');
+
 // Rounds
 Route::get('/rounds', 'RoundController@index');
 Route::get('/round/{id}/course/{course_id}', 'RoundController@show');
+Route::get('/round/{id}/user/show', 'UserController@userRound');
 
 // Hole
 Route::get('/holes', 'HoleController@index');
@@ -261,6 +276,7 @@ Route::resource('tee', 'TeeController');
 Route::resource('forum', 'ForumsController');
 Route::resource('request', 'RequestController');
 Route::resource('country', 'CountryController');
+Route::resource('lost', 'LostController');
 
 
 Route::get('/create-role', function(){

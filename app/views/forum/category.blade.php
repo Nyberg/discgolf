@@ -108,14 +108,14 @@
                             <h4 class="modal-title">Redigera Kategori</h4>
                         </div>
                         <div class="modal-body">
-                            {{Form::model($category,['method' => 'POST', 'route' => ['categoryUpdate', $category->id]])}}
+                            {{Form::model($category,['method' => 'POST', 'route' => ['categoryUpdate', $category->id], 'id'=>'edit_category'])}}
                            <div class="form-group">
                            {{Form::label('title','Namn')}}
-                           {{Form::text('title', null, ['class' => 'form-control'])}}
+                           {{Form::text('title', null, ['class' => 'form-control', 'data-validation'=>'required', 'data-validation-error-msg'=>'Detta fältet måste fyllas i..'])}}
                            </div>
                            <div class="form-group">
                            {{Form::label('subtitle','Beskrivning')}}
-                           {{Form::text('subtitle', null, ['class' => 'form-control'])}}
+                           {{Form::text('subtitle', null, ['class' => 'form-control', 'data-validation'=>'required', 'data-validation-error-msg'=>'Detta fältet måste fyllas i..'])}}
                            </div>
 
                        </div>
@@ -129,4 +129,14 @@
                 </div>
             </div>
         @endif
+@stop
+
+@section('scripts')
+<script>
+
+$.validate({
+  form : '#edit_category'
+});
+
+</script>
 @stop

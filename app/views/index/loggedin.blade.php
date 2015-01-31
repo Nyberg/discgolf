@@ -20,8 +20,6 @@
     <div class="col-lg-12">
      <div class="col-lg-9"></div>
 
-
-
       <div class="col-lg-3">
         <div class="dol-lg-12">
             <div class="col-lg-12">
@@ -41,7 +39,7 @@
                   <div class="caption">
                     <h4 class="text-center">Lost & Found</h4>
                     <p class="text-center">Har du tappat bort en disk? Eller har du kanske hittat en vilsen disc? Klicka nedan för att avgöra discens öde!</p>
-                    <a href="#"><span class="btn btn-theme btn-block">Get to it!</span></a>
+                    <a href="/lost-and-found"><span class="btn btn-theme btn-block">Get to it!</span></a>
                   </div>
                 </div>
        </div>

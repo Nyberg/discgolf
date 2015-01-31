@@ -87,7 +87,7 @@
           <div class="col-lg-3">
             <h5>Fairway Drivers</h5>
                 @foreach($bag->disc as $disc)
-                @if($disc->type == 'Fairway')
+                @if($disc->type == 'Fairway Driver')
                 <p>{{$disc->author.' '.$disc->plastic.' '. $disc->name . ', '.$disc->weight.'g'}}</p>
                 @endif
                 @endforeach
@@ -109,7 +109,7 @@
     <div id="sectionB" class="tab-pane fade in">
 
 
-        <h4><i class="fa fa-angle-right"></i> Alla rundor av {{$user->first_name .' '. $user->last_name}}</h4>
+        <h4><i class="fa fa-angle-right"></i> De 5 senaste rundorna av {{$user->first_name .' '. $user->last_name}}</h4>
         <table class="table table-hover">
             <thead>
             <tr>
@@ -137,6 +137,9 @@
        @endforeach
             </tbody>
         </table>
+
+        <a href="/round/{{$user->id}}/user/show" class="btn btn-primary btn-sm">Se alla rundor av {{$user->first_name}}</a>
+
   </div>
 
      <div id="sectionD" class="tab-pane fade in">
@@ -345,9 +348,9 @@
     <div id="sectionF" class="tab-pane fade in">
      <br/>
 
-        <h4 class="mb"><i class="fa fa-comments-o"></i> Kommentarer
+        <h4 class=""><i class="fa fa-comments-o"></i> Kommentarer
         @if(Auth::user())
-        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#comment">
+        <button class="btn btn-primary pull-right mb" data-toggle="modal" data-target="#comment">
         Kommentera
         </button>
         @endif

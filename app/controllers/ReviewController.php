@@ -4,9 +4,6 @@ use dg\Forms\AddReviewForm;
 
 class ReviewController extends \BaseController {
 
-    /**
-     * @var AddReviewForm
-     */
     private $addReviewForm;
 
     public function __construct(AddReviewForm $addReviewForm){
@@ -46,13 +43,6 @@ class ReviewController extends \BaseController {
         return Redirect::to('/course/'.$review->course_id.'/show')->with('success', 'Din recension är tillagd!');
 	}
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function show()
 	{
 		$reviews = Review::where('user_id', Auth::id())->get();

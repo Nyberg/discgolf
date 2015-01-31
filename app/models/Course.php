@@ -49,4 +49,8 @@ class Course extends Eloquent implements UserInterface, RemindableInterface {
     public function city(){
         return $this->belongsTo('City');
     }
+
+    public function losts(){
+        return $this->hasMany('Lost');
+    }
 }

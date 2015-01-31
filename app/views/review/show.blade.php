@@ -10,6 +10,9 @@
 
       <h4><i class="fa fa-angle-right"></i> Dina recensioner</h4>
 
+      @if(count($reviews) == 0)
+        <p>Inga recensioner..</p>
+      @else
           @foreach($reviews as $rev)
 
               <br/>
@@ -48,6 +51,8 @@
 
 
            @endforeach
+
+      @endif
         </div>
     </div>
 </div>

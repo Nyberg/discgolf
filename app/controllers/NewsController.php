@@ -1,103 +1,83 @@
 <?php
 
-class NewsController extends \BaseController {
+use dg\Forms\NewsForm;
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+class NewsController extends Controller {
+
+    private $newsForm;
+
+    public function __construct(NewsForm $newsForm){
+
+        $this->newsForm = $newsForm;
+    }
+
 	public function index()
 	{
 		//
 	}
 
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
 	public function create()
 	{
-		//
+		return View::make('news.create');
 	}
 
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function store()
 	{
+
+        $this->newsForm->validate($input = Input::all());
+
 		$news = new News();
 
         $news->head = Input::get('head');
         $news->body = Input::get('body');
-
-        if(Auth::user()->hasRole('Admin')){
-            $news->club_id = Input::get('id');
-        }else{
-            $news->club_id = Auth::user()->club_id;
-        }
+        $news->views = 0;
+        $news->club_id = Auth::user()->club_id;
 
         $news->save();
 
-        return Redirect::back()->with('success', 'News entry saved!');
+        return Redirect::to('/club/'.Auth::user()->club_id.'/show')->with('success', 'Nyhet sparad!');
 
 	}
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function show($id)
 	{
-		//
+		$news = News::find($id);
+
+        $news->views++;
+        $news->save();
+
+        return View::make('news.show', ['news'=>$news]);
 	}
 
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function edit($id)
 	{
-		//
+		$news = News::find($id);
+
+        return View::make('news.edit', ['news'=>$news]);
 	}
 
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function update($id)
 	{
-		//
+        $this->newsForm->validate($input = Input::all());
+
+        $news = News::find($id);
+
+        $news->head = Input::get('head');
+        $news->body = Input::get('body');
+
+        $news->save();
+
+        return Redirect::to('/club/'.Auth::user()->club_id.'/show')->with('success', 'Nyhet uppdaterad!');
 	}
 
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
 		$new = News::whereId($id)->firstOrFail();
 
         $new->delete();
 
-        return Redirect::back()->with('success', 'News entry deleted!');
+        return Redirect::to('/dashboard')->with('success', 'Nyhet borttagen!');
 
 	}
 

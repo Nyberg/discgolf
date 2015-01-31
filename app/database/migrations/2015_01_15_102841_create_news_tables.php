@@ -18,8 +18,8 @@ class CreateNewsTables extends Migration {
             $table->string('head', '255');
             $table->longText('body', '2000');
             $table->integer('club_id');
+            $table->integer('views');
             $table->timestamps();
-
         });
 	}
 

@@ -1,12 +1,16 @@
 <?php
 
+use dg\Forms\addBagForm;
+
 class BagController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+    private $addBagForm;
+
+    public function __construct(AddBagForm $addBagForm){
+
+        $this->addBagForm = $addBagForm;
+    }
+
 	public function index()
 	{
 		$bags = Bag::with('user')->get();
@@ -29,24 +33,19 @@ class BagController extends \BaseController {
 
 	public function store()
 	{
+        $this->addBagForm->validate($input = Input::only('type'));
+
 		$bag = New bag();
 
         $bag->type = Input::get('type');
-        $bag->user_id = Auth::user()->id;
+        $bag->user_id = Auth::id();
 
         $bag->save();
 
-        return Redirect::to('/user/'.Auth::user()->id.'/bags')->with('success', 'Bag created successfullty!');
+        return Redirect::to('/account/user/'.Auth::user()->id.'/bags')->with('success', 'Bag tillagd!');
 
 	}
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function show($id)
 	{
 		$bag = Bag::whereId($id)->firstOrFail();
@@ -54,13 +53,6 @@ class BagController extends \BaseController {
         return View::make('bag.show', ['bag'=>$bag]);
 	}
 
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function edit($id)
 	{
 		$bag = Bag::with('disc')->whereId($id)->firstOrFail();
@@ -68,37 +60,24 @@ class BagController extends \BaseController {
         return View::make('bag.edit', ['bag'=>$bag]);
 	}
 
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function update($id)
     {
+        $this->addBagForm->validate($input = Input::only('type'));
 
 		$bag = Bag::whereId($id)->firstOrFail();
 
         $bag->type = Input::get('type');
         $bag->save();
 
-        return Redirect::to('/user/'.Auth::user()->id.'/bags')->with('success', 'Bag updated!');
+        return Redirect::to('/account/user/'.Auth::user()->id.'/bags')->with('success', 'Bag updated!');
 	}
 
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
         $bag = Bag::whereId($id)->firstOrFail();
         $bag->delete();
 
-        return Redirect::to('/user/'.Auth::user()->id.'/bags')->with('success', 'Bag ' . $bag->type . ' deleted!');
+        return Redirect::back()->with('success', 'Bag ' . $bag->type . ' deleted!');
 	}
 
 

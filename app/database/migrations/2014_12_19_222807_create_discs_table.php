@@ -21,6 +21,7 @@ class CreateDiscsTable extends Migration {
             $table->string('plastic', '255');
             $table->integer('weight');
             $table->string('condition', '255');
+            $table->string('type', '255');
             $table->string('mixed', '255');
             $table->timestamps();
 

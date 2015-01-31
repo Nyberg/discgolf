@@ -11,7 +11,7 @@
                     <h2 class="text-center page-header-custom">Forum</h2>
                     <div class="divider-header"></div>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-12">
     <div class="table-responsive">
         <table class="table panel panel-default">
         @foreach($groups as $group)
@@ -39,7 +39,7 @@
         @foreach($clubs as $club)
                 <tbody class="panel-heading">
                 <tr>
-                    <th><h5 class="panel-title">{{$club->title}}</h5></th>
+                    <th><h5 class="panel-title">{{$club->title}}<small> {{$club->desc}}</small></h5></th>
                     <td><h6>Trådar</h6></td>
                     <td><h6>Inlägg</h6></td>
                 </tr>
@@ -91,7 +91,7 @@
                         {{Form::open(['method' => 'post', 'route' => ['forum-store-group'], 'id' => 'target_form'])}}
                         <div class="form-group">
                         {{Form::label('title','Namn')}}
-                        {{Form::text('title', '', ['class' => 'form-control'])}}
+                        {{Form::text('title', '', ['class' => 'form-control', 'data-validation'=>'required','data-validation-error-msg'=>'Du måste fylla i detta fältet..'])}}
                         </div>
                      {{Form::close()}}
                     </div>
@@ -118,13 +118,13 @@
                             {{Form::open(['method' => 'post', 'route' => ['forum-store-club-group'], 'id' => 'club_target_form'])}}
                             <div class="form-group">
                             {{Form::label('title','Namn')}}
-                            {{Form::text('title', '', ['class' => 'form-control'])}}
+                            {{Form::text('title', '', ['class' => 'form-control', 'data-validation'=>'length', 'data-validation'=>'required','data-validation-error-msg'=>'Du måste fylla i detta fältet..'])}}
                             </div>
 
 
                             <div class="form-group">
                             {{Form::label('subtitle','Beskrivning')}}
-                            {{Form::text('subtitle', '', ['class' => 'form-control'])}}
+                            {{Form::text('subtitle', '', ['class' => 'form-control', 'data-validation'=>'required','data-validation-error-msg'=>'Du måste fylla i detta fältet..'])}}
                             </div>
                             <div class="form-group">
                             {{Form::label('id', 'I vilken grupp ska kategorin placeras?')}}
@@ -160,11 +160,11 @@
                             {{Form::open(['method' => 'post', 'route' => ['forum-store-category'], 'id' => 'target_category_form'])}}
                             <div class="form-group">
                             {{Form::label('title','Namn')}}
-                            {{Form::text('title', null, ['class' => 'form-control'])}}
+                            {{Form::text('title', null, ['class' => 'form-control', 'data-validation'=>'required', 'data-validation-error-msg'=>'Du måste fylla i detta fältet..'])}}
                             </div>
                             <div class="form-group">
                             {{Form::label('subtitle','Beskrivning')}}
-                            {{Form::text('subtitle', null, ['class' => 'form-control'])}}
+                            {{Form::text('subtitle', '', ['class' => 'form-control','data-validation'=>'required', 'data-validation-error-msg'=>'Du måste fylla i detta fältet..'])}}
                             </div>
                             <div class="form-group">
                             {{Form::label('id', 'I vilken grupp ska kategorin placeras?')}}
@@ -208,4 +208,15 @@
                 </div>
             </div>
         @endif
+@stop
+
+
+@section('scripts')
+<script>
+
+$.validate({
+  form : '#club_group_form $group_form #club_group_form'
+});
+
+</script>
 @stop

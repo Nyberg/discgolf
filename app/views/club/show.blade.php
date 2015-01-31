@@ -21,11 +21,11 @@
             <li class="active"><a data-toggle="tab" href="#sectionA"><i class="fa fa-info"></i> {{$club->name}}</a></li>
             <li><a data-toggle="tab" href="#sectionB"><i class="fa fa-microphone"></i> Om {{$club->name}}</a></li>
             <li><a data-toggle="tab" href="#sectionC"><i class="fa fa-user"></i> Medlemmar ({{count($club->users)}})</a></li>
-            <li><a data-toggle="tab" href="#sectionE"><i class="fa fa-money"></i> Sponsorer</a></li>
+            <!-- <li><a data-toggle="tab" href="#sectionE"><i class="fa fa-money"></i> Sponsorer</a></li> -->
             <li><a data-toggle="tab" href="#sectionG"><i class="fa fa-comments"></i> Kommentarer ({{count($club->comments)}})</a></li>
             @if(Auth::check())
             @if(Auth::user() && Auth::user()->hasRole('ClubOwner') && Auth::user()->club_id == $club->id || Auth::user()->hasRole('Admin'))
-            <li class="pull-right"><a data-toggle="modal" data-target="#news"><i class="fa fa-plus"></i> Lägg till nyhet</a></li>
+            <li class="pull-right"><a href="/admin/add/news"><i class="fa fa-plus"></i> Lägg till nyhet</a></li>
             @endif
             @endif
         </ul>
@@ -41,24 +41,21 @@
                     <div class="col-lg-12">
                         <h4><i class="fa fa-info"></i> Nyheter</h4>
 
-                        @foreach($club->news as $new)
-                        <div class="row">
+                        @foreach($news as $new)
+                        <div class="row divider">
                             <div class="col-lg-12">
 
-                                <h4>{{$new->head}}<small class="pull-right"> Skapad {{$new->created_at->format('Y-m-d')}}</small></h4>
+                                <h4><small class="btn btn-sm btn-theme">{{$new->created_at->format('d/n')}}</small> {{$new->head}}</h4>
 
-                                <p>{{$new->body}}</p>
-
-                                @if(Auth::check())
-                                @if(Auth::user() && Auth::user()->hasRole('ClubOwner') && Auth::user()->club_id == $club->id || Auth::user()->hasRole('Admin'))
-
-                                {{Form::open(['method'=>'DELETE', 'route'=>['news.destroy', $new->id]])}}
-                                {{Form::submit('Delete Entry', ['class'=>'btn btn-danger btn-xs'])}}
-                                {{Form::close()}}
-                                @endif
-                                @endif
+                                <p>{{str_limit($new->body, $limit = 200, $end = '...')}}</p>
+                            <div class="news-btn">
+                                <small>Kommentarer ({{count($new->comments)}}) | </small>
+                                <a href="/club/news/{{$new->id}}/show" class=""><small>Läs mer..</small></a>
+                            </div>
 
                             </div>
+
+
                         </div>
                         @endforeach
                     </div>
@@ -95,29 +92,47 @@
             </div>
 
             <div id="sectionC" class="tab-pane fade in">
-            <div class="col-lg-12 wrapper-parent">
+                <div class="col-lg-12 wrapper-parent mb">
 
-            @foreach($club->users as $member)
 
-            <div class="col-lg-2 center">
 
-            <a href="/user/{{$member->id}}/show"  data-toggle="lightbox" data-parent=".wrapper-parent"><img src="{{$member->image}}" class="img-thumbnail" width="100%" height="80%"/></a>
-            <h5 class="center">{{$member->first_name . ' ' . $member->last_name}}</h5>
-            </div>
+                    @if(count($users) < 18)
+                    <h4 class="tab-rub">Visar {{count($users)}} av {{count($users)}} medlemmar i {{$club->name}}</h4>
+                    @else
+                    <h4 class="tab-rub">Visar 18 av {{count($club->users)}} medlemmar - {{$club->name}}</h4>
+                    @endif
+                     <ul class="list-inline list-unstyled" id="Container">
+                         @foreach($users as $user)
+                        <li class="col-sm-2 text-center thread mix mixup-content">
+                           <img src="{{$user->image}}" class="img-responsive img-circle center-block" width="40px"/>
+                           <p><a href="/user/{{$user->id}}/show">{{$user->first_name . ' ' . $user->last_name}}</a></p>
+                           <small>Klubb: <a href="/club/{{$user->club_id}}/show">{{$user->club->name}}</a></small>
+                        </li>
+                        @endforeach
+                    </ul>
 
-            @endforeach
+                </div>
 
-            </div>
+                @if(count($club->users) > 18)
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                     <a href="#" class="btn btn-primary btn-sm">Visa alla medlemmar</a>
+                    </div>
+                </div>
+                @else
+                @endif
+
             </div>
 
     <div id="sectionG" class="tab-pane fade">
     <div class="col-lg-12">
     <br/>
 
-         <h4 class="mb"> Join the discussion!
+         <h4 class=""> Kommentarer ({{count($club->comments)}})
             @if(Auth::user())
-            <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#comment">
-             Kommentera
+            <button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#comment">
+               Kommentera
             </button>
             @else
             @endif
@@ -236,4 +251,17 @@
 
 
 
+@stop
+
+@section('scripts')
+    <script>
+
+    $(function(){
+
+    // Instantiate MixItUp:
+
+    $('#Container').mixItUp();
+
+    });
+    </script>
 @stop

@@ -2,20 +2,6 @@
 
 class DiscController extends \BaseController {
 
-	public function index()
-	{
-		//
-	}
-
-    public function user($id){
-
-    }
-
-	public function create()
-	{
-		//
-	}
-
 	public function store()
 	{
         $id = Input::get('id');
@@ -32,23 +18,12 @@ class DiscController extends \BaseController {
 
         $disc->save();
         $bag = Bag::whereId($id)->firstOrFail();
-        $sum = Disc::where('bag_id', $id)->count();
-        $bag->discs = $sum;
+        $bag->discs++;
 
         $bag->save();
 
-        return Redirect::back()->with('success', 'Disc '.$disc->name.' added to bag ' .$bag->type.'!');
+        return Redirect::back()->with('success', 'Disc '.$disc->name.' tillagd i ' .$bag->type.'!');
 
-	}
-
-	public function show($id)
-	{
-		//
-	}
-
-	public function edit($id)
-	{
-		//
 	}
 
 	public function update($id)
@@ -68,16 +43,10 @@ class DiscController extends \BaseController {
 
             $disc->save();
 
-            $bag = Bag::whereId($disc->bag_id)->firstOrFail();
-            $sum = Disc::where('bag_id', $disc->bag_id)->count();
-            $bag->discs = $sum;
-
-            $bag->save();
-
-            return Redirect::back()->with('success', 'Disc '.$disc->name.' updated!');
+            return Redirect::back()->with('success', 'Disc '.$disc->name.' uppdaterad!');
 
         }else{
-            return Redirect::back()->with('danger', 'Something went wrong!');
+            return Redirect::back()->with('danger', 'Något gick snett..');
         }
 	}
 
@@ -93,7 +62,7 @@ class DiscController extends \BaseController {
 
         $bag->save();
 
-        return Redirect::back()->with('success', 'Disc '.$disc->name.' deleted!');
+        return Redirect::back()->with('success', 'Disc '.$disc->name.' borttagen!');
 
 	}
 

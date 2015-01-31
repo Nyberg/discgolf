@@ -6,7 +6,14 @@
 
 <div class="showback">
 
-      <h4><i class="fa fa-angle-right"></i> Dina sponsorer</h4><hr>
+      <h4><i class="fa fa-angle-right"></i> Dina sponsorer</h4>
+
+      @if(count($sponsors) == 0)
+
+      <p>Du har inga sponsorer tillagda</p>
+
+      @else
+
       <table class="table table-hover">
           <thead>
           <tr>
@@ -37,6 +44,7 @@
           </tbody>
       </table>
 
+      @endif
 </div>
 
 @stop

@@ -4,14 +4,22 @@
 @section('content')
 
 
-     		<div class="showback">
+    <div class="showback">
 
-      <h4><i class="fa fa-angle-right"></i> Dina kommentarer</h4><hr>
+      <h4><i class="fa fa-angle-right"></i> Dina kommentarer</h4>
+
+      @if(count($comments) == 0)
+
+      <p>Du har inte skrivit några kommentarer..</p>
+
+      @else
+
       <table class="table table-hover">
           <thead>
           <tr>
 
            <th>Datum</th>
+           <th>Var</th>
            <th>Kommentar</th>
             <th>Redigera</th>
             <th>Ta bort</th>
@@ -23,6 +31,7 @@
           @foreach($comments as $comment)
            <tr>
             <td>{{$comment->created_at}}</td>
+            <td><a href="/{{strtolower($comment->commentable_type)}}/{{$comment->commentable_id}}/show">Länk</a></td>
             <td>{{$comment->body}}</td>
 
            <td><a data-toggle="modal" data-target="#comment{{$comment->id}}"><span class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></span></a></td>
@@ -43,40 +52,40 @@
 
 
               <div class="modal fade" id="comment{{$comment->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                          <h4 class="modal-title" id="myModalLabel">Redigera Kommentar</h4>
-                                        </div>
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                          <h4 class="modal-title" id="myModalLabel">Redigera Kommentar</h4>
+                        </div>
 
-                                        <div class="modal-body">
-                                        {{Form::model($comment, ['method'=>'PATCH', 'route'=> ['comment.update', $comment->id]])}}
+                        <div class="modal-body">
+                        {{Form::model($comment, ['method'=>'PATCH', 'route'=> ['comment.update', $comment->id]])}}
 
-                                         <div class="form-group">
-                                                           <label class="col-sm-2 col-sm-2 control-label">Kommentar</label>
-                                                           <div class="col-sm-10">
+                         <div class="form-group">
+                               <label class="col-sm-2 col-sm-2 control-label">Kommentar</label>
+                               <div class="col-sm-10">
 
-                                                               {{Form::text('body', $comment->body, ['class'=>'form-control'])}}
-                                                           </div>
-                                                       </div>
+                                   {{Form::text('body', $comment->body, ['class'=>'form-control'])}}
+                               </div>
+                           </div>
 
+                        <div class="modal-footer">
+                            {{Form::submit('Spara Kommentar', ['class'=>'btn btn-primary'])}}
+                                {{Form::close()}}
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
 
-                                        <div class="modal-footer">
-                                            {{Form::submit('Spara Kommentar', ['class'=>'btn btn-primary'])}}
-                                                {{Form::close()}}
-                                          <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
-
-                                       </div>
-                                     </div>
+                       </div>
+                     </div>
               </div>
 
 
 
-              </div></div><!-- --/content-panel ---->
+    </div></div><!-- --/content-panel ---->
 
       @endforeach
 
+    @endif
 
       </div>
 

@@ -39,19 +39,19 @@ class UserController extends \BaseController {
 
             $scores = Score::where('user_id', $id)->get();
             $courses_played = Round::where('user_id', $id)->lists('tee_id');
-            $rounds = Round::with('score')->where('user_id', $id)->where('status', 1)->orWhere('par_id',$id)->get();
+            $datarounds = Round::with('score')->where('user_id', $id)->where('status', 1)->orWhere('par_id',$id)->get();
 
             $data = $this->stat->calc($scores);
             $shots = $this->stat->calcShots($scores);
             $cp = $this->stat->getCourses($courses_played);
-            $bfr = $this->stat->getBfr($rounds);
-            $avg = $this->stat->getAvg($scores, $rounds);
-            $birdies = $this->stat->getBirdies($rounds);
+            $bfr = $this->stat->getBfr($datarounds);
+            $avg = $this->stat->getAvg($scores, $datarounds);
+            $birdies = $this->stat->getBirdies($datarounds);
 
 
             $user = User::with('profile')->whereId($id)->firstOrFail();
 
-            $rounds = Round::with('tee')->where('user_id', $id)->where('status', 1)->orWhere('par_id', $id)->get();
+            $rounds = Round::with('tee')->where('user_id', $id)->where('status', 1)->orWhere('par_id', $id)->limit(5)->get();
             $club = Club::whereId($user->club_id)->firstOrFail();
             $bags = Bag::with('disc')->where('user_id', $id)->get();
             $sponsors = Sponsor::where('user_id', $id)->get();
@@ -72,7 +72,7 @@ class UserController extends \BaseController {
                 $shots = 0;
                 $data = 0;
 
-                $rounds = Round::with('tee')->where('user_id', $id)->where('status', 1)->orWhere('par_id', $id)->get();
+                $rounds = Round::with('tee')->where('user_id', $id)->where('status', 1)->orWhere('par_id', $id)->limit(5)->get();
                 $user = User::with('profile', 'club')->whereId($id)->firstOrFail();
                # $club = Club::whereId($user->club_id)->firstOrFail();
                 $bags = Bag::with('disc')->where('user_id', $id)->get();
@@ -252,6 +252,16 @@ class UserController extends \BaseController {
 
 	public function destroy($id)
 	{
+
+    }
+
+    public function userRound($id){
+
+        $user = User::find($id);
+
+        $rounds = Round::where('user_id', $id)->orWhere('par_id', $id)->paginate(15);
+
+        return View::make('round.user', compact('rounds'), ['user'=>$user]);
 
     }
 

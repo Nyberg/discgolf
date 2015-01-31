@@ -10,10 +10,6 @@ class CommentController extends \BaseController
         return View::make('comment.index', ['comments'=>$comments]);
     }
 
-    public function create()
-    {
-    }
-
     public function store()
     {
 
@@ -55,30 +51,20 @@ class CommentController extends \BaseController
 
                 $club->comments()->save($comment);
 
+            }if(Input::get('model') == 'news'){
+
+                $news = News::whereId($comment->commentable_id)->firstOrFail();
+
+                $news->comments()->save($comment);
+
             }
 
-            return Redirect::back()->with('success', 'Comment saved!');
+            return Redirect::back()->with('success', 'Kommenatar sparad!');
 
         } else {
 
-            return Redirect::back()->with('headsup', 'You need to be logged in to do that!');
+            return Redirect::back()->with('headsup', 'Du måste vara inloggad för att kunna kommentera');
         }
-    }
-
-    public function course_store()
-    {
-        $comment = new Comment;
-        $comment->body = Input::get('body');
-        $comment->user_id = Auth::user()->id;
-        $comment->commentable_id = Input::get('type_id');
-        $comment->save();
-
-        $course = Course::whereId($comment->commentable_id)->firstOrFail();
-
-        $course->comments()->save($comment);
-
-        return Redirect::back()->with('success', 'Comment saved!');
-
     }
 
 	public function edit($id)
@@ -102,15 +88,10 @@ class CommentController extends \BaseController
 
         if($comment){
             $comment->delete();
-            return Redirect::back()->with('success', 'Comment deleted!');
+            return Redirect::back()->with('success', 'Kommentar borttagen!');
         }else{
-            return Redirect::back()->with('danger', 'Something went wrong!');
+            return Redirect::back()->with('danger', 'Något gick fel..');
         }
 
-
-
-
 	}
-
-
 }

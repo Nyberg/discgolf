@@ -20,6 +20,32 @@ body {
     font-weight: 200;
 }
 
+.news-header{
+    padding-right: 20px;
+}
+
+.divider{
+    border-bottom: 1px solid #ededed;
+    margin-bottom: 20px;
+
+}
+
+.divider p{
+    margin-bottom: 20px;
+}
+
+.news-btn{
+    padding-bottom: 20px;
+}
+
+.lost{
+    color: #D9534F;
+}
+
+.found{
+    color: #5CB85C;
+}
+
 #Container .mix{
     display: none;
 }

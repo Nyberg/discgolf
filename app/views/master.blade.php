@@ -19,6 +19,7 @@
 {{HTML::style('admin_css/css/ekko-lightbox.min.css')}}
 {{HTML::script('http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js')}}
 {{HTML::script('http://code.jquery.com/jquery-1.11.0.min.js')}}
+{{HTML::script('admin_js/form-validator/jquery.form-validator.js')}}
 
 {{HTML::script('admin_js/Chart.js')}}
 {{HTML::script('admin_js/Chart.min.js')}}
@@ -63,6 +64,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.47/jquery.form-validator.min.js"></script>
 
   <body data-spy="scroll">
 
@@ -163,6 +165,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       }
     })
 
+    $.validate();
 
      /* $(document).ready(function () {
             $("#date-popover").popover({html: true, trigger: "manual"});

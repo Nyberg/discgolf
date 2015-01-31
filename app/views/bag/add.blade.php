@@ -11,9 +11,10 @@
                               <div class="col-sm-10">
 
                                   {{Form::text('type', '', ['class'=>'form-control'])}}
+                                  {{errors_for('type', $errors)}}
                               </div>
                           </div>
-                         {{Form::submit('Save', ['class'=>'btn btn-primary'])}}
+                         {{Form::submit('Save', ['class'=>'btn btn-success'])}}
                          {{Form::close()}}
                 </div>
             </div>
