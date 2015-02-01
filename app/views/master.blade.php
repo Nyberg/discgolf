@@ -119,6 +119,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <!--script for this page-->
 {{HTML::script('admin_js/sparkline-chart.js')}}
 {{HTML::script('admin_js/app.js')}}
+{{HTML::script('admin_js/round/lost.js')}}
 
 @yield('scripts')
 

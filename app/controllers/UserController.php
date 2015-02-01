@@ -18,7 +18,7 @@ class UserController extends \BaseController {
 
 	public function index()
 	{
-		$users = User::with('profile')->paginate(18);
+		$users = User::with('profile')->paginate(15);
         $clubs = Club::get();
         return View::make('users.users',compact('users'), ['clubs'=>$clubs]);
 	}

@@ -18,10 +18,13 @@
 {{HTML::style('css/lightbox.css')}}
 {{HTML::script('js/jquery-1.11.0.min.js')}}
 {{HTML::script('js/lightbox.min.js')}}
+{{HTML::script('admin_js/form-validator/jquery.form-validator.js')}}
 
 
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.47/jquery.form-validator.min.js"></script>
+
 <style>body{padding-top: 85px;}</style>
 
 <!--
@@ -60,9 +63,6 @@
     @yield('scripts')
      <script>
                  $.backstretch("../img/login-bg.jpg", {speed: 500});
-             </script>
-
-
-
+     </script>
   </body>
 </html>

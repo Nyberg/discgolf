@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
         {{Form::label('body' , 'Innehåll * Detta måste fyllas i.')}}
-        {{Form::textarea('body', null, ['class' => 'form-control'])}}
+        {{Form::textarea('body', null, ['class' => 'form-control', 'id'=>"area"])}}
         </div>
         <div class="form-group">
         {{Form::submit('Spara', ['class' => 'btn btn-primary btn-primary'])}}
@@ -28,9 +28,9 @@
 @section('scripts')
 <script>
 
-$.validate({
-  form : '#thread'
-});
+    $.validate({
+      form : '#thread'
+    });
 
 </script>
 @stop

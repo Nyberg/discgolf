@@ -19,7 +19,7 @@ Route::group(['before'=>'checkAdmin'], function(){
                 Route::post('/thread/{id}/lock', ['as' => 'forum-lock-thread', 'uses' => 'ForumsController@lockThread']);
             });
             Route::group(['before' => 'checkRole'], function(){
-                Route::get('/group/{id}/delete', ['as'=> 'forum-delete-group', 'uses' => 'ForumsController@deleteGroup']);
+                Route::post('/group/delete', ['as'=> 'forum-delete-group', 'uses' => 'ForumsController@deleteGroup']);
             });
         });
 
@@ -107,6 +107,7 @@ Route::group(['before'=>'auth'], function(){
     Route::get('/account/round/{id}/edit/{course_id}', 'RoundController@edit');
 
     Route::post('/getTees', 'TeeController@getTeepads');
+    Route::post('/getHoles', 'HoleController@getHoles');
     Route::get('/getUsers', 'UserController@getPlayers');
     Route::post('/getScore', 'ScoreController@getScore');
 
@@ -115,6 +116,8 @@ Route::group(['before'=>'auth'], function(){
 
     #   Lost & Found    #
     Route::get('/account/lost/add', 'LostController@create');
+    Route::get('/account/user/{id}/lost-and-found', 'LostController@user');
+    Route::get('/account/lost-and-found/{id}/solved', 'LostController@markSolved');
 
     #   User        #
     Route::get('/account/edit/{id}/user', 'UserController@edit');

@@ -198,11 +198,23 @@
                             <h4 class="modal-title">Ta bort Grupp</h4>
                         </div>
                         <div class="modal-body">
-                            <p>Är du säker på att du vill ta bort denna grupp? <br /> <small>Alla kategorier och trådar som tillhör gruppen kommer också försvinna!</small> </p>
+
+                                {{Form::open(['method' => 'post', 'route' => ['forum-delete-group']])}}
+                                <div class="form-group">
+                                     <select class="form-control" name="id">
+                                       @foreach($groups as $group)
+                                       <option value="{{ $group->id}}">{{$group->title}}</option>
+                                       @endforeach
+                                    </select>
+                                </div>
+
+                           <small>Alla kategorier och trådar som tillhör gruppen kommer också försvinna!</small>
                         </div>
                         <div class="modal-footer">
+                         {{Form::submit('Ta bort', ['class' => 'btn btn-primary btn-primary'])}}
+                         {{Form::close()}}
                             <button type="button" class=" btn btn-danger" data-dismiss="modal">Stäng</button>
-                            <a id="btn_delete_group"  class=" btn btn-primary">Ta bort</a>
+
                         </div>
                     </div>
                 </div>

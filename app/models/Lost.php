@@ -11,4 +11,8 @@ class Lost extends \Eloquent {
     public function course(){
         return $this->belongsTo('Course');
     }
+
+    public function hole(){
+        return $this->belongsTo('Hole');
+    }
 }

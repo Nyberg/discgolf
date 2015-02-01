@@ -6,7 +6,7 @@
 
      		<div class="showback">
 
-      <h4><i class="fa fa-angle-right"></i> Dina rundor</h4><hr>
+      <h4><i class="fa fa-angle-right"></i> Dina rundor</h4>
       <table class="table table-hover">
           <thead>
           <tr>
@@ -26,7 +26,7 @@
           @foreach($rounds as $round)
            <tr>
             <td><a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->created_at->format('Y-m-d')}}</a></td>
-            <td><a href="/user/{{$round->user_id}}/show">{{$round->user}}</a></td>
+            <td><a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a></td>
             <td><a href="/course/{{$round->course_id}}/show">{{$round->course['name'] . ' - ' . $round->tee['color']}}</a></td>
             <td>{{$round->type}}
 

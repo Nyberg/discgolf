@@ -46,6 +46,10 @@ body {
     color: #5CB85C;
 }
 
+.lost-and-found{
+    margin-bottom: 20px;
+}
+
 #Container .mix{
     display: none;
 }

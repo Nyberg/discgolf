@@ -14,9 +14,9 @@
     </div>
 
     <div class="col-sm-12">
-        {{Form::model($comment,['method' => 'POST', 'route' => ['forum-update-comment', $comment->id]])}}
+        {{Form::model($comment,['method' => 'POST', 'route' => ['forum-update-comment', $comment->id], 'id'=>'comment_form'])}}
         <div class="form-group">
-        {{Form::label('body' , 'Innehåll')}}
+        {{Form::label('body' , 'Innehåll * Detta fältet måste fyllas i.')}}
         {{Form::textarea('body', null, ['class' => 'form-control'])}}
         </div>
         <div class="form-group text-center">
@@ -26,4 +26,15 @@
     </div>
 </div>
 
+@stop
+
+
+@section('scripts')
+<script>
+
+    $.validate({
+      form : '#comment_form'
+    });
+
+</script>
 @stop

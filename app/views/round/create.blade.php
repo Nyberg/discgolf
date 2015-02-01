@@ -60,6 +60,17 @@
            </div>
         </div>
 
+        <div class="form-group">
+            <label class="col-sm-1 col-sm-1 control-label">Datum</label>
+                 <div class="col-sm-5">
+
+                     {{Form::text('date', '', ['class'=>'form-control datepicker'])}}
+                      <span class="help-block">Klicka på fältet för att välja datum</span>
+                     {{errors_for('date', $errors)}}
+
+                 </div>
+        </div>
+
 
 
         {{Form::submit('Nästa', ['class'=>'btn btn-primary'])}}
@@ -67,5 +78,26 @@
 
 
         </div>
+
+@stop
+
+
+@section('scripts')
+
+    <script>
+
+      $(function() {
+                   $(".datepicker").datepicker({
+                   dateFormat: "yy-mm-dd",
+                   startDate: '-2d'
+                    })
+           });
+
+ /*   $('.datepicker').datepicker({
+    dateFormat: 'dd-mm-yy',
+    startDate: '-2d'
+    }) */
+
+    </script>
 
 @stop

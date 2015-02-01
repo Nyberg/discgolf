@@ -166,5 +166,11 @@ class HoleController extends \BaseController {
         return Redirect::back()->with('success', 'Hål raderat!');
 	}
 
+    public function getHoles(){
+
+        $holes = Hole::where('course_id', Input::get('id'))->get();
+
+        return Response::json($holes);
+    }
 
 }

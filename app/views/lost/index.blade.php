@@ -30,7 +30,7 @@
 
     @foreach($losts as $lost)
 
-    <div class="col-md-3 text-center" data-container="body" data-toggle="popover" data-placement="top" data-title="För mer info" data-content="Maila: {{$lost->user->email}}">
+    <div class="col-md-3 text-center lost-and-found" data-container="body" data-toggle="popover" data-placement="top" data-title="För mer info" data-content="Maila: {{$lost->user->email}}">
 
         <p>
         @if($lost->status == 'lost')
@@ -40,7 +40,7 @@
         @endif</p>
 
          <h4>{{$lost->type}}</h4>
-         <small>{{$lost->course->name}} | {{$lost->date}}</small>
+         <small>{{$lost->course->name}} hål {{$lost->hole->number}}| {{$lost->date}}</small>
 
     </div>
 

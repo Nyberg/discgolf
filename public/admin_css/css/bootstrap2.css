@@ -191,6 +191,7 @@ table {
   border-spacing: 0;
   border-collapse: collapse;
 }
+
 td,
 th {
   padding: 0;
@@ -2082,6 +2083,12 @@ th {
   max-width: 100%;
   margin-bottom: 20px;
 }
+
+.table head{
+
+    font-size: 30px;
+}
+
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfoot > tr > th,
@@ -2095,7 +2102,9 @@ th {
 }
 .table > thead > tr > th {
   vertical-align: bottom;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 1px solid #fff;
+    color: #fff;
+    background-color: #424A5D;
 }
 .table > caption + thead > tr:first-child > th,
 .table > colgroup + thead > tr:first-child > th,

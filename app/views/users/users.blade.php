@@ -6,39 +6,32 @@
               <h2 class="text-center page-header-custom">Användare</h2>
               <div class="divider-header"></div>
 
-<div class="row">
+  <table class="table table-striped table-advance table-hover">
 
-    <div class="col-md-12 mb text-center    ">
 
-    <div class="btn-toolbar ">
+      <thead>
+      <tr>
+          <th>Användare</th>
+          <th>Klubb</th>
+          <th>Rating</th>
+          <th>Rundor</th>
+      </tr>
+      </thead>
+      <tbody>
 
-        <div class="btn-group ">
+      @foreach($users as $user)
 
-            <a type="button" class="btn btn-primary"><i class="fa fa-sort-alpha-asc"></i></a>
+      <tr>
+          <td><a href="/user/{{$user->id}}/show">{{$user->first_name .' '. $user->last_name}}</a></td>
+          <td>{{$user->club->name}}</td>
+          <td>0</td>
+          <td>{{count($user->round)}}</td>
+      </tr>
 
-            <a type="button" class="btn btn-primary"><i class="fa fa-sort-alpha-desc"></i></a>
+      @endforeach
 
-            <a type="button" class="btn btn-primary"><i class="fa fa-random"></i></a>
-
-        </div>
-
-    </div>
-
-    </div>
-
-    <div class="col-md-12">
-
-     <ul class="list-inline list-unstyled" id="Container">
-        @foreach($users as $user)
-        <li class="col-sm-2 text-center thread mix mixup-content">
-           <img src="{{$user->image}}" class="img-responsive img-circle center-block" width="40px"/>
-           <p><a href="/user/{{$user->id}}/show">{{$user->first_name . ' ' . $user->last_name}}</a></p>
-           <small>Klubb: <a href="/club/{{$user->club_id}}/show">{{$user->club->name}}</a></small>
-        </li>
-        @endforeach
-    </ul>
-
-</div>
+      </tbody>
+  </table>
 
 <div class="row">
     <div class="col-sm-12 text-center">
@@ -47,17 +40,4 @@
 </div>
 
 
-@stop
-
-@section('scripts')
-    <script>
-
-    $(function(){
-
-    // Instantiate MixItUp:
-
-    $('#Container').mixItUp();
-
-    });
-    </script>
 @stop

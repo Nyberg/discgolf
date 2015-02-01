@@ -23,6 +23,7 @@
                     <li><a href="/rules-discgolf/">Regler Discgolf</a></li>
                     <li class="divider"></li>
                     <li><a href="/links/">Länkar</a></li>
+                    <li><a href="/lost-and-found">Lost & Found</a></li>
                   </ul>
                 </li>
 

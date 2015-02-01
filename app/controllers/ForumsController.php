@@ -282,8 +282,11 @@ class ForumsController extends \BaseController {
     }
 
 
-    public function deleteGroup($id)
+    public function deleteGroup()
     {
+
+        $id = Input::get('id');
+
         $group = ForumGroup::find($id);
         if($group == null)
         {

@@ -9,13 +9,13 @@
 	  <div id="login-page">
 	  	<div class="container">
 
-		     {{Form::open(['route' => 'session.store', 'class'=>'form-login'])}}
+		     {{Form::open(['route' => 'session.store', 'class'=>'form-login', 'id'=>'login'])}}
 
 		        <h2 class="form-login-heading">logga in</h2>
 
 		        <div class="login-wrap">
 
-                                        {{Form::email('email', null,['class'=>'input-fw input-flat form-control', 'placeholder'=>'Email', 'autofocus'])}}
+                                        {{Form::email('email', null,['class'=>'input-fw input-flat form-control', 'placeholder'=>'Email', 'autofocus', 'data-validation'=>'email'])}}
 		     <br>
                                         {{Form::password('password', ['class'=>'input-fw input-flat form-control', 'placeholder'=>'Lösenord', 'autofocus'])}}
 
@@ -78,5 +78,16 @@
 	  </div>
 
 @stop
+
+        @section('scripts')
+        <script>
+
+            $.validate({
+              form : '#login'
+            });
+
+        </script>
+        @stop
+
 
 

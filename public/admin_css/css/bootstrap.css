@@ -183,6 +183,11 @@ table {
   border-spacing: 0;
   border-collapse: collapse;
 }
+
+table thead{
+    background-color: #2A6496;
+}
+
 td,
 th {
   padding: 0;
@@ -2062,12 +2067,14 @@ table {
 }
 th {
   text-align: left;
+
 }
 .table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 20px;
 }
+
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfoot > tr > th,

@@ -61,6 +61,7 @@
                         </a>
                         <ul class="sub">
                             <li><a  href="/account/user/{{Auth::id()}}/bags">Hantera dina bags</a></li>
+                            <li><a  href="/account/user/{{Auth::id()}}/lost-and-found">Lost & Found</a></li>
 
                         </ul>
                     </li>

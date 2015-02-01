@@ -4,9 +4,9 @@ class RoundController extends \BaseController {
 
 	public function index()
 	{
-		$rounds = Round::with('course', 'user')->where('status', 1)->get();
+		$rounds = Round::with('course', 'user')->where('status', 1)->orderBy('created_at', 'desc')->paginate(15);
 
-        return View::make('round.index', ['rounds'=>$rounds]);
+        return View::make('round.index',compact('rounds'));
 	}
 
     public function user_round($id){
@@ -50,6 +50,7 @@ class RoundController extends \BaseController {
             $round->username = $name;
             $round->status = 0;
             $round->type = 'Singel';
+            $round->date = Input::get('date');
             $round->save();
 
             $course = Tee::with('hole')->whereId($round->tee_id)->firstOrFail();
@@ -65,6 +66,7 @@ class RoundController extends \BaseController {
             $round->status = 0;
             $round->type = 'Par';
             $round->par_id = Input::get('players');
+            $round->date = Input::get('date');
             $round->save();
 
             $course = Tee::with('hole')->whereId($round->tee_id)->firstOrFail();

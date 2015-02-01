@@ -24,6 +24,7 @@ class CreateRoundTable extends Migration {
             $table->integer('par_id');
             $table->longText('comment');
             $table->boolean('status');
+            $table->string('date');
             $table->timestamps();
 
         });

@@ -5,11 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateLostsTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
 	public function up()
 	{
         Schema::create('losts', function (Blueprint $table) {
@@ -24,11 +19,6 @@ class CreateLostsTable extends Migration {
         });
 	}
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
 	public function down()
 	{
 		Schema::drop('losts');

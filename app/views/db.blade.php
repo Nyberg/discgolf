@@ -13,7 +13,7 @@
 {{HTML::style('admin_css/lineicons/style.css')}}
 {{HTML::style('db_css/style.css')}}
 {{HTML::style('db_css/style-responsive.css')}}
-{{HTML::style('db_css/datepicker.css')}}
+{{HTML::style('admin_css/css/datepicker.css')}}
 {{HTML::style('admin_css/css/jquery-ui.css')}}
 {{HTML::style('admin_css/css/ekko-lightbox.css')}}
 {{HTML::style('admin_css/css/ekko-lightbox.min.css')}}
