@@ -234,6 +234,7 @@ Route::get('/club/news/{id}/show', 'NewsController@show');
 Route::get('/rounds', 'RoundController@index');
 Route::get('/round/{id}/course/{course_id}', 'RoundController@show');
 Route::get('/round/{id}/user/show', 'UserController@userRound');
+Route::get('/course/{id}/rounds/', 'RoundController@courseRound');
 
 // Hole
 Route::get('/holes', 'HoleController@index');

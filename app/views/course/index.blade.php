@@ -43,9 +43,9 @@
         <li class="col-sm-2 text-center thread mix category-{{$course->country->country}} category-{{$course->state->state}} category-{{$course->city->city}}" data-myorder="2">
 
         @foreach($course->photos as $photo)
-           <a href="/club/{{$course->id}}/show"><img src="{{$photo->url}}" class="img-responsive thumbnail center-block" width="100%;" min-height="60px;"/></a>
+           <a href="/course/{{$course->id}}/show"><img src="{{$photo->url}}" class="img-responsive thumbnail center-block" width="100%;" min-height="60px;"/></a>
         @endforeach
-           <p><a href="/club/{{$course->id}}/show">{{$course->name .', ' . $course->city->city}}</a></p>
+           <p><a href="/course/{{$course->id}}/show">{{$course->name .', ' . $course->city->city}}</a></p>
            <small>Klubb: <a href="/club/{{$course->club->id}}/show">{{$course->club->name}}</a></small>
         </li>
         @endforeach

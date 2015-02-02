@@ -185,4 +185,13 @@ class RoundController extends \BaseController {
         return View::make('round.app');
     }
 
+    public function courseRound($id){
+
+        $rounds = Round::where('course_id', $id)->orderBy('date', 'desc')->paginate(15);
+        $course = Course::find($id);
+
+        return View::make('course.rounds', compact('rounds'), ['course'=>$course]);
+
+    }
+
 }

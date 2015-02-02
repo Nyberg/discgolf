@@ -170,6 +170,9 @@
 @endforeach
 </tbody>
 </table>
+
+<a href="/course/{{$course->id}}/rounds" class="btn btn-primary btn-sm">Visa alla rundor</a>
+
 </div>
 
 
