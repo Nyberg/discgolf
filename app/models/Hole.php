@@ -36,4 +36,8 @@ class Hole extends Eloquent implements UserInterface, RemindableInterface  {
     public function lost(){
         return $this->hasMany('Lost');
     }
+
+    public function records(){
+        return $this->belongsTo('Record');
+    }
 }

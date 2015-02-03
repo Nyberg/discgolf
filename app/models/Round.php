@@ -34,4 +34,8 @@ class Round extends Eloquent implements UserInterface, RemindableInterface {
         return $this->morphMany('Comment', 'commentable');
     }
 
+    public function record(){
+        return $this->belongsTo('Record');
+    }
+
 }

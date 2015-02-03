@@ -20,5 +20,8 @@ class Tee extends \Eloquent {
         return $this->hasMany('Hole');
     }
 
+    public function records(){
+        return $this->hasMany('Record');
+    }
 
 }

@@ -32,6 +32,7 @@
                   <ul class="dropdown-menu" role="menu">
                    <li class="dropdown-header">Rundor</li>
                     <li><a href="/rounds">Alla rundor</a></li>
+                    <li><a href="/records">Alla rekordrundor</a></li>
                     <li class="divider"></li>
                      <li class="dropdown-header">Banor</li>
                     <li><a href="/courses">Alla Banor</a></li>

@@ -24,6 +24,14 @@ body {
     padding-right: 20px;
 }
 
+.table th a{
+    color: #fff;
+}
+
+.table th a:hover{
+    color: #FFD777;
+}
+
 .divider{
     border-bottom: 1px solid #ededed;
     margin-bottom: 20px;

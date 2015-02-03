@@ -2,22 +2,11 @@
 
 class TeeController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
 		//
 	}
 
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
 	public function create($id)
 	{
 		$course = Course::whereId($id)->firstOrFail();
@@ -26,12 +15,6 @@ class TeeController extends \BaseController {
 
 	}
 
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function store()
 	{
 		$tee = New tee;

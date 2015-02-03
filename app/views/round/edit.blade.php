@@ -11,15 +11,6 @@
        {{Form::model($round, ['method'=>'PATCH', 'route'=> ['round.update', $round->id]])}}
        {{Form::hidden('tee_id', $tee->id)}}
 
-            <div class="form-group">
-                <label class="col-sm-2 col-sm-2 control-label"> Status</label>
-                <div class="col-sm-10">
-                {{Form::select('status', ['0'=>'Dold', '1'=>'Aktiv'],$round->status, array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
-                 <span class="help-block">Välj om rundan ska visas för andra eller inte. Vid dold döljs den även i statistiken.</span>
-                </div>
-
-            </div>
-
           <div class="form-group">
               <label class="col-sm-2 col-sm-2 control-label">Kommentar</label><br/>
               <div class="col-sm-12">

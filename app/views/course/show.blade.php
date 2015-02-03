@@ -2,7 +2,9 @@
 
 @section('content')
 
-<h4 class="rub"><i class="fa fa-angle-right"></i> {{$course->name . ' - '}} <a href="/club/{{$club->id}}/show">{{$club->name}}</a></h4>
+<h4 class="tab-rub text-center page-header-custom">{{$course->name . ' - '}} <a href="/club/{{$club->id}}/show">{{$club->name}}</a></h4>
+     <div class="divider-header"></div>
+
 <div class="row">
 
 @foreach($course->photos as $photo)
@@ -47,7 +49,7 @@
     @foreach($course->tee as $tee)
 <li class=""><a data-toggle="tab" href="#section{{$tee->id}}"><i class="fa fa-star-o"></i> {{$tee->color}}</a></li>
     @endforeach
-
+<li class=""><a data-toggle="tab" href="#sectionX"><i class="fa fa-star-o"></i> Rekordrundor</a></li>
 </ul>
 <div class="tab-content">
 
@@ -59,31 +61,31 @@
 
           @foreach($course->tee as $tee)
 
-                <div class="col-sm-3 col-md-3">
-                    <div class="thumbnail text-center stat">
-                         <i class="fa fa-tree fa-4x"></i>
-                      <div class="caption text-center">
+            <div class="col-sm-3 col-md-3">
+                <div class="thumbnail text-center stat">
+                     <i class="fa fa-tree fa-4x"></i>
+                  <div class="caption text-center">
 
-                        <h4>{{$tee->color}}</h4>
+                    <h4>{{$tee->color}}</h4>
 
-                        <p>Par: {{$tee->par}} | Antal hål: {{$tee->holes}}</p>
+                    <p>Par: {{$tee->par}} | Antal hål: {{$tee->holes}}</p>
 
-                      </div>
+                  </div>
+                </div>
+              </div>
+          @endforeach
+            <div class="col-sm-6 col-md-6">
+                  <div class="thumbnail stat">
+
+                    <div class="caption text-center stat">
+                        <i class="fa fa-exclamation fa-4x"></i>
+                      <h4> Banöversikt</h4>
+
+
+                      <p>Längst hål: {{convert($data['longest'])}} | Kortaste hål: {{convert($data['shortest'])}} | Medellängd: {{convert($data['avg'])}} | <span data-toggle="tooltip" data-placement="bottom" title="Visar medellängd av alla tees">Totallängd: {{convert($data['total'])}}</span></p>
                     </div>
                   </div>
-          @endforeach
-                        <div class="col-sm-6 col-md-6">
-                              <div class="thumbnail stat">
-
-                                <div class="caption text-center stat">
-                                    <i class="fa fa-exclamation fa-4x"></i>
-                                  <h4> Banöversikt</h4>
-
-
-                                  <p>Längst hål: {{convert($data['longest'])}} | Kortaste hål: {{convert($data['shortest'])}} | Medellängd: {{convert($data['avg'])}} | <span data-toggle="tooltip" data-placement="bottom" title="Visar medellängd av alla tees">Totallängd: {{convert($data['total'])}}</span></p>
-                                </div>
-                              </div>
-                            </div>
+            </div>
 
           </div>
         </div>
@@ -93,15 +95,17 @@
 
     <div id="section{{$tee->id}}" class="tab-pane fade">
 
-<h4 class="tab-rub" id="hole-gallery-{{$tee->id}}"><i class="fa fa-tree"></i> {{$tee->color . ' tee - ' .$course->name}}</h4>
+<h4 class="tab-rub text-center page-header-custom" id="hole-gallery-{{$tee->id}}">{{$tee->color . ' tee - ' .$course->name}}</h4>
+     <div class="divider-header"></div>
+
     <table class="table table-hover">
         <thead>
             <tr>
-            <td>Hål</td>
+            <th>Hål</th>
             @foreach($tee->hole as $hole)
-            <td><a href="{{$hole->image}}" data-toggle="lightbox" data-gallery="hole-gallery-{{$tee->id}}" data-parent="" data-footer="<a href='/hole/{{$hole->id}}/show'>Klicka här för att visa mer information</a>" data-title="{{'Basket '.$hole->number. ', '.$course->name.' - '.$tee->color.'.<br/>Length ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></td>
+            <th><a href="{{$hole->image}}" data-toggle="lightbox" data-gallery="hole-gallery-{{$tee->id}}" data-parent="" data-footer="<a href='/hole/{{$hole->id}}/show'>Klicka här för att visa mer information</a>" data-title="{{'Basket '.$hole->number. ', '.$course->name.' - '.$tee->color.'.<br/>Length ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></th>
             @endforeach
-            <td>Total</td>
+            <th>Total</th>
             </tr>
         </thead>
     <tbody>
@@ -124,6 +128,58 @@
     </table>
     </div>
     @endforeach
+
+
+      <div id="sectionX" class="tab-pane fade">
+
+
+<h4 class="tab-rub text-center page-header-custom">Rekordrundor {{$course->name}}</h4>
+     <div class="divider-header"></div>
+       @foreach($records as $rec)
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <p class="tab-rub">{{$rec->round->type}} | Resultat: {{calcScore($rec->round->total, $rec->tee->par)}} |
+
+                    @if($rec->type == 'Singel')
+                        <a href="/user/{{$rec->user_id}}/show">{{$rec->user->first_name . ' ' . $rec->user->last_name}}</a>
+                    @else
+                        {{showPar($rec->par_id, $rec->user_id)}}
+                    @endif
+                    </p>
+
+
+                </tr>
+                <tr>
+                    <td>{{$rec->tee->color}} | Hål</td>
+                    @foreach($rec->tee->hole as $hole)
+                    <td class="text-center ">{{$hole->number}}</td>
+                    @endforeach
+                </tr>
+
+            </thead>
+        <tbody>
+
+                <tr>
+                    <th>Resultat/Par</th>
+                    @foreach($rec->round->score as $score)
+                    <td class="text-center {{checkScore($score->score, $score->par)}}">{{$score->score}} ({{$score->par}})</td>
+                    @endforeach
+                </tr>
+
+                <tr>
+                    <th>Längd</th>
+                    @foreach($rec->tee->hole as $hole)
+                    <td class="text-center">{{convert($hole->length)}}</td>
+                    @endforeach
+                </tr>
+      </tbody>
+      </table>
+
+       @endforeach
+
+      </div>
+
     </div>
 
 </div></div></div>

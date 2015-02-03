@@ -40,7 +40,9 @@ class ScoreController extends \BaseController {
         };
 
         $total = Score::where('round_id', $id)->sum('score');
+
         $round = Round::whereId($id)->firstOrFail();
+
         $round->total = $total;
         $round->save();
 

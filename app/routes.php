@@ -105,6 +105,8 @@ Route::group(['before'=>'auth'], function(){
     Route::get('/account/round/{id}/course/{course_id}/score/add', 'ScoreController@create');
     Route::get('/account/round/{id}/course/{course_id}/par/', 'RoundController@createPar');
     Route::get('/account/round/{id}/edit/{course_id}', 'RoundController@edit');
+    Route::get('/account/round/{id}/active', 'RoundController@setActive');
+    Route::get('/account/round/{id}/edit-score', 'RoundController@editScore');
 
     Route::post('/getTees', 'TeeController@getTeepads');
     Route::post('/getHoles', 'HoleController@getHoles');
@@ -235,6 +237,7 @@ Route::get('/rounds', 'RoundController@index');
 Route::get('/round/{id}/course/{course_id}', 'RoundController@show');
 Route::get('/round/{id}/user/show', 'UserController@userRound');
 Route::get('/course/{id}/rounds/', 'RoundController@courseRound');
+Route::get('/records', 'RoundController@records');
 
 // Hole
 Route::get('/holes', 'HoleController@index');

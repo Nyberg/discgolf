@@ -110,15 +110,14 @@ class CourseController extends \BaseController {
         $course = Course::with('tee')->whereId($id)->firstOrFail();
         $tees = Tee::where('course_id', $id)->get();
         $rounds = Round::where('course_id', $id)->get();
-        $total = Round::where('course_id', $id)->count();
         $club = Club::whereId($course->club_id)->firstOrFail();
         $reviews = Review::where('course_id', $id)->get();
 
         $holes = Hole::where('course_id', $id)->get();
-
+        $records = Record::where('course_id', $id)->where('status', 1)->get();
         $data = $this->stat->generateInfo($holes, $tees);
 
-        return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'tees'=>$tees, 'club'=>$club,'reviews'=>$reviews, 'data'=>$data]);
+        return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'tees'=>$tees, 'club'=>$club,'reviews'=>$reviews, 'data'=>$data, 'records'=>$records]);
 	
 }
 
