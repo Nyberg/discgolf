@@ -2,63 +2,46 @@
 
 @section('content')
 
-  <h4 class="rubrik"><i class="fa fa-angle-right"></i> {{$user->first_name .' ' .$user->last_name}} - <a href="/club/{{$user->club['id']}}/show">{{$user->club['name']}}</a></h4>
-     <div class="row">
-        <img class="img-responsive" src="{{$user->profile['image']}}" width="100%"/>
-     </div>
+<div class="row hidden-phone">
+<div class="col-lg-12">
+<img class="image" src="{{$user->profile->image}}" width="100%"/>
+<div class="over-img-img">
+
+</div>
+    <div class="over-img">
+    <img src="{{$user->image}}" class="img-circle center-block"/>
+     <h2 class="text-center page-header-custom  hidden-tablet">{{$user->first_name .' ' .$user->last_name}} - {{$user->club->name}}</h2>
+    </div>
+    </div>
+</div>
+
 
 
 <div class="row">
-    <br/>
+<br/>
     <div class="col-lg-12">
-
-
     <div class="bs-example">
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#sectionA"><i class="fa fa-microphone"></i> Information</a></li>
-            <li><a data-toggle="tab" href="#sectionB"><i class="fa fa-star-o"></i> Rundor ({{count($rounds)}})</a></li>
-            <li><a data-toggle="tab" href="#sectionC"><i class="fa fa-spinner"></i> Bag</a></li>
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a data-toggle="tab" href="#sectionA">Information</a></li>
+            <li><a data-toggle="tab" href="#sectionB">Rundor ({{count($rounds)}})</a></li>
+            <li><a data-toggle="tab" href="#sectionC">Bag</a></li>
             @if(count($sponsors) == 0)
             @else
-            <li><a data-toggle="tab" href="#sectionD"><i class="fa fa-money"></i> Sponsorer</a></li>
+            <li><a data-toggle="tab" href="#sectionD">Sponsorer</a></li>
             @endif
-            <li><a data-toggle="tab" href="#sectionE"><i class=" fa fa-bar-chart-o"></i> Statistik</a></li>
-            <li><a data-toggle="tab" href="#sectionF"><i class="fa fa-comments"></i> Kommentarer ({{count($user->comments)}})</a></li>
+            <li><a data-toggle="tab" href="#sectionE">Statistik</a></li>
+            <li><a data-toggle="tab" href="#sectionF">Kommentarer ({{count($user->comments)}})</a></li>
 
         </ul>
-
-
+</div>
 
     <div class="tab-content">
+
   <br/>
          <div id="sectionA" class="tab-pane fade in active">
-                <div class="col-lg-2">
 
-                    <img src="{{$user->image}}" class="img-thumbnail"/>
+                <div class="col-lg-12">
 
-                </div>
-
-                <div class="col-lg-7">
-                    <h4><i class="fa fa-microphone"></i> Om {{$user->first_name}}</h4>
-                    <p>{{$user->profile['info']}}</p>
-                </div>
-
-                <div class="col-lg-3">
-
-                    <h4><i class="fa fa-globe"></i> Kontakt</h4>
-                    <address>
-                       <strong>{{$user->first_name . ' ' . $user->last_name;}}</strong><br>
-                      {{$user->profile['location'] . ', ' . $user->profile->city->city}}<br>
-                       {{$user->profile->state->state . ', ' .$user->profile->country->country}}<br>
-
-                       <abbr title="Phone">Telefon:</abbr> {{$user->profile['phone']}}<br/>
-                        Email: <a href="mailto:{{$user->email}}">{{$user->email}}</a>
-                     </address>
-
-                     <address>
-                        <strong>Hemsida</strong><br>
-                        <a href="http://{{$user->profile['website']}}" target="_blank">{{$user->profile['website']}}</a>
-                      </address>
                 </div>
          </div>
 
@@ -108,15 +91,16 @@
 
     <div id="sectionB" class="tab-pane fade in">
 
-
-        <h4><i class="fa fa-angle-right"></i> De 5 senaste rundorna av {{$user->first_name .' '. $user->last_name}}</h4>
+         <div class="panel panel-default">
+           <!-- Default panel contents -->
+           <div class="panel-heading">  De 5 senaste rundorna av {{$user->first_name .' '. $user->last_name}}</div>
         <table class="table table-hover">
             <thead>
             <tr>
-            <th>Datum</th>
-            <th>Bana</th>
-            <th>Typ</th>
-            <th>Resultat</th>
+            <td>Datum</td>
+            <td>Bana</td>
+            <td>Typ</td>
+            <td>Resultat</td>
             </tr>
             </thead>
             <tbody>
@@ -138,8 +122,9 @@
             </tbody>
         </table>
 
-        <a href="/round/{{$user->id}}/user/show" class="btn btn-primary btn-sm">Se alla rundor av {{$user->first_name}}</a>
 
+    </div>
+         <a href="/round/{{$user->id}}/user/show" class="btn btn-primary btn-sm">Se alla rundor av {{$user->first_name}}</a>
   </div>
 
      <div id="sectionD" class="tab-pane fade in">
@@ -348,6 +333,9 @@
     <div id="sectionF" class="tab-pane fade in">
      <br/>
 
+      <div class="row">
+                     <div class="col-lg-12">
+
         <h4 class=""><i class="fa fa-comments-o"></i> Kommentarer
         @if(Auth::user())
         <button class="btn btn-primary pull-right mb" data-toggle="modal" data-target="#comment">
@@ -355,6 +343,9 @@
         </button>
         @endif
         </h4>
+
+        </div>
+        </div>
             <div class="row">
                 <div class="col-lg-12">
                     @foreach($user->comments as $comment)

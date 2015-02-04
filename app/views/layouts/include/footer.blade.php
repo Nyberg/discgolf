@@ -34,15 +34,4 @@
         </div>
     </div>
 
-    <div class="row-fluid">
 
-    <div class="col-md-10 col-md-offset-1">
-        <ul class="social">
-            <li><a href=""><img src="/social/facebook.png" width="25px"/></a></li>
-            <li><a href=""><img src="/social/twitter.png" width="25px"/></a></li>
-            <li><a href=""><img src="/social/youtube.gif" width="25px"/></a></li>
-            <li><a href=""><img src="/social/mail.png" width="25px"/></a></li>
-            <li class="pull-right copyright">© 2015 - All rights reserved | Penguin Project</li>
-
-        </ul>
-    </div>

@@ -11,8 +11,8 @@ Premium: http://www.gridgum.com
 
 /* BASIC THEME CONFIGURATION */
 body {
-    color: #797979;
-    background-color: #ebebeb;
+    color: #7D7D7D;
+    background-color: #FDFDFD;
     padding: 0px !important;
     margin: 0px !important;
     font-size:1.2em;
@@ -20,16 +20,37 @@ body {
     font-weight: 200;
 }
 
+.image {
+    position: relative;
+    width: 100%; /* for IE 6 */
+}
+
+.over-img {
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    width: 100%;
+}
+
+.over-img img{
+    width:80px;
+    border: 2px solid #fff;
+}
+
+.over-img h2{
+    color: white; text-shadow: #1abc9c 0.1em 0.1em 0.4em
+}
+
 .news-header{
     padding-right: 20px;
 }
 
 .table th a{
-    color: #fff;
+    color: #1abc9c;
 }
 
 .table th a:hover{
-    color: #FFD777;
+    color: #000;
 }
 
 .divider{
@@ -73,7 +94,7 @@ body {
 }
 
 .divider-header {
-    background: none repeat scroll 0% 0% #424A5D;
+    background: none repeat scroll 0% 0% #1abc9c;
 }
 
 .divider-header {
@@ -84,9 +105,9 @@ body {
 }
 
 .page-header-custom {
-    color: #424A5D;
-    font-size: 24px;
-    letter-spacing: 1px;
+    color: #1abc9c;
+    font-size: 1.5em;
+    letter-spacing: 3px;
     text-transform: uppercase;
     margin-bottom: 10px;
     font-weight: 400;
@@ -103,8 +124,8 @@ body {
 
 .back{
 
-    min-height: 100px;
-    background-color: #ffd777;
+    min-height: 60px;
+    background-color: #1abc9c;
 }
 
 .tab-rub{
@@ -147,10 +168,18 @@ i{
 .span-h2 {
     color: #ffffff;
     text-transform: uppercase;
-    font: 1.4em 'Ruda', Sans-Serif;
-    background-color: #ffd777;
+    font: 1.4em;
+    background-color: #1abc9c;
     padding: 10px;
 
+}
+
+.record-a {
+    color: #fff;
+}
+
+.record-a:hover{
+    color: #000;
 }
 
 ul li {
@@ -168,7 +197,7 @@ a, a:hover, a:focus {
 }
 ::-moz-selection {
     background: #ffd777;
-    color: #fff;
+    color: #000;
 }
 
 #container {
@@ -178,7 +207,7 @@ a, a:hover, a:focus {
 
 /* Bootstrap Modifications */
 .modal-header {
-	background: #ffd777;
+	background: #1ABC9C;
 }
 
 .modal-title {
@@ -2357,7 +2386,7 @@ label {
 
 /*footer*/
 .site-footer {
-    background: #424a5d;
+    background: #222;
     color: #fff;
     padding: 10px 0;
     min-height: 200px;
@@ -2372,7 +2401,7 @@ label {
 }
 
 .footer-section a:hover{
-    color: #ffd777;
+    color: #1abc9c;
 }
 
 .footer-heading{
@@ -2380,7 +2409,7 @@ label {
     font-size: 1em;
     letter-spacing: 1px;
     padding-bottom: 15px;
-    color: #ffd777;
+    color: #1abc9c;
 }
 
 .footer-child{

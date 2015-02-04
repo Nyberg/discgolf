@@ -66,10 +66,7 @@
                          <p class="thread-options"><a href="/forum/comment/{{$comment->id}}/edit">Redigera</a> | <a href="#" class="" data-toggle="modal" data-target="#comment-delete"><span id="{{$comment->id}}" class="fui-cross delete_comment">Ta bort</span></a></p>
                     </div>
 
-
-
                     <div class="col-sm-10">
-
                         <p>{{$comment->body}}</p>
                     </div>
 
@@ -89,16 +86,15 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-8">
+    <div class="col-sm-10">
     @if(Auth::check())
     @else
          <button class="btn btn-warning btn-sm">Du måste vara inloggad för att kunna kommentera</button>
     @endif
     @if(Auth::check() && $thread->status == 1)
-     <a href="#" data-toggle="modal" data-target="#comment_form" class="btn btn-primary btn-sm pull-right">Svara på tråd</a>
+     <a href="#" data-toggle="modal" data-target="#comment_form" class="btn btn-primary btn-sm">Svara på tråd</a>
     @else
      <button class="btn btn-danger btn-sm">Tråden är låst</button>
-
     @endif
     </div>
 </div>

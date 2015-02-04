@@ -62,14 +62,14 @@ function calcScore($score, $total){
 
 }
 
-function calcRecord($total, $par){
+function calcRecord($total, $par, $id, $course_id){
 
     if($total == 0){
         return '-';
     }
 
     $sum = $total - $par;
-    return $total . ' ('.$sum.')';
+    return '<a href="/round/'.$id.'/course/'.$course_id.'/" class="record-a">'.$total . ' ('.$sum.')'.'</a>';
 
 }
 

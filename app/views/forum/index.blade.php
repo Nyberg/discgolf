@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-12">
     <div class="table-responsive">
-        <table class="table panel panel-default">
+        <table class="table panel panel-default theme-color">
         @foreach($groups as $group)
             <tbody class="panel-heading">
             <tr>
@@ -37,7 +37,7 @@
         @if(Auth::check())
 
         @foreach($clubs as $club)
-                <tbody class="panel-heading">
+                <tbody class="panel-heading theme-color">
                 <tr>
                     <th><h5 class="panel-title">{{$club->title}}<small> {{$club->desc}}</small></h5></th>
                     <td><h6>Trådar</h6></td>

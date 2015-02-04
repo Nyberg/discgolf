@@ -105,12 +105,9 @@ class RoundController extends \BaseController {
 
         $round = Round::whereId($id)->firstOrFail();
 
-        $p_rating = Auth::user()->rating;
+      /*  $p_rating = Auth::user()->rating;
         $c_rating = $round->course->rating;
-
-        $base = $c_rating - $p_rating;
-
-        dd($c_rating);
+        $base = $c_rating - $p_rating; */
 
         $round->total = $total;
         $round->status = 0;

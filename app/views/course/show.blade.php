@@ -19,8 +19,9 @@
 
 </div>
 <div class="row">
+<br/>
 <div class="col-lg-6">
-<h4 class="tab-rub"><i class="fa fa-comments"></i> Information</h4>
+<h4 class="">Information</h4>
 
 
 <p>{{$course->information}}</p>
@@ -28,7 +29,7 @@
 </div>
 <div class="col-lg-6">
 <div class="col-lg-12">
-<h4 class="tab-rub"><i class="fa fa-map-marker"></i> Location</h4>
+<h4 class="">Location</h4>
 <div id="map-canvas"></div>
 </div>
 
@@ -44,7 +45,7 @@
 <div class="row">
 <div class="col-lg-12 main-chart">
 
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs nav-justified">
 <li class="active"><a data-toggle="tab" href="#sectionA"><i class="fa fa-star-o"></i> Översikt</a></li>
     @foreach($course->tee as $tee)
 <li class=""><a data-toggle="tab" href="#section{{$tee->id}}"><i class="fa fa-star-o"></i> {{$tee->color}}</a></li>
@@ -62,26 +63,20 @@
           @foreach($course->tee as $tee)
 
             <div class="col-sm-3 col-md-3">
-                <div class="thumbnail text-center stat">
+                <div class="thumbnail stat">
+                 <div class="caption text-center stat">
                      <i class="fa fa-tree fa-4x"></i>
-                  <div class="caption text-center">
-
                     <h4>{{$tee->color}}</h4>
-
-                    <p>Par: {{$tee->par}} | Antal hål: {{$tee->holes}}</p>
-
+                    <p>Par: {{$tee->par}} | Antal hål: {{$tee->holes}} | Rating: 942</p>
                   </div>
                 </div>
               </div>
           @endforeach
             <div class="col-sm-6 col-md-6">
                   <div class="thumbnail stat">
-
                     <div class="caption text-center stat">
                         <i class="fa fa-exclamation fa-4x"></i>
                       <h4> Banöversikt</h4>
-
-
                       <p>Längst hål: {{convert($data['longest'])}} | Kortaste hål: {{convert($data['shortest'])}} | Medellängd: {{convert($data['avg'])}} | <span data-toggle="tooltip" data-placement="bottom" title="Visar medellängd av alla tees">Totallängd: {{convert($data['total'])}}</span></p>
                     </div>
                   </div>
@@ -101,28 +96,28 @@
     <table class="table table-hover">
         <thead>
             <tr>
-            <th>Hål</th>
+            <td>Hål</td>
             @foreach($tee->hole as $hole)
-            <th><a href="{{$hole->image}}" data-toggle="lightbox" data-gallery="hole-gallery-{{$tee->id}}" data-parent="" data-footer="<a href='/hole/{{$hole->id}}/show'>Klicka här för att visa mer information</a>" data-title="{{'Basket '.$hole->number. ', '.$course->name.' - '.$tee->color.'.<br/>Length ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></th>
+            <td><a href="{{$hole->image}}" data-toggle="lightbox" data-gallery="hole-gallery-{{$tee->id}}" data-parent="" data-footer="<a href='/hole/{{$hole->id}}/show'>Klicka här för att visa mer information</a>" data-title="{{'Basket '.$hole->number. ', '.$course->name.' - '.$tee->color.'.<br/>Length ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></td>
             @endforeach
-            <th>Total</th>
+            <td>Total</td>
             </tr>
         </thead>
     <tbody>
         <tr>
-            <th>Par</th>
+            <td>Par</td>
             @foreach($tee->hole as $hole)
             <td>{{$hole->par}}</td>
             @endforeach
-            <td>Par: {{$course->par}}</td>
+            <td>Par: {{$tee->par}}</td>
         </tr>
 
         <tr>
-            <th>Längd</th>
+            <td>Längd</td>
             @foreach($tee->hole as $hole)
             <td>{{convert($hole->length)}}</td>
             @endforeach
-            <td>Längd:</td>
+            <td></td>
         </tr>
     </tbody>
     </table>
@@ -136,20 +131,17 @@
 <h4 class="tab-rub text-center page-header-custom">Rekordrundor {{$course->name}}</h4>
      <div class="divider-header"></div>
        @foreach($records as $rec)
+           <div class="panel panel-default">
+               <div class="panel-heading">{{$rec->round->type}} | Resultat: {{calcScore($rec->round->total, $rec->tee->par)}}
+
+                          @if($rec->type == 'Singel')
+                              av <a href="/user/{{$rec->user_id}}/show">{{$rec->user->first_name . ' ' . $rec->user->last_name}}</a>
+                          @else
+                              av {{showPar($rec->par_id, $rec->user_id)}}
+                          @endif</div>
+
           <table class="table table-hover">
               <thead>
-                <tr>
-                  <p class="tab-rub">{{$rec->round->type}} | Resultat: {{calcScore($rec->round->total, $rec->tee->par)}} |
-
-                    @if($rec->type == 'Singel')
-                        <a href="/user/{{$rec->user_id}}/show">{{$rec->user->first_name . ' ' . $rec->user->last_name}}</a>
-                    @else
-                        {{showPar($rec->par_id, $rec->user_id)}}
-                    @endif
-                    </p>
-
-
-                </tr>
                 <tr>
                     <td>{{$rec->tee->color}} | Hål</td>
                     @foreach($rec->tee->hole as $hole)
@@ -161,21 +153,21 @@
         <tbody>
 
                 <tr>
-                    <th>Resultat/Par</th>
+                    <td>Resultat/Par</td>
                     @foreach($rec->round->score as $score)
                     <td class="text-center {{checkScore($score->score, $score->par)}}">{{$score->score}} ({{$score->par}})</td>
                     @endforeach
                 </tr>
 
                 <tr>
-                    <th>Längd</th>
+                    <td>Längd</td>
                     @foreach($rec->tee->hole as $hole)
                     <td class="text-center">{{convert($hole->length)}}</td>
                     @endforeach
                 </tr>
       </tbody>
       </table>
-
+    </div>
        @endforeach
 
       </div>
@@ -188,7 +180,7 @@
 <div class="col-lg-12 main-chart">
 <div class="showback">
 
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs nav-justified">
 <li class="active"><a data-toggle="tab" href="#sectionD"><i class="fa fa-star-o"></i> Rundor ({{count($rounds)}})</a></li>
 <li class="active"><a data-toggle="tab" href="#sectionE"><i class="fa fa-bookmark-o"></i> Recensioner ({{count($reviews)}})</a></li>
 <li><a data-toggle="tab" href="#sectionF"><i class="fa fa-comments-o"></i> Kommentarer ({{count($course->comments)}})</a></li>
@@ -196,7 +188,10 @@
 <div class="tab-content">
 
 <div id="sectionD" class="tab-pane fade in active">
-<h4 class="tab-rub"><i class="fa fa-angle-right"></i> De 10 senaste rundorna spelade vid {{$course->name}}</h4>
+    <br/>
+    <div class="panel panel-default">
+                    <div class="panel-heading">De 10 senaste rundorna spelade vid {{$course->name}}</div>
+
 <table class="table table-hover">
 <thead>
 <tr>
@@ -226,7 +221,7 @@
 @endforeach
 </tbody>
 </table>
-
+    </div>
 <a href="/course/{{$course->id}}/rounds" class="btn btn-primary btn-sm">Visa alla rundor</a>
 
 </div>
@@ -236,9 +231,18 @@
 
 <div class="row">
 
-    @foreach($reviews as $rev)
-
     <br/>
+        <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Recensioner ({{count($reviews)}})</div>
+        </div>
+
+    @if(count($reviews) == 0)
+    <div class="col-lg-12">
+    <p>Inga skrivna recensioner.</p>
+    </div>
+    @else
+    @foreach($reviews as $rev)
 
     <div class="col-lg-12">
 
@@ -258,6 +262,8 @@
     </div>
     </div>
     @endforeach
+    @endif
+    </div>
 
 </div>
 
@@ -266,14 +272,14 @@
 
 
 <div id="sectionF" class="tab-pane fade">
-     <h4 class="tab-rub"><i class="fa fa-angle-right"></i> Join the discussion!
-        @if(Auth::user())
-        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#comment">
-        Kommentera
-        </button>
-        @endif
-     </h4>
-
+            <br/>
+              <div class="panel panel-default">
+                <div class="panel-heading">Kommentarer ({{count($course->comments)}})
+                     @if(Auth::user())
+                        <a class="pull-right btn btn-primary btn-xs" data-toggle="modal" data-target="#comment">Kommentera</a>
+                     @endif
+                </div>
+             </div>
      <div class="row">
        <div class="col-lg-12">
 

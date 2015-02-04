@@ -2,18 +2,20 @@
 
 
     @section('content')
-
-    <h4 class="rub"><i class="fa fa-angle-right"></i> <a href="/course/{{$course->id}}/show">{{$course->name . ' - ' . $tee->color}}</a>, {{$round->created_at->format('Y-m-d')}} av
-                        @if($round->type == 'Par')
-                       <td>{{showPar($round->par_id, $round->user_id)}}</td>
-                        @else
-                        <a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a>
-                        @endif
+              <h2 class="text-center page-header-custom"><a href="/course/{{$course->id}}/show">{{$course->name . ' - ' . $tee->color}}</a>, {{$round->date}} av
+                           @if($round->type == 'Par')
+                                     <td>{{showPar($round->par_id, $round->user_id)}}</td>
+                                      @else
+                                      <a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a>
+                                      @endif
+              </h2>
+              <div class="divider-header"></div>
      </h4>
     <div class="row">
     @foreach($course->photos as $photo)
          <img class="" src="{{$photo->url}}" width="100%"/>
     @endforeach
+    <div class="hidden-phone">
                <span class="text-center span-h2 col-lg-3">{{$course->city->city . ', ' . $course->state->state}}</span>
                <span class="text-center span-h2 col-lg-2">{{'Hål: '. $tee->holes}}</span>
                <span class="text-center span-h2 col-lg-2">{{'Par: ' . $tee->par}}</span>
@@ -21,17 +23,21 @@
                Bästa resultat:
                @foreach($records as $record)
 
-               {{calcRecord($record->total, $tee->par)}}
+               {{calcRecord($record->total, $tee->par, $record->id, $record->course_id)}}
                @endforeach
                </span>
                <span class="text-center span-h2 col-lg-2">{{checkFee($course->fee)}}</span>
+               </div>
            </div>
 
-    <h4 class="tab-rub" id="hole-gallery"><i class="fa fa-angle-right"></i> Resultat:</h4>
+        <br/>
+         <div class="panel panel-default">
+           <!-- Default panel contents -->
+           <div class="panel-heading">  Resultat:</div>
     <table class="table table-hover text-center">
     <thead>
         <tr>
-            <th>Hål</td>
+            <td>Hål</td>
             @foreach($tee->hole as $hole)
                  <td><a href="{{$hole->image}}" data-toggle="lightbox" data-gallery="hole-gallery" data-parent="" data-footer="" data-title="{{'Basket '.$hole->number. ', '.$course->name.' - ' . $tee->color . '.<br/>Length ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></td>
             @endforeach
@@ -39,13 +45,13 @@
     </thead>
     <tbody>
         <tr>
-            <th>Resultat/Par</th>
+            <td>Resultat/Par</td>
             @foreach($round->score as $score)
             <td class="{{checkScore($score->score, $score->par)}}">{{$score->score}} ({{$score->par}})</td>
             @endforeach
         </tr>
         <tr>
-            <th>Längd</th>
+            <td>Längd</td>
             @foreach($tee->hole as $hole)
             <td>{{convert($hole->length)}}</td>
             @endforeach
@@ -53,17 +59,19 @@
     </tbody>
     </table>
     </div>
+    </div>
 
     <div class="row">
     <div class="col-lg-12">
     <div class="showback">
-     <h4 class="mb"><i class="fa fa-comments-o"></i> Kommentarer
-        @if(Auth::user())
-        <button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#comment">
-         Kommentera
-        </button>
-        @endif
-     </h4>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">Kommentarer ({{count($round->comments)}})
+                     @if(Auth::user())
+                        <a class="pull-right btn btn-primary btn-xs" data-toggle="modal" data-target="#comment">Kommentera</a>
+                     @endif
+                </div>
+             </div>
 <div class="row">
   <div class="col-lg-12">
         @foreach($round->comments as $comment)

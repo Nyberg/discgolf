@@ -2,13 +2,17 @@
 
 @section('content')
 
-  <h4><i class="fa fa-angle-right"></i> {{$club->name}}
-  @if(Auth::check() && Auth::user()->club_id == 0)
-  <a href="#" data-toggle="modal" data-target="#club_request_form" class="btn btn-primary btn-sm pull-right">Ansök om medlemskap</a>
-  @endif
-  </h4>
         <div class="row">
-     <img class="" src="{{$club->image}}" width="100%"/>
+        <div class="col-lg-12">
+          <img src="{{$club->image}}" width="100%"/>
+        <div class="over-img-img">
+
+        </div>
+            <div class="over-img">
+
+             <h2 class="text-center page-header-custom  hidden-tablet">{{$club->name}}</h2>
+            </div>
+            </div>
       </div>
 
 <div class="row">
@@ -17,17 +21,12 @@
 
 
     <div class="bs-example">
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#sectionA"><i class="fa fa-info"></i> {{$club->name}}</a></li>
-            <li><a data-toggle="tab" href="#sectionB"><i class="fa fa-microphone"></i> Om {{$club->name}}</a></li>
-            <li><a data-toggle="tab" href="#sectionC"><i class="fa fa-user"></i> Medlemmar ({{count($club->users)}})</a></li>
-            <!-- <li><a data-toggle="tab" href="#sectionE"><i class="fa fa-money"></i> Sponsorer</a></li> -->
-            <li><a data-toggle="tab" href="#sectionG"><i class="fa fa-comments"></i> Kommentarer ({{count($club->comments)}})</a></li>
-            @if(Auth::check())
-            @if(Auth::user() && Auth::user()->hasRole('ClubOwner') && Auth::user()->club_id == $club->id || Auth::user()->hasRole('Admin'))
-            <li class="pull-right"><a href="/admin/add/news"><i class="fa fa-plus"></i> Lägg till nyhet</a></li>
-            @endif
-            @endif
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a data-toggle="tab" href="#sectionA">{{$club->name}}</a></li>
+            <li><a data-toggle="tab" href="#sectionB">Nyheter ({{count($club->news)}})</a></li>
+            <li><a data-toggle="tab" href="#sectionC">Medlemmar ({{count($club->users)}})</a></li>
+            <li><a data-toggle="tab" href="#sectionE">Banor</a></li>
+            <li><a data-toggle="tab" href="#sectionG">Kommentarer ({{count($club->comments)}})</a></li>
         </ul>
     </div>
 
@@ -37,71 +36,38 @@
      <div class="col-lg-12"><br/></div>
         <br/>
              <div id="sectionA" class="tab-pane fade in active">
-                <div class="col-lg-7">
-                    <div class="col-lg-12">
-                        <h4><i class="fa fa-info"></i> Nyheter</h4>
-
-                        @foreach($news as $new)
-                        <div class="row divider">
-                            <div class="col-lg-12">
-
-                                <h4><small class="btn btn-sm btn-theme">{{$new->created_at->format('d/n')}}</small> {{$new->head}}</h4>
-
-                                <p>{{str_limit($new->body, $limit = 200, $end = '...')}}</p>
-                            <div class="news-btn">
-                                <small>Kommentarer ({{count($new->comments)}}) | </small>
-                                <a href="/club/news/{{$new->id}}/show" class=""><small>Läs mer..</small></a>
-                            </div>
-
-                            </div>
-
-
-                        </div>
-                        @endforeach
-                    </div>
-
-                </div>
-         <div class="col-lg-5">
-            <h4><i class="fa fa-tree"></i> Banor</h4>
-
-                @foreach($club->course as $course)
-
-                @foreach($course->photos as $photo)
-                <h5>  {{$course->name}}</h5>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <a href="/course/{{$course->id}}/show"> <img class="img-thumbnail" src="{{$photo->url}}" width="100%"/></a>
-                    </div>
-                </div>
-                @endforeach
-
-                @endforeach
-
-        </div>
 
             </div>
 
             <div id="sectionB" class="tab-pane fade">
-                <div class="col-lg-12">
-                 <div class="col-lg-10">
-                        <h4><i class="fa fa-microphone"></i> Om {{$club->name}}</h4>
-                        <p>{{$club->information}}</p>
-                    </div>
-                </div>
+               <div class="col-lg-12">
+                   @foreach($news as $new)
+                   <div class="row divider">
+                       <div class="col-lg-12">
+                           <h4><small class="btn btn-sm btn-theme">{{$new->created_at->format('d/n')}}</small> {{$new->head}}</h4>
+                           <p>{{str_limit($new->body, $limit = 200, $end = '...')}}</p>
+                       <div class="news-btn">
+                           <small>Kommentarer ({{count($new->comments)}}) | </small>
+                           <a href="/club/news/{{$new->id}}/show" class=""><small>Läs mer..</small></a>
+                       </div>
+                       </div>
+                   </div>
+                   @endforeach
+               </div>
             </div>
 
             <div id="sectionC" class="tab-pane fade in">
                 <div class="col-lg-12 wrapper-parent mb">
 
+    <div class="panel panel-default">
 
-
-                    @if(count($users) < 18)
-                    <h4 class="tab-rub">Visar {{count($users)}} av {{count($users)}} medlemmar i {{$club->name}}</h4>
+                    @if(count($users) <= 18)
+                     <div class="panel-heading">Visar {{count($users)}} av {{count($club->users)}} medlemmar i {{$club->name}}</div>
                     @else
-                    <h4 class="tab-rub">Visar 18 av {{count($club->users)}} medlemmar - {{$club->name}}</h4>
+                     <div class="panel-heading">Visar 18 av {{count($club->users)}} medlemmar i {{$club->name}}</div>
                     @endif
                      <ul class="list-inline list-unstyled" id="Container">
+                     <br/>
                          @foreach($users as $user)
                         <li class="col-sm-2 text-center thread mix mixup-content">
                            <img src="{{$user->image}}" class="img-responsive img-circle center-block" width="40px"/>
@@ -122,21 +88,43 @@
                 </div>
                 @else
                 @endif
-
+             </div>
             </div>
+
+       <div id="sectionE" class="tab-pane fade">
+            <div class="col-lg-12 ">
+                 <div class="panel panel-default">
+                   <!-- Default panel contents -->
+                   <div class="panel-heading">Banor</div>
+            </div>
+                @foreach($club->course as $course)
+                <div class="row">
+                @foreach($course->photos as $photo)
+                    <div class="col-lg-6">
+
+                        <a href="/course/{{$course->id}}/show"> <img class="" src="{{$photo->url}}" width="100%"/></a>
+                    </div>
+                    <div class="col-lg-6">
+                       <h2 class="text-center page-header-custom">{{$course->name}}</h2>
+                    </div>
+                </div>
+                @endforeach
+                </div>
+                @endforeach
+             </div>
+
 
     <div id="sectionG" class="tab-pane fade">
     <div class="col-lg-12">
     <br/>
 
-         <h4 class=""> Kommentarer ({{count($club->comments)}})
-            @if(Auth::user())
-            <button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#comment">
-               Kommentera
-            </button>
-            @else
-            @endif
-         </h4>
+              <div class="panel panel-default">
+                <div class="panel-heading">Kommentarer ({{count($club->comments)}})
+                     @if(Auth::user())
+                        <a class="pull-right btn btn-primary btn-xs" data-toggle="modal" data-target="#comment">Kommentera</a>
+                     @endif
+                </div>
+             </div>
 
          <div class="row">
            <div class="col-lg-12">

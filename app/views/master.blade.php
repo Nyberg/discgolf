@@ -69,10 +69,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
   <body data-spy="scroll">
 
     <section id="container">
-    <div class="row-fluid back">
+   <div class="row-fluid back">
     <div class="col-lg-10 col-md-offset-1">
      <a class="navbar-brand" href="/">
-        <img src="/img/logo.png" class="col-md-offset-1"/>
+<!-- <img src="/img/logo.png" class="col-md-offset-1"/> -->
     </a>
     </div>
     </div>
