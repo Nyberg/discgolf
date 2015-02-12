@@ -12,6 +12,7 @@
             <div class="col-md-3 footer-section">
                 <ul>
                     <li class="footer-heading">Produkter</li>
+                    <li class="footer-child"><a href="#">Statistik</a></li>
                     <li class="footer-child"><a href="#">Penguin App</a></li>
                     <li class="footer-child"><a href="#">Penguin Api</a></li>
                 </ul>

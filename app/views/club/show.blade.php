@@ -9,7 +9,6 @@
 
         </div>
             <div class="over-img">
-
              <h2 class="text-center page-header-custom  hidden-tablet">{{$club->name}}</h2>
             </div>
             </div>
@@ -19,52 +18,64 @@
     <br/>
     <div class="col-lg-12">
 
-
     <div class="bs-example">
         <ul class="nav nav-tabs nav-justified">
             <li class="active"><a data-toggle="tab" href="#sectionA">{{$club->name}}</a></li>
             <li><a data-toggle="tab" href="#sectionB">Nyheter ({{count($club->news)}})</a></li>
             <li><a data-toggle="tab" href="#sectionC">Medlemmar ({{count($club->users)}})</a></li>
-            <li><a data-toggle="tab" href="#sectionE">Banor</a></li>
-            <li><a data-toggle="tab" href="#sectionG">Kommentarer ({{count($club->comments)}})</a></li>
+            <li><a data-toggle="tab" href="#sectionD">Banor</a></li>
+            <li><a data-toggle="tab" href="#sectionE">Kommentarer ({{count($club->comments)}})</a></li>
         </ul>
     </div>
 
     </div>
 
  <div class="tab-content">
-     <div class="col-lg-12"><br/></div>
-        <br/>
-             <div id="sectionA" class="tab-pane fade in active">
 
+             <div id="sectionA" class="tab-pane fade in active">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                    <br/>
+                    <p>{{$club->information}}</p>
+                </div>
+                </div>
             </div>
 
             <div id="sectionB" class="tab-pane fade">
                <div class="col-lg-12">
-                   @foreach($news as $new)
-                   <div class="row divider">
-                       <div class="col-lg-12">
-                           <h4><small class="btn btn-sm btn-theme">{{$new->created_at->format('d/n')}}</small> {{$new->head}}</h4>
-                           <p>{{str_limit($new->body, $limit = 200, $end = '...')}}</p>
+                   @foreach($club->news as $new)
+                   <div class="row">
+                       <div class="col-lg-12 text-center">
+                                           <h2 class="text-center page-header-custom">{{$new->head}}</h2>
+                                           <p class="text-center">{{$new->created_at . ' av '}}  <a href="/club/{{$new->club_id}}/show">{{$new->club->name}}</a> | {{$new->views}} visningar</p>
+
+                                           <div class="divider-header"></div>
+                           <p class="">{{str_limit($new->body, $limit = 200, $end = '...')}}</p>
                        <div class="news-btn">
-                           <small>Kommentarer ({{count($new->comments)}}) | </small>
-                           <a href="/club/news/{{$new->id}}/show" class=""><small>Läs mer..</small></a>
+                           Kommentarer ({{count($new->comments)}}) |
+                           <a href="/club/news/{{$new->id}}/show" class="">Läs mer..</a>
                        </div>
                        </div>
+                   </div>
                    </div>
                    @endforeach
                </div>
             </div>
 
-            <div id="sectionC" class="tab-pane fade in">
+            <div id="sectionC" class="tab-pane fade">
                 <div class="col-lg-12 wrapper-parent mb">
-
-    <div class="panel panel-default">
+                    <br/>
+                    <div class="panel panel-default">
 
                     @if(count($users) <= 18)
-                     <div class="panel-heading">Visar {{count($users)}} av {{count($club->users)}} medlemmar i {{$club->name}}</div>
+                     <div class="panel-heading">Visar {{count($users)}} av {{count($club->users)}} medlemmar i {{$club->name}}
+                     @if(Auth::check() && Auth::user()->club_id == 0 || Auth::check() && Auth::user()->club_id == 1000000)
+                    <a class="pull-right btn btn-primary btn-xs" data-toggle="modal" data-target="#club_request_form">Ansök om medlemskap</a>
+                     @else
+                     @endif
+                     </div>
                     @else
-                     <div class="panel-heading">Visar 18 av {{count($club->users)}} medlemmar i {{$club->name}}</div>
+                     <div class="panel-heading">Visar 18 av {{count($club->users)}} medlemmar i {{$club->name}} </div>
                     @endif
                      <ul class="list-inline list-unstyled" id="Container">
                      <br/>
@@ -77,7 +88,7 @@
                         @endforeach
                     </ul>
 
-                </div>
+
 
                 @if(count($club->users) > 18)
 
@@ -88,11 +99,13 @@
                 </div>
                 @else
                 @endif
+                 </div>
              </div>
             </div>
 
-       <div id="sectionE" class="tab-pane fade">
+       <div id="sectionD" class="tab-pane fade">
             <div class="col-lg-12 ">
+            <br/>
                  <div class="panel panel-default">
                    <!-- Default panel contents -->
                    <div class="panel-heading">Banor</div>
@@ -114,7 +127,7 @@
              </div>
 
 
-    <div id="sectionG" class="tab-pane fade">
+    <div id="sectionE" class="tab-pane fade">
     <div class="col-lg-12">
     <br/>
 
@@ -144,7 +157,7 @@
               </div>
 
               <div class="modal-body">
-              {{Form::open(['route'=>'comment.store', 'class'=>'form-horizontal style-form'])}}
+              {{Form::open(['route'=>'comment.store', 'class'=>'form-horizontal style-form', 'id'=>'comment_form'])}}
                 {{Form::hidden('type_id', $club->id)}}
                 {{Form::hidden('model', 'club')}}
 
@@ -152,7 +165,7 @@
                      <label class="col-sm-2 col-sm-2 control-label">Kommentar</label>
                      <div class="col-sm-10">
 
-                         {{Form::text('body', '', ['class'=>'form-control'])}}
+                         {{Form::text('body', '', ['class'=>'form-control', 'data-validation'=>'required', 'data-validation-error-msg'=>'Detta fältet måste fyllas i..'])}}
                      </div>
                  </div>
 

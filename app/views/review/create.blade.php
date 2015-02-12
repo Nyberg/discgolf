@@ -5,7 +5,7 @@
 <div class="showback">
 
   <h4 class="mb"><i class="fa fa-angle-right"></i> Skapa recension</h4>
-   {{Form::open(['method'=>'POST', 'route'=>['review.store'], 'class'=>'form-horizontal style-form'])}}
+   {{Form::open(['method'=>'POST', 'route'=>['review.store'], 'class'=>'form-horizontal style-form', 'id'=>'review'])}}
 
          <div class="form-group">
              <label class="col-sm-2 col-sm-2 control-label">Välj bana att recensera</label>
@@ -20,7 +20,7 @@
                    <label class="col-sm-2 col-sm-2 control-label">Rubrik</label>
                    <div class="col-sm-10">
 
-                      {{Form::text('head', '', ['class'=>'form-control'])}}
+                      {{Form::text('head', '', ['class'=>'form-control', 'data-validation'=>'required', 'data-validation-error-msg'=>'Detta fältet måste fyllas i..'])}}
 
                    </div>
                </div>
@@ -44,7 +44,19 @@
         </div>
 
 
-        {{Form::submit('Next', ['class'=>'btn btn-primary'])}}
+        {{Form::submit('Spara', ['class'=>'btn btn-primary'])}}
      {{Form::close()}}
+
+@stop
+
+@section('scripts')
+
+    <script>
+
+    $.validate({
+      form : '#review'
+    });
+
+    </script>
 
 @stop

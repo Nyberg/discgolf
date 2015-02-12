@@ -207,7 +207,6 @@ Route::get('/searchplayer', ['as' => 'searchplayer', 'uses' => 'SearchController
 Route::get('/search/{result}','SearchController@search');
 
 #   App     #
-
 Route::get('/app', 'RoundController@app');
 
 #   Sidor   #
@@ -242,6 +241,8 @@ Route::get('/records', 'RoundController@records');
 // Hole
 Route::get('/holes', 'HoleController@index');
 Route::get('/hole/{id}/show', 'HoleController@show');
+Route::post('/stats/hole/', ['as' => 'hole.stats', 'uses' => 'HoleController@getStats']);
+Route::get('/getHoleStats', 'HoleController@getHoleStats');
 
 // Shot
 Route::get('/hole/{id}/score/{score_id}', 'ShotController@show');
@@ -284,20 +285,3 @@ Route::resource('forum', 'ForumsController');
 Route::resource('request', 'RequestController');
 Route::resource('country', 'CountryController');
 Route::resource('lost', 'LostController');
-
-
-Route::get('/create-role', function(){
-
-    $user = new Role;
-    $user->name = 'User';
-    $user->save();
-
-    $admin = new Role;
-    $admin->name = 'Admin';
-    $admin->save();
-
-    Auth::user()->roles()->attach(7);
-
-    return 'Roller satta!';
-
-});

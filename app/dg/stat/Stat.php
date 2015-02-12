@@ -91,6 +91,67 @@ class Stat {
        return $avg = $total / $num;
     }
 
+    public function generateAvg($tees){
+
+        $total = 0;
+        $rounds = 0;
+        $sum = count($tees);
+        $dirArray = [];
+
+        $j = 1;
+        foreach($tees as $tee){
+            $dirArray[$j][$tee->id] = 0;
+
+            $sum = count($tee->round);
+
+            $k = 1;
+            foreach($tee->hole as $hole){
+                $avg = 0;
+                $total = 0;
+
+                if(count($hole->score) == null){
+                    $sum = 1;
+                    $total = $hole->par;
+                }else{
+
+                foreach($hole->score as $score){
+                        $total = $total + $score->score;
+                        $rounds++;
+                    }
+                }
+
+                $avg = $total / $sum;
+                $dirArray[$j][$k] = round($avg,1);
+                $k++;
+            }
+
+            $j++;
+        }
+
+        return $dirArray;
+    }
+
+    public function getAvgScore($scores){
+
+        $total = 0;
+        $rounds = 0;
+        $num = count($scores);
+
+        $data = ['avg'=>0, 'shots'=>0];
+
+        foreach($scores as $score){
+            $total = $total + $score->score;
+            $rounds++;
+        }
+
+        $avg = $total / $num;
+        $data['avg'] = round($avg, 1);
+        $data['shots'] = $total;
+        $data['rounds'] = $rounds;
+
+        return $data;
+    }
+
     function getScore($score, $total){
 
         $sum = $score - $total;

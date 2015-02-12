@@ -23,12 +23,6 @@ class MembershipController extends \BaseController {
 		//
 	}
 
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
     public function store($id)
     {
         $club = Club::find($id);
@@ -45,18 +39,16 @@ class MembershipController extends \BaseController {
 
     }
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function accept($user_id, $club_id)
 	{
 		$user = User::find($user_id);
 
+        $role = Role::where('name','Member')->firstOrFail();
+
         $user->club_id = $club_id;
         $user->save();
+
+        $user->roles()->attach($role);
 
         $mem = Membership::where('user_id', $user->id)->firstOrFail();
 

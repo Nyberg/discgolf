@@ -16,41 +16,67 @@
 
           <ul class="nav navbar-nav">
                 <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="/">Startsida</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Discgolf <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="/about/">Om Discgolf</a></li>
-                    <li><a href="/rules-discgolf/">Regler Discgolf</a></li>
-                    <li class="divider"></li>
-                    <li><a href="/links/">Länkar</a></li>
-                    <li><a href="/lost-and-found">Lost & Found</a></li>
-                  </ul>
-                </li>
+                <li class="{{ Request::is('/dashboard') ? 'active' : '' }}"><a href="/dashboard">Dashboard</a></li>
 
-                <li class="{{ Request::is('round/*','rounds', 'courses', 'course/*') ? 'active' : '' }}">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Rundor & Banor <span class="caret"></span></a>
+                <li class="{{ Request::is('round/*','rounds') ? 'active' : '' }}">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Rundor<span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                   <li class="dropdown-header">Rundor</li>
-                    <li><a href="/rounds">Alla rundor</a></li>
-                    <li><a href="/records">Alla rekordrundor</a></li>
-                    <li class="divider"></li>
-                     <li class="dropdown-header">Banor</li>
-                    <li><a href="/courses">Alla Banor</a></li>
+                          <li><a  href="/account/round/add">Lägg till runda</a></li>
+                          <li><a  href="/account/rounds/{{Auth::id()}}/user">Hantera dina rundor</a></li>
                   </ul>
                 </li>
 
                 <li class="{{ Request::is('users', 'user/*', 'clubs', 'club/*') ? 'active' : '' }}">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Användare & Klubbar <span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Klubb <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                   <li class="dropdown-header">Spelare</li>
-                    <li><a href="/users">Alla Användare</a></li>
-                    <li class="divider"></li>
-                     <li class="dropdown-header">Klubbar</li>
-                    <li><a href="/clubs">Alla Klubbar</a></li>
+                          <li><a  href="/club/{{Auth::user()->club_id}}/show">Besök din klubb</a></li>
+                          @if(Auth::user()->hasRole('ClubOwner'))
+                           <li class="divider"></li>
+                                                     <li class="dropdown-header">Klubbägare</li>
+                          <li><a  href="/admin/club/{{Auth::user()->club_id}}/edit">Redigera din klubb</a></li>
+                          <li><a  href="/admin/club/{{Auth::user()->club_id}}/users">Hantera medlemmar</a></li>
+                          <li><a  href="/admin/club/{{Auth::user()->club_id}}/courses">Hantera din klubbs banor</a></li>
+                          <li><a  href="/admin/course/add">Lägg till bana</a></li>
+                          @else
+                          @endif
                   </ul>
                 </li>
 
-                 <li class="{{ Request::is('forum','forum/*') ? 'active' : '' }}"><a href="/forum">Forum</a></li>
+                <li class="{{ Request::is('users', 'user/*', 'clubs', 'club/*') ? 'active' : '' }}">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bag <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                     <li><a  href="/account/user/{{Auth::id()}}/bags">Hantera dina bags</a></li>
+                     <li><a  href="/account/user/{{Auth::id()}}/lost-and-found">Lost & Found</a></li>
+                  </ul>
+                </li>
+
+                <li class="{{ Request::is('users', 'user/*', 'clubs', 'club/*') ? 'active' : '' }}">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Recensioner <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                          <li><a  href="/account/review/add">Skriv en recension</a></li>
+                          <li><a  href="/account/review/user">Hantera dina recensioner</a></li>
+                  </ul>
+                </li>
+
+                <li class="{{ Request::is('users', 'user/*', 'clubs', 'club/*') ? 'active' : '' }}">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Kommentarer <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                        <li><a  href="/account/comment/user/">Hantera dina kommentarer</a></li>
+                  </ul>
+                </li>
+
+                @if(Auth::user()->hasRole('Premium'))
+
+                <li class="{{ Request::is('users', 'user/*', 'clubs', 'club/*') ? 'active' : '' }}">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sponsorer <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                          <li><a  href="/account/sponsor/add">Lägg till en sponsor</a></li>
+                          <li><a  href="/account/sponsor/user">Hantera dina sponsorer</a></li>
+                  </ul>
+                </li>
+                @else
+                @endif
+
           </ul>
 
         <ul class="nav navbar-nav navbar-right pull-right col-lg-offset-right-1">
@@ -64,6 +90,7 @@
                           <li class="divider"></li>
                            <li class="dropdown-header">Inställningar</li>
                           <li><a  href="/account/edit/{{Auth::user()->id}}/user">Redigera Profil/Inställningar</a></li>
+                          <li><a  href="/account/user/password/">Byt lösenord</a></li>
 
                           <li class="divider"></li>
                           <li class="dropdown-header">Discgolf</li>
@@ -97,7 +124,7 @@
                        @if(Auth::user())
 
                       <li>
-                          <a href="/user/{{Auth::user()->id}}/show" style="padding-top: 10px; margin-top: 10px; margin-bottom: -5px">
+                           <a href="/user/{{Auth::user()->id}}/show" style="padding-top: 10px; margin-top: 10px; margin-bottom: -5px">
                           <img alt="Brand" src="{{Auth::user()->image}}" width="30px" height="30px" class="img-circle"/>
                           </a>
                       </li>

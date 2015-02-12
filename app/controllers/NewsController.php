@@ -18,7 +18,12 @@ class NewsController extends Controller {
 
 	public function create()
 	{
-		return View::make('news.create');
+        if(Auth::user()->hasRole('ClubOwner')){
+            return View::make('news.create');
+        }else{
+            return Redirect::back()->with('danger', 'Du har inte rättigheter för detta..');
+        }
+
 	}
 
 	public function store()
@@ -51,9 +56,12 @@ class NewsController extends Controller {
 
 	public function edit($id)
 	{
-		$news = News::find($id);
+        $news = News::find($id);
+        if(Auth::user()->hasRole('ClubOwner') && Auth::user()->club_id == $news->club_id){
 
-        return View::make('news.edit', ['news'=>$news]);
+            return View::make('news.edit', ['news'=>$news]);
+        }
+        return Redirect::back()->with('danger', 'Du har inte rättigheter för detta..');
 	}
 
 	public function update($id)
@@ -75,10 +83,16 @@ class NewsController extends Controller {
 	{
 		$new = News::whereId($id)->firstOrFail();
 
-        $new->delete();
+        if(Auth::user()->hasRole('ClubOwner') && $new->club_id == Auth::user()->club_id){
 
-        return Redirect::to('/dashboard')->with('success', 'Nyhet borttagen!');
+            $new->delete();
 
+            return Redirect::to('/dashboard')->with('success', 'Nyhet borttagen!');
+        }else{
+            $new->delete();
+
+            return Redirect::back()->with('danger', 'Du har inte rättigheter för detta..');
+        }
 	}
 
 

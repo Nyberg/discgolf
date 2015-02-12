@@ -15,6 +15,7 @@
 {{HTML::style('admin_css/css/style-responsive.css')}}
 {{HTML::style('admin_css/css/datepicker.css')}}
 {{HTML::style('admin_css/css/jquery-ui.css')}}
+{{HTML::style('admin_css/css/morris.css')}}
 {{HTML::style('admin_css/css/ekko-lightbox.css')}}
 {{HTML::style('admin_css/css/ekko-lightbox.min.css')}}
 {{HTML::script('http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js')}}
@@ -71,14 +72,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <section id="container">
    <div class="row-fluid back">
     <div class="col-lg-10 col-md-offset-1">
-     <a class="navbar-brand" href="/">
-<!-- <img src="/img/logo.png" class="col-md-offset-1"/> -->
-    </a>
+    <!-- <a class="navbar-brand" href="/"> -->
+   <!-- <img src="/img/logo.png" class="col-md-offset-1"/> -->
+   <!-- </a> -->
     </div>
     </div>
 
 
-<div id="affix" data-spy="affix" data-offset-top="80" data-offset-bottom="200">
+<div id="affix" data-spy="affix" data-offset-top="20" data-offset-bottom="200">
     @include('layouts/include/menu')
 </div>
     <section id="main-content">
@@ -120,6 +121,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 {{HTML::script('admin_js/sparkline-chart.js')}}
 {{HTML::script('admin_js/app.js')}}
 {{HTML::script('admin_js/round/lost.js')}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
 
 @yield('scripts')
 

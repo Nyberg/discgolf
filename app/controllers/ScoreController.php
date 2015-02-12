@@ -31,7 +31,7 @@ class ScoreController extends \BaseController {
             $score = new Score();
             $score->round_id = Input::get('round_id');
             $score->user_id = Auth::User()->id;
-            $score->hole_id = Input::get('number-'.$i.'');
+            $score->hole_id = Input::get('hole-'.$i.'');
             $score->score = Input::get('score-'.$i.'');
             $score->par = Input::get('par-'.$i.'');
             $score->score_added = 0;

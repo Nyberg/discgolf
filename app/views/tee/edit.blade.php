@@ -5,13 +5,13 @@
 	<div class="showback">
 
   <h4 class="mb"><i class="fa fa-angle-right"></i> Redigera tee {{$tee->color}} för {{$tee->course['name']}}</h4>
-  {{Form::model($tee, ['method'=>'PATCH', 'route'=> ['tee.update', $tee->id]])}}
+  {{Form::model($tee, ['method'=>'PATCH', 'route'=> ['tee.update', $tee->id], 'id'=>'tee'])}}
 
       <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">Färg</label>
           <div class="col-sm-10">
 
-              {{Form::text('color', null, ['class'=>'form-control'])}}
+              {{Form::text('color', null, ['class'=>'form-control', 'data-validation'=>'required', 'data-validation-error-msg'=>'Detta fältet måste fyllas i..'])}}
               <span class="help-block"></span>
 
           </div>
@@ -22,7 +22,7 @@
               <label class="col-sm-2 col-sm-2 control-label">Antal hål</label>
               <div class="col-sm-10">
 
-                  {{Form::text('holes', null, ['class'=>'form-control'])}}
+                  {{Form::text('holes', null, ['class'=>'form-control', 'data-validation'=>'number', 'data-validation-allowing'=>'range[9;27]', 'data-validation-error-msg'=>'Du måste ange ett nummer mellan 9 och 27'])}}
                   <span class="help-block"></span>
 
               </div>
@@ -64,4 +64,14 @@
     </div>
      </div>
 
+@stop
+
+@section('scripts')
+<script>
+
+$.validate({
+  form : '#tee'
+});
+
+</script>
 @stop

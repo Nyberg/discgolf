@@ -7,12 +7,12 @@
     <meta name="author" content="Johannes Nyberg">
     <meta name="keyword" content="">
 
-{{HTML::style('db_css/bootstrap.css')}}
+{{HTML::style('admin_css/css/bootstrap2.css')}}
 {{HTML::style('admin_css/font-awesome/css/font-awesome.css')}}
 {{HTML::style('admin_js/gritter/css/jquery.gritter.css')}}
 {{HTML::style('admin_css/lineicons/style.css')}}
-{{HTML::style('db_css/style.css')}}
-{{HTML::style('db_css/style-responsive.css')}}
+{{HTML::style('admin_css/css/style.css')}}
+{{HTML::style('admin_css/css/style-responsive.css')}}
 {{HTML::style('admin_css/css/datepicker.css')}}
 {{HTML::style('admin_css/css/jquery-ui.css')}}
 {{HTML::style('admin_css/css/ekko-lightbox.css')}}
@@ -26,35 +26,9 @@
 {{HTML::script('admin_js/jquery-ui.min.js')}}
 {{HTML::script('packages/jleach/laravelmce/js/tinymce/tinymce.min.js')}}
 {{HTML::script('//tinymce.cachefly.net/4.1/tinymce.min.js')}}
+{{HTML::script('admin_js/form-validator/jquery.form-validator.js')}}
 
 {{HTML::script('https://maps.googleapis.com/maps/api/js?key=AIzaSyAqPB9cgeF7VZw7JTd2qYD2K4TPbCNDicc&sensor=false')}}
-
-<script type="text/javascript">
-
-function initialize() {
-
-    document.getElementById('lat').style.display = 'none';
-    document.getElementById('long').style.display = 'none';
-
-    var long = document.getElementById('long').textContent;
-    var lat = document.getElementById('lat').textContent;
-
-    var myLatlng = new google.maps.LatLng(long, lat);
-    var mapOptions = {
-        zoom: 10,
-        center: myLatlng
-        }
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    var marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      title: 'Hello World!'
-    });
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
-</script>
 
 <script>tinymce.init({selector:'textarea'});</script>
 
@@ -66,13 +40,21 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
     <section id="container" >
 
-    @include('layouts/include/menu_old')
+       <div class="row-fluid back">
+        <div class="col-lg-10 col-md-offset-1">
+        <!-- <a class="navbar-brand" href="/"> -->
+       <!-- <img src="/img/logo.png" class="col-md-offset-1"/> -->
+       <!-- </a> -->
+        </div>
+        </div>
 
-   <section id="main-content">
-            <section class="wrapper">
+    @include('layouts/include/db_menu')
 
-                <div class="row">
-                    <div class="col-lg-12 main-chart">
+    <section id="main-content">
+      <section class="wrapper site-min-height">
+
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
 
                 @include('layouts/include/flash') <!-- Visar alla flashmeddelanden som skickas ut av systemet -->
 
@@ -85,6 +67,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
     </section><!-- /MAIN CONTENT -->
 
     </section>
+
+    <footer class="site-footer">
+
+        @include('layouts/include/footer')
+
+    </footer>
 
 
 <!-- js placed at the end of the document so the pages load faster -->

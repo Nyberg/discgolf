@@ -5,8 +5,11 @@ class ClubController extends \BaseController {
 	public function index()
 	{
         $clubs = Club::all();
+        $countries = Country::get();
+        $states = State::get();
+        $cities = City::get();
 
-        return View::make('club.index', ['clubs'=>$clubs]);
+        return View::make('club.index', ['clubs'=>$clubs, 'countries'=>$countries, 'states'=>$states, 'cities'=>$cities]);
 	}
 
 	public function create()

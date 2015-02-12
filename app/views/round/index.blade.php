@@ -4,6 +4,7 @@
 @section('content')
 
               <h2 class="text-center page-header-custom">Rundor</h2>
+              <p class="text-center">Visar alla rundor 7 dagar tillbaka i tiden</p>
               <div class="divider-header"></div>
 
  <table class="table table-hover">
@@ -15,7 +16,6 @@
             <th>Bana</th>
             <th class="hidden-phone">Typ</th>
             <th>Resultat</th>
-            <th>Rating</th>
           </tr>
 
           </thead>
@@ -35,7 +35,6 @@
 
             </td>
             <td>{{calcScore($round->total, $round->tee['par'])}}</td>
-            <td>0</td>
            </tr>
            @endforeach
           </tbody>

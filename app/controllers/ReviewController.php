@@ -18,11 +18,9 @@ class ReviewController extends \BaseController {
 
 	public function create()
 	{
-
         $courses = Course::lists('name', 'id');
 
         return View::make('review.create', ['courses'=>$courses]);
-
 	}
 
 	public function store()
@@ -53,38 +51,56 @@ class ReviewController extends \BaseController {
 	public function edit($id)
 	{
         $review = Review::with('course')->whereId($id)->firstOrFail();
-        $courses = Course::lists('name', 'id');
 
-        return View::make('review.edit', ['courses'=>$courses, 'review'=>$review]);
+        if(Auth::id() == $review->user_id){
+
+            $courses = Course::lists('name', 'id');
+
+            return View::make('review.edit', ['courses'=>$courses, 'review'=>$review]);
+
+        }else{
+
+            return Redirect::back()->with('danger', 'Du kan inte redigera detta..');
+        }
 	}
 
 	public function update($id)
 	{
 
-        $this->addReviewForm->validate($input = Input::all());
-
         $review = Review::whereId($id)->firstOrFail();
 
-        $review->user_id = Auth::user()->id;
-        $review->course_id = Input::get('id');
-        $review->head = Input::get('head');
-        $review->body = Input::get('body');
-        $review->rating = Input::get('rating');
+        if(Auth::id() == $review->user_id){
 
-        $review->save();
+            $this->addReviewForm->validate($input = Input::all());
 
-        return Redirect::to('/account/review/user')->with('success', 'Din recension är uppdaterad!');
+            $review = Review::whereId($id)->firstOrFail();
+
+            $review->user_id = Auth::user()->id;
+            $review->course_id = Input::get('id');
+            $review->head = Input::get('head');
+            $review->body = Input::get('body');
+            $review->rating = Input::get('rating');
+
+            $review->save();
+
+            return Redirect::to('/account/review/user')->with('success', 'Din recension är uppdaterad!');
+
+        }else{
+            return Redirect::back()->with('danger', 'Du kan inte uppdatera detta..');
+        }
 	}
 
 	public function destroy($id)
 	{
 		$review = Review::whereId($id)->firstOrFail();
 
-        $review->delete();
+        if(Auth::id() == $review->user_id) {
 
-        return Redirect::back()->with('success', 'Recension '.$review->head.' borttagen');
+            $review->delete();
 
+            return Redirect::back()->with('success', 'Recension ' . $review->head . ' borttagen');
+        }else{
+            return Redirect::back()->with('danger', 'Du kan inte redigera detta..');
+        }
 	}
-
-
 }

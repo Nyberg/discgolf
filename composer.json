@@ -6,11 +6,12 @@
     "type": "project",
     "require": {
         "laravel/framework": "4.2.*",
-        "laracasts/validation": "~1.0",
+        "laracasts/validation": "1.2.*",
         "intervention/image": "master-dev",
         "zizaco/entrust": "1.2.*@dev",
         "guzzlehttp/guzzle": "~5.0",
-        "way/generators": "~2.0"
+        "way/generators": "~2.0",
+        "khill/lavacharts": "dev-master"
     },
     "autoload": {
         "classmap": [

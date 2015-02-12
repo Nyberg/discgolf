@@ -5,23 +5,21 @@
 <div class="showback">
 
                         <div class="bs-example">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#sectionA">Settings</a></li>
-                            <li><a data-toggle="tab" href="#sectionB">Profile</a></li>
-                            <li class="pull-right"><a data-toggle="" href="/account/user/password/">Change Password</a></li>
-
+                        <ul class="nav nav-tabs nav-justified">
+                            <li class="active"><a data-toggle="tab" href="#sectionA">Inställningar</a></li>
+                            <li><a data-toggle="tab" href="#sectionB">Profil</a></li>
                         </ul>
                   <div class="form-horizontal style-form">
                     <div class="tab-content">
 
                         <div id="sectionA" class="tab-pane fade in active">
                                <br/>
-                           	  <h4 class="mb"><i class="fa fa-angle-right"></i> Edit User</h4>
+                           	  <h4 class="mb"><i class="fa fa-angle-right"></i> Redigera Användare</h4>
 
                                       	  {{Form::model($user, ['method'=>'PATCH', 'route'=> ['user.update', $user->id], 'files'=>true])}}
 
                                               <div class="form-group">
-                                                  <label class="col-sm-2 col-sm-2 control-label">Name</label>
+                                                  <label class="col-sm-2 col-sm-2 control-label">Namn</label>
                                                   <div class="col-sm-5">
 
                                                       {{Form::text('first_name', null, ['class'=>'form-control'])}}
@@ -44,7 +42,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                  <label class="col-sm-2 col-sm-2 control-label">Club</label>
+                                                  <label class="col-sm-2 col-sm-2 control-label">Klubb</label>
                                                   <div class="col-sm-10">
 
                                                   @if(Auth::user()->hasRole('ClubOwner'))
@@ -69,13 +67,13 @@
                                                 <div class="col-sm-10">
 
                                                     {{Form::select('metric', ['m'=>'Meter', 'f'=>'Feet'], null, array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
-                                                     <span class="help-block">Choose which metrics length will be shown in.</span>
+                                                     <span class="help-block">Välj vilken typ längd ska visas i</span>
 
                                                 </div>
                                             </div>
 
                                                <div class="form-group">
-                                                                    <label class="col-sm-2 col-sm-2 control-label">Profile Image</label>
+                                                                    <label class="col-sm-2 col-sm-2 control-label">Profilbild</label>
                                                                       <div class="col-sm-10">
                                                                          <img src="{{$user->image}}" class="img-thumbnail" width="100px" height="100px"/>
 
@@ -88,7 +86,7 @@
                                                                       </div>
                                                             </div>
 
-                                              {{Form::submit('Save Settings', ['class'=>'btn btn-primary'])}}
+                                              {{Form::submit('Spara Inställningar', ['class'=>'btn btn-primary'])}}
                                              {{Form::close()}}
 
 
@@ -100,7 +98,7 @@
 
                         <div id="sectionB" class="tab-pane fade">
                         <br/>
-                            <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Profile</h4>
+                            <h4 class="mb"><i class="fa fa-angle-right"></i> Redigera Profil</h4>
                                               	  {{Form::model($user->profile, ['method'=>'PATCH', 'route'=> ['user.update', $user->id], 'files'=>true])}}
 
                                                      <div class="form-group">
@@ -144,7 +142,7 @@
                                                               </div>
                                                          </div>
                                                       <div class="form-group">
-                                                           <label class="col-sm-2 col-sm-2 control-label">Address</label>
+                                                           <label class="col-sm-2 col-sm-2 control-label">Adress</label>
                                                            <div class="col-sm-10">
 
                                                                {{Form::text('location', null, ['class'=>'form-control'])}}
@@ -153,7 +151,7 @@
                                                        </div>
 
                                                     <div class="form-group">
-                                                        <label class="col-sm-2 col-sm-2 control-label">Phone</label>
+                                                        <label class="col-sm-2 col-sm-2 control-label">Telefon</label>
                                                         <div class="col-sm-10">
 
                                                             {{Form::text('phone', null, ['class'=>'form-control'])}}
@@ -163,7 +161,7 @@
                                                     </div>
 
                                                       <div class="form-group">
-                                                            <label class="col-sm-2 col-sm-2 control-label">Website</label>
+                                                            <label class="col-sm-2 col-sm-2 control-label">Hemsida</label>
                                                             <div class="col-sm-10">
 
                                                                 {{Form::text('website', null, ['class'=>'form-control'])}}
@@ -180,7 +178,7 @@
                                                     </div>
 
                                                      <div class="form-group">
-                                                            <label class="col-sm-2 col-sm-2 control-label">Profile Header Image</label>
+                                                            <label class="col-sm-2 col-sm-2 control-label">Header</label>
                                                               <div class="col-sm-10">
                                                                   {{Form::file('file', '', ['class'=>'form-control'])}} </div>
 
@@ -190,14 +188,9 @@
                                                               </div>
                                                     </div>
 
-                                                      {{Form::submit('Update Profile', ['class'=>'btn btn-primary'])}}
+                                                      {{Form::submit('Uppdatera Profil', ['class'=>'btn btn-primary'])}}
                                                      {{Form::close()}}
-
-
                         </div>
-
-
-
                         </div>
                          </div>
 

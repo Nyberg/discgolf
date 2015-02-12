@@ -6,7 +6,7 @@
 
   <h4 class="mb"><i class="fa fa-angle-right"></i> Redigera recension - {{$review->head}}</h4>
   <div class="form-horizontal">
-     {{Form::model($review, ['method'=>'PATCH', 'route'=> ['review.update', $review->id]])}}
+     {{Form::model($review, ['method'=>'PATCH', 'route'=> ['review.update', $review->id], 'id'=>'review_edit'])}}
 
          <div class="form-group">
              <label class="col-sm-2 col-sm-2 control-label">Välj bana att recensera</label>
@@ -21,7 +21,7 @@
            <label class="col-sm-2 col-sm-2 control-label">Rubrik</label>
            <div class="col-sm-10">
 
-              {{Form::text('head', null, ['class'=>'form-control'])}}
+              {{Form::text('head', null, ['class'=>'form-control', 'data-validation'=>'required', 'data-validation-error-msg'=>'Detta fältet måste fyllas i..'])}}
             {{errors_for('head', $errors)}}
            </div>
        </div>
@@ -46,9 +46,21 @@
         </div>
 
 
-        {{Form::submit('Spara', ['class'=>'btn btn-primary'])}}
+        {{Form::submit('Uppdatera', ['class'=>'btn btn-primary'])}}
      {{Form::close()}}
     </div>
 </div>
+
+@stop
+
+@section('scripts')
+
+    <script>
+
+    $.validate({
+      form : '#review_edit'
+    });
+
+    </script>
 
 @stop

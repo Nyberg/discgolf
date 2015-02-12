@@ -25,10 +25,6 @@
             <li class="active"><a data-toggle="tab" href="#sectionA">Information</a></li>
             <li><a data-toggle="tab" href="#sectionB">Rundor ({{count($rounds)}})</a></li>
             <li><a data-toggle="tab" href="#sectionC">Bag</a></li>
-            @if(count($sponsors) == 0)
-            @else
-            <li><a data-toggle="tab" href="#sectionD">Sponsorer</a></li>
-            @endif
             <li><a data-toggle="tab" href="#sectionE">Statistik</a></li>
             <li><a data-toggle="tab" href="#sectionF">Kommentarer ({{count($user->comments)}})</a></li>
 
@@ -48,11 +44,13 @@
          <div id="sectionC" class="tab-pane fade in">
          @foreach($bags as $bag)
             <div class="col-lg-12">
-            <h4><i class="fa fa-spinner"></i> {{$bag->type}}</h4>
+            <div class="panel panel-default">
+                      <!-- Default panel contents -->
+                      <div class="panel-heading">{{$bag->type}}</div>
 
             </div>
           <div class="col-lg-3">
-            <h5>Putters</h5>
+            <p>Putters</p>
                 @foreach($bag->disc as $disc)
                 @if($disc->type == 'Putter')
                 <p>{{$disc->author.' '.$disc->plastic.' '. $disc->name . ', '.$disc->weight.'g'}}</p>
@@ -60,7 +58,7 @@
                 @endforeach
           </div>
           <div class="col-lg-3">
-            <h5>Midranges</h5>
+            <p>Midranges</p>
                 @foreach($bag->disc as $disc)
                 @if($disc->type == 'Midrange')
                 <p>{{$disc->author.' '.$disc->plastic.' '. $disc->name . ', '.$disc->weight.'g'}}</p>
@@ -68,7 +66,7 @@
                 @endforeach
           </div>
           <div class="col-lg-3">
-            <h5>Fairway Drivers</h5>
+            <p>Fairway Drivers</p>
                 @foreach($bag->disc as $disc)
                 @if($disc->type == 'Fairway Driver')
                 <p>{{$disc->author.' '.$disc->plastic.' '. $disc->name . ', '.$disc->weight.'g'}}</p>
@@ -76,14 +74,14 @@
                 @endforeach
           </div>
           <div class="col-lg-3">
-            <h5>Drivers</h5>
+            <p>Drivers</p>
                 @foreach($bag->disc as $disc)
                 @if($disc->type == 'Driver')
                 <p>{{$disc->author.' '.$disc->plastic.' '. $disc->name . ', '.$disc->weight.'g'}}</p>
                 @endif
                 @endforeach
           </div>
-
+        </div>
            @endforeach
          </div>
 
@@ -134,29 +132,39 @@
     </div>
     <div id="sectionE" class="tab-pane fade in">
 
-
                @if($cp <= 4)
                <p>{{$user->first_name . ' ' . $user->last_name}} har inte spelat tillräckligt med rundor (5) för att kunna generera statistik. </p>
-                @else
+               @else
+               @endif
 
-                  @endif
 <div class="row">
-            <div class="col-sm-2 col-md-2 col-md-offset-1">
+
+            <div class="col-sm-4 col-md-4">
                 <div class="thumbnail text-center stat">
-                     <i class="fa fa-database fa-4x"></i>
                   <div class="caption text-center">
-                  <p>Totalt antal kast</p>
-                    <h4>{{$shots}}</h4>
-                    <p>Siffran visar totala antalet kast för alla rundor</p>
-
-
+                  <i class="fa fa-star fa-4x"></i>
+                  <p>Antal rundor</p>
+                    <h4>{{count($user->round)}}</h4>
+                    <p>Siffran visar totala antalet rundor</p>
                   </div>
                 </div>
               </div>
-               <div class="col-sm-2 col-md-2">
+
+            <div class="col-sm-4 col-md-4">
+                <div class="thumbnail text-center stat">
+                  <div class="caption text-center">
+                  <i class="fa fa-database fa-4x"></i>
+                  <p>Totalt antal kast</p>
+                    <h4>{{$shots}}</h4>
+                    <p>Siffran visar totala antalet kast för alla rundor</p>
+                  </div>
+                </div>
+              </div>
+
+               <div class="col-sm-4 col-md-4">
                 <div class="thumbnail text-center">
-                       <i class="fa fa-tree fa-4x"></i>
                     <div class="caption text-center">
+                       <i class="fa fa-tree fa-4x"></i>
                     <p>Spelade banor</p>
                     @if($cp <= 4)
                     <h4>0</h4>
@@ -170,10 +178,10 @@
                   </div>
                 </div>
 
-               <div class="col-sm-2 col-md-2">
+               <div class="col-sm-4 col-md-4">
                 <div class="thumbnail text-center">
-                       <i class="fa fa-thumbs-o-up fa-4x"></i>
                     <div class="caption text-center">
+                    <i class="fa fa-thumbs-o-up fa-4x"></i>
                     <p>Bogeyfria rundor</p>
                       <h4>{{$bfr}}</h4>
                       <p>Siffran visar antalet bogeyfria rundor</p>
@@ -183,10 +191,10 @@
                   </div>
                 </div>
 
-               <div class="col-sm-2 col-md-2">
+               <div class="col-sm-4 col-md-4">
                 <div class="thumbnail text-center">
-                       <i class="fa fa-trophy fa-4x"></i>
                     <div class="caption text-center">
+                     <i class="fa fa-trophy fa-4x"></i>
                     <p>Genomsnittligt resultat</p>
                       <h4>{{round($avg, 1)}}</h4>
                       <p>Siffran visar snittresultat per runda</p>
@@ -196,10 +204,10 @@
                   </div>
                 </div>
 
-               <div class="col-sm-2 col-md-2">
+               <div class="col-sm-4 col-md-4">
                 <div class="thumbnail text-center">
-                       <i class="fa fa-child fa-4x"></i>
                     <div class="caption text-center">
+                    <i class="fa fa-child fa-4x"></i>
                     <p>Flest birdies på en runda</p>
                       <h4>{{$birdies}}</h4>
                       <p>Siffran visar rundan med flest birdies</p>
@@ -210,125 +218,17 @@
                 </div>
     </div>
 
+    @if(count($user->round) > 4)
     <!-- Statistik -->
     <div class="row">
-                <div class="col-sm-2 col-md-2 col-md-offset-1">
-                    <div class="thumbnail text-center">
-                         <i class="fa fa-star-o fa-4x"></i>
-                      <div class="caption text-center">
-                      <p>Aces</p>
-                        <h4>{{$data['ace']}}</h4>
-                        <p>Siffran visar totala antalet kast för alla rundor</p>
+        <div id="chart-div"></div>
+        @piechart('Resultat', 'chart-div', array('height'=>400, 'width'=>600))
 
+     </div>
+     <!-- End Statistics -->
+     @else
+     @endif
 
-                      </div>
-                    </div>
-                  </div>
-
-                    <div class="col-sm-2 col-md-2">
-                      <div class="thumbnail text-center">
-                             <i class="fa fa-bomb fa-4x"></i>
-                          <div class="caption text-center">
-                          <p>Albatross</p>
-                            <h4>{{$data['albatross']}}</h4>
-                            <p>Siffran visar rundan med flest birdies</p>
-                          </div>
-                        </div>
-                      </div>
-
-
-                  <div class="col-sm-2 col-md-2">
-                      <div class="thumbnail text-center">
-                           <i class="fa fa-bullseye fa-4x"></i>
-                        <div class="caption text-center">
-                        <p>Eagles</p>
-                          <h4>{{$data['eagle']}}</h4>
-                          <p>Siffran visar totala antalet kast för alla rundor</p>
-
-
-                        </div>
-                      </div>
-                    </div>
-
-                   <div class="col-sm-2 col-md-2">
-                    <div class="thumbnail text-center">
-                           <i class="fa fa-smile-o fa-4x"></i>
-                        <div class="caption text-center">
-                        <p>Birdies</p>
-                          <h4>{{$data['birdie']}}</h4>
-                          <p>Siffran visar antalet bogeyfria rundor</p>
-
-
-                        </div>
-                      </div>
-                    </div>
-
-                       <div class="col-sm-2 col-md-2">
-                        <div class="thumbnail text-center">
-                               <i class="fa fa-check fa-4x"></i>
-                            <div class="caption text-center">
-                            <p>Par</p>
-
-                              <h4>{{$data['par']}}</h4>
-
-                              <p>Siffran visar antalet unika banor som spelats</p>
-
-
-                            </div>
-                          </div>
-                        </div>
-
-
-        </div>
-        <div class="row">
-
-          <div class="col-sm-2 col-md-2 col-md-offset-1">
-                            <div class="thumbnail text-center">
-                                   <i class="fa fa-meh-o fa-4x"></i>
-                                <div class="caption text-center">
-                                <p>Bogeys</p>
-                                  <h4>{{$data['bogey']}}</h4>
-                                  <p>Siffran visar snittresultat per runda</p>
-                                </div>
-                              </div>
-                            </div>
-
-                  <div class="col-sm-2 col-md-2">
-                    <div class="thumbnail text-center">
-                           <i class="fa fa-frown-o fa-4x"></i>
-                        <div class="caption text-center">
-                        <p>Dubbel Bogeys</p>
-                          <h4>{{$data['dblbogey']}}</h4>
-                          <p>Siffran visar rundan med flest birdies</p>
-                        </div>
-                      </div>
-                    </div>
-
-                  <div class="col-sm-2 col-md-2">
-                    <div class="thumbnail text-center">
-                           <i class="fa fa-times fa-4x"></i>
-                        <div class="caption text-center">
-                        <p>Trippel Bogeys</p>
-                          <h4>{{$data['trpbogey']}}</h4>
-                          <p>Siffran visar rundan med flest birdies</p>
-                        </div>
-                      </div>
-                    </div>
-
-                  <div class="col-sm-2 col-md-2">
-                    <div class="thumbnail text-center">
-                           <i class="fa fa-trash-o fa-4x"></i>
-                        <div class="caption text-center">
-                        <p>Quad Bogeys</p>
-                          <h4>{{$data['quad']}}</h4>
-                          <p>Siffran visar rundan med flest birdies</p>
-                        </div>
-                      </div>
-                    </div>
-
-
-        </div>
-        <!-- End Statistics -->
     </div>
     <div id="sectionF" class="tab-pane fade in">
      <br/>
@@ -336,13 +236,13 @@
       <div class="row">
                      <div class="col-lg-12">
 
-        <h4 class=""><i class="fa fa-comments-o"></i> Kommentarer
-        @if(Auth::user())
-        <button class="btn btn-primary pull-right mb" data-toggle="modal" data-target="#comment">
-        Kommentera
-        </button>
-        @endif
-        </h4>
+                   <div class="panel panel-default">
+                     <div class="panel-heading">Kommentarer ({{count($user->comments)}})
+                          @if(Auth::user())
+                             <a class="pull-right btn btn-primary btn-xs" data-toggle="modal" data-target="#comment">Kommentera</a>
+                          @endif
+                     </div>
+                  </div>
 
         </div>
         </div>
@@ -365,14 +265,14 @@
     </div>
 
     <div class="modal-body">
-    {{Form::open(['route'=>'comment.store', 'class'=>'form-horizontal style-form'])}}
+    {{Form::open(['route'=>'comment.store', 'class'=>'form-horizontal style-form', 'id'=>'comment_form'])}}
     {{Form::hidden('type_id', $user->id)}}
     {{Form::hidden('model', 'user')}}
     <div class="form-group">
     <label class="col-sm-2 col-sm-2 control-label">Kommentar</label>
     <div class="col-sm-10">
 
-    {{Form::text('body', '', ['class'=>'form-control'])}}
+    {{Form::text('body', '', ['class'=>'form-control', 'data-validation'=>'required', 'data-validation-error-msg'=>'Detta fältet måste fyllas i..'])}}
     </div>
     </div>
 
@@ -393,30 +293,5 @@
 </div>
 </div>
 </div>
-</div></div>
-
-@if(count($sponsors) == 0)
-
-@else
-<div class="showback">
-<div class="row">
-
-<div class="col-lg-12">
-
-    <h4>Sponsorer</h4>
-
-     @foreach($sponsors as $sponsor)
-
-    <div class="col-lg-3">
-     <a href="/sponsor/{{$sponsor->id}}/redirect/" target="_blank"><img src="{{$sponsor->image}}" class="img-thumbnail" width="100%"/></a>
-     </div>
-
-     @endforeach
-
-
-<div class="col-lg-12"></div>
-
-@endif
-
 
 @stop

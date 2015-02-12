@@ -4,7 +4,9 @@ class RoundController extends \BaseController {
 
 	public function index()
 	{
-		$rounds = Round::with('course', 'user')->where('status', 1)->orderBy('created_at', 'desc')->paginate(15);
+        $date = date('Y-m-d', strtotime('-1 week'));
+
+		$rounds = Round::with('course', 'user')->where('status', 1)->where('date', '>=' , $date)->orderBy('created_at', 'desc')->paginate(15);
 
         return View::make('round.index',compact('rounds'));
 	}
@@ -83,38 +85,46 @@ class RoundController extends \BaseController {
 
 	public function store()
 	{
-        $total = 0;
-        $number = Input::get('holes');
         $id = Input::get('round_id');
-
-        for($i = 1; $i <= $number; $i++){
-
-            $score = new Score();
-
-            $score->user_id = Auth::User()->id;
-            $score->hole_id = Input::get('hole_id-'.$i.'');
-            $score->round_id = Input::get('round_id');
-            $score->score = Input::get('score-'.$i.'');
-            $score->par = Input::get('par-'.$i.'');
-            $x = Input::get('score-'.$i.'');
-
-            $total = (int)$total + (int)$x;
-            $score->save();
-
-        };
-
         $round = Round::whereId($id)->firstOrFail();
 
-      /*  $p_rating = Auth::user()->rating;
-        $c_rating = $round->course->rating;
-        $base = $c_rating - $p_rating; */
+        if(Auth::id() == $round->user_id){
 
-        $round->total = $total;
-        $round->status = 0;
+            $total = 0;
+            $number = Input::get('holes');
 
-        $round->save();
+            for($i = 1; $i <= $number; $i++){
 
-        return Redirect::to('/dashboard')->with('success', 'Runda tillagd!');
+                $score = new Score();
+
+                $score->user_id = Auth::User()->id;
+                $score->hole_id = Input::get('hole_id-'.$i.'');
+                $score->round_id = Input::get('round_id');
+                $score->score = Input::get('score-'.$i.'');
+                $score->par = Input::get('par-'.$i.'');
+                $x = Input::get('score-'.$i.'');
+
+                $total = (int)$total + (int)$x;
+                $score->save();
+
+            };
+
+            $round = Round::whereId($id)->firstOrFail();
+
+            /*  $p_rating = Auth::user()->rating;
+              $c_rating = $round->course->rating;
+              $base = $c_rating - $p_rating; */
+
+            $round->total = $total;
+            $round->status = 0;
+
+            $round->save();
+
+            return Redirect::to('/dashboard')->with('success', 'Runda tillagd!');
+
+        }else{
+            return Redirect::to('/')->with('danger', 'Du kan inte redigera detta..');
+        }
 	}
 
     public function show($id, $course_id)
@@ -148,16 +158,20 @@ class RoundController extends \BaseController {
     public function editScore($id){
 
         $round = Round::with('score')->whereId($id)->firstOrFail();
-        return View::make('round.editScore', ['round' => $round]);
+
+        if(Auth::id() == $round->user_id){
+            return View::make('round.editScore', ['round' => $round]);
+        }else{
+            return Redirect::to('/')->with('danger', 'Du kan inte redigera det!');
+        }
+
     }
 
 	public function update($id)
 	{
         $round = Round::whereId($id)->firstOrFail();
 
-        if (is_null($round)) {
-            return Redirect::back()->with('danger', 'Något gick snett!');
-        } else {
+        if(Auth::id() == $round->user_id){
 
             $round = Round::whereId($id)->firstOrFail();
             $round->tee_id = Input::get('tee_id');
@@ -167,6 +181,11 @@ class RoundController extends \BaseController {
             $round->save();
 
             return Redirect::back()->with('success', 'Runda uppdaterad!');
+
+        } else {
+
+            return Redirect::back()->with('danger', 'Du kan inte redigera detta..');
+
         }
 	}
 
@@ -187,7 +206,7 @@ class RoundController extends \BaseController {
         return Redirect::back()->with('success', 'Runda borttagen!');
 
         }else{
-            return Redirect::to('/')->with('danger', 'Du kan inte redigera det!');
+            return Redirect::to('/')->with('danger', 'Du kan inte ta bort detta..');
         }
 	}
 
@@ -209,132 +228,139 @@ class RoundController extends \BaseController {
 
         $round = Round::find($id);
 
-        $round->status = 1;
-        $round->save();
-
-        if ($round->type == 'Singel') {
-
-            $num = Record::where('course_id', $round->course_id)->where('type', 'Singel')->where('tee_id', $round->tee_id)->where('status', 1)->orderBy('total', 'asc')->pluck('total');
-
-            if ($num == null && $round->type == 'Singel') {
-
-                $record = new Record();
-                $record->user_id = Auth::id();
-                $record->course_id = $round->course_id;
-                $record->tee_id = $round->tee_id;
-                $record->type = $round->type;
-                $record->total = $round->total;
-                $record->date = $round->date;
-                $record->par_id = $round->par_id;
-                $record->round_id = $round->id;
-                $record->status = 1;
-
-                $record->save();
+        if(Auth::id() == $round->user_id) {
 
 
-            }
+            $round->status = 1;
+            $round->save();
 
-            if ($round->total == (int)$num) {
-                $record = new Record();
-                $record->user_id = Auth::id();
-                $record->course_id = $round->course_id;
-                $record->tee_id = $round->tee_id;
-                $record->type = $round->type;
-                $record->total = $round->total;
-                $record->date = $round->date;
-                $record->par_id = $round->par_id;
-                $record->round_id = $round->id;
-                $record->status = 1;
+            if ($round->type == 'Singel') {
 
-                $record->save();
+                $num = Record::where('course_id', $round->course_id)->where('type', 'Singel')->where('tee_id', $round->tee_id)->where('status', 1)->orderBy('total', 'asc')->pluck('total');
 
-            }
-            if ($round->total < (int)$num) {
+                if ($num == null && $round->type == 'Singel') {
 
-                $recs = Record::where('course_id', $round->course_id)->where('total', $num)->where('type', 'Singel')->where('status', 1)->get();
+                    $record = new Record();
+                    $record->user_id = Auth::id();
+                    $record->course_id = $round->course_id;
+                    $record->tee_id = $round->tee_id;
+                    $record->type = $round->type;
+                    $record->total = $round->total;
+                    $record->date = $round->date;
+                    $record->par_id = $round->par_id;
+                    $record->round_id = $round->id;
+                    $record->status = 1;
 
-                foreach ($recs as $rec) {
+                    $record->save();
 
-                    $rec->status = 0;
+
                 }
 
-                $record = new Record();
-                $record->user_id = Auth::id();
-                $record->course_id = $round->course_id;
-                $record->tee_id = $round->tee_id;
-                $record->type = $round->type;
-                $record->total = $round->total;
-                $record->date = $round->date;
-                $record->par_id = $round->par_id;
-                $record->round_id = $round->id;
-                $record->status = 1;
+                if ($round->total == (int)$num) {
+                    $record = new Record();
+                    $record->user_id = Auth::id();
+                    $record->course_id = $round->course_id;
+                    $record->tee_id = $round->tee_id;
+                    $record->type = $round->type;
+                    $record->total = $round->total;
+                    $record->date = $round->date;
+                    $record->par_id = $round->par_id;
+                    $record->round_id = $round->id;
+                    $record->status = 1;
 
-                $record->save();
+                    $record->save();
 
+                }
+                if ($round->total < (int)$num) {
+
+                    $recs = Record::where('course_id', $round->course_id)->where('total', $num)->where('type', 'Singel')->where('status', 1)->get();
+
+                    foreach ($recs as $rec) {
+
+                        $rec->status = 0;
+                    }
+
+                    $record = new Record();
+                    $record->user_id = Auth::id();
+                    $record->course_id = $round->course_id;
+                    $record->tee_id = $round->tee_id;
+                    $record->type = $round->type;
+                    $record->total = $round->total;
+                    $record->date = $round->date;
+                    $record->par_id = $round->par_id;
+                    $record->round_id = $round->id;
+                    $record->status = 1;
+
+                    $record->save();
+
+                }
             }
-        }
 
-        if ($round->type == 'Par') {
+            if ($round->type == 'Par') {
 
-            $num = Record::where('course_id', $round->course_id)->where('type', 'Par')->where('tee_id', $round->tee_id)->where('status', 1)->orderBy('total', 'asc')->pluck('total');
+                $num = Record::where('course_id', $round->course_id)->where('type', 'Par')->where('tee_id', $round->tee_id)->where('status', 1)->orderBy('total', 'asc')->pluck('total');
 
-            if ($num == null && $round->type == 'Par') {
+                if ($num == null && $round->type == 'Par') {
 
-                $record = new Record();
-                $record->user_id = Auth::id();
-                $record->course_id = $round->course_id;
-                $record->tee_id = $round->tee_id;
-                $record->type = $round->type;
-                $record->total = $round->total;
-                $record->date = $round->date;
-                $record->par_id = $round->par_id;
-                $record->round_id = $round->id;
-                $record->status = 1;
+                    $record = new Record();
+                    $record->user_id = Auth::id();
+                    $record->course_id = $round->course_id;
+                    $record->tee_id = $round->tee_id;
+                    $record->type = $round->type;
+                    $record->total = $round->total;
+                    $record->date = $round->date;
+                    $record->par_id = $round->par_id;
+                    $record->round_id = $round->id;
+                    $record->status = 1;
 
-                $record->save();
-            }
-
-            if ($round->total == (int)$num) {
-                $record = new Record();
-                $record->user_id = Auth::id();
-                $record->course_id = $round->course_id;
-                $record->tee_id = $round->tee_id;
-                $record->type = $round->type;
-                $record->total = $round->total;
-                $record->date = $round->date;
-                $record->par_id = $round->par_id;
-                $record->round_id = $round->id;
-                $record->status = 1;
-
-                $record->save();
-
-            }
-            if ($round->total < (int)$num) {
-
-                $recs = Record::where('course_id', $round->course_id)->where('total', $num)->where('type', 'Par')->where('status', 1)->get();
-
-                foreach ($recs as $rec) {
-                    $rec->delete();
+                    $record->save();
                 }
 
-                $record = new Record();
-                $record->user_id = Auth::id();
-                $record->course_id = $round->course_id;
-                $record->tee_id = $round->tee_id;
-                $record->type = $round->type;
-                $record->total = $round->total;
-                $record->date = $round->date;
-                $record->par_id = $round->par_id;
-                $record->round_id = $round->id;
-                $record->status = 1;
+                if ($round->total == (int)$num) {
+                    $record = new Record();
+                    $record->user_id = Auth::id();
+                    $record->course_id = $round->course_id;
+                    $record->tee_id = $round->tee_id;
+                    $record->type = $round->type;
+                    $record->total = $round->total;
+                    $record->date = $round->date;
+                    $record->par_id = $round->par_id;
+                    $record->round_id = $round->id;
+                    $record->status = 1;
 
-                $record->save();
+                    $record->save();
+
+                }
+                if ($round->total < (int)$num) {
+
+                    $recs = Record::where('course_id', $round->course_id)->where('total', $num)->where('type', 'Par')->where('status', 1)->get();
+
+                    foreach ($recs as $rec) {
+                        $rec->delete();
+                    }
+
+                    $record = new Record();
+                    $record->user_id = Auth::id();
+                    $record->course_id = $round->course_id;
+                    $record->tee_id = $round->tee_id;
+                    $record->type = $round->type;
+                    $record->total = $round->total;
+                    $record->date = $round->date;
+                    $record->par_id = $round->par_id;
+                    $record->round_id = $round->id;
+                    $record->status = 1;
+
+                    $record->save();
+
+                }
 
             }
 
-        }
+            return Redirect::back()->with('success', 'Din runda är nu aktiv och låst.');
 
-        return Redirect::back()->with('success', 'Din runda är nu aktiv och låst.');
+        }else{
+            return Redirect::back()->with('danger', 'Du kan inte redigera detta..');
+        }
     }
 
     public function records(){

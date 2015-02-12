@@ -5,15 +5,14 @@
 	<div class="showback">
 
   <h4 class="mb"><i class="fa fa-angle-right"></i> Skapa runda</h4>
-   {{Form::open(['method'=>'POST', 'route'=>['account-round-add-score'], 'class'=>'form-horizontal style-form'])}}
-
+   {{Form::open(['method'=>'POST', 'route'=>['account-round-add-score'], 'class'=>'form-horizontal style-form', 'id'=>'round_form'])}}
 
       <div class="form-group">
           <label class="col-sm-1 col-sm-1 control-label">Välj Bana</label>
           <div class="col-sm-5">
 
-         <select name="course" class="form-control teepads" id="teepads">
-                              <option value="0">Välj Bana</option>
+         <select name="course" class="form-control teepads" id="teepads" data-validation="required" data-validation-error-msg="Du måste fylla i detta fältet..">
+                              <option value="0" readonly>Välj Bana</option>
                               @foreach($courses as $course)
                               <option id="{{$course->id}}" value="{{$course->id}}">{{$course->name}}</option>
                               @endforeach
@@ -88,15 +87,14 @@
 
       $(function() {
                    $(".datepicker").datepicker({
-                   dateFormat: "yy-mm-dd",
-                   startDate: '-2d'
+                   format: "yyyy-mm-dd"
+
                     })
            });
 
- /*   $('.datepicker').datepicker({
-    dateFormat: 'dd-mm-yy',
-    startDate: '-2d'
-    }) */
+    $.validate({
+      form : '#round_form'
+    });
 
     </script>
 

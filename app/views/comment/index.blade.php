@@ -60,13 +60,13 @@
                         </div>
 
                         <div class="modal-body">
-                        {{Form::model($comment, ['method'=>'PATCH', 'route'=> ['comment.update', $comment->id]])}}
+                        {{Form::model($comment, ['method'=>'PATCH', 'route'=> ['comment.update', $comment->id], 'id'=>'comment'])}}
 
                          <div class="form-group">
                                <label class="col-sm-2 col-sm-2 control-label">Kommentar</label>
                                <div class="col-sm-10">
 
-                                   {{Form::text('body', $comment->body, ['class'=>'form-control'])}}
+                                   {{Form::text('body', $comment->body, ['class'=>'form-control', 'data-validation'=>'required', 'data-validation-error-msg'=>'Detta fältet måste fyllas i..'])}}
                                </div>
                            </div>
 
@@ -88,5 +88,18 @@
     @endif
 
       </div>
+
+@stop
+
+
+@section('scripts')
+
+    <script>
+
+    $.validate({
+      form : '#comment'
+    });
+
+    </script>
 
 @stop

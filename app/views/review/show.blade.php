@@ -3,10 +3,9 @@
 
 @section('content')
 
-
-               <div class="showback">
-               <div class="row">
-               <div class="col-lg-12">
+       <div class="showback">
+       <div class="row">
+       <div class="col-lg-12">
 
       <h4><i class="fa fa-angle-right"></i> Dina recensioner</h4>
 
@@ -21,12 +20,12 @@
                                   <span class="pull-left">
 
                                              {{Form::open(['method'=>'DELETE', 'route'=>['review.destroy', $rev->id]])}}
-                                             {{Form::submit('Ta bort', ['class'=>'btn btn-danger pull-right'])}}
+                                             {{Form::submit('Ta bort', ['class'=>'btn btn-sm btn-danger pull-right'])}}
                                              {{Form::close()}}
 
                                   </span>
 
-                                  <a href="/account/review/{{$rev->id}}/edit/"><span class="btn btn-theme pull-right"><i class="fa fa-pencil"></i></span></a>
+                                  <a href="/account/review/{{$rev->id}}/edit/"><span class="btn btn-theme btn-sm pull-right"><i class="fa fa-pencil"></i></span></a>
 
                               </div>
 

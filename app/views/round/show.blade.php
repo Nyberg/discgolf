@@ -33,7 +33,7 @@
         <br/>
          <div class="panel panel-default">
            <!-- Default panel contents -->
-           <div class="panel-heading">  Resultat:</div>
+           <div class="panel-heading">  Resultat: {{calcScore($round->total, $round->tee->par)}}</div>
     <table class="table table-hover text-center">
     <thead>
         <tr>
@@ -62,7 +62,15 @@
     </div>
 
     <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-4">
+        <div class="showback">
+            <div class="panel panel-default">
+                <div class="panel-heading">Mer om {{$round->user->first_name}}</div>
+                <img src="{{$round->user->image}}" class="" width="120px"/>
+             </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
     <div class="showback">
 
               <div class="panel panel-default">
@@ -73,7 +81,8 @@
                 </div>
              </div>
 <div class="row">
-  <div class="col-lg-12">
+
+  <div class="col-md-12">
         @foreach($round->comments as $comment)
 
         @include('layouts/include/comment')
@@ -90,7 +99,7 @@
               </div>
 
               <div class="modal-body">
-              {{Form::open(['route'=>'comment.store', 'class'=>'form-horizontal style-form'])}}
+              {{Form::open(['route'=>'comment.store', 'class'=>'form-horizontal style-form', 'id'=>'comment_form'])}}
                 {{Form::hidden('type_id', $round->id)}}
                 {{Form::hidden('model', 'round')}}
 
@@ -98,7 +107,7 @@
                      <label class="col-sm-2 col-sm-2 control-label">Kommentar</label>
                      <div class="col-sm-10">
 
-                         {{Form::text('body', '', ['class'=>'form-control'])}}
+                         {{Form::text('body', '', ['class'=>'form-control', 'data-validation'=>'required', 'data-validation-error-msg'=>'Detta fältet måste fyllas i..'])}}
                      </div>
                  </div>
 

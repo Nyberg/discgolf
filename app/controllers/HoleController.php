@@ -1,6 +1,19 @@
 <?php
 
+use dg\statistics\Stat;
+use Khill\Lavacharts\Lavacharts;
+
 class HoleController extends \BaseController {
+
+    /**
+     * @var Stat
+     */
+    private $stat;
+
+    public function __construct(Stat $stat){
+
+        $this->stat = $stat;
+    }
 
 	public function index()
 	{
@@ -66,8 +79,12 @@ class HoleController extends \BaseController {
 	public function show($id)
 	{
 		$hole = Hole::with('shot')->whereId($id)->firstOrFail();
+        $data = Score::where('hole_id', $id)->get();
+        $scores = Score::where('hole_id', $id)->limit(10)->get();
 
-        return View::make('holes.show', ['hole'=>$hole]);
+        $avg = $this->stat->getAvgScore($data);
+
+        return View::make('holes.show', ['hole'=>$hole, 'scores'=>$scores, 'avg'=>$avg]);
 	}
 
 	public function edit($id)
@@ -171,6 +188,81 @@ class HoleController extends \BaseController {
         $holes = Hole::where('course_id', Input::get('id'))->get();
 
         return Response::json($holes);
+    }
+
+    #   Personlig statistik #
+    public function getStats()
+    {
+
+        $input = Input::all();
+
+        if($input['model'] == 'hole'){
+            $hole = Hole::where('id', $input['id'])->firstOrFail();
+            $scores = Score::where('hole_id', $input['id'])->where('user_id', Auth::id())->get();
+            $rounds = Round::where('user_id', Auth::id())->where('tee_id', $hole->tee_id)->orWhere('par_id', Auth::id())->where('status', 1)->get();
+        }
+        if($input['model'] == 'course' ){
+            $scores = Score::where('course_id', $input['id'])->where('user_id', Auth::id())->get();
+            $rounds = Round::where('course_id', $input['id'])->where('user_id', Auth::id())->get();
+        }
+
+        $stats = $this->stat->calc($scores);
+        $avg = $this->stat->getAvgScore($scores);
+
+        $message = [
+            'msg' => 'success',
+            'avg' => $avg['avg'],
+            'shots' => $avg['shots'],
+            'results' => count($scores),
+            'rounds'    => count($rounds),
+            'ace'   => $stats['ace'],
+            'eagle'   => $stats['eagle'],
+            'birdie'   => $stats['birdie'],
+            'par'   => $stats['par'],
+            'bogey'   => $stats['bogey'],
+            'dblbogey'   => $stats['dblbogey'],
+            'trpbogey'   => $stats['trpbogey'],
+            'quad'   => $stats['quad']
+        ];
+
+        return Response::json($message);
+
+    }
+
+    # Första charten #
+    public function getHoleStats()
+    {
+        $id = Input::get('id');
+        $model = Input::get('model');
+
+        if($model == 'course'){
+            $scores = Score::where('course_id', $id)->get();
+
+        }
+        if($model == 'hole'){
+            $scores = Score::where('hole_id', $id)->get();
+        }
+
+        $stats = $this->stat->calc($scores);
+        $avg = $this->stat->getAvgScore($scores);
+
+        $message = [
+            'msg' => 'success',
+            'avg' => $avg['avg'],
+            'shots' => $avg['shots'],
+            'results' => count($scores),
+            'ace'   => $stats['ace'],
+            'eagle'   => $stats['eagle'],
+            'birdie'   => $stats['birdie'],
+            'par'   => $stats['par'],
+            'bogey'   => $stats['bogey'],
+            'dblbogey'   => $stats['dblbogey'],
+            'trpbogey'   => $stats['trpbogey'],
+            'quad'   => $stats['quad']
+        ];
+
+        return Response::json($message);
+
     }
 
 }

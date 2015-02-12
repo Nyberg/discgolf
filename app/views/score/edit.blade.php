@@ -4,14 +4,14 @@
 
 	<div class="showback">
 
-          		 <h4><i class="fa fa-angle-right"></i> Redigera Resultat - Hål {{$score->hole->number}}</h4><hr>
+          		 <h4><i class="fa fa-angle-right"></i> Redigera Resultat - Hål {{$score->hole->number}}</h4>
                    <div class="form-horizontal style-form">
-            {{Form::model($score,['method'=>'PATCH', 'route'=> ['score.update', $score->id]])}}
+            {{Form::model($score,['method'=>'PATCH', 'route'=> ['score.update', $score->id], 'id'=>'score_update'])}}
             {{Form::hidden('round_id', $score->round_id)}}
                       <div class="form-group">
                         <label class="col-sm-1 col-sm-1 control-label">Resultat</label>
                                                  <div class="col-sm-3">
-                                              {{Form::number('score', null, ['class'=>'form-control'])}}
+                                              {{Form::number('score', null, ['class'=>'form-control', 'data-validation'=>'number', 'data-validation-allowing'=>'range[1;100]', 'data-validation-error-msg'=>'Du måste ange ett nummer mellan 1 och 100'])}}
                                                 </div>
                           <label class="col-sm-1 col-sm-1 control-label">Längd</label>
                              <div class="col-sm-3">
@@ -31,4 +31,17 @@
              {{Form::close()}}
                 </div>
     </div>
+@stop
+
+
+@section('scripts')
+
+    <script>
+
+    $.validate({
+      form : '#score_update'
+    });
+
+    </script>
+
 @stop

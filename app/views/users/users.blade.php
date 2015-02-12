@@ -4,6 +4,7 @@
 @section('content')
 
               <h2 class="text-center page-header-custom">Användare</h2>
+              <p class="text-center">Visar alla användare i ditt län - {{Auth::user()->profile->state->state}}</p>
               <div class="divider-header"></div>
 
   <table class="table table-striped table-advance table-hover">
@@ -22,10 +23,10 @@
       @foreach($users as $user)
 
       <tr>
-          <td><a href="/user/{{$user->id}}/show">{{$user->first_name .' '. $user->last_name}}</a></td>
-          <td>{{$user->club->name}}</td>
+          <td><a href="/user/{{$user->id}}/show">{{$user->user->first_name .' '. $user->user->last_name}}</a></td>
+          <td>{{$user->user->club->name}}</td>
           <td>0</td>
-          <td>{{count($user->round)}}</td>
+          <td>{{count($user->user->round)}}</td>
       </tr>
 
       @endforeach

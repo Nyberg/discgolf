@@ -227,7 +227,7 @@
 <script>
 
 $.validate({
-  form : '#club_group_form $group_form #club_group_form'
+  form : '#club_group_form #group_form #club_group_form'
 });
 
 </script>

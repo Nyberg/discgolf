@@ -39,16 +39,19 @@
                 @endif
 
                 <div class="row">
+                    <br/>
                     <div class="col-md-10 col-md-offset-1">
 
-                             <h4 class=""> Kommentarer ({{count($news->comments)}})
+                                          <div class="panel panel-default">
+                                            <div class="panel-heading">Kommentarer ({{count($news->comments)}})
                                 @if(Auth::user())
-                                <button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#comment">
+                                <button class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#comment">
                                  Kommentera
                                 </button>
                                 @else
                                 @endif
-                             </h4>
+                             </div>
+                              </div>
 
                              @if(count($news->comments) == 0)
 
@@ -62,8 +65,8 @@
 
                              @endif
 
-                    </div>
 
+                    </div>
                 </div>
 
 

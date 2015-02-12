@@ -2,6 +2,7 @@
 
 use dg\Forms\CourseAddForm;
 use dg\statistics\Stat;
+use Khill\Lavacharts\Lavacharts;
 
 class CourseController extends \BaseController {
 
@@ -109,16 +110,16 @@ class CourseController extends \BaseController {
 	{
         $course = Course::with('tee')->whereId($id)->firstOrFail();
         $tees = Tee::where('course_id', $id)->get();
-        $rounds = Round::where('course_id', $id)->get();
+        $rounds = Round::where('course_id', $id)->where('status', 1)->get();
         $club = Club::whereId($course->club_id)->firstOrFail();
         $reviews = Review::where('course_id', $id)->get();
 
         $holes = Hole::where('course_id', $id)->get();
         $records = Record::where('course_id', $id)->where('status', 1)->get();
         $data = $this->stat->generateInfo($holes, $tees);
+        $avg = $this->stat->generateAvg($tees);
 
-        return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'tees'=>$tees, 'club'=>$club,'reviews'=>$reviews, 'data'=>$data, 'records'=>$records]);
-	
+        return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'tees'=>$tees, 'club'=>$club,'reviews'=>$reviews, 'data'=>$data, 'records'=>$records, 'avg'=>$avg]);
 }
 
 

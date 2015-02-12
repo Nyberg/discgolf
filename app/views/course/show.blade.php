@@ -46,11 +46,11 @@
 <div class="col-lg-12 main-chart">
 
 <ul class="nav nav-tabs nav-justified">
-<li class="active"><a data-toggle="tab" href="#sectionA"><i class="fa fa-star-o"></i> Översikt</a></li>
+<li class="active"><a data-toggle="tab" href="#sectionA">Översikt</a></li>
     @foreach($course->tee as $tee)
-<li class=""><a data-toggle="tab" href="#section{{$tee->id}}"><i class="fa fa-star-o"></i> {{$tee->color}}</a></li>
+<li class=""><a data-toggle="tab" href="#section{{$tee->id}}">{{$tee->color}} Tee</a></li>
     @endforeach
-<li class=""><a data-toggle="tab" href="#sectionX"><i class="fa fa-star-o"></i> Rekordrundor</a></li>
+<li class=""><a data-toggle="tab" href="#sectionX">Rekordrundor</a></li>
 </ul>
 <div class="tab-content">
 
@@ -67,7 +67,7 @@
                  <div class="caption text-center stat">
                      <i class="fa fa-tree fa-4x"></i>
                     <h4>{{$tee->color}}</h4>
-                    <p>Par: {{$tee->par}} | Antal hål: {{$tee->holes}} | Rating: 942</p>
+                    <p>Par: {{$tee->par}} | Antal hål: {{$tee->holes}}</p>
                   </div>
                 </div>
               </div>
@@ -91,6 +91,7 @@
     <div id="section{{$tee->id}}" class="tab-pane fade">
 
 <h4 class="tab-rub text-center page-header-custom" id="hole-gallery-{{$tee->id}}">{{$tee->color . ' tee - ' .$course->name}}</h4>
+<p class="text-center">Hoovra över banans par för att se snittresultat för varje hål.</p>
      <div class="divider-header"></div>
 
     <table class="table table-hover">
@@ -107,7 +108,7 @@
         <tr>
             <td>Par</td>
             @foreach($tee->hole as $hole)
-            <td>{{$hole->par}}</td>
+            <td><span data-toggle="tooltip" data-placement="top" title="Snittresultat: {{$avg[$tee->id][$hole->number]}}"> {{$hole->par}}</span></td>
             @endforeach
             <td>Par: {{$tee->par}}</td>
         </tr>
@@ -172,18 +173,71 @@
 
       </div>
 
+
+
     </div>
 
 </div></div></div>
+
+            @if(Auth::check() && Auth::user()->hasRole('Admin'))
+                    <div class="showback">
+                  <div class="row">
+
+                  <div class="col-md-12 statistics">
+
+                      <!-- Statistik -->
+                          <div class="panel panel-default hidden-phone">
+                             <!-- Default panel contents -->
+                             <div class="panel-heading">Statistik
+                             </div>
+
+                            <div class="col-md-6" id="stats">
+                             <div class="col-md-12 text-center">
+                                  <br/><h4>Översiktlig Statistik - {{$course->name}}</h4>
+                                  <p>Resultat</p>
+
+                            </div>
+                                <div id="donut-stats" style="height: 250px;"></div>
+                            </div>
+
+                                <div class="col-md-6">
+                                 <div class="col-md-12 text-center" id="result">
+
+                                </div>
+                                    <div id="donut-example" style="height: 250px;"></div>
+                                </div>
+
+                          </div>
+
+
+                        <div class="col-md-12">
+                        </div>
+
+                              </div>
+                            <div class="col-md-12">
+                             <input hidden="id" id="id" value="{{$course->id}}"/>
+                             <input hidden="model" id="model" value="course"/>
+                                 {{Form::open(['method' => 'POST','route' => ['hole.stats'],'class' => 'form-inline', 'id' => 'user_stat'])}}
+                                 {{Form::hidden('id', $course->id, ['id'=>'id'])}}
+                                 {{Form::hidden('model', 'course', ['id'=>'model'])}}
+                                 {{Form::hidden('user_id', Auth::id(), ['id'=>'user_id'])}}
+                                 {{Form::submit('Visa din statistik', ['class' => 'btn btn-primary btn-sm btn-block'])}}
+                                 {{Form::close()}}
+                            </div>
+                        </div>
+                        </div>
+
+            @else
+            @endif
 
 <div class="row">
 <div class="col-lg-12 main-chart">
 <div class="showback">
 
 <ul class="nav nav-tabs nav-justified">
-<li class="active"><a data-toggle="tab" href="#sectionD"><i class="fa fa-star-o"></i> Rundor ({{count($rounds)}})</a></li>
-<li class="active"><a data-toggle="tab" href="#sectionE"><i class="fa fa-bookmark-o"></i> Recensioner ({{count($reviews)}})</a></li>
-<li><a data-toggle="tab" href="#sectionF"><i class="fa fa-comments-o"></i> Kommentarer ({{count($course->comments)}})</a></li>
+<li class="active"><a data-toggle="tab" href="#sectionD">Rundor ({{count($rounds)}})</a></li>
+<li class="active"><a data-toggle="tab" href="#sectionE">Recensioner ({{count($reviews)}})</a></li>
+<li><a data-toggle="tab" href="#sectionF">Kommentarer ({{count($course->comments)}})</a></li>
 </ul>
 <div class="tab-content">
 
@@ -192,37 +246,35 @@
     <div class="panel panel-default">
                     <div class="panel-heading">De 10 senaste rundorna spelade vid {{$course->name}}</div>
 
-<table class="table table-hover">
-<thead>
-<tr>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Användare</th>
+                    <th>Tee</th>
+                    <th>Typ</th>
+                    <th>Resultat</th>
+                </tr>
 
-<th>Datum</th>
-<th>Användare</th>
-<th>Tee</th>
-<th>Typ</th>
-<th>Resultat</th>
-
-</tr>
-
-</thead>
-<tbody>
-@foreach($rounds as $round)
-<tr>
-<td><a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->created_at->format('Y-m-d')}}</a></td>
-@if($round->type == 'Singel')
-<td><a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a></td>
-@else
-<td>{{showPar($round->par_id, $round->user_id)}}</td>
-@endif
-<td>{{$round->tee['color']}}</td>
-<td>{{$round->type}}</td>
-<td>{{calcScore($round->total, $tee->par)}}</td>
-</tr>
-@endforeach
-</tbody>
-</table>
-    </div>
-<a href="/course/{{$course->id}}/rounds" class="btn btn-primary btn-sm">Visa alla rundor</a>
+            </thead>
+            <tbody>
+                @foreach($rounds as $round)
+                <tr>
+                    <td><a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->created_at->format('Y-m-d')}}</a></td>
+                    @if($round->type == 'Singel')
+                    <td><a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a></td>
+                    @else
+                    <td>{{showPar($round->par_id, $round->user_id)}}</td>
+                    @endif
+                    <td>{{$round->tee['color']}}</td>
+                    <td>{{$round->type}}</td>
+                    <td>{{calcScore($round->total, $round->tee->par)}}</td>
+                </tr>
+                @endforeach
+            </tbody>
+            </table>
+        </div>
+        <a href="/course/{{$course->id}}/rounds" class="btn btn-primary btn-sm">Visa alla rundor</a>
 
 </div>
 
@@ -299,14 +351,14 @@
                   </div>
 
                   <div class="modal-body">
-                  {{Form::open(['route'=>'comment.store', 'class'=>'form-horizontal style-form'])}}
+                  {{Form::open(['route'=>'comment.store', 'class'=>'form-horizontal style-form','id'=>'comment_form'])}}
                     {{Form::hidden('type_id', $course->id)}}
                     {{Form::hidden('model', 'course')}}
                    <div class="form-group">
                          <label class="col-sm-2 col-sm-2 control-label">Kommentar</label>
                          <div class="col-sm-10">
 
-                             {{Form::text('body', '', ['class'=>'form-control'])}}
+                             {{Form::text('body', '', ['class'=>'form-control', 'data-validation'=>'required', 'data-validation-error-msg'=>'Detta fältet måste fyllas i..'])}}
                          </div>
                      </div>
 
@@ -328,8 +380,19 @@
 
 @section('scripts')
 
+{{HTML::script('admin_js/stats/stats.js')}}
+
     <script>
 
+    jQuery(document).ready(function($) {
+
+        getFirstPie();
+
+         $('#user_stat').submit(getUserPie);
+
+        });
+</script>
+<script>
         $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
             event.preventDefault();
             $(this).ekkoLightbox();
