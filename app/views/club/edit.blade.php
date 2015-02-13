@@ -91,6 +91,17 @@
                                                   <span class="help-block"></span>
                                               </div>
                                           </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Medlemskap</label>
+                              <div class="col-sm-10">
+                                  {{Form::textarea('membership', null, ['class'=>'form-control'])}} </div>
+
+                              <label class="col-sm-2 col-sm-2 control-label"></label>
+                              <div class="col-sm-10">
+                                  <span class="help-block"></span>
+                              </div>
+                          </div>
                 </div>
                       {{Form::submit('Save', ['class'=>'btn btn-primary'])}}
                         {{Form::close()}}

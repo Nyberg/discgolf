@@ -10,7 +10,7 @@
 </div>
     <div class="over-img">
     <img src="{{$user->image}}" class="img-circle center-block"/>
-     <h2 class="text-center page-header-custom  hidden-tablet">{{$user->first_name .' ' .$user->last_name}} - {{$user->club->name}}</h2>
+     <h2 class="text-center page-header-custom  hidden-tablet">{{$user->first_name .' ' .$user->last_name}} - <a href="/club/{{$user->club_id}}/show">{{$user->club->name}}</a></h2>
     </div>
     </div>
 </div>

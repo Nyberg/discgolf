@@ -59,22 +59,6 @@
                     {{errors_for('course', $errors)}}
              </div>
             </div>
-             <div class="form-group" id="bana">
-
-
-                      <div class="hole">
-
-                      <label class="col-sm-2 col-sm-2 control-label">Hål</label>
-                       <div class="col-sm-5">
-
-                        <select name="hole" class="form-control" id="target">
-                        <option value="0" selected="selected">Välj hål</option>
-                        </select>
-
-                      </div>
-
-              </div>
-          </div>
 
          {{Form::submit('Rapportera', ['class'=>'btn btn-success'])}}
     {{Form::close()}}

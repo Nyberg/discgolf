@@ -68,13 +68,32 @@ body {
     width: 100%;
 }
 
+.over-img-club {
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    width: 100%;
+}
+
 .over-img img{
-    width:80px;
+    width:60px;
     border: 2px solid #fff;
 }
 
-.over-img h2{
+.over-img-club img{
+    width:140px;
+}
+
+.over-img h2, .over-img-club h2{
     color: white; text-shadow: #E74C3C 0.1em 0.1em 0.4em
+}
+
+.over-img a{
+    color: white; text-shadow: #E74C3C 0.1em 0.1em 0.4em
+}
+
+.over-img a:hover{
+    color: #E74C3C;
 }
 
 .news-header{
@@ -148,6 +167,27 @@ body {
     text-transform: uppercase;
     margin-bottom: 10px;
     font-weight: 400;
+}
+
+.page-subheader-custom {
+
+    font-size: 1.1em;
+    letter-spacing: 0px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 100;
+}
+
+.page-subheader-custom a {
+}
+
+.page-subheader-custom a:hover{
+    color: #E74C3C;
+}
+
+.margin-top-bottom{
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .thread-options{
@@ -359,12 +399,16 @@ a, a:hover, a:focus {
 }
 
 hr {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border: 0;
-  border-top: 1px solid #797979;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  border-top: 1px solid #F5F5F5;
 }
 
+.hr {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #F5F5F5;
+}
 
 
 /*Helpers*/
@@ -781,7 +825,6 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 .dropdown-menu.inbox li a .subject {
     display: block;
 }
-
 .dropdown-menu.inbox li a .subject .from {
     font-size: 12px;
     font-weight: 600;

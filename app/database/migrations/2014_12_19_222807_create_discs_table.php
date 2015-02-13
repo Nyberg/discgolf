@@ -23,6 +23,7 @@ class CreateDiscsTable extends Migration {
             $table->string('condition', '255');
             $table->string('type', '255');
             $table->string('mixed', '255');
+            $table->integer('user_id');
             $table->timestamps();
 
         });

@@ -1,11 +1,12 @@
 
-<div class="well col-lg-12">
+<div class="col-lg-12 hr">
 <div class="col-lg-1">
 <img src="{{getUserImage($comment->user_id)}}" class="img-circle pull-left" width="60px">
 </div>
 <div class="col-lg-10">
 <p>{{$comment->created_at}} av <a href="/user/{{$comment->user_id}}/show">{{getUser($comment->user_id)}}</a></p>
 <p>{{$comment->body}}</p>
+
 </div>
 <div class="col-lg-1">
 

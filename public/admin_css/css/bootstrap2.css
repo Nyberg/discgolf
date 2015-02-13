@@ -3686,7 +3686,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 30px 15px;
+  padding: 15px 15px;
 
 }
 .nav > li > a:hover,
@@ -3720,7 +3720,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   max-width: none;
 }
 .nav-tabs {
-  border-bottom: 1px solid #E74C3C;
 }
 .nav-tabs > li {
   float: left;
@@ -3730,7 +3729,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   line-height: 1.42857143;
 }
 .nav-tabs > li > a:hover {
-    background-color: #F5F5F5;
+    background-color: #FDFDFD;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
@@ -3746,7 +3745,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .nav-tabs.nav-justified > li {
   float: none;
-
 }
 .nav-tabs.nav-justified > li > a {
   margin-bottom: 5px;
@@ -5309,6 +5307,7 @@ a.list-group-item-danger.active:focus {
 .panel-group {
   margin-bottom: 20px;
 }
+
 .panel-group .panel {
   margin-bottom: 0;
 }
@@ -5336,6 +5335,7 @@ a.list-group-item-danger.active:focus {
   background-color: #F5F5F5;
   border-color: #ddd;
 }
+
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #ddd;
 }

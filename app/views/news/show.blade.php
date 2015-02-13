@@ -2,7 +2,6 @@
 
 @section('content')
 
-
                   <h2 class="text-center page-header-custom">{{$news->head}}</h2>
                   <p class="text-center">{{$news->created_at . ' av '}}  <a href="/club/{{$news->club_id}}/show">{{$news->club->name}}</a> | {{$news->views}} visningar</p>
 
@@ -10,10 +9,10 @@
 
                   <div class="row">
 
-                    <div class="col-md-10 col-md-offset-1 divider">
+                    <div class="col-md-10 col-md-offset-1">
 
                          <p>{{$news->body}}</p>
-
+                    <hr/>
                     </div>
 
                   </div>

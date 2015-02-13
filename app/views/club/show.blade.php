@@ -8,7 +8,8 @@
         <div class="over-img-img">
 
         </div>
-            <div class="over-img">
+            <div class="over-img-club">
+             <img src="/img/logo-club.png" class="center-block"/>
              <h2 class="text-center page-header-custom  hidden-tablet">{{$club->name}}</h2>
             </div>
             </div>
@@ -23,8 +24,7 @@
             <li class="active"><a data-toggle="tab" href="#sectionA">{{$club->name}}</a></li>
             <li><a data-toggle="tab" href="#sectionB">Nyheter ({{count($club->news)}})</a></li>
             <li><a data-toggle="tab" href="#sectionC">Medlemmar ({{count($club->users)}})</a></li>
-            <li><a data-toggle="tab" href="#sectionD">Banor</a></li>
-            <li><a data-toggle="tab" href="#sectionE">Kommentarer ({{count($club->comments)}})</a></li>
+            <li><a data-toggle="tab" href="#sectionE">Gästbok ({{count($club->comments)}})</a></li>
         </ul>
     </div>
 
@@ -33,16 +33,86 @@
  <div class="tab-content">
 
              <div id="sectionA" class="tab-pane fade in active">
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <div class="col-md-12">
                     <br/>
+                    <h2 class="text-center page-header-custom">Information om {{$club->name}}</h2>
+                    <div class="divider-header"></div>
                     <p>{{$club->information}}</p>
+                    <br/>
+                    <hr/>
                 </div>
+
+                <div class="col-md-12">
+                    <br/>
+                    <h2 class="text-center page-header-custom">Medlemskap</h2>
+                    <div class="divider-header"></div>
+                    <p>{{$club->membership}}</p>
                 </div>
+
+                </div>
+
+        <!-- Sidocontent -->
+
+         <div class="col-md-4">
+        <br/>
+           <div class="col-md-12 panel panel-default">
+
+                 <!-- Default panel contents -->
+                 <div class="panel-heading text-center">Banor</div>
+                  @foreach($club->course as $course)
+                  <div class="col-md-12 margin-top-bottom">
+                  @foreach($course->photos as $photo)
+
+                          <a href="/course/{{$course->id}}/show"> <img class="thumbnail" src="{{$photo->url}}" width="100%"/></a>
+                         <p class="text-center"><a href="/course/{{$course->id}}/show">{{$course->name}} | Tees: {{count($course->tee)}} | Rundor: {{count($course->round)}}</a></p>
+                  <hr/>
+                  @endforeach
+                  </div>
+                  @endforeach
+
+           </div>
+
+         <br/>
+          <div class="col-md-12 panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading text-center">Mest lästa nyheter</div>
+
+            @foreach($mosts as $new)
+            <div class="col-md-12">
+                <h2 class="text-center page-subheader-custom"> <a href="/club/news/{{$new->id}}/show" class="">{{$new->head}}</a></h2>
+                 <p class="text-center">{{$new->created_at->format('Y-m-d') . ' av '}}  <a href="/club/{{$new->club_id}}/show">{{$new->club->name}}</a> | {{$new->views}} visningar</p>
+            <hr/>
+            </div>
+
+            @endforeach
+
+          </div>
+
+              <div class="col-md-12 panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading panel-subheading text-center">Senaste nyheter</div>
+
+                    <?php $i = 0; ?>
+                    @foreach($club->news as $new)
+                    @if($i == 3)<?php break; ?>@endif
+                    <div class="col-md-12">
+                        <h2 class="text-center page-subheader-custom"> <a href="/club/news/{{$new->id}}/show" class="">{{$new->head}}</a></h2>
+                         <p class="text-center">{{$new->created_at->format('Y-m-d') . ' av '}}  <a href="/club/{{$new->club_id}}/show">{{$new->club->name}}</a> | {{$new->views}} visningar</p>
+                    <hr/>
+                    </div>
+                    <?php $i++; ?>
+                    @endforeach
+                </div>
+
+           </div>
+
+           <!-- Slut sidocontent -->
+
             </div>
 
             <div id="sectionB" class="tab-pane fade">
-               <div class="col-lg-12">
+               <div class="col-md-12">
                    @foreach($club->news as $new)
                    <div class="row">
                        <div class="col-lg-12 text-center">
@@ -55,12 +125,13 @@
                            Kommentarer ({{count($new->comments)}}) |
                            <a href="/club/news/{{$new->id}}/show" class="">Läs mer..</a>
                        </div>
+                       <hr/>
                        </div>
                    </div>
-                   </div>
-                   @endforeach
                </div>
+                   @endforeach
             </div>
+
 
             <div id="sectionC" class="tab-pane fade">
                 <div class="col-lg-12 wrapper-parent mb">
@@ -81,9 +152,9 @@
                      <br/>
                          @foreach($users as $user)
                         <li class="col-sm-2 text-center thread mix mixup-content">
-                           <img src="{{$user->image}}" class="img-responsive img-circle center-block" width="40px"/>
+                           <a href="{{$user->id}}/show"><img src="{{$user->image}}" class="img-responsive img-circle center-block" width="40px"/></a>
                            <p><a href="/user/{{$user->id}}/show">{{$user->first_name . ' ' . $user->last_name}}</a></p>
-                           <small>Klubb: <a href="/club/{{$user->club_id}}/show">{{$user->club->name}}</a></small>
+
                         </li>
                         @endforeach
                     </ul>
@@ -103,38 +174,14 @@
              </div>
             </div>
 
-       <div id="sectionD" class="tab-pane fade">
-            <div class="col-lg-12 ">
-            <br/>
-                 <div class="panel panel-default">
-                   <!-- Default panel contents -->
-                   <div class="panel-heading">Banor</div>
-            </div>
-                @foreach($club->course as $course)
-                <div class="row">
-                @foreach($course->photos as $photo)
-                    <div class="col-lg-6">
-
-                        <a href="/course/{{$course->id}}/show"> <img class="" src="{{$photo->url}}" width="100%"/></a>
-                    </div>
-                    <div class="col-lg-6">
-                       <h2 class="text-center page-header-custom">{{$course->name}}</h2>
-                    </div>
-                </div>
-                @endforeach
-                </div>
-                @endforeach
-             </div>
-
-
     <div id="sectionE" class="tab-pane fade">
     <div class="col-lg-12">
     <br/>
 
               <div class="panel panel-default">
-                <div class="panel-heading">Kommentarer ({{count($club->comments)}})
+                <div class="panel-heading">Gästbok ({{count($club->comments)}})
                      @if(Auth::user())
-                        <a class="pull-right btn btn-primary btn-xs" data-toggle="modal" data-target="#comment">Kommentera</a>
+                        <a class="pull-right btn btn-primary btn-xs" data-toggle="modal" data-target="#comment">Skriv inlägg</a>
                      @endif
                 </div>
              </div>
@@ -182,8 +229,9 @@
     </div><!-- --/Modal-panel ---->
 
     </div>
-
     </div>
+
+</div>
 
           <div class="modal fade bs-example-modal-lg" id="news" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                       <div class="modal-dialog">
@@ -246,6 +294,7 @@
                             </div>
                         </div>
                     </div>
+                    @else
                 @endif
     </div>
 </div>

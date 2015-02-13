@@ -28,7 +28,7 @@ $(document).ready(function() {
         }
     });
 
-    $i = 0;
+  /*  $i = 0;
 
     $(".course").change(function () {
 
@@ -50,7 +50,7 @@ $(document).ready(function() {
             })
          })
 
-    });
+    }); */
 
 /*
     $(".type").change(function(){

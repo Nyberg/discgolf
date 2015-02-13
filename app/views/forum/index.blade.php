@@ -7,9 +7,8 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-
-                    <h2 class="text-center page-header-custom">Forum</h2>
-                    <div class="divider-header"></div>
+        <h2 class="text-center page-header-custom">Forum</h2>
+        <div class="divider-header"></div>
     </div>
     <div class="col-md-12">
     <div class="table-responsive">
@@ -56,7 +55,6 @@
                 @endforeach
         @endif
 
-
             <tr class="panel-footer">
                 <td>
                     @if(Auth::check() && Auth::user()->hasRole('Admin'))
@@ -74,6 +72,7 @@
         </table>
     </div>
 </div>
+
 </div>
 
     @if(Auth::check() && Auth::user()->hasRole('Admin'))

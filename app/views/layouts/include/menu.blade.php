@@ -14,7 +14,7 @@
 
     <div id="navbar" class="navbar-collapse collapse col-md-offset-1">
 
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav menu-padding">
                 <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="/">Startsida</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Discgolf <span class="caret"></span></a>
@@ -47,6 +47,10 @@
                     <li class="divider"></li>
                      <li class="dropdown-header">Klubbar</li>
                     <li><a href="/clubs">Alla Klubbar</a></li>
+                    @if(Auth::check())
+                    <li><a href="/club/{{Auth::user()->club_id}}/show">Besök din klubb</a></li>
+                    @else
+                    @endif
                   </ul>
                 </li>
 
@@ -108,19 +112,18 @@
                             <a href="/registration">Registrera</a>
                     </li>
 
-                       <ul class="nav pull-right top-menu">
+                    <ul class="nav pull-right top-menu">
+                           {{Form::open(['route' => 'searchresult', 'method' => 'GET', 'class' => 'navbar-form navbar-left'])}}
+                         <div class="input-group">
+                                  <input type="text" class="form-control input-sm" name="auto" id="auto" placeholder="Search Course">
 
-                                                           {{Form::open(['route' => 'searchresult', 'method' => 'GET', 'class' => 'navbar-form navbar-left'])}}
-                                                         <div class="input-group">
-                                                                  <input type="text" class="form-control input-sm" name="auto" id="auto" placeholder="Search Course">
+                              <span class="input-group-btn">
+                                   {{Form::submit('Search Course', ['class' => 'btn btn-primary btn-sm'])}}
 
-                                                              <span class="input-group-btn">
-                                                                   {{Form::submit('Search Course', ['class' => 'btn btn-primary btn-sm'])}}
-
-                                                             {{Form::close()}}
-                                                              </span>
-                                                          </div>
-                                                          </ul>
+                             {{Form::close()}}
+                              </span>
+                          </div>
+                    </ul>
 
 
                 @endif

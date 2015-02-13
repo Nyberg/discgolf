@@ -29,6 +29,7 @@ class ClubController extends \BaseController {
         $club->city_id = Input::get('city');
         $club->website = Input::get('website');
         $club->information = Input::get('information');
+        $club->membership = Input::get('membership');
         $club->image = '/img/dg/header.jpg';
 
         $club->save();
@@ -50,9 +51,10 @@ class ClubController extends \BaseController {
 	{
 		$club = Club::with('course', 'users')->whereId($id)->firstOrFail();
         $news = News::where('club_id', $id)->orderBy('created_at', 'desc')->limit(5)->get();
+        $mosts = News::where('club_id', $id)->orderBy('views', 'desc')->limit(3)->get();
 		$users = User::where('club_id', $id)->limit(18)->get();
 
-        return View::make('club.show', ['club'=>$club, 'users'=>$users, 'news'=>$news]);
+        return View::make('club.show', ['club'=>$club, 'users'=>$users, 'news'=>$news, 'mosts'=>$mosts]);
 	}
 
 	public function edit($id)
@@ -85,6 +87,7 @@ class ClubController extends \BaseController {
             $club->city_id = Input::get('city');
             $club->website = Input::get('website');
             $club->information = Input::get('information');
+            $club->membership = Input::get('membership');
 
 
             if(Input::hasFile('file')) {
