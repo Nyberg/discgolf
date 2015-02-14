@@ -56,7 +56,7 @@
 
          <div class="col-md-4">
         <br/>
-           <div class="col-md-12 panel panel-default">
+           <div class="col-md-12 panel panel-sub">
 
                  <!-- Default panel contents -->
                  <div class="panel-heading text-center">Banor</div>
@@ -74,7 +74,7 @@
            </div>
 
          <br/>
-          <div class="col-md-12 panel panel-default">
+          <div class="col-md-12 panel panel-sub">
             <!-- Default panel contents -->
             <div class="panel-heading text-center">Mest lästa nyheter</div>
 
@@ -89,7 +89,7 @@
 
           </div>
 
-              <div class="col-md-12 panel panel-default">
+              <div class="col-md-12 panel panel-sub">
                     <!-- Default panel contents -->
                     <div class="panel-heading panel-subheading text-center">Senaste nyheter</div>
 
@@ -128,8 +128,9 @@
                        <hr/>
                        </div>
                    </div>
-               </div>
+
                    @endforeach
+                    </div>
             </div>
 
 
@@ -195,6 +196,8 @@
 
     </div></div></div>
 
+   </div>
+
     <div class="modal fade bs-example-modal-lg" id="comment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -228,7 +231,7 @@
     </div>
     </div><!-- --/Modal-panel ---->
 
-    </div>
+
     </div>
 
 </div>

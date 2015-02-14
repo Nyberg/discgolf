@@ -215,8 +215,24 @@ body {
 }
 
 i{
-    color: #222;
+    color: #fff;
 }
+
+.stat{
+    background-color: #2C3E50;
+    box-shadow: 3px 3px 4px #888888;
+}
+
+.white{
+    color: #fff;
+    padding-top: 8px;
+}
+
+.red{
+    color: #E74C3C;
+    margin-top: 5px;
+}
+
 
 .thread-first{
     margin-top: 10px;

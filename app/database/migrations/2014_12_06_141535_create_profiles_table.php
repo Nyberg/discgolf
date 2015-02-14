@@ -15,7 +15,7 @@ class CreateProfilesTable extends Migration {
             $table->integer('state_id');
             $table->integer('city_id');
             $table->longText('info')->nullable();
-            $table->string('club')->nullable();
+            $table->integer('club_id');
             $table->string('website')->nullable();
             $table->string('image')->nullable();
             $table->string('location')->nullable();

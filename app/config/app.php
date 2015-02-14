@@ -196,8 +196,6 @@ return array(
         'Entrust'           => 'Zizaco\Entrust\EntrustFacade',
         'Gmaps'             => 'Appitventures\Phpgmaps\Facades\Phpgmaps'
 
-
-
 	),
 
 );

@@ -20,7 +20,7 @@
 <tbody>
 @foreach($rounds as $round)
 <tr>
-<td><a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->created_at->format('Y-m-d')}}</a></td>
+<td><a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->created_at->format('m')}}</a></td>
 @if($round->type == 'Singel')
 <td><a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a></td>
 @else

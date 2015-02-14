@@ -243,6 +243,7 @@ Route::get('/holes', 'HoleController@index');
 Route::get('/hole/{id}/show', 'HoleController@show');
 Route::post('/stats/hole/', ['as' => 'hole.stats', 'uses' => 'HoleController@getStats']);
 Route::get('/getHoleStats', 'HoleController@getHoleStats');
+Route::get('/getRoundsPerMonth', 'HoleController@getRoundsPerMonth');
 
 // Shot
 Route::get('/hole/{id}/score/{score_id}', 'ShotController@show');

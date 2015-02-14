@@ -119,6 +119,7 @@ class CourseController extends \BaseController {
         $data = $this->stat->generateInfo($holes, $tees);
         $avg = $this->stat->generateAvg($tees);
 
+
         return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'tees'=>$tees, 'club'=>$club,'reviews'=>$reviews, 'data'=>$data, 'records'=>$records, 'avg'=>$avg]);
 }
 

@@ -25,7 +25,7 @@ class CreateRecordsTable extends Migration {
 
 	public function down()
 	{
-		//
+		Schema::drop('records');
 	}
 
 }

@@ -234,13 +234,18 @@ class HoleController extends \BaseController {
     {
         $id = Input::get('id');
         $model = Input::get('model');
+        $user = User::find(Auth::id());
+
+        $name = $user->first_name + ' ' + $user->last_name;
 
         if($model == 'course'){
             $scores = Score::where('course_id', $id)->get();
-
         }
         if($model == 'hole'){
             $scores = Score::where('hole_id', $id)->get();
+        }
+        if($model == 'user'){
+            $scores = Score::where('user_id', $id)->get();
         }
 
         $stats = $this->stat->calc($scores);
@@ -248,6 +253,7 @@ class HoleController extends \BaseController {
 
         $message = [
             'msg' => 'success',
+            'user' => $name,
             'avg' => $avg['avg'],
             'shots' => $avg['shots'],
             'results' => count($scores),
@@ -259,6 +265,41 @@ class HoleController extends \BaseController {
             'dblbogey'   => $stats['dblbogey'],
             'trpbogey'   => $stats['trpbogey'],
             'quad'   => $stats['quad']
+        ];
+
+        return Response::json($message);
+
+    }
+
+    # Första charten #
+    public function getRoundsPerMonth()
+    {
+        $id = Input::get('id');
+        $model = Input::get('model');
+        $user = User::whereId(Auth::id())->firstOrFail();
+
+        $name = $user->first_name . ' ' . $user->last_name;
+
+        if($model == 'user'){
+            $rounds = Round::where('user_id', $id)->get();
+        }
+
+        $stats = $this->stat->getRoundsPerMonth($rounds);
+        $message = [
+            'msg' => 'success',
+            'user' => $name,
+            'jan'   => $stats['jan'],
+            'feb'   => $stats['feb'],
+            'mar'   => $stats['mar'],
+            'apr'   => $stats['apr'],
+            'maj'   => $stats['maj'],
+            'jun'   => $stats['jun'],
+            'jul'   => $stats['jul'],
+            'aug'   => $stats['aug'],
+            'sep'   => $stats['sep'],
+            'okt'   => $stats['okt'],
+            'nov'   => $stats['nov'],
+            'dec'   => $stats['dec'],
         ];
 
         return Response::json($message);

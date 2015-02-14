@@ -21,12 +21,12 @@
 <br/>
     <div class="col-lg-12">
     <div class="bs-example">
-        <ul class="nav nav-tabs nav-justified">
-            <li class="active"><a data-toggle="tab" href="#sectionA">Information</a></li>
-            <li><a data-toggle="tab" href="#sectionB">Rundor ({{count($rounds)}})</a></li>
-            <li><a data-toggle="tab" href="#sectionC">Bag</a></li>
-            <li><a data-toggle="tab" href="#sectionE">Statistik</a></li>
-            <li><a data-toggle="tab" href="#sectionF">Kommentarer ({{count($user->comments)}})</a></li>
+        <ul class="nav nav-tabs nav-justified" id="nav-just">
+            <li class="active" id="menu_item"><a data-toggle="tab" href="#sectionA">Information</a></li>
+            <li id="menu_item_2"><a data-toggle="tab" href="#sectionB">Rundor ({{count($rounds)}})</a></li>
+            <li id="menu_item_3"><a data-toggle="tab" href="#sectionC">Bag</a></li>
+            <li id="stats_li"><a data-toggle="tab" href="#sectionE">Statistik</a></li>
+            <li id="menu_item_4"><a data-toggle="tab" href="#sectionF">Gästbok ({{count($user->comments)}})</a></li>
 
         </ul>
 </div>
@@ -130,138 +130,71 @@
 
 
     </div>
+
+    <!-- Section E -->
     <div id="sectionE" class="tab-pane fade in">
 
-               @if($cp <= 4)
-               <p>{{$user->first_name . ' ' . $user->last_name}} har inte spelat tillräckligt med rundor (5) för att kunna generera statistik. </p>
+               @if($cp >= 1)
+               <div class="row">
+
+                           <div class="col-md-12">
+                           <h4 class="text-center page-header-custom">Statistik</h4>
+               <p class="text-center">{{$user->first_name . ' ' . $user->last_name}} har inte spelat tillräckligt med rundor (5) för att kunna generera statistik. </p>
+                   <div class="divider-header"></div>
+                           </div>
+                           </div>
                @else
-               @endif
-
-<div class="row">
-
-            <div class="col-sm-4 col-md-4">
-                <div class="thumbnail text-center stat">
-                  <div class="caption text-center">
-                  <i class="fa fa-star fa-4x"></i>
-                  <p>Antal rundor</p>
-                    <h4>{{count($user->round)}}</h4>
-                    <p>Siffran visar totala antalet rundor</p>
-                  </div>
-                </div>
-              </div>
-
-            <div class="col-sm-4 col-md-4">
-                <div class="thumbnail text-center stat">
-                  <div class="caption text-center">
-                  <i class="fa fa-database fa-4x"></i>
-                  <p>Totalt antal kast</p>
-                    <h4>{{$shots}}</h4>
-                    <p>Siffran visar totala antalet kast för alla rundor</p>
-                  </div>
-                </div>
-              </div>
-
-               <div class="col-sm-4 col-md-4">
-                <div class="thumbnail text-center">
-                    <div class="caption text-center">
-                       <i class="fa fa-tree fa-4x"></i>
-                    <p>Spelade banor</p>
-                    @if($cp <= 4)
-                    <h4>0</h4>
-                    @else
-                      <h4>{{count($cp)}}</h4>
-                      @endif
-                      <p>Siffran visar antalet unika banor som spelats</p>
 
 
-                    </div>
-                  </div>
-                </div>
-
-               <div class="col-sm-4 col-md-4">
-                <div class="thumbnail text-center">
-                    <div class="caption text-center">
-                    <i class="fa fa-thumbs-o-up fa-4x"></i>
-                    <p>Bogeyfria rundor</p>
-                      <h4>{{$bfr}}</h4>
-                      <p>Siffran visar antalet bogeyfria rundor</p>
+        <div class="row">
 
 
-                    </div>
-                  </div>
-                </div>
-
-               <div class="col-sm-4 col-md-4">
-                <div class="thumbnail text-center">
-                    <div class="caption text-center">
-                     <i class="fa fa-trophy fa-4x"></i>
-                    <p>Genomsnittligt resultat</p>
-                      <h4>{{round($avg, 1)}}</h4>
-                      <p>Siffran visar snittresultat per runda</p>
 
 
-                    </div>
-                  </div>
-                </div>
-
-               <div class="col-sm-4 col-md-4">
-                <div class="thumbnail text-center">
-                    <div class="caption text-center">
-                    <i class="fa fa-child fa-4x"></i>
-                    <p>Flest birdies på en runda</p>
-                      <h4>{{$birdies}}</h4>
-                      <p>Siffran visar rundan med flest birdies</p>
 
 
-                    </div>
-                  </div>
-                </div>
-    </div>
 
-    @if(count($user->round) > 4)
-    <!-- Statistik -->
-    <div class="row">
-        <div id="chart-div"></div>
-        @piechart('Resultat', 'chart-div', array('height'=>400, 'width'=>600))
-
-     </div>
-     <!-- End Statistics -->
-     @else
-     @endif
+            </div>
+      @endif
 
     </div>
+    <!-- Slut Section E -->
+
+    <!-- Section F -->
     <div id="sectionF" class="tab-pane fade in">
      <br/>
 
       <div class="row">
-                     <div class="col-lg-12">
+        <div class="col-lg-12">
 
-                   <div class="panel panel-default">
-                     <div class="panel-heading">Kommentarer ({{count($user->comments)}})
-                          @if(Auth::user())
-                             <a class="pull-right btn btn-primary btn-xs" data-toggle="modal" data-target="#comment">Kommentera</a>
-                          @endif
-                     </div>
-                  </div>
+           <div class="panel panel-default">
+             <div class="panel-heading">Inlägg ({{count($user->comments)}})
+                  @if(Auth::user())
+                     <a class="pull-right btn btn-primary btn-xs" data-toggle="modal" data-target="#comment">Skriv inlägg</a>
+                  @endif
+             </div>
+          </div>
 
         </div>
         </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    @foreach($user->comments as $comment)
-                    @include('layouts/include/comment')
-                    @endforeach
-                </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                @foreach($user->comments as $comment)
+                @include('layouts/include/comment')
+                @endforeach
             </div>
+        </div>
 
     </div>
+    <!-- Slut Section F -->
 
     <div class="modal fade bs-example-modal-lg" id="comment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
     <div class="modal-content">
     <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h4 class="modal-title" id="myModalLabel">Kommentera</h4>
+    <h4 class="modal-title" id="myModalLabel">Skriv inlägg</h4>
     </div>
 
     <div class="modal-body">
@@ -269,7 +202,7 @@
     {{Form::hidden('type_id', $user->id)}}
     {{Form::hidden('model', 'user')}}
     <div class="form-group">
-    <label class="col-sm-2 col-sm-2 control-label">Kommentar</label>
+    <label class="col-sm-2 col-sm-2 control-label">Inlägg</label>
     <div class="col-sm-10">
 
     {{Form::text('body', '', ['class'=>'form-control', 'data-validation'=>'required', 'data-validation-error-msg'=>'Detta fältet måste fyllas i..'])}}
@@ -278,7 +211,7 @@
 
 
     <div class="modal-footer">
-    {{Form::submit('Save Comment', ['class'=>'btn btn-primary'])}}
+    {{Form::submit('Spara inlägg', ['class'=>'btn btn-primary'])}}
     {{Form::close()}}
     <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
 
@@ -293,5 +226,157 @@
 </div>
 </div>
 </div>
+</div>
+
+<div class="showback" id="stats">
+    <div class="row">
+
+        <div class="col-md-12">
+
+                <h4 class="tab-rub text-center page-header-custom">Statistik</h4>
+
+                    <p class="text-center">Statistiken baserar sig på minst 5 aktiva rundor.</p>
+                    <div class="divider-header"></div>
+        </div>
+
+         <div class="col-sm-3 col-md-3 col-md-offset-1">
+                        <div class="thumbnail text-center stat" data-toggle="tooltip" data-placement="top" title="Siffran visar totala antalet rundor.">
+                          <div class="caption text-center">
+                          <i class="fa fa-star fa-4x"></i>
+                          <p class="white">Antal rundor</p>
+                            <h4 class="red">{{count($user->round)}}</h4>
+                          </div>
+                        </div>
+                      </div>
+
+                    <div class="col-sm-4 col-md-4">
+                        <div class="thumbnail text-center stat" data-toggle="tooltip" data-placement="top" title="Siffran visar totala antalet kast för alla rundor.">
+                          <div class="caption text-center white">
+                          <i class="fa fa-database fa-4x"></i>
+                          <p class="white">Totalt antal kast</p>
+                            <h4 class="red">{{$shots}}</h4>
+                          </div>
+                        </div>
+                      </div>
+
+                       <div class="col-sm-3 col-md-3 col-lg-offset-right-1">
+                        <div class="thumbnail text-center stat" data-toggle="tooltip" data-placement="top" title="Siffran visar antalet unika banor som spelats.">
+                            <div class="caption text-center">
+                               <i class="fa fa-tree fa-4x"></i>
+                            <p class="white">Spelade banor</p>
+                            @if($cp <= 0)
+                            <h4 class="red">0</h4>
+                            @else
+                              <h4 class="red">{{count($cp)}}</h4>
+                              @endif
+
+                            </div>
+                          </div>
+                        </div>
+
+                       <div class="col-sm-3 col-md-3 col-md-offset-1">
+                        <div class="thumbnail text-center stat"  data-toggle="tooltip" data-placement="top" title="Siffran visar antalet bogeyfria rundor.">
+                            <div class="caption text-center">
+                            <i class="fa fa-thumbs-o-up fa-4x"></i>
+                            <p class="white">Bogeyfria rundor</p>
+                              <h4 class="red">{{$bfr}}</h4>
+                            </div>
+                          </div>
+                        </div>
+
+                       <div class="col-sm-4 col-md-4">
+                        <div class="thumbnail text-center stat"  data-toggle="tooltip" data-placement="top" title="Siffran visar snittresultat per runda.">
+                            <div class="caption text-center">
+                             <i class="fa fa-trophy fa-4x"></i>
+                            <p class="white">Genomsnittligt resultat</p>
+                              <h4 class="red">{{round($avg, 1)}}</h4>
+                            </div>
+                          </div>
+                        </div>
+
+                       <div class="col-sm-3 col-md-3 col-md-offset-right-1">
+                        <div class="thumbnail text-center stat"  data-toggle="tooltip" data-placement="top" title="Siffran visar rundan med flest birdies.">
+                            <div class="caption text-center">
+                            <i class="fa fa-child fa-4x"></i>
+                            <p class="white">Flest birdies på en runda</p>
+                              <h4 class="red">{{$birdies}}</h4>
+                            </div>
+                          </div>
+                        </div>
+
+        <div class="col-md-12 hidden-phone">
+                <h4 class="tab-rub text-center page-header-custom">Diagram & Sånt</h4>
+
+                <div id="chart-one" style="min-width: 310px; height: 400px; width: 800px; margin: 0 auto"></div>
+
+
+                <input hidden="id" id="id" value="{{$user->id}}"/>
+                <input hidden="model" id="model" value="user"/>
+                <hr/>
+            </div>
+
+        <div class="col-md-12">
+        <br>
+            <div id="chart-two" style="min-width: 310px; height: 400px; width: 800px; margin: 0 auto"></div>
+        </div>
+        </div>
+    </div>
+
+@stop
+
+@section('scripts')
+
+<script>
+
+
+
+
+        $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
+
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+
+    </script>
+
+    {{HTML::script('admin_js/stats/stats.js')}}
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+
+    <script>
+
+    jQuery(document).ready(function($) {
+
+    $('#stats').hide();
+
+    $("#stats_li").click(function(){
+
+        $( "#stats" ).show( 500 );
+        getFirstPie();
+        getSecondPie();
+    });
+
+    $('#menu_item').click(function(){
+          $('#stats').hide(500);
+    });
+
+    $('#menu_item_2').click(function(){
+          $('#stats').hide(500);
+    });
+
+    $('#menu_item_3').click(function(){
+          $('#stats').hide(500);
+    });
+
+    $('#menu_item_4').click(function(){
+          $('#stats').hide(500);
+    });
+
+});
+
+    </script>
 
 @stop

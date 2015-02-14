@@ -110,6 +110,7 @@ class Stat {
                 $total = 0;
 
                 if(count($hole->score) == null){
+
                     $sum = 1;
                     $total = $hole->par;
                 }else{
@@ -139,9 +140,16 @@ class Stat {
 
         $data = ['avg'=>0, 'shots'=>0];
 
+        if(count($scores) == null){
+            $total = 9;
+            $num = 3;
+        }else{
+
         foreach($scores as $score){
-            $total = $total + $score->score;
-            $rounds++;
+                $total = $total + $score->score;
+                $rounds++;
+            }
+
         }
 
         $avg = $total / $num;
@@ -187,6 +195,8 @@ class Stat {
 
             $j = 1;
             foreach($rounds as $round){
+
+
 
             foreach($round->score as $score){
                 $dirArray[$j][] = $this->checkScore($score->score, $score->par);
@@ -391,6 +401,69 @@ class Stat {
         }
 
         return $data;
+    }
+
+    public function getRoundsPerMonth($stats){
+
+        $data = ['jan'=>0, 'feb'=>0, 'mar'=>0,'apr'=>0,'maj'=>0,'jun'=>0,'jul'=>0,'aug'=>0,'sep'=>0,'okt'=>0,'nov'=>0,'dec'=>0];
+        $results = [];
+
+        foreach($stats as $round){
+            array_push($results, $this->getMonth($round->created_at));
+        }
+
+        foreach($results as $result){
+
+            switch($result){
+                case '01':
+                    $data['jan']++;
+                    break;
+                case '02':
+                    $data['feb']++;
+                    break;
+                case '03':
+                    $data['mar']++;
+                    break;
+                case '04':
+                    $data['apr']++;
+                    break;
+                case '05':
+                    $data['maj']++;
+                    break;
+                case '06':
+                    $data['jun']++;
+                    break;
+                case '07':
+                    $data['jul']++;
+                    break;
+                case '08':
+                    $data['aug']++;
+                    break;
+                case '09':
+                    $data['sep']++;
+                    break;
+                case '10':
+                    $data['okt']++;
+                    break;
+                case '11':
+                    $data['nov']++;
+                    break;
+                case '12':
+                    $data['dec']++;
+                    break;
+            }
+        }
+
+        return $data;
+
+    }
+
+    public function getMonth($value){
+
+        $date = $value->format('m');
+
+        return $date;
+
     }
 
 } 

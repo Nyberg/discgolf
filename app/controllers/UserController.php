@@ -62,44 +62,6 @@ class UserController extends \BaseController {
                 $sponsor->save();
             }
 
-            $lava = new Lavacharts;
-            $reasons = Lava::DataTable();
-
-            $reasons->addStringColumn('Reasons')
-                ->addNumberColumn('Percent')
-                ->addRow(array('Ace', $data['ace']))
-                ->addRow(array('Albatross', $data['albatross']))
-                ->addRow(array('Eagle', $data['eagle']))
-                ->addRow(array('Birdie', $data['birdie']))
-                ->addRow(array('Par', $data['par']))
-                ->addRow(array('Bogey', $data['bogey']))
-                ->addRow(array('Double Bogey', $data['dblbogey']))
-                ->addRow(array('Triple Bogey', $data['trpbogey']))
-                ->addRow(array('Quad Bogey', $data['quad']));
-
-
-            $piechart = Lava::PieChart('Resultat')
-                ->setOptions(array(
-                    'datatable' => $reasons,
-                    'title' => 'Antal resultat',
-                    'is3D' => true,
-                    'width' => 500,
-                    'height' => 350,
-                    'colors' => array('#FFCE00','#000', '#90FF7E','#C0FFB6', '#F5F5F5', '#FFC1C1', '#f99090','#f97777', '#f55656'),
-                    'slices' => array(
-                        $lava->Slice(array(
-                            'offset' => 0.,
-                        )),
-
-                        $lava->Slice(array(
-                            'offset' => 0.25
-                        )),
-                        $lava->Slice(array(
-                            'offset' => 0.3
-                        ))
-                    )
-                ));
-
             return View::make('users.show', ['user' => $user, 'rounds' => $rounds, 'club' => $club, 'bags' => $bags, 'sponsors' => $sponsors, 'data' => $data, 'shots' => $shots, 'cp' => $cp, 'bfr' => $bfr, 'avg' => $avg, 'birdies' => $birdies]);
 
         }else{

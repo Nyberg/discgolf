@@ -64,20 +64,20 @@
 
             <div class="col-sm-3 col-md-3">
                 <div class="thumbnail stat">
-                 <div class="caption text-center stat">
+                 <div class="caption text-center">
                      <i class="fa fa-tree fa-4x"></i>
-                    <h4>{{$tee->color}}</h4>
-                    <p>Par: {{$tee->par}} | Antal hål: {{$tee->holes}}</p>
+                    <h4 class="white">{{$tee->color}}</h4>
+                    <p class="red">Par: {{$tee->par}} | Antal hål: {{$tee->holes}}</p>
                   </div>
                 </div>
               </div>
           @endforeach
             <div class="col-sm-6 col-md-6">
                   <div class="thumbnail stat">
-                    <div class="caption text-center stat">
+                    <div class="caption text-center">
                         <i class="fa fa-exclamation fa-4x"></i>
-                      <h4> Banöversikt</h4>
-                      <p>Längst hål: {{convert($data['longest'])}} | Kortaste hål: {{convert($data['shortest'])}} | Medellängd: {{convert($data['avg'])}} | <span data-toggle="tooltip" data-placement="bottom" title="Visar medellängd av alla tees">Totallängd: {{convert($data['total'])}}</span></p>
+                      <h4 class="white"> Banöversikt</h4>
+                      <p class="red">Längst hål: {{convert($data['longest'])}} | Kortaste hål: {{convert($data['shortest'])}} | Medellängd: {{convert($data['avg'])}} | <span data-toggle="tooltip" data-placement="bottom" title="Visar medellängd av alla tees">Totallängd: {{convert($data['total'])}}</span></p>
                     </div>
                   </div>
             </div>
@@ -179,9 +179,29 @@
 
 </div></div></div>
 
+
+
             @if(Auth::check() && Auth::user()->hasRole('Admin'))
+
+             @if(count($course->round) == null)
+              <div class="showback">
+                               <div class="row">
+
+                               <div class="col-md-12">
+                                <h4 class="text-center page-header-custom">Statistik</h4>
+                                         <p class="text-center">Ingen statistik att visa.</p>
+                                          <div class="divider-header"></div>
+                             </div>
+                             </div>
+                             </div>
+                                         @else
+
                     <div class="showback">
                   <div class="row">
+                   <div class="col-md-12">
+                                                  <h4 class="text-center page-header-custom">Statistik</h4>
+                                                            <div class="divider-header"></div>
+                                               </div>
 
                   <div class="col-md-12 statistics">
 
@@ -193,6 +213,9 @@
 
                             <div class="col-md-6" id="stats">
                              <div class="col-md-12 text-center">
+
+
+
                                   <br/><h4>Översiktlig Statistik - {{$course->name}}</h4>
                                   <p>Resultat</p>
 
@@ -224,11 +247,13 @@
                                  {{Form::submit('Visa din statistik', ['class' => 'btn btn-primary btn-sm btn-block'])}}
                                  {{Form::close()}}
                             </div>
-                        </div>
-                        </div>
 
+                        </div>
+                        </div>
+             @endif
             @else
             @endif
+
 
 <div class="row">
 <div class="col-lg-12 main-chart">
