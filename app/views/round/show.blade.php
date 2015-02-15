@@ -60,17 +60,24 @@
     </table>
     </div>
     </div>
+     <div class="showback">
+    <div class="row">
+
+          <div class="col-md-12">
+             <input hidden="id" id="id" value="{{$round->id}}"/>
+             <input hidden="model" id="model" value="round"/>
+             <div id="chart-two" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
+
+          </div>
+
+              <hr/>
+
+          </div>
+    </div>
 
     <div class="row">
-    <div class="col-md-4">
-        <div class="showback">
-            <div class="panel panel-default">
-                <div class="panel-heading">Mer om {{$round->user->first_name}}</div>
-                <img src="{{$round->user->image}}" class="" width="120px"/>
-             </div>
-        </div>
-    </div>
-    <div class="col-lg-8">
+
+    <div class="col-lg-12">
     <div class="showback">
 
               <div class="panel panel-default">
@@ -135,6 +142,18 @@
 
 @section('scripts')
 
+{{HTML::script('admin_js/stats/stats.js')}}
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <script>
+
+    jQuery(document).ready(function($) {
+
+        getRoundAvgScore();
+
+        });
+</script>
+
     <script>
 
         $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
@@ -145,4 +164,3 @@
     </script>
 
 @stop
-

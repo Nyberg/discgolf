@@ -271,39 +271,202 @@ class HoleController extends \BaseController {
 
     }
 
-    # Första charten #
+    # Andra charten #
     public function getRoundsPerMonth()
     {
         $id = Input::get('id');
         $model = Input::get('model');
-        $user = User::whereId(Auth::id())->firstOrFail();
 
+        $user = User::whereId($id)->firstOrFail();
         $name = $user->first_name . ' ' . $user->last_name;
+
 
         if($model == 'user'){
             $rounds = Round::where('user_id', $id)->get();
+
+            $stats = $this->stat->getRoundsPerMonth($rounds);
+            $message = [
+                'msg' => 'success',
+                'user' => $name,
+                'jan'  =>  $stats['jan'],
+                'feb'   => $stats['feb'],
+                'mar'   => $stats['mar'],
+                'apr'   => $stats['apr'],
+                'maj'   => $stats['maj'],
+                'jun'   => $stats['jun'],
+                'jul'   => $stats['jul'],
+                'aug'   => $stats['aug'],
+                'sep'   => $stats['sep'],
+                'okt'   => $stats['okt'],
+                'nov'   => $stats['nov'],
+                'dec'   => $stats['dec'],
+            ];
+
+        }
+        if($model == 'course'){
+            $rounds = Round::where('course_id', $id)->get();
+            $user_rounds = Round::where('user_id', Auth::id())->get();
+            $course = Course::whereId($id)->firstOrFail();
+            $course = $course->name;
+
+            $stats = $this->stat->getRoundsPerMonth($rounds);
+            $data = $this->stat->getRoundsPerMonth($user_rounds);
+            $message = [
+                'msg' => 'success',
+                'user' => $name,
+                'model_name' => $course,
+                'jan'  =>  $stats['jan'],
+                'feb'   => $stats['feb'],
+                'mar'   => $stats['mar'],
+                'apr'   => $stats['apr'],
+                'maj'   => $stats['maj'],
+                'jun'   => $stats['jun'],
+                'jul'   => $stats['jul'],
+                'aug'   => $stats['aug'],
+                'sep'   => $stats['sep'],
+                'okt'   => $stats['okt'],
+                'nov'   => $stats['nov'],
+                'dec'   => $stats['dec'],
+                'u_jan'  =>  $data['jan'],
+                'u_feb'   => $data['feb'],
+                'u_mar'   => $data['mar'],
+                'u_apr'   => $data['apr'],
+                'u_maj'   => $data['maj'],
+                'u_jun'   => $data['jun'],
+                'u_jul'   => $data['jul'],
+                'u_aug'   => $data['aug'],
+                'u_sep'   => $data['sep'],
+                'u_okt'   => $data['okt'],
+                'u_nov'   => $data['nov'],
+                'u_dec'   => $data['dec'],
+            ];
         }
 
-        $stats = $this->stat->getRoundsPerMonth($rounds);
+
+
+        return Response::json($message);
+
+    }
+
+    # Andra charten #
+    public function getRoundAvgScore()
+    {
+        $id = Input::get('id');
+        $model = Input::get('model');
+
+        $round = Round::find($id);
+
+
+        if($model == 'round') {
+
+            $tee = Tee::where('id', $round->tee_id)->firstOrFail();
+            $tees = Tee::with('round')->where('id', $round->tee_id)->get();
+            $round = Round::where('id', $round->id)->firstOrFail();
+            $user_rounds = Round::where('tee_id', $round->tee_id)->where('user_id', Auth::id())->get();
+
+        }
+
+            $stats = $this->stat->generateRound($round, $tee);
+            $avg = $this->stat->generateAvg($tees);
+          #  $user = $this->stat->generateUserAvg($tee, $user_rounds);
+
+            $message = [
+                'msg' => 'success',
+                'holes' => $tee->holes,
+                '1'  =>  $stats['1'],
+                '2'   => $stats['2'],
+                '3'   => $stats['3'],
+                '4'   => $stats['4'],
+                '5'   => $stats['5'],
+                '6'   => $stats['6'],
+                '7'   => $stats['7'],
+                '8'   => $stats['8'],
+                '9'   => $stats['9'],
+                '10'   => $stats['10'],
+                '11'   => $stats['11'],
+                '12'   => $stats['12'],
+                '13'   => $stats['13'],
+                '14'   => $stats['14'],
+                '15'   => $stats['15'],
+                '16'   => $stats['16'],
+                '17'   => $stats['17'],
+                '18'   => $stats['18'],
+                'a1'   => $avg[$tee->id]['1'],
+                'a2'   => $avg[$tee->id]['2'],
+                'a3'   => $avg[$tee->id]['3'],
+                'a4'   => $avg[$tee->id]['4'],
+                'a5'   => $avg[$tee->id]['5'],
+                'a6'   => $avg[$tee->id]['6'],
+                'a7'   => $avg[$tee->id]['7'],
+                'a8'   => $avg[$tee->id]['8'],
+                'a9'   => $avg[$tee->id]['9'],
+                'a10'   => $avg[$tee->id]['10'],
+                'a11'   => $avg[$tee->id]['11'],
+                'a12'   => $avg[$tee->id]['12'],
+                'a13'   => $avg[$tee->id]['13'],
+                'a14'   => $avg[$tee->id]['14'],
+                'a15'   => $avg[$tee->id]['15'],
+                'a16'   => $avg[$tee->id]['16'],
+                'a17'   => $avg[$tee->id]['17'],
+                'a18'   => $avg[$tee->id]['18'],
+              /*  'u1'    => $user[$tee->id]['1'],
+                'u2'    => $user[$tee->id]['2'],
+                'u3'    => $user[$tee->id]['3'],
+                'u4'    => $user[$tee->id]['4'],
+                'u5'    => $user[$tee->id]['5'],
+                'u6'    => $user[$tee->id]['6'],
+                'u7'    => $user[$tee->id]['7'],
+                'u8'    => $user[$tee->id]['8'],
+                'u9'    => $user[$tee->id]['9'],
+                'u10'    => $user[$tee->id]['10'],
+                'u11'    => $user[$tee->id]['11'],
+                'u12'    => $user[$tee->id]['12'],
+                'u13'    => $user[$tee->id]['13'],
+                'u14'    => $user[$tee->id]['14'],
+                'u15'    => $user[$tee->id]['15'],
+                'u16'    => $user[$tee->id]['16'],
+                'u17'    => $user[$tee->id]['17'],
+                'u18'    => $user[$tee->id]['18'], */
+            ];
+
+        return Response::json($message);
+
+    }
+
+    # Andra charten #
+    public function getRoundAvg()
+    {
+        $id = Input::get('id');
+        $model = Input::get('model');
+
+        $round = Round::find($id);
+
+
+        if($model == 'course') {
+
+        $rounds = Round::where('course_id',$id)->where('user_id', Auth::id())->limit(5)->get();
+
+        }
+
+        $stats = $this->stat->roundAvg($rounds);
+
         $message = [
             'msg' => 'success',
-            'user' => $name,
-            'jan'   => $stats['jan'],
-            'feb'   => $stats['feb'],
-            'mar'   => $stats['mar'],
-            'apr'   => $stats['apr'],
-            'maj'   => $stats['maj'],
-            'jun'   => $stats['jun'],
-            'jul'   => $stats['jul'],
-            'aug'   => $stats['aug'],
-            'sep'   => $stats['sep'],
-            'okt'   => $stats['okt'],
-            'nov'   => $stats['nov'],
-            'dec'   => $stats['dec'],
+            '1'  =>  $stats['1'],
+            '2'   => $stats['2'],
+            '3'   => $stats['3'],
+            '4'   => $stats['4'],
+            '5'   => $stats['5'],
+            'd1'   => $stats['date-1'],
+            'd2'   => $stats['date-2'],
+            'd3'   => $stats['date-3'],
+            'd4'   => $stats['date-4'],
+            'd5'   => $stats['date-5'],
         ];
 
         return Response::json($message);
 
     }
+
 
 }

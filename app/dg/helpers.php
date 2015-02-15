@@ -109,10 +109,10 @@ function calcRecord($total, $par, $id, $course_id){
 function convert($length){
 
     if(!Auth::user()){
-        return $length . ' m';
+        return round($length) . ' m';
     }
     if(Auth::user()->metric != 'f'){
-        return $length . ' m';
+        return round($length) . ' m';
     }else{
         $sum = $length * 3.280;
         return round($sum, 0) . ' ft';

@@ -244,6 +244,8 @@ Route::get('/hole/{id}/show', 'HoleController@show');
 Route::post('/stats/hole/', ['as' => 'hole.stats', 'uses' => 'HoleController@getStats']);
 Route::get('/getHoleStats', 'HoleController@getHoleStats');
 Route::get('/getRoundsPerMonth', 'HoleController@getRoundsPerMonth');
+Route::get('/getRoundAvgScore', 'HoleController@getRoundAvgScore');
+Route::post('/getRoundAvg', ['as' => 'course.stats', 'uses'=>'HoleController@getRoundAvg']);
 
 // Shot
 Route::get('/hole/{id}/score/{score_id}', 'ShotController@show');

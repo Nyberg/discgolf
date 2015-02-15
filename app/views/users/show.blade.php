@@ -305,19 +305,21 @@
                         </div>
 
         <div class="col-md-12 hidden-phone">
-                <h4 class="tab-rub text-center page-header-custom">Diagram & Sånt</h4>
-
-                <div id="chart-one" style="min-width: 310px; height: 400px; width: 800px; margin: 0 auto"></div>
-
+                <h4 class="text-center page-header-custom">Diagram & Sånt</h4>
+        <div class="row">
+         <div class="col-md-12 text-center">
+                <div id="chart-one" style="min-width: 100%; height: 400px; width: 100%; margin: 0 auto"></div>
 
                 <input hidden="id" id="id" value="{{$user->id}}"/>
                 <input hidden="model" id="model" value="user"/>
                 <hr/>
-            </div>
+         </div>
+        </div>
+        </div>
 
-        <div class="col-md-12">
+        <div class="col-md-12 text-center">
         <br>
-            <div id="chart-two" style="min-width: 310px; height: 400px; width: 800px; margin: 0 auto"></div>
+            <div id="chart-two" style="min-width: 100%; height: 400px; width: 100%; margin: 0 auto"></div>
         </div>
         </div>
     </div>

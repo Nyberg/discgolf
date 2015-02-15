@@ -132,6 +132,90 @@ class Stat {
         return $dirArray;
     }
 
+    public function generateUserAvg($tee, $rounds){
+
+        $total = 0;
+        $rounds = 0;
+        $sum = count($tee);
+        $dirArray = [];
+
+        $j = 1;
+        foreach($tee as $tee){
+            $dirArray[$j][$tee->id] = 0;
+
+            $sum = count($tee->round);
+
+            $k = 1;
+            foreach($tee->hole as $hole){
+                $avg = 0;
+                $total = 0;
+
+                if(count($hole->score) == null){
+
+                    $sum = 1;
+                    $total = $hole->par;
+                }else{
+
+                    foreach($hole->score as $score){
+                        $total = $total + $score->score;
+                        $rounds++;
+                    }
+                }
+
+                $avg = $total / $sum;
+                $dirArray[$j][$k] = round($avg,1);
+                $k++;
+            }
+
+            $j++;
+        }
+
+        return $dirArray;
+    }
+
+    public function roundAvg($rounds){
+
+        $stats = ['1'=>0, '2'=>0,'3'=>0,'4'=>0,'5'=>0, 'date-1'=>0, 'date-2'=>0, 'date-3'=>0, 'date-4'=>0, 'date-5'=>0];
+
+        $i = 1;
+        foreach($rounds as $round){
+
+            $stats[$i] = $this->getRoundScore($round->total, $round->tee->par);
+            $stats['date-'.$i] = $round->date;
+
+        $i++;
+        }
+
+        return $stats;
+
+    }
+
+    public function getRoundScore($total, $par){
+
+            $avg = $total - $par;
+
+        return $avg;
+    }
+
+    public function generateRound($rounds, $tee){
+
+        if($tee->holes == 18){
+            $dirArray = ['1'=>0,'2'=>0,'3'=>0,'4'=>0,'5'=>0,'6'=>0,'7'=>0,'8'=>0,'9'=>0,'10'=>0,'11'=>0,'12'=>0,'13'=>0,'14'=>0,'15'=>0,'16'=>0,'17'=>0,'18'=>0,];
+        }
+        if($tee->holes == 9){
+            $dirArray = ['1'=>0,'2'=>0,'3'=>0,'4'=>0,'5'=>0,'6'=>0,'7'=>0,'8'=>0,'9'=>0];
+        }
+
+        $i = 1;
+        foreach($rounds->score as $s)
+        {
+                $dirArray[$i]= $s->score;
+                $i++;
+
+        }
+        return $dirArray;
+    }
+
     public function getAvgScore($scores){
 
         $total = 0;
@@ -195,8 +279,6 @@ class Stat {
 
             $j = 1;
             foreach($rounds as $round){
-
-
 
             foreach($round->score as $score){
                 $dirArray[$j][] = $this->checkScore($score->score, $score->par);
