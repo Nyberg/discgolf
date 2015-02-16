@@ -61,18 +61,46 @@
     </div>
     </div>
      <div class="showback">
-    <div class="row">
 
-          <div class="col-md-12">
-             <input hidden="id" id="id" value="{{$round->id}}"/>
-             <input hidden="model" id="model" value="round"/>
-             <div id="chart-two" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
+     @if(Auth::check() && Auth::user()->hasRole('Member') || Auth::check() && Auth::user()->hasRole('Premium') || Auth::check() && Auth::user()->hasRole('Admin'))
 
-          </div>
+            <div class="row">
+
+              <div class="col-md-12">
+                 <input hidden="id" id="id" value="{{$round->id}}"/>
+                 <input hidden="model" id="model" value="round"/>
+                 <div id="chart-two" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
+              </div>
 
               <hr/>
 
-          </div>
+            </div>
+
+     @else
+
+            <div class="row">
+
+              <div class="col-md-12">
+                <h2 class="text-center page-header-custom">Statistik</h2>
+                 <p class="text-center">Som medlem eller licensierad spelare får du extra statistik. Här kan du bland annat se resultatet jämfört med banans snitt för varje hål. </p>
+                 <p class="text-center"><a href="#">Läs mer om medlemskap här!</a></p>
+                <div class="divider-header"></div>
+
+
+
+              </div>
+
+              <div class="col-md-12">
+
+              </div>
+
+              <hr/>
+
+            </div>
+
+
+     @endif
+
     </div>
 
     <div class="row">

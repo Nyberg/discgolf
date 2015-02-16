@@ -36,7 +36,7 @@ class UserController extends \BaseController {
 
         $total = Round::where('user_id', $id)->count();
 
-        if($total >= 5){
+        if($total >= 1){
 
             $scores = Score::where('user_id', $id)->get();
             $courses_played = Round::where('user_id', $id)->lists('tee_id');
@@ -119,7 +119,7 @@ class UserController extends \BaseController {
                 $user->profile->state_id = Input::get('state');
                 $user->profile->location = Input::get('location');
                 $user->profile->city_id = Input::get('city');
-                $user->profile->club = Input::get('club');
+                $user->profile->club_id = Input::get('club');
                 $user->profile->website = Input::get('website');
                 $user->profile->info = Input::get('info');
 
@@ -155,7 +155,7 @@ class UserController extends \BaseController {
                     File::delete(public_path().$old->profile->image);
                 }
 
-                return Redirect::back()->with('success', 'Profile updated!');
+                return Redirect::back()->with('success', 'Profil uppdaterad!');
 
             }else {
 
@@ -203,10 +203,10 @@ class UserController extends \BaseController {
 
                 $user->save();
 
-                return Redirect::back()->with('success', 'Settings updated!');
+                return Redirect::back()->with('success', 'Inställningar uppdaterade!');
             }
         }
-        return Redirect::back()->withFlashMessage('You cant edit that!');
+        return Redirect::back()->withFlashMessage('Du kan inte redigera detta!');
     }
 
     public function addRole($id){

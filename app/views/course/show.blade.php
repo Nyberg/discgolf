@@ -62,7 +62,11 @@
 
           @foreach($course->tee as $tee)
 
-            <div class="col-sm-3 col-md-3">
+            @if(count($course->tee) == 1)
+            <div class="col-sm-6 col-md-6">
+            @else
+            <div class="col-sm-6 col-md-6">
+            @endif
                 <div class="thumbnail stat">
                  <div class="caption text-center">
                      <i class="fa fa-tree fa-4x"></i>
@@ -181,71 +185,70 @@
 
 
 
-            @if(Auth::check() && Auth::user()->hasRole('Admin'))
+    @if(Auth::check() && Auth::user()->hasRole('Member') || Auth::check() && Auth::user()->hasRole('Premium') || Auth::check() && Auth::user()->hasRole('Admin'))
 
-             @if(count($course->round) == null)
-              <div class="showback">
-                               <div class="row">
+     @if(count($course->round) == null)
+        <div class="showback">
+            <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="text-center page-header-custom">Statistik</h4>
+                            <p class="text-center">Ingen statistik att visa.</p>
+                        <div class="divider-header"></div>
+                    </div>
+            </div>
+         </div>
+     @else
 
-                               <div class="col-md-12">
-                                <h4 class="text-center page-header-custom">Statistik</h4>
-                                         <p class="text-center">Ingen statistik att visa.</p>
-                                          <div class="divider-header"></div>
-                             </div>
-                             </div>
-                             </div>
-                                         @else
+        <div class="showback">
+          <div class="row">
+                  <div class="col-md-12 hidden-phone">
+                          <h4 class="tab-rub text-center page-header-custom">Statistik</h4>
+                           <div class="divider-header"></div>
 
-                <div class="showback">
-                  <div class="row">
-                          <div class="col-md-12 hidden-phone">
-                                  <h4 class="tab-rub text-center page-header-custom">Statistik</h4>
-                                   <div class="divider-header"></div>
-
-                                   <input hidden="id" id="id" value="{{$course->id}}"/>
-                                  <input hidden="model" id="model" value="course"/>
-                                      {{Form::open(['method' => 'POST','route' => ['hole.stats'],'class' => 'form-inline', 'id' => 'user_stat'])}}
-                                      {{Form::hidden('id', $course->id, ['id'=>'id'])}}
-                                      {{Form::hidden('model', 'course', ['id'=>'model'])}}
-                                      {{Form::hidden('user_id', Auth::id(), ['id'=>'user_id'])}}
-                                      {{Form::submit('Visa din statistik', ['class' => 'btn btn-primary btn-sm center-block'])}}
-                                      {{Form::close()}}
-                              <div class="col-md-6">
-                                 <div id="chart-one" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
-                              </div>
-                              <div class="col-md-6">
-
-                                <div id="chart-user" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
-                              </div>
-
-                                  <hr/>
-                              </div>
-
-
-
-                            <div class="col-md-12">
-                            <br/>
-
-                              {{Form::open(['method' => 'POST','route' => ['course.stats'],'class' => 'form-inline', 'id' => 'round_avg'])}}
+                           <input hidden="id" id="id" value="{{$course->id}}"/>
+                          <input hidden="model" id="model" value="course"/>
+                              {{Form::open(['method' => 'POST','route' => ['hole.stats'],'class' => 'form-inline', 'id' => 'user_stat'])}}
                               {{Form::hidden('id', $course->id, ['id'=>'id'])}}
                               {{Form::hidden('model', 'course', ['id'=>'model'])}}
                               {{Form::hidden('user_id', Auth::id(), ['id'=>'user_id'])}}
-                              {{Form::submit('Give me more!', ['class' => 'btn btn-primary btn-sm center-block'])}}
+                              {{Form::submit('Visa din statistik', ['class' => 'btn btn-primary btn-sm center-block'])}}
                               {{Form::close()}}
+                      <div class="col-md-6">
+                         <div id="chart-one" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
+                      </div>
+                      <div class="col-md-6">
 
-                            <div class="col-md-6">
-                                <br>
-                                <div id="chart-two" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
-                            </div>
-                            <div class="col-md-6">
-                                <br>
-                                <div id="chart-round-avg" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
-                            </div>
-                            </div>
+                        <div id="chart-user" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
+                      </div>
 
-                        </div>
-                        </div>
-             @endif
+                          <hr/>
+                      </div>
+
+
+
+                    <div class="col-md-12">
+                    <br/>
+
+                      {{Form::open(['method' => 'POST','route' => ['course.stats'],'class' => 'form-inline', 'id' => 'round_avg'])}}
+                      {{Form::hidden('id', $course->id, ['id'=>'id'])}}
+                      {{Form::hidden('model', 'course', ['id'=>'model'])}}
+                      {{Form::hidden('user_id', Auth::id(), ['id'=>'user_id'])}}
+                      {{Form::submit('Give me more!', ['class' => 'btn btn-primary btn-sm center-block'])}}
+                      {{Form::close()}}
+
+                    <div class="col-md-6">
+                        <br>
+                        <div id="chart-two" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <br>
+                        <div id="chart-round-avg" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
+                    </div>
+                    </div>
+
+                </div>
+                </div>
+     @endif
             @else
             @endif
 

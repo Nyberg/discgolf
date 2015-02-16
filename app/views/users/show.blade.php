@@ -133,30 +133,8 @@
 
     <!-- Section E -->
     <div id="sectionE" class="tab-pane fade in">
-
-               @if($cp >= 1)
-               <div class="row">
-
-                           <div class="col-md-12">
-                           <h4 class="text-center page-header-custom">Statistik</h4>
-               <p class="text-center">{{$user->first_name . ' ' . $user->last_name}} har inte spelat tillräckligt med rundor (5) för att kunna generera statistik. </p>
-                   <div class="divider-header"></div>
-                           </div>
-                           </div>
-               @else
-
-
         <div class="row">
-
-
-
-
-
-
-
-            </div>
-      @endif
-
+        </div>
     </div>
     <!-- Slut Section E -->
 
@@ -235,7 +213,7 @@
 
                 <h4 class="tab-rub text-center page-header-custom">Statistik</h4>
 
-                    <p class="text-center">Statistiken baserar sig på minst 5 aktiva rundor.</p>
+                    <p class="text-center">Statistiken baserar sig på minst 1 aktiv runda.</p>
                     <div class="divider-header"></div>
         </div>
 
@@ -306,21 +284,27 @@
 
         <div class="col-md-12 hidden-phone">
                 <h4 class="text-center page-header-custom">Diagram & Sånt</h4>
+        </div>
         <div class="row">
-         <div class="col-md-12 text-center">
+         <div class="col-md-12">
+
                 <div id="chart-one" style="min-width: 100%; height: 400px; width: 100%; margin: 0 auto"></div>
 
                 <input hidden="id" id="id" value="{{$user->id}}"/>
                 <input hidden="model" id="model" value="user"/>
                 <hr/>
+
          </div>
-        </div>
+
+         <div class="col-md-12">
+         <br>
+             <div id="chart-two" style="min-width: 100%; height: 400px; width: 100%; margin: 0 auto"></div>
+         </div>
+
         </div>
 
-        <div class="col-md-12 text-center">
-        <br>
-            <div id="chart-two" style="min-width: 100%; height: 400px; width: 100%; margin: 0 auto"></div>
-        </div>
+
+
         </div>
     </div>
 

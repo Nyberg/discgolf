@@ -61,6 +61,11 @@ Route::group(['before'=>'checkAdmin'], function(){
 
         #   Land, Landskap & Stad   #
         Route::get('/admin/location/', 'CountryController@index');
+
+        #   Länkar      #
+        Route::get('/admin/links/', 'LinksController@admin');
+        Route::get('/admin/link/add', 'LinksController@create');
+        Route::get('/admin/link/{id}/edit', 'LinksController@edit');
     }
 );
 
@@ -213,7 +218,7 @@ Route::get('/app', 'RoundController@app');
 Route::get('/about-discgol/', 'HomeController@discgolf');
 Route::get('/rules-discgolf/', 'HomeController@rules');
 Route::get('/about/', 'HomeController@about');
-Route::get('/links/', 'HomeController@links');
+Route::get('/link','LinksController@index');
 
 // Course
 Route::get('/course/{id}/show' , 'CourseController@show');
@@ -288,3 +293,4 @@ Route::resource('forum', 'ForumsController');
 Route::resource('request', 'RequestController');
 Route::resource('country', 'CountryController');
 Route::resource('lost', 'LostController');
+Route::resource('links', 'LinksController');

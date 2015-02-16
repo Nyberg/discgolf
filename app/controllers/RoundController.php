@@ -100,6 +100,7 @@ class RoundController extends \BaseController {
                 $score->user_id = Auth::User()->id;
                 $score->hole_id = Input::get('hole_id-'.$i.'');
                 $score->round_id = Input::get('round_id');
+                $score->course_id = $round->course_id;
                 $score->score = Input::get('score-'.$i.'');
                 $score->par = Input::get('par-'.$i.'');
                 $x = Input::get('score-'.$i.'');
@@ -120,7 +121,7 @@ class RoundController extends \BaseController {
 
             $round->save();
 
-            return Redirect::to('/dashboard')->with('success', 'Runda tillagd!');
+            return Redirect::to('/account/rounds/'.Auth::id().'/user')->with('success', 'Runda tillagd!');
 
         }else{
             return Redirect::to('/')->with('danger', 'Du kan inte redigera detta..');
@@ -238,7 +239,7 @@ class RoundController extends \BaseController {
 
                 $num = Record::where('course_id', $round->course_id)->where('type', 'Singel')->where('tee_id', $round->tee_id)->where('status', 1)->orderBy('total', 'asc')->pluck('total');
 
-                if ($num == null && $round->type == 'Singel') {
+                if ($num == null && $round->type == 'Singel' || $num == 0 && $round->type == 'Singel') {
 
                     $record = new Record();
                     $record->user_id = Auth::id();
@@ -276,8 +277,8 @@ class RoundController extends \BaseController {
                     $recs = Record::where('course_id', $round->course_id)->where('total', $num)->where('type', 'Singel')->where('status', 1)->get();
 
                     foreach ($recs as $rec) {
-
                         $rec->status = 0;
+                        $rec->save();
                     }
 
                     $record = new Record();

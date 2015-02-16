@@ -28,7 +28,10 @@ class HomeController extends BaseController {
     }
 
     public function links(){
-        return View::make('index.links');
+
+        $links = Link::get();
+
+        return View::make('index.links', ['links'=>$links]);
     }
 
     public function discgolf(){
