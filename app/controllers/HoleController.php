@@ -190,6 +190,94 @@ class HoleController extends \BaseController {
         return Response::json($holes);
     }
 
+    # Första charten #
+    public function getUserData()
+    {
+        $id = Input::get('id');
+        $model = Input::get('model');
+        $user = User::find($id);
+
+        $name = $user->first_name . ' ' . $user->last_name;
+
+        if($model == 'hole'){
+            $scores = Score::where('hole_id', $id)->get();
+        }
+        if($model == 'user'){
+            $scores = Score::where('user_id', $id)->get();
+            $courses_played = Round::where('user_id', $id)->lists('tee_id');
+            $datarounds = Round::with('score')->where('user_id', $id)->where('status', 1)->orWhere('par_id',$id)->get();
+
+            $data = $this->stat->calc($scores);
+            $shots = $this->stat->calcShots($scores);
+            $cp = $this->stat->getCourses($courses_played);
+            $bfr = $this->stat->getBfr($datarounds);
+            $avg = $this->stat->getAvg($scores, $datarounds);
+            $birdies = $this->stat->getBirdies($datarounds);
+
+        }
+
+
+        $message = [
+            'msg' => 'success',
+            'user' => $name,
+            'avg' => $avg,
+            'shots' => $shots,
+            'cp'    => count($cp),
+            'bfr'   => $bfr,
+            'birdies' => $birdies,
+
+        ];
+
+        return Response::json($message);
+
+    }
+
+    # Första charten #
+    public function getUserDataReload()
+    {
+        $id = Input::get('id');
+        $model = Input::get('model');
+
+        $user = User::find($id);
+
+        $name = $user->first_name . ' ' . $user->last_name;
+
+        if($model == 'course'){
+            $scores = Score::where('course_id', $id)->get();
+        }
+        if($model == 'hole'){
+            $scores = Score::where('hole_id', $id)->get();
+        }
+        if($model == 'user'){
+            $scores = Score::where('user_id', $id)->get();
+            $courses_played = Round::where('user_id', $id)->lists('tee_id');
+            $datarounds = Round::with('score')->where('user_id', $id)->where('status', 1)->orWhere('par_id',$id)->get();
+
+            $data = $this->stat->calc($scores);
+            $shots = $this->stat->calcShots($scores);
+            $cp = $this->stat->getCourses($courses_played);
+            $bfr = $this->stat->getBfr($datarounds);
+            $avg = $this->stat->getAvg($scores, $datarounds);
+            $birdies = $this->stat->getBirdies($datarounds);
+
+        }
+
+
+        $message = [
+            'msg' => 'success',
+            'user' => $name,
+            'avg' => $avg,
+            'shots' => $shots,
+            'cp'    => count($cp),
+            'bfr'   => $bfr,
+            'birdies' => $birdies,
+
+        ];
+
+        return Response::json($message);
+
+    }
+
     #   Personlig statistik #
     public function getStats()
     {
@@ -201,9 +289,13 @@ class HoleController extends \BaseController {
             $scores = Score::where('hole_id', $input['id'])->where('user_id', Auth::id())->get();
             $rounds = Round::where('user_id', Auth::id())->where('tee_id', $hole->tee_id)->orWhere('par_id', Auth::id())->where('status', 1)->get();
         }
-        if($input['model'] == 'course' ){
+        if($input['model'] == 'course'){
             $scores = Score::where('course_id', $input['id'])->where('user_id', Auth::id())->get();
             $rounds = Round::where('course_id', $input['id'])->where('user_id', Auth::id())->get();
+        }
+        if($input['model'] == 'user'){
+            $scores = Score::where('user_id', $input['id'])->get();
+            $rounds = Round::where('user_id', $input['id'])->get();
         }
 
         $stats = $this->stat->calc($scores);
@@ -305,7 +397,7 @@ class HoleController extends \BaseController {
         }
         if($model == 'course'){
             $rounds = Round::where('course_id', $id)->get();
-            $user_rounds = Round::where('user_id', Auth::id())->get();
+            $user_rounds = Round::where('user_id', Auth::id())->where('course_id', $id)->get();
             $course = Course::whereId($id)->firstOrFail();
             $course = $course->name;
 
@@ -349,6 +441,97 @@ class HoleController extends \BaseController {
     }
 
     # Andra charten #
+    public function getCourseRoundsReload()
+    {
+        $id = Input::get('id');
+        $model = Input::get('model');
+
+        $user = User::whereId($id)->firstOrFail();
+        $name = $user->first_name . ' ' . $user->last_name;
+
+        if($model == 'course'){
+            $rounds = Round::where('course_id', $id)->get();
+            $user_rounds = Round::where('user_id', Auth::id())->where('course_id', $id)->get();
+            $course = Course::whereId($id)->firstOrFail();
+            $course = $course->name;
+
+            $stats = $this->stat->getRoundsPerMonth($rounds);
+            $data = $this->stat->getRoundsPerMonth($user_rounds);
+            $message = [
+                'msg' => 'success',
+                'user' => $name,
+                'model_name' => $course,
+                'jan'  =>  $stats['jan'],
+                'feb'   => $stats['feb'],
+                'mar'   => $stats['mar'],
+                'apr'   => $stats['apr'],
+                'maj'   => $stats['maj'],
+                'jun'   => $stats['jun'],
+                'jul'   => $stats['jul'],
+                'aug'   => $stats['aug'],
+                'sep'   => $stats['sep'],
+                'okt'   => $stats['okt'],
+                'nov'   => $stats['nov'],
+                'dec'   => $stats['dec'],
+                'u_jan'  =>  $data['jan'],
+                'u_feb'   => $data['feb'],
+                'u_mar'   => $data['mar'],
+                'u_apr'   => $data['apr'],
+                'u_maj'   => $data['maj'],
+                'u_jun'   => $data['jun'],
+                'u_jul'   => $data['jul'],
+                'u_aug'   => $data['aug'],
+                'u_sep'   => $data['sep'],
+                'u_okt'   => $data['okt'],
+                'u_nov'   => $data['nov'],
+                'u_dec'   => $data['dec'],
+            ];
+        }
+
+
+
+        return Response::json($message);
+
+    }
+
+    # Andra charten #
+    public function getRoundsPerMonthReload()
+    {
+        $id = Input::get('id');
+        $model = Input::get('model');
+
+        $user = User::whereId($id)->firstOrFail();
+        $name = $user->first_name . ' ' . $user->last_name;
+
+        if($model == 'user'){
+
+            $rounds = Round::where('user_id', $id)->get();
+
+        }
+
+            $stats = $this->stat->getRoundsPerMonth($rounds);
+            $message = [
+                'msg' => 'success',
+                'user' => $name,
+                'jan'  =>  $stats['jan'],
+                'feb'   => $stats['feb'],
+                'mar'   => $stats['mar'],
+                'apr'   => $stats['apr'],
+                'maj'   => $stats['maj'],
+                'jun'   => $stats['jun'],
+                'jul'   => $stats['jul'],
+                'aug'   => $stats['aug'],
+                'sep'   => $stats['sep'],
+                'okt'   => $stats['okt'],
+                'nov'   => $stats['nov'],
+                'dec'   => $stats['dec'],
+            ];
+
+        return Response::json($message);
+
+    }
+
+    # Andra charten #
     public function getRoundAvgScore()
     {
         $id = Input::get('id');
@@ -362,12 +545,12 @@ class HoleController extends \BaseController {
             $tee = Tee::where('id', $round->tee_id)->firstOrFail();
             $tees = Tee::with('round')->where('id', $round->tee_id)->get();
             $round = Round::where('id', $round->id)->firstOrFail();
-            $user_rounds = Round::where('tee_id', $round->tee_id)->where('user_id', Auth::id())->get();
-
-        }
-
+          #  $user_rounds = Round::where('tee_id', $round->tee_id)->where('user_id', Auth::id())->get();
             $stats = $this->stat->generateRound($round, $tee);
             $avg = $this->stat->generateAvg($tees);
+        }
+
+
           #  $user = $this->stat->generateUserAvg($tee, $user_rounds);
 
             $message = [
@@ -444,8 +627,11 @@ class HoleController extends \BaseController {
 
         if($model == 'course') {
 
-        $rounds = Round::where('course_id',$id)->where('user_id', Auth::id())->limit(5)->get();
+        $rounds = Round::where('course_id',$id)->limit(5)->get();
 
+        }
+        if($model == 'user'){
+            $rounds = Round::where('user_id',$id)->limit(5)->get();
         }
 
         $stats = $this->stat->roundAvg($rounds);

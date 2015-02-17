@@ -100,7 +100,7 @@ class Stat {
 
         $j = 1;
         foreach($tees as $tee){
-            $dirArray[$j][$tee->id] = 0;
+            $dirArray[$tee->id][] = 0;
 
             $sum = count($tee->round);
 
@@ -122,7 +122,7 @@ class Stat {
                 }
 
                 $avg = $total / $sum;
-                $dirArray[$j][$k] = round($avg,1);
+                $dirArray[$tee->id][$hole->number] = round($avg,1);
                 $k++;
             }
 

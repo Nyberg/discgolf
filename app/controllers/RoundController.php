@@ -253,8 +253,6 @@ class RoundController extends \BaseController {
                     $record->status = 1;
 
                     $record->save();
-
-
                 }
 
                 if ($round->total == (int)$num) {
@@ -293,7 +291,6 @@ class RoundController extends \BaseController {
                     $record->status = 1;
 
                     $record->save();
-
                 }
             }
 
@@ -301,7 +298,7 @@ class RoundController extends \BaseController {
 
                 $num = Record::where('course_id', $round->course_id)->where('type', 'Par')->where('tee_id', $round->tee_id)->where('status', 1)->orderBy('total', 'asc')->pluck('total');
 
-                if ($num == null && $round->type == 'Par') {
+                if ($num == null && $round->type == 'Par' || $num = 0 && $round->type == 'Par') {
 
                     $record = new Record();
                     $record->user_id = Auth::id();
@@ -352,7 +349,6 @@ class RoundController extends \BaseController {
                     $record->status = 1;
 
                     $record->save();
-
                 }
 
             }

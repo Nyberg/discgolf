@@ -40,7 +40,7 @@
         @endif</p>
 
          <h4>{{$lost->type}}</h4>
-         <small>{{$lost->course->name}} hål {{$lost->hole->number}}| {{$lost->date}}</small>
+         <small>{{$lost->course->name}} |  {{$lost->date}}</small>
 
     </div>
 

@@ -3,17 +3,17 @@
 @section('content')
 
         <div class="row">
-        <div class="col-lg-12">
-          <img src="{{$club->image}}" width="100%"/>
-        <div class="over-img-img">
+            <div class="col-lg-12">
+              <img src="{{$club->image}}" width="100%"/>
+                <div class="over-img-img">
 
+                </div>
+                <div class="over-img-club">
+                     <img src="/img/logo-club.png" class="center-block"/>
+                     <h2 class="text-center page-header-custom  hidden-tablet">{{$club->name}}</h2>
+                </div>
+            </div>
         </div>
-            <div class="over-img-club">
-             <img src="/img/logo-club.png" class="center-block"/>
-             <h2 class="text-center page-header-custom  hidden-tablet">{{$club->name}}</h2>
-            </div>
-            </div>
-      </div>
 
 <div class="row">
     <br/>
@@ -112,25 +112,24 @@
             </div>
 
             <div id="sectionB" class="tab-pane fade">
-               <div class="col-md-12">
-                   @foreach($club->news as $new)
-                   <div class="row">
-                       <div class="col-lg-12 text-center">
-                                           <h2 class="text-center page-header-custom">{{$new->head}}</h2>
-                                           <p class="text-center">{{$new->created_at . ' av '}}  <a href="/club/{{$new->club_id}}/show">{{$new->club->name}}</a> | {{$new->views}} visningar</p>
 
-                                           <div class="divider-header"></div>
-                           <p class="">{{str_limit($new->body, $limit = 200, $end = '...')}}</p>
-                       <div class="news-btn">
-                           Kommentarer ({{count($new->comments)}}) |
-                           <a href="/club/news/{{$new->id}}/show" class="">Läs mer..</a>
-                       </div>
-                       <hr/>
-                       </div>
-                   </div>
+                <div class="row">
 
-                   @endforeach
-                    </div>
+                 <div class="col-md-12">
+
+                    <h4 class="tab-rub text-center page-header-custom">Nyheter</h4>
+
+                    @if(Auth::check() && Auth::user()->hasRole('ClubOwner') && Auth::user()->club_id == $club->id)
+                    <p class="text-center"><a href="/admin/add/news">Lägg till nyhet</a></p>
+                    @else
+                    @endif
+
+                    <div class="divider-header"></div>
+                 </div>
+
+
+                </div>
+
             </div>
 
 
@@ -297,11 +296,8 @@
                             </div>
                         </div>
                     </div>
-                    @else
-                @endif
-    </div>
-</div>
 
+                @endif
 
 
 @stop

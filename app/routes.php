@@ -250,7 +250,11 @@ Route::post('/stats/hole/', ['as' => 'hole.stats', 'uses' => 'HoleController@get
 Route::get('/getHoleStats', 'HoleController@getHoleStats');
 Route::get('/getRoundsPerMonth', 'HoleController@getRoundsPerMonth');
 Route::get('/getRoundAvgScore', 'HoleController@getRoundAvgScore');
+Route::get('/getUserData', 'HoleController@getUserData');
 Route::post('/getRoundAvg', ['as' => 'course.stats', 'uses'=>'HoleController@getRoundAvg']);
+Route::post('/getRoundsPerMonthReload', ['as' => 'user.rounds', 'uses'=>'HoleController@getRoundsPerMonthReload']);
+Route::post('/getUserDataReload', ['as' => 'user.data', 'uses'=>'HoleController@getUserDataReload']);
+Route::post('/getCourseRoundsReload', ['as' => 'course.rounds', 'uses'=>'HoleController@getCourseRoundsReload']);
 
 // Shot
 Route::get('/hole/{id}/score/{score_id}', 'ShotController@show');

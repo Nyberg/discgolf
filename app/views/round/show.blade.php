@@ -3,11 +3,11 @@
 
     @section('content')
               <h2 class="text-center page-header-custom"><a href="/course/{{$course->id}}/show">{{$course->name . ' - ' . $tee->color}}</a>, {{$round->date}} av
-                           @if($round->type == 'Par')
-                                     <td>{{showPar($round->par_id, $round->user_id)}}</td>
-                                      @else
-                                      <a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a>
-                                      @endif
+               @if($round->type == 'Par')
+                 <td>{{showPar($round->par_id, $round->user_id)}}</td>
+                  @else
+                  <a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a>
+                  @endif
               </h2>
               <div class="divider-header"></div>
      </h4>
@@ -85,9 +85,6 @@
                  <p class="text-center">Som medlem eller licensierad spelare får du extra statistik. Här kan du bland annat se resultatet jämfört med banans snitt för varje hål. </p>
                  <p class="text-center"><a href="#">Läs mer om medlemskap här!</a></p>
                 <div class="divider-header"></div>
-
-
-
               </div>
 
               <div class="col-md-12">
@@ -171,7 +168,7 @@
 @section('scripts')
 
 {{HTML::script('admin_js/stats/stats.js')}}
-<script src="http://code.highcharts.com/highcharts.js"></script>
+{{HTML::script('http://code.highcharts.com/highcharts.js')}}
 
     <script>
 
