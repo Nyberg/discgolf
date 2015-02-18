@@ -39,7 +39,7 @@ class CountryController extends \BaseController {
 
         if($type == 'Country'){
 
-            $country = New country;
+            $country = new Country;
             $country->country = Input::get('name');
             $country->save();
 
@@ -47,7 +47,7 @@ class CountryController extends \BaseController {
         }
         if($type == 'State'){
 
-            $state = New state;
+            $state = new State;
             $state->state = Input::get('name');
             $state->save();
 
@@ -55,7 +55,7 @@ class CountryController extends \BaseController {
         }
         if($type == 'City'){
 
-            $city = New city;
+            $city = new City;
             $city->city = Input::get('name');
             $city->save();
 

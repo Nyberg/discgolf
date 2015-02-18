@@ -35,7 +35,7 @@ class BagController extends \BaseController {
 	{
         $this->addBagForm->validate($input = Input::only('type'));
 
-		$bag = New bag();
+		$bag = new Bag;
 
         $bag->type = Input::get('type');
         $bag->user_id = Auth::id();
