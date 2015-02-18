@@ -52,12 +52,12 @@ return array(
 			'prefix'   => '',
 		),
 
-		'mysql2' => array(
+		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => '127.0.0.1',
-			'database'  => 'discgolf',
-			'username'  => 'homestead',
-			'password'  => 'secret',
+			'host'      => getenv('host'),
+			'database'  => getenv('database'),
+			'username'  => getenv('username'),
+			'password'  => getenv('pw'),
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
