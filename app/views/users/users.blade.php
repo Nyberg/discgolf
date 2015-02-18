@@ -3,18 +3,15 @@
 
 @section('content')
 
-              <h2 class="text-center page-header-custom">Användare</h2>
-              <p class="text-center">Visar alla användare i ditt län - {{Auth::user()->profile->state->state}}</p>
-              <div class="divider-header"></div>
+  <h2 class="text-center page-header-custom">Användare</h2>
+  <div class="divider-header"></div>
 
   <table class="table table-striped table-advance table-hover">
-
 
       <thead>
       <tr>
           <th>Användare</th>
           <th>Klubb</th>
-          <th>Rating</th>
           <th>Rundor</th>
       </tr>
       </thead>
@@ -23,10 +20,9 @@
       @foreach($users as $user)
 
       <tr>
-          <td><a href="/user/{{$user->id}}/show">{{$user->user->first_name .' '. $user->user->last_name}}</a></td>
-          <td>{{$user->user->club->name}}</td>
-          <td>0</td>
-          <td>{{count($user->user->round)}}</td>
+          <td><a href="/user/{{$user->id}}/show">{{$user->first_name .' '. $user->user->last_name}}</a></td>
+          <td>{{$user->club->name}}</td>
+          <td>{{count($user->round)}}</td>
       </tr>
 
       @endforeach

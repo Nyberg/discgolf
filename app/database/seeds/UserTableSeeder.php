@@ -10,8 +10,8 @@
 
 
                 [
-                    'last_name'     => 'Allansson',
-                    'first_name'    =>  'Allan',
+                    'last_name'     => 'Nyberg',
+                    'first_name'    =>  'Johannes',
                     'password'      => 'v9hq9evg',
                     'email'         => 'johannes.nyb@gmail.com',
                     'metric'        => 'f',
@@ -25,9 +25,8 @@
 
             foreach($users as $user)
             {
-                for($i=0; $i<40; $i++){
                     User::create($user);
-                }
+
             }
 
 
