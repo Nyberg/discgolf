@@ -23,7 +23,7 @@ $(document).ready(function() {
 
         }
 
-            $.post('http://http://178.62.90.148/getTees', {id: $(".teepads" ).val()}, function(data){
+            $.post('http://178.62.90.148/getTees', {id: $(".teepads" ).val()}, function(data){
             $.each(data, function(index, value) {
 
                 $('#target').append(' <option value='+value.id+' id="dropdown">' + value.color +'</option>');
@@ -54,7 +54,7 @@ $(document).ready(function() {
 
             if($j == 1){
 
-                $.get('http://http://178.62.90.148/getUsers', function (data) {
+                $.get('http://178.62.90.148/getUsers', function (data) {
                     $.each(data, function (index, value) {
                         $('#players').append(' <option value='+value.id+' id="userdropdown">' + value.first_name + ' ' + value.last_name + '</option>');
                     })
