@@ -1,7 +1,7 @@
 
 function getData(){
 
-    $.get('http://dg.dev:8000/getUserData', {id: $("#id").val(), model: $("#model").val()}, function (data) {
+    $.get('http://178.62.90.148/getUserData', {id: $("#id").val(), model: $("#model").val()}, function (data) {
 
     if (data['msg'] == 'success') {
 
@@ -464,7 +464,7 @@ function getRoundAvg(){
 
         $('.fa-spinner').remove();
         $('#stats').append('<br /><br/><i class="fa fa-spinner fa-spin fa-2x"></i>');
-        $.get('http://dg.dev:8000/getRoundsPerMonth', {id: $("#id").val(), model: $("#model").val()}, function (data) {
+        $.get('http://178.62.90.148/getRoundsPerMonth', {id: $("#id").val(), model: $("#model").val()}, function (data) {
 
             $('#chart-round-avg').highcharts({
                 chart: {
@@ -638,7 +638,7 @@ function getRoundAvg(){
 
         $('.fa-spinner').remove();
         $('#stats').append('<br /><br/><i class="fa fa-spinner fa-spin fa-2x"></i>');
-        $.get('http://dg.dev:8000/getRoundsPerMonth', {id: $("#id").val(), model: $("#model").val()}, function (data) {
+        $.get('http://178.62.90.148/getRoundsPerMonth', {id: $("#id").val(), model: $("#model").val()}, function (data) {
 
 
 
@@ -822,7 +822,7 @@ function getUserRoundsReload(){
     function getRoundAvgScore(){
 
         $('.fa-spinner').remove();
-        $.get('http://dg.dev:8000/getRoundAvgScore', {id: $("#id").val(), model: $("#model").val()}, function (data) {
+        $.get('http://178.62.90.148/getRoundAvgScore', {id: $("#id").val(), model: $("#model").val()}, function (data) {
                 $('#chart-two').highcharts({
                     chart: {
                         type: 'line'
