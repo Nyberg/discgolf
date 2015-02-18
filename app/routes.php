@@ -26,6 +26,10 @@ Route::group(['before'=>'checkAdmin'], function(){
         #   Dashboard   #
         Route::get('/admin','AdminController@index');
 
+        #   Alfa        #
+        Route::get('/admin/alfa', 'ActivationController@index');
+        Route::post('/admin/alfa/{id}/send', ['as'=>'alfa.send', 'uses'=>'ActivationController@sendAlfa']);
+
         #   User        #
         Route::get('/admin/user/{id}', 'UserController@adminshow');
         Route::get('/admin/users', 'AdminController@users');
@@ -266,7 +270,7 @@ Route::get('/bags/{id}/show', 'BagController@show');
 // Users
 Route::get('/users', 'UserController@index');
 Route::get('/user/{id}/show', 'UserController@show');
-Route::get('/registration', 'RegistrationController@create');
+Route::get('/registration/{token}', 'RegistrationController@create');
 
 #   Password    #
 Route::controller('password', 'RemindersController');
@@ -274,6 +278,9 @@ Route::controller('password', 'RemindersController');
 #   Sponsors    #
 Route::get('/sponsor/{id}/redirect/', 'SponsorController@redirect');
 
+#   Activation  #
+Route::get('/activation/{token}/', ['as'=>'confirmation_path', 'uses'=> 'RegistrationController@create']);
+Route::get('/alfa', 'RegistrationController@alfa');
 
 
 Route::resource('session','SessionController', ['only'=>['create', 'store', 'destroy']]);
@@ -298,3 +305,4 @@ Route::resource('request', 'RequestController');
 Route::resource('country', 'CountryController');
 Route::resource('lost', 'LostController');
 Route::resource('links', 'LinksController');
+Route::resource('activation', 'ActivationController');

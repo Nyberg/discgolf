@@ -80,4 +80,5 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function bags(){
         return $this->hasMany('Bag');
     }
+
 }

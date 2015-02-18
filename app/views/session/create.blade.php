@@ -33,7 +33,7 @@
 
 		            <div class="registration">
 		                Är du inte medlem?<br/>
-		                <a class="" href="/registration">
+		                <a class="" href="/alfa">
 		                    Skapa användare
 		                </a>
 		            </div>

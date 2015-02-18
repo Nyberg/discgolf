@@ -2,11 +2,12 @@
 
 namespace dg\Mailer;
 
+use Registration;
 use User;
 
 class ActivationEmail extends Mailer {
 
-    public function activate(User $user)
+    public function activate(Registration $user)
     {
         $view = 'emails.activation.activation';
         $data = ['name' => $user['first_name'], 'email' => $user['email'] ];
