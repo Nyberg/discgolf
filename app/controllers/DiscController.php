@@ -5,7 +5,7 @@ class DiscController extends \BaseController {
 	public function store()
 	{
         $id = Input::get('id');
-		$disc = New disc();
+		$disc = new Disc;
 
         $disc->name = Input::get('name');
         $disc->author = Input::get('author');
