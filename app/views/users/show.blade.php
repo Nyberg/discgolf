@@ -140,42 +140,40 @@
 
                 </div>
 
-
-
-                    <div class="col-md-12 collapse well well-sm"  id="collapseExample">
-                    <div class="col-lg-3">
-                                <p>Putters</p>
-                                    @foreach($bag->disc as $disc)
-                                    @if($disc->type == 'Putter')
-                                    <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
-                                    @endif
-                                    @endforeach
-                              </div>
-                              <div class="col-lg-3">
-                                <p>Midranges</p>
-                                    @foreach($bag->disc as $disc)
-                                    @if($disc->type == 'Midrange')
-                                    <p>{{$disc->author.' '.$disc->plastic.' '. $disc->name}}</p>
-                                    @endif
-                                    @endforeach
-                              </div>
-                              <div class="col-lg-3">
-                                <p>Fairway Drivers</p>
-                                    @foreach($bag->disc as $disc)
-                                    @if($disc->type == 'Fairway Driver')
-                                    <p>{{$disc->author.' '.$disc->plastic.' '. $disc->name}}</p>
-                                    @endif
-                                    @endforeach
-                              </div>
-                              <div class="col-lg-3">
-                                <p>Drivers</p>
-                                    @foreach($bag->disc as $disc)
-                                    @if($disc->type == 'Driver')
-                                    <p>{{$disc->author.' '.$disc->plastic.' '. $disc->name}}</p>
-                                    @endif
-                                    @endforeach
-                              </div>
-                    </div>
+            <div class="col-md-12 collapse well well-sm"  id="collapseExample">
+                      <div class="col-lg-3">
+                        <p>Putters</p>
+                            @foreach($bag->disc as $disc)
+                            @if($disc->type == 'Putter')
+                            <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
+                            @endif
+                            @endforeach
+                      </div>
+                      <div class="col-lg-3">
+                        <p>Midranges</p>
+                            @foreach($bag->disc as $disc)
+                            @if($disc->type == 'Midrange')
+                             <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
+                            @endif
+                            @endforeach
+                      </div>
+                      <div class="col-lg-3">
+                        <p>Fairway Drivers</p>
+                            @foreach($bag->disc as $disc)
+                            @if($disc->type == 'Fairway Driver')
+                             <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
+                            @endif
+                            @endforeach
+                      </div>
+                      <div class="col-lg-3">
+                        <p>Drivers</p>
+                            @foreach($bag->disc as $disc)
+                            @if($disc->type == 'Driver')
+                             <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
+                            @endif
+                            @endforeach
+                      </div>
+            </div>
 
                 </div>
             @endforeach

@@ -11,7 +11,7 @@ class HomeController extends BaseController {
 
             return View::make('index.loggedin', ['rounds'=>$rounds, 'reviews'=>$reviews]);
         }else{
-            return View::make('index.startsida');
+            return View::make('session.create');
         }
     }
 
