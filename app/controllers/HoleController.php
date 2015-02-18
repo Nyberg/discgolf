@@ -216,7 +216,6 @@ class HoleController extends \BaseController {
 
         }
 
-
         $message = [
             'msg' => 'success',
             'user' => $name,
@@ -225,6 +224,7 @@ class HoleController extends \BaseController {
             'cp'    => count($cp),
             'bfr'   => $bfr,
             'birdies' => $birdies,
+            'rounds'    => count($user->round)
 
         ];
 
@@ -262,7 +262,6 @@ class HoleController extends \BaseController {
 
         }
 
-
         $message = [
             'msg' => 'success',
             'user' => $name,
@@ -271,6 +270,7 @@ class HoleController extends \BaseController {
             'cp'    => count($cp),
             'bfr'   => $bfr,
             'birdies' => $birdies,
+            'rounds'    => count($user->round)
 
         ];
 

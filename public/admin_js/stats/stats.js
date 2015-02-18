@@ -41,7 +41,7 @@ function getData(){
                 }
             },
             subtitle: {
-                text: 'Antal kast: ' + data['shots'],
+                text: 'Antal rundor: ' + data['rounds'] + ' - Antal kast: ' + data['shots'],
                 style: {
                     color: '#E0E0E3',
                     textTransform: 'uppercase',
@@ -91,7 +91,7 @@ function getData(){
                 "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
             series: [{
                 name: data['user'],
-                data: [data['birdies'], data['cp'], -3, data['bfr']]
+                data: [data['birdies'], data['cp'], data['avg'], data['bfr']]
             }]
         });
     }
@@ -153,7 +153,7 @@ function getDataReload(){
                         }
                     },
                     subtitle: {
-                        text: 'Antal kast: ' + data['shots'],
+                        text: 'Antal rundor: ' + data['rounds'] + ' - Antal kast: ' + data['shots'],
                         style: {
                             color: '#E0E0E3',
                             textTransform: 'uppercase',
@@ -203,7 +203,7 @@ function getDataReload(){
                         "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
                     series: [{
                         name: data['user'],
-                        data: [data['birdies'], data['cp'], -3, data['bfr']]
+                        data: [data['birdies'], data['cp'], data['avg'], data['bfr']]
                     }]
                 });
 
