@@ -32,7 +32,7 @@
 {{HTML::script('packages/jleach/laravelmce/js/tinymce/tinymce.min.js')}}
 {{HTML::script('//tinymce.cachefly.net/4.1/tinymce.min.js')}}
 
-{{HTML::script('https://maps.googleapis.com/maps/api/js?key=AIzaSyAqPB9cgeF7VZw7JTd2qYD2K4TPbCNDicc&sensor=false')}}
+{{HTML::script('https://maps.googleapis.com/maps/api/js?key=AIzaSyDOnY0hNzG_KmwhDm8bryX3M4cXmTRrOAQ&sensor=false')}}
 
 <script type="text/javascript">
 
