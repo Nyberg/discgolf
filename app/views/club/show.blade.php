@@ -20,7 +20,18 @@
     </ul>
 </div>
 
-<div class="tab-content">
+<div class="row">
+
+    <div class="col-md-12 text-center">
+
+        <br/>
+        <br/>
+        <br/>
+
+        <h1 class="page-header-custom">Denna sidan är under konstruktion!</h1>
+        <p>Förslag på vad en klubbs sida ska innehålla kan lämnas i forumet.</p>
+
+    </div>
 
 </div>
 

@@ -7,6 +7,7 @@
      		<div class="showback">
 
       <h4><i class="fa fa-angle-right"></i> Dina rundor</h4>
+      <p>Här ligger alla rundor efter att dom lagts till. När du klickar på <a href="#" class="btn btn-xs btn-success">Markera som aktiv</a> kan du inte ändra ditt resultat på rundan. Rundan kan inte heller tas bort för tillfället. Detta för att modulen med rekordrundor ska fungera korrekt.</p>
       <table class="table table-hover">
           <thead>
           <tr>

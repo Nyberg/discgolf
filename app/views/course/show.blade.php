@@ -151,7 +151,7 @@
      <div class="divider-header"></div>
        @foreach($records as $rec)
            <div class="panel panel-default">
-               <div class="panel-heading">{{$rec->round->type}} | Resultat: {{calcScore($rec->round->total, $rec->tee->par)}}
+               <div class="panel-heading"><a href="/round/{{$rec->round_id}}/course/{{$rec->course_id}}">{{$rec->round->type}} | Resultat: {{calcScore($rec->round->total, $rec->tee->par)}}</a>
 
                           @if($rec->type == 'Singel')
                               av <a href="/user/{{$rec->user_id}}/show">{{$rec->user->first_name . ' ' . $rec->user->last_name}}</a>

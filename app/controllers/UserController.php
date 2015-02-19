@@ -61,6 +61,9 @@ class UserController extends \BaseController {
                 $sponsor->save();
             }
 
+            $user->views++;
+            $user->save();
+
             return View::make('users.show', ['user' => $user, 'rounds' => $rounds, 'club' => $club, 'bags' => $bags, 'sponsors' => $sponsors/*, 'data' => $data, 'shots' => $shots, 'cp' => $cp, 'bfr' => $bfr, 'avg' => $avg, 'birdies' => $birdies*/]);
 
     }
