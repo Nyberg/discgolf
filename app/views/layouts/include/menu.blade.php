@@ -111,21 +111,6 @@
                           <li>
                             <a href="/registration">Registrera</a>
                     </li>
-
-                    <ul class="nav pull-right top-menu">
-                           {{Form::open(['route' => 'searchresult', 'method' => 'GET', 'class' => 'navbar-form navbar-left'])}}
-                         <div class="input-group">
-                                  <input type="text" class="form-control input-sm" name="auto" id="auto" placeholder="Search Course">
-
-                              <span class="input-group-btn">
-                                   {{Form::submit('Search Course', ['class' => 'btn btn-primary btn-sm'])}}
-
-                             {{Form::close()}}
-                              </span>
-                          </div>
-                    </ul>
-
-
                 @endif
 
 
