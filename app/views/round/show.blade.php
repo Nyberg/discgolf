@@ -34,7 +34,7 @@
          <div class="panel panel-default">
            <!-- Default panel contents -->
            <div class="panel-heading">  Resultat: {{calcScore($round->total, $round->tee->par)}}</div>
-    <table class="table table-hover text-center">
+    <table class="table table-hover text-center hidden-phone">
     <thead>
         <tr>
             <td>Hål</td>
@@ -60,7 +60,7 @@
     </table>
     </div>
     </div>
-     <div class="showback">
+     <div class="showback hidden-phone">
 
      @if(Auth::check() && Auth::user()->hasRole('Member') || Auth::check() && Auth::user()->hasRole('Premium') || Auth::check() && Auth::user()->hasRole('Admin'))
 

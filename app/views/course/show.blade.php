@@ -13,19 +13,20 @@
 
 @endforeach
 
-          <span class="text-center span-h2 col-md-4">{{$course->city->city . ', ' . $course->state->state}}</span>
-               <span class="text-center span-h2 col-md-4">{{'Tees: '. count($course->tee)}}</span>
-               <span class="text-center span-h2 col-md-4">{{checkFee($course->fee)}}</span>
+    <span class="hidden-phone">
+        <span class="text-center span-h2 col-md-4">{{$course->city->city . ', ' . $course->state->state}}</span>
+        <span class="text-center span-h2 col-md-4">{{'Tees: '. count($course->tee)}}</span>
+        <span class="text-center span-h2 col-md-4">{{checkFee($course->fee)}}</span>
+    </span>
 
 </div>
 <div class="row">
 <br/>
 <div class="col-md-6">
 <h4 class="tab-rub text-center page-header-custom">Information</h4>
-     <div class="divider-header"></div>
 
-
-<p>{{$course->information}}</p>
+    <div class="divider-header"></div>
+    <p class="margin-left">{{$course->information}}</p>
 
 </div>
 <div class="col-md-6">
@@ -69,21 +70,21 @@
             @else
             <div class="col-sm-6 col-md-6">
             @endif
-                <div class="thumbnail stat">
+                <div class="thumbnail">
                  <div class="caption text-center">
                      <i class="fa fa-tree fa-4x"></i>
-                    <h4 class="white">{{$tee->color}}</h4>
-                    <p class="red">Par: {{$tee->par}} | Antal hål: {{$tee->holes}}</p>
+                    <h4 class="">{{$tee->color}}</h4>
+                    <p class="">Par: {{$tee->par}} | Antal hål: {{$tee->holes}}</p>
                   </div>
                 </div>
               </div>
           @endforeach
             <div class="col-sm-6 col-md-6">
-                  <div class="thumbnail stat">
+                  <div class="thumbnail">
                     <div class="caption text-center">
                         <i class="fa fa-exclamation fa-4x"></i>
-                      <h4 class="white"> Banöversikt</h4>
-                      <p class="red">Längst hål: {{convert($data['longest'])}} | Kortaste hål: {{convert($data['shortest'])}} | Medellängd: {{convert($data['avg'])}} | <span data-toggle="tooltip" data-placement="bottom" title="Visar medellängd av alla tees">Totallängd: {{convert($data['total'])}}</span></p>
+                      <h4 class=""> Banöversikt</h4>
+                      <p class="">Längst hål: {{convert($data['longest'])}} | Kortaste hål: {{convert($data['shortest'])}} | Medellängd: {{convert($data['avg'])}} | <span data-toggle="tooltip" data-placement="bottom" title="Visar medellängd av alla tees">Totallängd: {{convert($data['total'])}}</span></p>
                     </div>
                   </div>
             </div>
