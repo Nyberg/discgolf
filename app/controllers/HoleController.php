@@ -628,13 +628,16 @@ class HoleController extends \BaseController {
         if($model == 'course') {
 
         $rounds = Round::where('course_id',$id)->limit(5)->get();
-
+            $stats = $this->stat->roundAvg($rounds);
         }
         if($model == 'user'){
             $rounds = Round::where('user_id',$id)->limit(5)->get();
+            $stats = $this->stat->roundAvg($rounds);
         }
-
-        $stats = $this->stat->roundAvg($rounds);
+        if($model == 'hole'){
+            $scores = Score::where('hole_id', $id)->limit(5)->get();
+            $stats = $this->stat->holeAvg($scores);
+        }
 
         $message = [
             'msg' => 'success',

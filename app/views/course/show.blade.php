@@ -71,7 +71,7 @@
           @foreach($course->tee as $tee)
 
             @if(count($course->tee) == 1)
-            <div class="col-sm-3 col-md-3">
+            <div class="col-sm-6 col-md-6">
             @else
             <div class="col-sm-3 col-md-3">
             @endif

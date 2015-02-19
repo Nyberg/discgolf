@@ -190,6 +190,23 @@ class Stat {
 
     }
 
+    public function holeAvg($scores){
+
+        $stats = ['1'=>0, '2'=>0,'3'=>0,'4'=>0,'5'=>0, 'date-1'=>0, 'date-2'=>0, 'date-3'=>0, 'date-4'=>0, 'date-5'=>0];
+
+        $i = 1;
+        foreach($scores as $score){
+
+            $stats[$i] = $this->getRoundScore($score->score, $score->hole->par);
+            $stats['date-'.$i] = $score->round->date;
+
+            $i++;
+        }
+
+        return $stats;
+
+    }
+
     public function getRoundScore($total, $par){
 
             $avg = $total - $par;

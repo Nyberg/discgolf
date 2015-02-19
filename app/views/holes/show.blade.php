@@ -49,38 +49,71 @@
     </div>
   </div>
 
-  </div>
+    <!-- Nav-pills -->
+    <div class="row">
 
-    @if(Auth::check() && Auth::user()->hasRole('Admin'))
- <div class="showback">
-                  <div class="row">
-                          <div class="col-md-12 hidden-phone">
-                                  <h4 class="tab-rub text-center page-header-custom">Statistik</h4>
-                                   <div class="divider-header"></div>
+        <div class="col-md-12">
+            <div class="row">
 
-                                   <input hidden="id" id="id" value="{{$hole->id}}"/>
-                                  <input hidden="model" id="model" value="hole"/>
-                                      {{Form::open(['method' => 'POST','route' => ['hole.stats'],'class' => 'form-inline', 'id' => 'user_stat'])}}
-                                      {{Form::hidden('id', $hole->id, ['id'=>'id'])}}
-                                      {{Form::hidden('model', 'course', ['id'=>'model'])}}
-                                      {{Form::hidden('user_id', Auth::id(), ['id'=>'user_id'])}}
-                                      {{Form::submit('Visa din statistik', ['class' => 'btn btn-primary btn-sm center-block'])}}
-                                      {{Form::close()}}
-                              <div class="col-md-6">
-                                 <div id="chart-one" style="min-width: 310px; height: 400px; width: 400px; margin: 0 auto"></div>
-                              </div>
-                              <div class="col-md-6">
+            </div>
+        </div>
 
-                                <div id="chart-user" style="min-width: 310px; height: 400px; width: 400px; margin: 0 auto"></div>
-                              </div>
+        <div class="col-md-12">
+            <div class="row">
+                <ul class="nav nav-pills nav-justified">
+                  <li class="active" id="menu_item"><a data-toggle="tab" href="#sectionA">Statistik</a></li>
+                  <li id="menu_item_2"></li>
+                </ul>
+            </div>
+        </div>
 
-                                  <hr/>
-                              </div>
+    </div>
+    <!-- Slut navpills -->
 
-                        </div>
-                        </div>
-    @else
-    @endif
+        <div class="tab-section">
+
+        <div id="sectionA" class="tab-pane fade in active">
+
+        <div class="row">
+           <div id="chart-round-avg" style="min-width: 300px; height: 400px; width: 100%; margin: 0 auto"></div>
+            <input hidden="id" id="id" value="{{$hole->id}}"/>
+            <input hidden="model" id="model" value="hole"/>
+        </div>
+        <div class="row">
+        <!-- Sidomeny -->
+        <div class="col-md-12">
+            <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                {{Form::open(['method' => 'POST','route' => ['course.stats'],'class' => 'form-inline', 'id' => 'round_avg'])}}
+                {{Form::hidden('id', $hole->id, ['id'=>'id'])}}
+                {{Form::hidden('model', 'hole', ['id'=>'model'])}}
+                {{Form::hidden('user_id', Auth::id(), ['id'=>'user_id'])}}
+                {{Form::submit('Senaste resultaten', ['class' => 'btn btn-red btn-sm btn-block'])}}
+                {{Form::close()}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    {{Form::open(['method' => 'POST','route' => ['hole.stats'],'class' => 'form-inline', 'id' => 'user_stat'])}}
+                    {{Form::hidden('id', $hole->id, ['id'=>'id'])}}
+                    {{Form::hidden('model', 'hole', ['id'=>'model'])}}
+                    {{Form::hidden('user_id', Auth::id(), ['id'=>'user_id'])}}
+                    {{Form::submit('Visa hålresultat', ['class' => 'btn btn-red btn-sm btn-block'])}}
+                    {{Form::close()}}
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <br/>
+
+            </div>
+
+            </div>
+        </div>
+        <!-- Slut sidomeny -->
+        </div>
+
 
 @stop
 
@@ -94,10 +127,8 @@
 
     jQuery(document).ready(function($) {
 
-        getFirstPie();
-        getUserRounds();
-
-         $('#user_stat').submit(getUserPie);
+            $('#round_avg').submit(getRoundAvg);
+            $('#user_stat').submit(getUserPie);
 
         });
 </script>
