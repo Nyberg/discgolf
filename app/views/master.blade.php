@@ -34,32 +34,6 @@
 {{HTML::script('https://maps.googleapis.com/maps/api/js?key=AIzaSyCMaFerIs2B3QmhCTjer-s1x_8THiBDYSs')}}
 
 
-<script type="text/javascript">
-
-function initialize() {
-
-    document.getElementById('lat').style.display = 'none';
-    document.getElementById('long').style.display = 'none';
-
-    var long = document.getElementById('long').textContent;
-    var lat = document.getElementById('lat').textContent;
-
-    var myLatlng = new google.maps.LatLng(long, lat);
-    var mapOptions = {
-        zoom: 10,
-        center: myLatlng
-        }
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    var marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      title: 'Hello World!'
-    });
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
-</script>
 
 <script>tinymce.init({selector:'textarea'});</script>
 
