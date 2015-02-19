@@ -92,7 +92,7 @@
             </div>
           </div>
 
-            {{Form::submit('Skicka anmälan', ['class'=>'btn btn-primary btn-block'])}}
+            {{Form::submit('Registrera dig', ['class'=>'btn btn-primary btn-block'])}}
             {{Form::close()}}
 
 		        </div>

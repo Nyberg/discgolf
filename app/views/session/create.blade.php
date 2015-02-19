@@ -15,7 +15,7 @@
 
 		        <div class="login-wrap">
 
-                                        {{Form::email('email', null,['class'=>'input-fw input-flat form-control', 'placeholder'=>'Email', 'autofocus', 'data-validation'=>'email'])}}
+                                        {{Form::email('email', null,['class'=>'input-fw input-flat form-control', 'placeholder'=>'Email', 'autofocus', 'data-validation'=>'email', 'data-validation-error-msg'=>'Detta fältet måste fyllas i..'])}}
 		     <br>
                                         {{Form::password('password', ['class'=>'input-fw input-flat form-control', 'placeholder'=>'Lösenord', 'autofocus'])}}
 
@@ -54,10 +54,10 @@
 		                      <div class="modal-body">
 
                                 <p>Skriv in din email-adress nedan för att återställa ditt lösenord.</p>
-                               <form action="{{ action('RemindersController@postRemind') }}" method="POST">
+                                <form action="{{ action('RemindersController@postRemind') }}" method="POST" id="restore">
 
-                                {{Form::email('email', null,['class'=>'form-control placeholder-no-fix', 'placeholder'=>'Email', 'autocomplete'=>'off','autofocus'])}}
-
+                                {{Form::email('email', null,['class'=>'form-control placeholder-no-fix', 'placeholder'=>'Email', 'autocomplete'=>'off','autofocus', 'data-validation'=>'email'])}}
+                                </form>
                                 </div>
                                 <div class="modal-footer">
                                 <input type="submit" class="btn btn-theme" value="Återställ">
@@ -79,15 +79,16 @@
 
 @stop
 
-        @section('scripts')
-        <script>
+@section('scripts')
 
-            $.validate({
-              form : '#login'
-            });
+    <script>
 
-        </script>
-        @stop
+    $.validate({
+      form : '#login'
+    });
 
+    </script>
+
+@stop
 
 

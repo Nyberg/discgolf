@@ -169,8 +169,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
       }
     })
 
-    $.validate();
-
      /* $(document).ready(function () {
             $("#date-popover").popover({html: true, trigger: "manual"});
             $("#date-popover").hide();
