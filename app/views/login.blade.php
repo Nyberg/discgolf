@@ -62,7 +62,7 @@
     {{HTML::script('admin_js/jquery.backstretch.min.js')}}
     @yield('scripts')
      <script>
-                 $.backstretch("../img/login-bg.jpg", {speed: 500});
+                 $.backstretch("../img/bg-johannes.jpg", {speed: 500});
      </script>
   </body>
 </html>

@@ -72,11 +72,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap2.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="bootstrap2.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/admin_css/css/bootstrap2.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47008547" vertical-offset="55590" max-vertical-offset="95895">
-              <caret line="3739" column="25" selection-start-line="3739" selection-start-column="25" selection-end-line="3739" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="55590" max-vertical-offset="95895">
+              <caret line="3759" column="14" selection-start-line="3759" selection-start-column="14" selection-end-line="3759" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/login.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.388668" vertical-offset="89" max-vertical-offset="1095">
+              <caret line="32" column="60" selection-start-line="32" selection-start-column="60" selection-end-line="32" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -132,7 +142,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/layouts/include/footer.blade.php" />
         <option value="$PROJECT_DIR$/app/views/lost/index.blade.php" />
         <option value="$PROJECT_DIR$/app/views/users/code.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/HoleController.php" />
@@ -183,6 +192,7 @@
         <option value="$PROJECT_DIR$/app/views/master.blade.php" />
         <option value="$PROJECT_DIR$/app/views/course/show.blade.php" />
         <option value="$PROJECT_DIR$/public/admin_css/css/bootstrap2.css" />
+        <option value="$PROJECT_DIR$/app/views/login.blade.php" />
       </list>
     </option>
   </component>
@@ -725,14 +735,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/login.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.06413994" vertical-offset="66" max-vertical-offset="1095">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/Activation.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13119534" vertical-offset="0" max-vertical-offset="1029">
@@ -1115,8 +1117,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/admin_css/css/bootstrap2.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47008547" vertical-offset="55590" max-vertical-offset="95895">
-          <caret line="3739" column="25" selection-start-line="3739" selection-start-column="25" selection-end-line="3739" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="55590" max-vertical-offset="95895">
+          <caret line="3759" column="14" selection-start-line="3759" selection-start-column="14" selection-end-line="3759" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/login.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.388668" vertical-offset="89" max-vertical-offset="1095">
+          <caret line="32" column="60" selection-start-line="32" selection-start-column="60" selection-end-line="32" selection-end-column="60" />
           <folding />
         </state>
       </provider>
