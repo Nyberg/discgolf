@@ -48,8 +48,10 @@
     </div>
     </div>
   </div>
-
     <!-- Nav-pills -->
+
+    @if(Auth::check())
+
     <div class="row">
 
         <div class="col-md-12">
@@ -113,6 +115,9 @@
         </div>
         <!-- Slut sidomeny -->
         </div>
+
+        @else
+        @endif
 
 
 @stop

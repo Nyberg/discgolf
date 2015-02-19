@@ -62,7 +62,7 @@
     </div>
      <div class="showback hidden-phone">
 
-     @if(Auth::check() && Auth::user()->hasRole('Member') || Auth::check() && Auth::user()->hasRole('Premium') || Auth::check() && Auth::user()->hasRole('Admin'))
+     @if(Auth::check())
 
             <div class="row">
 
