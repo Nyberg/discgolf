@@ -67,7 +67,7 @@
             @endforeach
 
         </div>
-         {{Form::submit('Spara', ['class'=>'btn btn-success btn-sm'])}}
+         {{Form::submit('Spara', ['class'=>'btn btn-success btn-sm center-block'])}}
                     {{Form::close()}}
         </div>
 
