@@ -4,8 +4,10 @@
 
     	<div class="showback">
 
-
-    <h4><i class="fa fa-angle-right"></i> Skapa Runda - {{$tee->course['name'] . ' - ' . $tee->color}}</h4><hr>
+    <div class="col-md-12">
+        <h2 class="text-center page-header-custom">Skapa Runda - {{$tee->course['name'] . ' - ' . $tee->color}}</h2>
+        <div class="divider-header"></div>
+    </div> <hr/>
       <table class="table table-hover">
 
 
@@ -36,7 +38,8 @@
           </tbody>
       </table>
 
-        <h4 class="mb"><i class="fa fa-angle-right"></i> Lägg till resultat</h4>
+        <h2 class="text-center page-header-custom">Lägg till resultat</h2>
+               <div class="divider-header"></div>
             {{Form::open(['route'=>'round.store', 'class'=>'form-horizontal style-form', 'id'=>'score'])}}
             {{Form::hidden('course_id', $tee->course->id)}}
             {{Form::hidden('holes', $tee->holes)}}
@@ -51,7 +54,7 @@
             {{Form::hidden('par-'.$hole->number.'', $hole->par)}}
 
 
-              <div class="col-sm-3 col-md-3">
+              <div class="col-sm-1 col-md-1">
                 <div class="thumbnail">
                   <div class="caption">
 
@@ -64,7 +67,7 @@
             @endforeach
 
         </div>
-         {{Form::submit('Spara', ['class'=>'btn btn-primary'])}}
+         {{Form::submit('Spara', ['class'=>'btn btn-success btn-sm'])}}
                     {{Form::close()}}
         </div>
 
