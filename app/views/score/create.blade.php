@@ -54,7 +54,7 @@
             {{Form::hidden('par-'.$hole->number.'', $hole->par)}}
 
 
-              <div class="col-sm-1 col-md-1">
+              <div class="col-sm-2 col-md-2">
                 <div class="thumbnail">
                   <div class="caption">
 
