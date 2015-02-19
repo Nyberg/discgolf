@@ -18,6 +18,54 @@
 <br/>
   <div class="row">
 
+    <div class="col-md-10 col-md-offset-1 col-md-offset-right-1">
+
+    <h4 class="tab-rub text-center page-header-custom">Välkommen till Penguin Projects Alfatest!</h4>
+
+        <div class="divider-header"></div>
+
+        <p class="text-center"><b>All data som läggs upp kan/kommer att försvinna under testperioden. Lägg inte upp data som ni inte vill bli av med!</b></p><hr>
+
+        <br/>
+         <h4>Tack för att du vill vara med och testa och förbättra Penguin Project!</h4>
+
+        <p>Sidan är i ett väldit tidigt stadie, men det finns tillräckligt med funktionalitet för att personer kan använda sig av den.
+        Under alfa-stadiet kommer väldigt många buggar och krockar uppstå så ni får inte gripas av panik om det flashar världens error för er.</p>
+
+        <h4>Bugghantering</h4>
+        <p>När ni stöter på en bugg, var vänlig att gå till forumets alfadel och leta reda på rätt område.
+        Kolla noga innan ni postar något nytt, så att vi kan undvika dubletter. Forumet kommer vara uppbyggt med en kategori för varje specifikt område.</p>
+
+        <h4>Förslag på funktionalitet</h4>
+        <p>Om ni skulle komma på något som ni vill ha med på sidan (inom vissa rimliga ramar) så postar ni det i "Förslag" i alfaforumet. Förslaget kommer att läsas igenom och undersökas.
+        Vill ni ha något tillägg eller påbyggnad, posta det i samma forum.</p>
+
+        <h4>Design & Rättigheter</h4>
+        <p>För tillfället så är det mesta öppet för en alfatestare. Det finns dock viss funktionalitet som fortfarande är låst (som jag inte anser behöver testas). Framförallt rör det sig om admindelen.
+        I en användares dashboard kommer det finnas en del funktionalitet som inte är tillgänglig, men ni kan fortfarande se det.</p>
+        <p>När det kommer till design så är det en väldigt öppen fråga. Det är inte min prio just nu. Framförallt dashboardgränssnittet är inte alls påbörjat rent designmässigt. Lämna dessa funderingar/klagomål utanför sidan.</p>
+        <p>Har ni dock förslag på konkreta designförändringar på framsidan, lämna en kommentar i forumets del för design. Glöm inte använda sidan på er platta eller mobil.</p>
+
+        <h4>Statistik</h4>
+        <p>Statistiken är väldigt grundläggande. Har ni frågor kring hur det fungerar och vilken data som används, lämna en kommentar i alfadelens statistikdel. Förslag på statistik lämnas även där.</p>
+
+        <h4>Klubbar</h4>
+        <p>För tillfället finns det bara 1 klubb och det visas inget på klubbens sida. Hela det avsnittet är under ombyggnad. Däremot kan ni använda er av klubbens forum för att diskutera interna frågor.</p>
+
+        <h4>Banor och rundor</h4>
+        <p>Det ligger 2 banor uppe för tillfället. Det är den del som är närmast klar. Lägg upp era rundor så statistiken kan visa rättvisa siffror.</p>
+
+        <h4>Korrenkturläsning och textförslag</h4>
+        <p>Alla förslag på informativa texter mottages varmt. Även länkar är vamrt välkomna. Posta det i alfaforumets informationsdel. </p>
+
+        <h4>App</h4>
+        <p>Som ni kanske vet kommer det byggas en app under alfa & betatester. Kom gärna med förslag i alfaforumets del för appen. Försök hålla förslagen rimliga.</p>
+
+        <h4>Avslutningsvis</h4>
+        <p>Som alfatestare har ni ett ansvar. Testa så mycket ni kan, kom med ideer och förslag. Försök hålla en öppen & glad diskussion med varandra. Användare som missköter sig är välkomna tillbaka när sidan går live på riktigt.</p>
+
+    </div>
+
 
     </div>
 

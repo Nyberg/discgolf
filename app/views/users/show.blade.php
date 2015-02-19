@@ -6,9 +6,9 @@
 <!-- Profilheader -->
 <div class="row profile-back">
     <div class="col-md-12">
-    <div class="col-md-5"><h4 class="text-right">{{$user->first_name . ' ' . $user->last_name}}</h4></div>
+    <div class="col-md-5"><a href="/user/{{$user->id}}/show"><h4 class="text-right">{{$user->first_name . ' ' . $user->last_name}}</h4></a></div>
     <div class="col-md-2"><img src="{{$user->image}}" class="img-circle center-block over-img"/></div>
-    <div class="col-md-5"><h4 class="text-left">{{$user->club->name}}</h4></div>
+    <div class="col-md-5"><a href="/club/{{$user->club_id}}/show"><h4 class="text-left">{{$user->club->name}}</h4></a></div>
 
     </div>
     <div class="col-md-12">

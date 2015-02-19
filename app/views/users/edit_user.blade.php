@@ -45,19 +45,14 @@
                                                   <label class="col-sm-2 col-sm-2 control-label">Klubb</label>
                                                   <div class="col-sm-10">
 
-                                                  @if(Auth::user()->hasRole('ClubOwner'))
+                                                @if(Auth::user()->hasRole('ClubOwner'))
 
-                                               {{Form::select('club',$clubs , $user->club_id, ['data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control', 'disabled'])}}
+                                                        {{Form::select('club',$clubs , $user->club_id, ['data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control', 'disabled'])}}
 
                                                          <span class="help-block">Du är klubbägare. Du kan därför inte ändra din klubb.</span>
-
-
                                                 @else
-
                                                 {{Form::select('club',$clubs , $user->club_id, ['data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'])}}
                                                 @endif
-
-
 
                                                   </div>
                                               </div>
@@ -73,18 +68,18 @@
                                             </div>
 
                                                <div class="form-group">
-                                                                    <label class="col-sm-2 col-sm-2 control-label">Profilbild</label>
-                                                                      <div class="col-sm-10">
-                                                                         <img src="{{$user->image}}" class="img-thumbnail" width="100px" height="100px"/>
+                                                <label class="col-sm-2 col-sm-2 control-label">Profilbild</label>
+                                                  <div class="col-sm-10">
+                                                     <img src="{{$user->image}}" class="img-thumbnail" width="100px" height="100px"/>
 
-                                                                          {{Form::file('file', null, ['class'=>'form-control'])}} </div>
+                                                      {{Form::file('file', null, ['class'=>'form-control'])}} </div>
 
 
-                                                                      <label class="col-sm-2 col-sm-2 control-label"></label>
-                                                                      <div class="col-sm-10">
-                                                                          <span class="help-block"></span>
-                                                                      </div>
-                                                            </div>
+                                                  <label class="col-sm-2 col-sm-2 control-label"></label>
+                                                  <div class="col-sm-10">
+                                                      <span class="help-block"></span>
+                                                  </div>
+                                                </div>
 
                                               {{Form::submit('Spara Inställningar', ['class'=>'btn btn-primary'])}}
                                              {{Form::close()}}
@@ -175,17 +170,6 @@
                                                             {{Form::textarea('info', null, ['class'=>'form-control'])}}
 
                                                         </div>
-                                                    </div>
-
-                                                     <div class="form-group">
-                                                            <label class="col-sm-2 col-sm-2 control-label">Header</label>
-                                                              <div class="col-sm-10">
-                                                                  {{Form::file('file', '', ['class'=>'form-control'])}} </div>
-
-                                                              <label class="col-sm-2 col-sm-2 control-label"></label>
-                                                              <div class="col-sm-10">
-                                                                  <span class="help-block"></span>
-                                                              </div>
                                                     </div>
 
                                                       {{Form::submit('Uppdatera Profil', ['class'=>'btn btn-primary'])}}

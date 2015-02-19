@@ -98,37 +98,7 @@ class UserController extends \BaseController {
                 $user->profile->website = Input::get('website');
                 $user->profile->info = Input::get('info');
 
-                if(Input::hasFile('file')) {
-
-                    try
-                    {
-                        $file = Input::file('file');
-
-                        $filepath = '/img/headers/';
-                        $filename = time() . '-header.png';
-                        $file = $file->move(public_path($filepath), ($filename));
-                        $user->profile->image = $filepath.$filename;
-                        $img = Image::make(public_path($user->profile->image));
-
-                        $img->save();
-
-                        $img->destroy();
-
-
-                    }
-                    catch(Exception $e)
-                    {
-                        return 'Något gick snett mannen: ' .$e;
-                    }
-                }
-
                 $user->profile->save();
-
-                if($old->profile->image == '/img/dg/header.jpg'){
-
-                }else{
-                    File::delete(public_path().$old->profile->image);
-                }
 
                 return Redirect::back()->with('success', 'Profil uppdaterad!');
 
