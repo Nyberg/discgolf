@@ -13,14 +13,14 @@
 
 @endforeach
 
-          <span class="text-center span-h2 col-lg-4">{{$course->city->city . ', ' . $course->state->state}}</span>
-               <span class="text-center span-h2 col-lg-4">{{'Tees: '. count($course->tee)}}</span>
-               <span class="text-center span-h2 col-lg-4">{{checkFee($course->fee)}}</span>
+          <span class="text-center span-h2 col-md-4">{{$course->city->city . ', ' . $course->state->state}}</span>
+               <span class="text-center span-h2 col-md-4">{{'Tees: '. count($course->tee)}}</span>
+               <span class="text-center span-h2 col-md-4">{{checkFee($course->fee)}}</span>
 
 </div>
 <div class="row">
 <br/>
-<div class="col-lg-6">
+<div class="col-md-6">
 <h4 class="tab-rub text-center page-header-custom">Information</h4>
      <div class="divider-header"></div>
 
@@ -28,8 +28,8 @@
 <p>{{$course->information}}</p>
 
 </div>
-<div class="col-lg-6">
-<div class="col-lg-12">
+<div class="col-md-6">
+<div class="col-md-12">
 <h4 class="tab-rub text-center page-header-custom">Hitta hit</h4>
      <div class="divider-header"></div>
 <div id="map-canvas"></div>
@@ -50,9 +50,9 @@
 <ul class="nav nav-tabs nav-justified">
 <li class="active"><a data-toggle="tab" href="#sectionA">Översikt</a></li>
     @foreach($course->tee as $tee)
-<li class=""><a data-toggle="tab" href="#section{{$tee->id}}">{{$tee->color}} Tee</a></li>
+<li class="hidden-phone"><a data-toggle="tab" href="#section{{$tee->id}}">{{$tee->color}} Tee</a></li>
     @endforeach
-<li class=""><a data-toggle="tab" href="#sectionX">Rekordrundor</a></li>
+<li class="hidden-phone"><a data-toggle="tab" href="#sectionX">Rekordrundor</a></li>
 </ul>
 <div class="tab-content">
 
@@ -188,7 +188,7 @@
 
 
 <!-- Nav-pills -->
-<div class="showback">
+<div class="showback hidden-phone">
 <div class="row">
 
     <div class="col-md-12">
