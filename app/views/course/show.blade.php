@@ -281,8 +281,8 @@
                 <tr>
                     <th>Datum</th>
                     <th>Användare</th>
-                    <th>Tee</th>
-                    <th>Typ</th>
+                    <th class="hidden-phone">Tee</th>
+                    <th class="hidden-phone">Typ</th>
                     <th>Resultat</th>
                 </tr>
 
@@ -296,8 +296,8 @@
                     @else
                     <td>{{showPar($round->par_id, $round->user_id)}}</td>
                     @endif
-                    <td>{{$round->tee['color']}}</td>
-                    <td>{{$round->type}}</td>
+                    <td class="hidden-phone">{{$round->tee['color']}}</td>
+                    <td class="hidden-phone">{{$round->type}}</td>
                     <td>{{calcScore($round->total, $round->tee->par)}}</td>
                 </tr>
                 @endforeach

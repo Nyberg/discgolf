@@ -55,7 +55,7 @@
     <div id="sectionA" class="tab-pane fade in active">
 
     <div class="row">
-       <div id="chart-round-avg" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
+       <div id="chart-round-avg" style="min-width: 300px; height: 400px; width: 100%; margin: 0 auto"></div>
         <input hidden="id" id="id" value="{{$user->id}}"/>
         <input hidden="model" id="model" value="user"/>
     </div>
