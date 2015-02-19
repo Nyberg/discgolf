@@ -26,7 +26,12 @@
 <h4 class="tab-rub text-center page-header-custom">Information</h4>
 
     <div class="divider-header"></div>
+
+    <div class="col-sm-12">
+
     <p class="margin-left">{{$course->information}}</p>
+
+    </div>
 
 </div>
 <div class="col-md-6">
