@@ -1111,7 +1111,7 @@ h6,
   font-size: 12px;
 }
 p {
-  margin: 0 0 2em;
+  margin: 0 0 0 0;
     line-height: 2em;
 }
 .lead {

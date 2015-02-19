@@ -28,7 +28,7 @@
 {{HTML::script('//tinymce.cachefly.net/4.1/tinymce.min.js')}}
 {{HTML::script('admin_js/form-validator/jquery.form-validator.js')}}
 
-{{HTML::script('https://maps.googleapis.com/maps/api/js?key=AIzaSyAqPB9cgeF7VZw7JTd2qYD2K4TPbCNDicc&sensor=false')}}
+{{HTML::script('https://maps.googleapis.com/maps/api/js?key=AIzaSyCMaFerIs2B3QmhCTjer-s1x_8THiBDYSs')}}
 
 <script>tinymce.init({selector:'textarea'});</script>
 
