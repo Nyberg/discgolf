@@ -23,8 +23,8 @@
       <tr>
           <td><a href="/user/{{$user->id}}/show">{{$user->first_name .' '. $user->last_name}}</a></td>
           <td>{{$user->created_at->format('Y-m-d')}}</td>
-          <td>{{$user->club->name}}</td>
-          <td>{{count($user->round)}}</td>
+          <td><a href="/club/{{$user->club_id}}/show">{{$user->club->name}}</a></td>
+          <td> <a href="/round/{{$user->id}}/user/show">{{count($user->round)}}</a></td>
       </tr>
 
       @endforeach

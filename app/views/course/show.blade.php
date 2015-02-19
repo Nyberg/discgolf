@@ -88,7 +88,13 @@
                   <div class="thumbnail">
                     <div class="caption text-center">
                         <i class="fa fa-exclamation fa-4x"></i>
-                      <h4 class=""> Banöversikt</h4>
+                        <h4 class="">
+
+                              <a href="{{$course->course_map}}" data-toggle="lightbox" data-title="Bankarta {{$course->name}}" data-footer="">
+                                  <span data-toggle="tooltip" data-placement="right" title="Klicka här för att se bankarta">Banöversikt</span>
+                              </a>
+
+                        </h4>
                       <p class="">Längst hål: {{convert($data['longest'])}} | Kortaste hål: {{convert($data['shortest'])}} | Medellängd: {{convert($data['avg'])}} | <span data-toggle="tooltip" data-placement="bottom" title="Visar medellängd av alla tees">Totallängd: {{convert($data['total'])}}</span></p>
                     </div>
                   </div>
