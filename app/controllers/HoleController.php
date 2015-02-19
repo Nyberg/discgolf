@@ -449,7 +449,7 @@ class HoleController extends \BaseController {
         $id = Input::get('id');
         $model = Input::get('model');
 
-        $user = User::whereId($id)->firstOrFail();
+        $user = User::whereId(Auth::id())->firstOrFail();
         $name = $user->first_name . ' ' . $user->last_name;
 
         if($model == 'course'){
