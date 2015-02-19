@@ -3738,7 +3738,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   color: #E74C3C;
   cursor: default;
   background-color: #fff;
-    border-bottom: 1px solid #E74C3C;
 }
 .nav-tabs.nav-justified {
   width: 100%;
@@ -3770,7 +3769,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs.nav-justified > .active > a,
 .nav-tabs.nav-justified > .active > a:hover,
 .nav-tabs.nav-justified > .active > a:focus {
-    border-bottom: 1px solid #1ABC9C;
 }
 @media (min-width: 768px) {
   .nav-tabs.nav-justified > li > a {
