@@ -368,12 +368,12 @@ class HoleController extends \BaseController {
     {
         $id = Input::get('id');
         $model = Input::get('model');
-
-        $user = User::whereId($id)->firstOrFail();
-        $name = $user->first_name . ' ' . $user->last_name;
-
-
+        
         if($model == 'user'){
+
+            $user = User::whereId($id)->firstOrFail();
+            $name = $user->first_name . ' ' . $user->last_name;
+
             $rounds = Round::where('user_id', $id)->get();
 
             $stats = $this->stat->getRoundsPerMonth($rounds);
