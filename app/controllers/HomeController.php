@@ -42,4 +42,12 @@ class HomeController extends BaseController {
         return View::make('index.about');
     }
 
+    public function about_pp(){
+        return View::make('index.aboutpp');
+    }
+
+    public function discdb(){
+        return View::make('index.discdb');
+    }
+
 }

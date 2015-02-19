@@ -222,7 +222,9 @@ Route::get('/app', 'RoundController@app');
 Route::get('/about-discgol/', 'HomeController@discgolf');
 Route::get('/rules-discgolf/', 'HomeController@rules');
 Route::get('/about/', 'HomeController@about');
+Route::get('/about-pp/', 'HomeController@about_pp');
 Route::get('/link','LinksController@index');
+Route::get('/disc-db','HomeController@discdb');
 
 // Course
 Route::get('/course/{id}/show' , 'CourseController@show');

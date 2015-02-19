@@ -27,6 +27,10 @@
         <p class="text-center"><b>All data som läggs upp kan/kommer att försvinna under testperioden. Lägg inte upp data som ni inte vill bli av med!</b></p><hr>
 
         <br/>
+
+        <a href="/about-pp" class="center-block btn btn-success btn-lg">Läs mer om Penguin Project!</a>
+
+        <br/>
          <h4>Tack för att du vill vara med och testa och förbättra Penguin Project!</h4>
 
         <p>Sidan är i ett väldit tidigt stadie, men det finns tillräckligt med funktionalitet för att personer kan använda sig av den.
