@@ -640,7 +640,7 @@ function getRoundAvg(){
         $('#stats').append('<br /><br/><i class="fa fa-spinner fa-spin fa-2x"></i>');
         $.get('http://178.62.90.148/getRoundsPerMonth', {id: $("#id").val(), model: $("#model").val()}, function (data) {
 
-
+                console.log(data);
 
                 $('#chart-round-avg').highcharts({
                     chart: {
