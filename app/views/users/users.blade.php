@@ -20,7 +20,7 @@
       @foreach($users as $user)
 
       <tr>
-          <td><a href="/user/{{$user->id}}/show">{{$user->first_name .' '. $user->user->last_name}}</a></td>
+          <td><a href="/user/{{$user->id}}/show">{{$user->first_name .' '. $user->last_name}}</a></td>
           <td>{{$user->club->name}}</td>
           <td>{{count($user->round)}}</td>
       </tr>
