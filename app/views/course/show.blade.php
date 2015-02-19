@@ -206,7 +206,7 @@
     <div class="col-md-12">
         <div class="row">
             <ul class="nav nav-pills nav-justified">
-              <li class="active" id="menu_item"><a data-toggle="tab" href="#sectionA">Översikt</a></li>
+              <li class="active" id="menu_item"><a data-toggle="tab" href="#sectionA">Statistik</a></li>
               <li id="menu_item_2"></li>
             </ul>
         </div>
