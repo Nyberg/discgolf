@@ -401,7 +401,7 @@ class HoleController extends \BaseController {
             $course = Course::whereId($id)->firstOrFail();
             $course = $course->name;
 
-            $user = User::whereId($id)->firstOrFail();
+            $user = User::whereId(Auth::id())->firstOrFail();
             $name = $user->first_name . ' ' . $user->last_name;
 
             $stats = $this->stat->getRoundsPerMonth($rounds);
@@ -447,12 +447,11 @@ class HoleController extends \BaseController {
     public function getCourseRoundsReload()
     {
         $id = Input::get('id');
-        $model = Input::get('model');
+        #$model = Input::get('model');
 
         $user = User::whereId(Auth::id())->firstOrFail();
         $name = $user->first_name . ' ' . $user->last_name;
 
-        if($model == 'course'){
             $rounds = Round::where('course_id', $id)->get();
             $user_rounds = Round::where('user_id', Auth::id())->where('course_id', $id)->get();
             $course = Course::whereId($id)->firstOrFail();
@@ -489,9 +488,6 @@ class HoleController extends \BaseController {
                 'u_nov'   => $data['nov'],
                 'u_dec'   => $data['dec'],
             ];
-        }
-
-
 
         return Response::json($message);
 

@@ -103,8 +103,8 @@
       <file leaf-file-name="HoleController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/HoleController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2693837" vertical-offset="6509" max-vertical-offset="10035">
-              <caret line="453" column="0" selection-start-line="453" selection-start-column="0" selection-end-line="453" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.34393638" vertical-offset="6374" max-vertical-offset="9975">
+              <caret line="449" column="9" selection-start-line="449" selection-start-column="9" selection-end-line="449" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -1247,8 +1247,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/HoleController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2693837" vertical-offset="6509" max-vertical-offset="10035">
-          <caret line="453" column="0" selection-start-line="453" selection-start-column="0" selection-end-line="453" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.34393638" vertical-offset="6374" max-vertical-offset="9975">
+          <caret line="449" column="9" selection-start-line="449" selection-start-column="9" selection-end-line="449" selection-end-column="9" />
           <folding />
         </state>
       </provider>
