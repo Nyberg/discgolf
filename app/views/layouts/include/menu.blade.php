@@ -109,7 +109,7 @@
                       @else
 
                           <li>
-                            <a href="/registration">Registrera</a>
+                            <a href="/alfa">Registrera</a>
                     </li>
                 @endif
 

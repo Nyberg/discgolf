@@ -41,6 +41,9 @@ class ActivationController extends \BaseController {
 
         $this->alfaEmail->sendAlfa($user, $token);
 
+        $user->activated = 1;
+        $user->save();
+
         return Redirect::back()->with('success', 'Inbjudan skickad');
 
     }
@@ -79,6 +82,7 @@ class ActivationController extends \BaseController {
             $activation = new Activation;
             $activation->user_id = $user->id;
             $activation->token = $this->generateRandomString();
+            $activation->status = 0;
             $activation->save();
 
             $user->roles()->attach($role);
