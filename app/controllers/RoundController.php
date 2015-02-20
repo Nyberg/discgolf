@@ -150,6 +150,11 @@ class RoundController extends \BaseController {
         $records = Record::where('course_id', $course_id)->where('tee_id', $round->tee_id)->where('type', $round->type)->get();
         $sum = Hole::where('tee_id', $id)->sum('length');
 
+        $user_rounds = Round::where('tee_id', $round->tee_id)->where('user_id', Auth::id())->get();
+        $user = $this->stat->generateUserAvg($tee, $user_rounds);
+        dd($user);
+
+
         return View::make('round.show', ['round'=>$round, 'tee'=>$tee, 'shots'=>$shots, 'scores'=>$scores, 'records'=>$records, 'sum'=>$sum, 'course'=>$course]);
     }
 
