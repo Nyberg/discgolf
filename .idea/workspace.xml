@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/controllers/CourseController.php" line="236" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/app/dg/stat/Stat.php" line="143" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5332600-6c6d-4db5-89ed-53faae75bf40" name="Default" comment="" />
@@ -41,8 +41,8 @@
       <file leaf-file-name="Stat.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/dg/stat/Stat.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.7" vertical-offset="7090" max-vertical-offset="8670">
-              <caret line="506" column="0" selection-start-line="506" selection-start-column="0" selection-end-line="506" selection-end-column="0" />
+            <state vertical-scroll-proportion="-8.2" vertical-offset="1900" max-vertical-offset="8490">
+              <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -58,11 +58,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="show.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="show.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/course/show.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.41980475" vertical-offset="989" max-vertical-offset="6750">
+            <state vertical-scroll-proportion="-12.541667" vertical-offset="989" max-vertical-offset="6750">
               <caret line="86" column="240" selection-start-line="86" selection-start-column="240" selection-end-line="86" selection-end-column="240" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RoundController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/RoundController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-18.625" vertical-offset="1818" max-vertical-offset="5805">
+              <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HoleController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/HoleController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.24686192" vertical-offset="7788" max-vertical-offset="9960">
+              <caret line="532" column="53" selection-start-line="532" selection-start-column="53" selection-end-line="532" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stats.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/admin_js/stats/stats.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="12630" max-vertical-offset="13440">
+              <caret line="882" column="21" selection-start-line="882" selection-start-column="21" selection-end-line="882" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -78,7 +108,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/models/Activation.php" />
         <option value="$PROJECT_DIR$/app/database/migrations/2015_02_18_122917_create_activations_table.php" />
         <option value="$PROJECT_DIR$/app/dg/Mailer/Mailer.php" />
         <option value="$PROJECT_DIR$/app/views/emails/activation/notifictaion.blade.php" />
@@ -109,8 +138,6 @@
         <option value="$PROJECT_DIR$/app/views/users/show.blade.php" />
         <option value="$PROJECT_DIR$/app/views/admin/index.blade.php" />
         <option value="$PROJECT_DIR$/app/views/forum/index.blade.php" />
-        <option value="$PROJECT_DIR$/public/admin_js/stats/stats.js" />
-        <option value="$PROJECT_DIR$/app/controllers/HoleController.php" />
         <option value="$PROJECT_DIR$/app/views/round/show.blade.php" />
         <option value="$PROJECT_DIR$/app/views/holes/show.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/ActivationController.php" />
@@ -127,8 +154,11 @@
         <option value="$PROJECT_DIR$/app/views/club/show.blade.php" />
         <option value="$PROJECT_DIR$/app/views/round/create.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/CourseController.php" />
-        <option value="$PROJECT_DIR$/app/dg/stat/Stat.php" />
         <option value="$PROJECT_DIR$/app/views/course/show.blade.php" />
+        <option value="$PROJECT_DIR$/app/dg/stat/Stat.php" />
+        <option value="$PROJECT_DIR$/app/controllers/RoundController.php" />
+        <option value="$PROJECT_DIR$/public/admin_js/stats/stats.js" />
+        <option value="$PROJECT_DIR$/app/controllers/HoleController.php" />
       </list>
     </option>
   </component>
@@ -180,6 +210,60 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="discgolf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="discgolf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="discgolf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="discgolf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="discgolf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin_js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="discgolf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="discgolf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin_js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stats" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -439,18 +523,11 @@
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="31" />
+      <option name="time" value="32" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/start/artisan.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1030">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/database/migrations/2015_02_18_122917_create_activations_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20408164" vertical-offset="0" max-vertical-offset="1029">
@@ -562,6 +639,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5043732" vertical-offset="1341" max-vertical-offset="5595">
           <caret line="124" column="81" selection-start-line="124" selection-start-column="8" selection-end-line="124" selection-end-column="81" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -616,25 +694,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/admin_js/stats/stats.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="9300" max-vertical-offset="13440">
-          <caret line="631" column="16" selection-start-line="631" selection-start-column="16" selection-end-line="631" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/HoleController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-29.416666" vertical-offset="6209" max-vertical-offset="9975">
-          <caret line="462" column="35" selection-start-line="462" selection-start-column="35" selection-end-line="462" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/round/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-29.375" vertical-offset="270" max-vertical-offset="2955">
           <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -819,18 +883,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/dg/stat/Stat.php">
+    <entry file="file://$PROJECT_DIR$/app/views/course/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.7" vertical-offset="7090" max-vertical-offset="8670">
-          <caret line="506" column="0" selection-start-line="506" selection-start-column="0" selection-end-line="506" selection-end-column="0" />
+        <state vertical-scroll-proportion="-12.541667" vertical-offset="989" max-vertical-offset="6750">
+          <caret line="86" column="240" selection-start-line="86" selection-start-column="240" selection-end-line="86" selection-end-column="240" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/course/show.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/dg/stat/Stat.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41980475" vertical-offset="989" max-vertical-offset="6750">
-          <caret line="86" column="240" selection-start-line="86" selection-start-column="240" selection-end-line="86" selection-end-column="240" />
+        <state vertical-scroll-proportion="-8.2" vertical-offset="1900" max-vertical-offset="8490">
+          <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/RoundController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.625" vertical-offset="1818" max-vertical-offset="5805">
+          <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/admin_js/stats/stats.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="12630" max-vertical-offset="13440">
+          <caret line="882" column="21" selection-start-line="882" selection-start-column="21" selection-end-line="882" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/HoleController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24686192" vertical-offset="7788" max-vertical-offset="9960">
+          <caret line="532" column="53" selection-start-line="532" selection-start-column="53" selection-end-line="532" selection-end-column="53" />
           <folding />
         </state>
       </provider>

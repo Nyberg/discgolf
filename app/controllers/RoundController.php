@@ -1,6 +1,18 @@
 <?php
 
+use dg\statistics\Stat;
+
 class RoundController extends \BaseController {
+
+    /**
+     * @var Stat
+     */
+    private $stat;
+
+    public function __construct(Stat $stat){
+
+        $this->stat = $stat;
+    }
 
 	public function index()
 	{

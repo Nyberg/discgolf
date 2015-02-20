@@ -530,7 +530,7 @@ class HoleController extends \BaseController {
 
     }
 
-    # Andra charten #
+    # Runda - visar snitt, bansnitt och användarsnitt #
     public function getRoundAvgScore()
     {
         $id = Input::get('id');
@@ -544,13 +544,12 @@ class HoleController extends \BaseController {
             $tee = Tee::where('id', $round->tee_id)->firstOrFail();
             $tees = Tee::with('round')->where('id', $round->tee_id)->get();
             $round = Round::where('id', $round->id)->firstOrFail();
-          #  $user_rounds = Round::where('tee_id', $round->tee_id)->where('user_id', Auth::id())->get();
+
+            $user_rounds = Round::where('tee_id', $round->tee_id)->where('user_id', Auth::id())->get();
+            $user = $this->stat->generateUserAvg($tee, $user_rounds);
             $stats = $this->stat->generateRound($round, $tee);
             $avg = $this->stat->generateAvg($tees);
         }
-
-
-          #  $user = $this->stat->generateUserAvg($tee, $user_rounds);
 
             $message = [
                 'msg' => 'success',
@@ -591,7 +590,7 @@ class HoleController extends \BaseController {
                 'a16'   => $avg[$tee->id]['16'],
                 'a17'   => $avg[$tee->id]['17'],
                 'a18'   => $avg[$tee->id]['18'],
-              /*  'u1'    => $user[$tee->id]['1'],
+                'u1'    => $user[$tee->id]['1'],
                 'u2'    => $user[$tee->id]['2'],
                 'u3'    => $user[$tee->id]['3'],
                 'u4'    => $user[$tee->id]['4'],
@@ -608,7 +607,7 @@ class HoleController extends \BaseController {
                 'u15'    => $user[$tee->id]['15'],
                 'u16'    => $user[$tee->id]['16'],
                 'u17'    => $user[$tee->id]['17'],
-                'u18'    => $user[$tee->id]['18'], */
+                'u18'    => $user[$tee->id]['18']
             ];
 
         return Response::json($message);

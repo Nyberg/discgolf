@@ -99,12 +99,13 @@ class Stat {
         $dirArray = [];
 
         $j = 1;
+
         foreach($tees as $tee){
+
             $dirArray[$tee->id][] = 0;
-
             $sum = count($tee->round);
-
             $k = 1;
+
             foreach($tee->hole as $hole){
                 $avg = 0;
                 $total = 0;
@@ -113,6 +114,7 @@ class Stat {
 
                     $sum = 1;
                     $total = $hole->par;
+
                 }else{
 
                 foreach($hole->score as $score){
@@ -135,40 +137,26 @@ class Stat {
     public function generateUserAvg($tee, $rounds){
 
         $total = 0;
-        $rounds = 0;
-        $sum = count($tee);
+        $num = 0;
         $dirArray = [];
+        $total = [];
 
-        $j = 1;
-        foreach($tee as $tee){
-            $dirArray[$j][$tee->id] = 0;
-
-            $sum = count($tee->round);
-
-            $k = 1;
-            foreach($tee->hole as $hole){
-                $avg = 0;
-                $total = 0;
-
-                if(count($hole->score) == null){
-
-                    $sum = 1;
-                    $total = $hole->par;
-                }else{
-
-                    foreach($hole->score as $score){
-                        $total = $total + $score->score;
-                        $rounds++;
-                    }
-                }
-
-                $avg = $total / $sum;
-                $dirArray[$j][$k] = round($avg,1);
-                $k++;
-            }
-
-            $j++;
+        foreach($tee->hole as $hole){
+            $dirArray[$hole->tee_id][$hole->number] = 0;
+            $total[$hole->tee_id][$hole->number] = 0;
         }
+
+        foreach($rounds as $round){
+
+            foreach($round->score as $score){
+                $total[$round->tee->id][$score->hole_id] = $total[$round->tee->id][$score->hole_id] + $score->score;
+            }
+            $num++;
+        }
+
+            foreach($tee->hole as $hole) {
+                $dirArray[$round->tee->id][$hole->id] = $total[$tee->id][$hole->id] / $num;
+            }
 
         return $dirArray;
     }

@@ -875,12 +875,12 @@ function getUserRoundsReload(){
                         name: 'Bansnitt',
                         data: [data['a1'], data['a2'], data['a3'], data['a4'], data['a5'], data['a6'], data['a7'], data['a8'], data['a9'], data['a10'], data['a11'], data['a12'], data['a13'], data['a14'], data['a15'], data['a16'], data['a17'], data['a18']]
 
-                    }/*,
+                    },
                     {
                         name: 'Ditt snitt (kommer snart)',
                         data: [data['u1'], data['u2'], data['u3'], data['u4'], data['u5'], data['u6'], data['u7'], data['u8'], data['u9'], data['u10'], data['u11'], data['u12'], data['u13'], data['u14'], data['u15'], data['u16'], data['u17'], data['u18']]
 
-                    }*/]
+                    }]
                 });
 
             },'json'
