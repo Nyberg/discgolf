@@ -48,10 +48,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Stat.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Stat.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/dg/stat/Stat.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.52395207" vertical-offset="1990" max-vertical-offset="8490">
+            <state vertical-scroll-proportion="-7.0" vertical-offset="1990" max-vertical-offset="8490">
               <caret line="157" column="93" selection-start-line="157" selection-start-column="93" selection-end-line="157" selection-end-column="93" />
               <folding />
             </state>
@@ -78,11 +78,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RoundController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RoundController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/RoundController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.5" vertical-offset="1818" max-vertical-offset="5880">
-              <caret line="154" column="18" selection-start-line="154" selection-start-column="18" selection-end-line="154" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.7089337" vertical-offset="1773" max-vertical-offset="5805">
+              <caret line="151" column="8" selection-start-line="151" selection-start-column="8" selection-end-line="151" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -177,8 +177,8 @@
         <option value="$PROJECT_DIR$/app/views/course/show.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/HoleController.php" />
         <option value="$PROJECT_DIR$/public/admin_js/stats/stats.js" />
-        <option value="$PROJECT_DIR$/app/controllers/RoundController.php" />
         <option value="$PROJECT_DIR$/app/dg/stat/Stat.php" />
+        <option value="$PROJECT_DIR$/app/controllers/RoundController.php" />
       </list>
     </option>
   </component>
@@ -989,18 +989,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/RoundController.php">
+    <entry file="file://$PROJECT_DIR$/app/dg/stat/Stat.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.5" vertical-offset="1818" max-vertical-offset="5880">
-          <caret line="154" column="18" selection-start-line="154" selection-start-column="18" selection-end-line="154" selection-end-column="18" />
+        <state vertical-scroll-proportion="-7.0" vertical-offset="1990" max-vertical-offset="8490">
+          <caret line="157" column="93" selection-start-line="157" selection-start-column="93" selection-end-line="157" selection-end-column="93" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/dg/stat/Stat.php">
+    <entry file="file://$PROJECT_DIR$/app/controllers/RoundController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52395207" vertical-offset="1990" max-vertical-offset="8490">
-          <caret line="157" column="93" selection-start-line="157" selection-start-column="93" selection-end-line="157" selection-end-column="93" />
+        <state vertical-scroll-proportion="0.7089337" vertical-offset="1773" max-vertical-offset="5805">
+          <caret line="151" column="8" selection-start-line="151" selection-start-column="8" selection-end-line="151" selection-end-column="8" />
           <folding />
         </state>
       </provider>
