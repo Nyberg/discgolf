@@ -823,7 +823,7 @@ function getUserRoundsReload(){
 
         $('.fa-spinner').remove();
         $.get('http://178.62.90.148/getRoundAvgScore', {id: $("#id").val(), model: $("#model").val()}, function (data) {
-                
+
                 $('#chart-two').highcharts({
                     chart: {
                         type: 'line'
@@ -832,7 +832,7 @@ function getUserRoundsReload(){
                         text: 'Snittresultat'
                     },
                     subtitle: {
-                        text: 'Grafen visar rundans resultat per hål och snittet för alla hål på banan.',
+                        text: 'Grafen visar rundans resultat per hål och snittet för alla hål på banan.'
                     },
                     xAxis: {
                         categories: ['1', '2', '3', '4', '5', '6',
