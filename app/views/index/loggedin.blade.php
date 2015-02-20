@@ -31,6 +31,38 @@
         <a href="/about-pp" class="center-block btn btn-success btn-lg">Läs mer om Penguin Project!</a>
 
         <br/>
+
+        @if(Auth::check())
+
+        <div class="row mtbox">
+            <div class="col-md-4 col-sm-4 box0">
+              <a  href="/account/round/add">  <div class="box1">
+                    <span class="li_user"></span>
+                    <h4>Lägg till en runda</h4>
+                </div>
+                    <p>Testa att lägga upp en runda</p></a>
+            </div>
+
+            <div class="col-md-4 col-sm-4 box0">
+               <a href="/forum/"> <div class="box1">
+                    <span class="li_star"></span>
+                    <h4>Forum</h4>
+                </div>
+                    <p>Skriv i forumet</p></a>
+            </div>
+
+               <div class="col-md-4 col-sm-4 box0">
+                <a  href="/courses/"> <div class="box1">
+                    <span class="li_cloud"></span>
+                    <h4>Banor</h4>
+                </div>
+                    <p>Besök en bana</p></a>
+            </div>
+        </div><!-- /row mt -->
+
+    @else
+    @endif
+
          <h4>Tack för att du vill vara med och testa och förbättra Penguin Project!</h4>
 
         <p>Sidan är i ett väldit tidigt stadie, men det finns tillräckligt med funktionalitet för att personer kan använda sig av den.
@@ -54,7 +86,7 @@
         <p>Statistiken är väldigt grundläggande. Har ni frågor kring hur det fungerar och vilken data som används, lämna en kommentar i alfadelens statistikdel. Förslag på statistik lämnas även där.</p>
 
         <h4>Klubbar</h4>
-        <p>För tillfället finns det bara 1 klubb och det visas inget på klubbens sida. Hela det avsnittet är under ombyggnad. Däremot kan ni använda er av klubbens forum för att diskutera interna frågor.</p>
+        <p>För tillfället så vet jag inte hur/eller om klubbar ska finnas med på sidan. Modulen finns där, men efter en dialog med Svenska Discgolfutskottet (DU) så ligger det på is ett tag.</p>
 
         <h4>Banor och rundor</h4>
         <p>Det ligger 2 banor uppe för tillfället. Det är den del som är närmast klar. Lägg upp era rundor så statistiken kan visa rättvisa siffror.</p>

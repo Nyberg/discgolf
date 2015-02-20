@@ -21,11 +21,6 @@
     <p>Ett annat stort mål är att bygga en app som ska vara direkt kopplad till denna sida. Rundor och resultat ska vara enkelt att se och utvärdera.</p>
     <p>En annan ide som jag har i bakhuvudet är att bygga ett API som kan användas för att hämta data från denna sidan och publiceras på en annan, tex tävlingsresultat på en klubbsida.</p>
     <br/>
-    <p>Projektet är icke vinstdrivande, utöver de kostnader som det kostar att driva sidan. Alla sammarbeten är aktuella, allt från skribenter till designers.</p>
-
-
-
-
 
     </div>
 
@@ -84,18 +79,6 @@
                                 Rundor
                             </h4>
                             <p>Lägg upp dina rundor, se resultat mot allas snitt och jämför med andra.</p>
-                       </div>
-                      </div>
-                </div>
-
-                <div class="col-sm-4 col-md-4">
-                      <div class="thumbnail">
-                        <div class="caption text-center">
-                            <i class="fa fa-users fa-4x red"></i>
-                            <h4 class="">
-                                Klubbar
-                            </h4>
-                            <p>Besök olika klubbar egna sidor för att få mer information om deras verksamhet.</p>
                        </div>
                       </div>
                 </div>
