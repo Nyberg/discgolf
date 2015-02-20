@@ -477,26 +477,32 @@ class Stat {
 
     public function generateInfo($holes, $tees){
 
-        $data = ['longest'=>0, 'shortest'=>10000000, 'avg'=>0, 'total'=>0];
+        foreach($tees as $tee) {
 
-        foreach($holes as $hole){
+            $data[$tee->id] = ['longest' => 0, 'shortest' => 10000000, 'avg' => 0, 'total' => 0];
+        }
 
-            if($hole->length <= $data['shortest']){
+            foreach($tees as $tee){
 
-                $data['shortest'] = $hole->length;
+            foreach($tee->hole as $hole){
+
+            if($hole->length <= $data[$tee->id]['shortest']){
+
+                $data[$tee->id]['shortest'] = $hole->length;
 
             }
 
-            if($hole->length > $data['shortest']){
+            if($hole->length > $data[$tee->id]['shortest']){
 
-                if($hole->length > $data['longest']){
-                    $data['longest'] = $hole->length;
+                if($hole->length > $data[$tee->id]['longest']){
+                    $data[$tee->id]['longest'] = $hole->length;
                 }
             }
 
-            $data['total'] = $data['total'] + $hole->length / count($tees);
-            $data['avg'] = $data['total'] / count($holes);
+            $data[$tee->id]['total'] = $data[$tee->id]['total'] + $hole->length;
+            $data[$tee->id]['avg'] = $data[$tee->id]['total'] / count($tee->hole);
 
+            }
         }
 
         return $data;
