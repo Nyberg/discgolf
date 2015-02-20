@@ -149,13 +149,13 @@ class Stat {
         foreach($rounds as $round){
 
             foreach($round->score as $score){
-                $total[$round->tee->id][$score->hole->number] = $total[$round->tee->id][$score->hole_id] + $score->score;
+                $total[$round->tee_id][$score->hole->number] = $total[$round->tee_id][$score->hole->number] + $score->score;
             }
             $num++;
         }
 
             foreach($tee->hole as $hole) {
-                $dirArray[$hole->tee_id][$hole->number] = $total[$hole->tee_id][$hole->id] / $num;
+                $dirArray[$hole->tee_id][$hole->number] = $total[$hole->tee_id][$hole->number] / $num;
             }
 
         return $dirArray;
