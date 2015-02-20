@@ -869,7 +869,7 @@ function getUserRoundsReload(){
                     }
                 }
             },
-                    colors: ['#2C3E50', '#E74C3C', '#E74C3C'],
+                    colors: ['#2C3E50', '#E74C3C', '#90FF7E'],
                     series: [{
                         name: 'Resultat',
                         data: [data['1'], data['2'], data['3'], data['4'], data['5'], data['6'], data['7'], data['8'], data['9'], data['10'], data['11'], data['12'], data['13'], data['14'], data['15'], data['16'], data['17'], data['18']]
@@ -880,7 +880,7 @@ function getUserRoundsReload(){
 
                     },
                     {
-                        name: 'Ditt snitt (kommer snart)',
+                        name: 'Ditt snitt',
                         data: [data['u1'], data['u2'], data['u3'], data['u4'], data['u5'], data['u6'], data['u7'], data['u8'], data['u9'], data['u10'], data['u11'], data['u12'], data['u13'], data['u14'], data['u15'], data['u16'], data['u17'], data['u18']]
 
                     }]
