@@ -84,7 +84,7 @@
                      <i class="fa fa-tree fa-4x"></i>
                     <h4 class="">{{$tee->color}}</h4>
                     <p class="">Par: {{$tee->par}} | Antal hål: {{$tee->holes}}</p>
-                  <p class="">Längst hål: {{convert($data[$tee->id]['longest'])}} | Kortaste hål: {{convert($data[$tee->id]['shortest'])}} | Medellängd: {{convert($data[$tee->id]['avg'])}} | <span data-toggle="tooltip" data-placement="bottom" title="Visar medellängd av alla tees">Totallängd: {{convert($data[$tee->id]['total'])}}</span></p>
+                  <p class="">Längst hål: {{convert($data[$tee->id]['longest'])}} | Kortaste hål: {{convert($data[$tee->id]['shortest'])}} | Medellängd: {{convert($data[$tee->id]['avg'])}} | Totallängd: {{convert($data[$tee->id]['total'])}}</p>
 
                   </div>
                 </div>
