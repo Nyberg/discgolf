@@ -537,13 +537,21 @@ class HoleController extends \BaseController {
         $model = Input::get('model');
 
         $round = Round::find($id);
+        $num = Round::where('tee_id', $round->tee_id)->where('user_id', Auth::id())->count();
 
             $tee = Tee::where('id', $round->tee_id)->firstOrFail();
             $tees = Tee::with('round')->where('id', $round->tee_id)->get();
             $round = Round::where('id', $round->id)->firstOrFail();
 
-            $user_rounds = Round::where('tee_id', $round->tee_id)->where('user_id', Auth::id())->get();
-            $user = $this->stat->generateUserAvg($tee, $user_rounds);
+            if($num == 0 || $num == null){
+                $user = $this->stat->generateBlank($tee);
+
+            }else{
+                $user_rounds = Round::where('tee_id', $round->tee_id)->where('user_id', Auth::id())->get();
+                $user = $this->stat->generateUserAvg($tee, $user_rounds);
+            }
+
+
             $stats = $this->stat->generateRound($round, $tee);
             $avg = $this->stat->generateAvg($tees);
 

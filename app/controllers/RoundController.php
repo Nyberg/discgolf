@@ -149,7 +149,7 @@ class RoundController extends \BaseController {
         $shots = Shot::with('disc')->where('round_id', $id)->get();
         $records = Record::where('course_id', $course_id)->where('tee_id', $round->tee_id)->where('type', $round->type)->get();
         $sum = Hole::where('tee_id', $id)->sum('length');
-        
+
         return View::make('round.show', ['round'=>$round, 'tee'=>$tee, 'shots'=>$shots, 'scores'=>$scores, 'records'=>$records, 'sum'=>$sum, 'course'=>$course]);
     }
 

@@ -146,6 +146,7 @@ class Stat {
             $total[$hole->tee_id][$hole->number] = 0;
         }
 
+
         foreach($rounds as $round){
 
             foreach($round->score as $score){
@@ -159,6 +160,18 @@ class Stat {
             }
 
         return $dirArray;
+    }
+
+    public function generateBlank($tee){
+
+        $dirArray = [];
+
+        foreach($tee->hole as $hole){
+            $dirArray[$hole->tee_id][$hole->number] = 0;
+        }
+
+        return $dirArray;
+
     }
 
     public function roundAvg($rounds){
