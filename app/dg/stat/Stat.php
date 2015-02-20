@@ -155,7 +155,7 @@ class Stat {
         }
 
             foreach($tee->hole as $hole) {
-                $dirArray[$round->tee->id][$hole->id] = $total[$tee->id][$hole->id] / $num;
+                $dirArray[$hole->tee_id][$hole->id] = $total[$hole->tee_id][$hole->id] / $num;
             }
 
         return $dirArray;
