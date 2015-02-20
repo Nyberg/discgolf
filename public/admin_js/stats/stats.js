@@ -820,7 +820,7 @@ function getUserRoundsReload(){
 
 
     function getRoundAvgScore(){
-        console.log('hej');
+
         $.get('http://178.62.90.148/getRoundAvgScore', {id: $("#id").val(), model: $("#model").val()}, function (data) {
 
                 console.log(data);
