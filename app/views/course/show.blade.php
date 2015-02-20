@@ -72,6 +72,10 @@
 
             @if(count($course->tee) == 1)
             <div class="col-sm-6 col-md-6">
+            @elseif(count($course->tee) == 2)
+            <div class="col-sm-6 col-md-6">
+            @elseif(count($course->tee) == 3)
+            <div class="col-sm-4 col-md-4">
             @else
             <div class="col-sm-3 col-md-3">
             @endif
@@ -80,26 +84,12 @@
                      <i class="fa fa-tree fa-4x"></i>
                     <h4 class="">{{$tee->color}}</h4>
                     <p class="">Par: {{$tee->par}} | Antal hål: {{$tee->holes}}</p>
+                  <p class="">Längst hål: {{convert($data[$tee->id]['longest'])}} | Kortaste hål: {{convert($data[$tee->id]['shortest'])}} | Medellängd: {{convert($data[$tee->id]['avg'])}} | <span data-toggle="tooltip" data-placement="bottom" title="Visar medellängd av alla tees">Totallängd: {{convert($data[$tee->id]['total'])}}</span></p>
+
                   </div>
                 </div>
               </div>
           @endforeach
-            <div class="col-sm-6 col-md-6">
-                  <div class="thumbnail">
-                    <div class="caption text-center">
-                        <i class="fa fa-exclamation fa-4x"></i>
-                        <h4 class="">
-
-                              <a href="{{$course->course_map}}" data-toggle="lightbox" data-title="Bankarta {{$course->name}}" data-footer="">
-                                  <span data-toggle="tooltip" data-placement="right" title="Klicka här för att se bankarta">Banöversikt</span>
-                              </a>
-
-                        </h4>
-                      <p class="">Längst hål: {{convert($data['longest'])}} | Kortaste hål: {{convert($data['shortest'])}} | Medellängd: {{convert($data['avg'])}} | <span data-toggle="tooltip" data-placement="bottom" title="Visar medellängd av alla tees">Totallängd: {{convert($data['total'])}}</span></p>
-                    </div>
-                  </div>
-            </div>
-
           </div>
         </div>
      </div>
