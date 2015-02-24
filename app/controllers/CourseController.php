@@ -88,7 +88,7 @@ class CourseController extends \BaseController {
             {
             $file = Input::file('file');
 
-            $filepath = '/img/dg/';
+            $filepath = '/img/Dg/';
             $filename = time() . '-course.jpg';
 
             $file = $file->move(public_path($filepath), ($filename));
@@ -174,7 +174,7 @@ class CourseController extends \BaseController {
 
                     $file = Input::file('file-2');
 
-                    $filepath = '/img/dg/course/';
+                    $filepath = '/img/Dg/course/';
                     $filename = time() . '-course.jpg';
 
                     $file = $file->move(public_path($filepath), ($filename));
@@ -191,7 +191,7 @@ class CourseController extends \BaseController {
 
                     foreach($course->photos as $photo){
 
-                        if($photo->url == '/img/dg/header.jpg'){
+                        if($photo->url == '/img/Dg/header.jpg'){
 
                         }else{
                             $photo->delete();
@@ -200,7 +200,7 @@ class CourseController extends \BaseController {
                     }
 
                     $file = Input::file('file');
-                    $filepath = '/img/dg/';
+                    $filepath = '/img/Dg/';
                     $filename = time() . '-course.jpg';
                     $file = $file->move(public_path($filepath), ($filename));
                     $photo->url = $filepath.$filename;

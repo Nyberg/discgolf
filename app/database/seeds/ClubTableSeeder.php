@@ -14,7 +14,7 @@
                     'country_id'    =>  '1',
                     'state_id'      => '1',
                     'city_id'         => '1',
-                    'image'         => '/img/dg/header.jpg',
+                    'image'         => '/img/Dg/header.jpg',
                     'website'        => 'johannesnyberg.se',
                     'information'         => 'Hej',
                     'members'       => '1',

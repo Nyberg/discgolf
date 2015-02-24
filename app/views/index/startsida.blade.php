@@ -12,7 +12,7 @@
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
   </ol>
   <div class="carousel-inner">
-    <div class="item active"> <img src="{{asset('img/dg/header.jpg')}}" style="width:100%" alt="First slide">
+    <div class="item active"> <img src="{{asset(Dg)}}" style="width:100%" alt="First slide">
       <div class="container">
         <div class="carousel-caption">
           <h1>Penguin Project</h1>

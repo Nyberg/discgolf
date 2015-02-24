@@ -30,7 +30,7 @@ class ClubController extends \BaseController {
         $club->website = Input::get('website');
         $club->information = Input::get('information');
         $club->membership = Input::get('membership');
-        $club->image = '/img/dg/header.jpg';
+        $club->image = '/img/Dg/header.jpg';
 
         $club->save();
 
@@ -113,7 +113,7 @@ class ClubController extends \BaseController {
 
             $img->destroy();
 
-            if($old->image == '/img/dg/header.jpg'){
+            if($old->image == '/img/Dg/header.jpg'){
 
             }else{
                 File::delete(public_path().$old->image);
