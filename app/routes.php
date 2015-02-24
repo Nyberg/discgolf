@@ -175,7 +175,8 @@ Route::group(['before'=>'auth'], function(){
     Route::get('/account/review/user', 'ReviewController@show');
 
     # Friends       #
-    Route::get('/account/friend/add', 'FriendsController@store');
+    Route::get('/account/friend/{id}/add', 'FriendsController@store');
+    Route::get('/account/friend/{id}/remove', 'FriendsController@destroy');
 
     # Request       #
     Route::post('/account/request/{id}/club', ['as'=>'club-request', 'uses'=> 'MembershipController@store']);

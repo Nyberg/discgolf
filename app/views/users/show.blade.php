@@ -11,37 +11,36 @@
     <div class="col-md-5"><a href="/club/{{$user->club_id}}/show"><h4 class="text-left">{{$user->club->name}}</h4></a></div>
 
     </div>
-    <div class="col-md-12">
+    <div class="col-md-12 margin-top-bottom">
         <div class="col-md-12">
             <small class="text-center margin-top">{{$user->profile->info}}</small>
         </div>
         <div class="col-md-12 text-center">
-            <p><i class="fa fa-map-marker fa-1-5x red"></i>{{$user->profile->city->city . ', ' . $user->profile->state->state}} <i class="fa fa-envelope fa-1-5x red"></i>{{$user->email}} <i class="fa fa-desktop fa-1-5x red"></i>{{$user->profile->website}}</p>
+            <p><i class="fa fa-map-marker fa-1-5x red"></i>{{$user->profile->city->city . ', ' . $user->profile->state->state}} <i class="fa fa-envelope fa-1-5x red"></i>{{$user->email}} <i class="fa fa-desktop fa-1-5x red"></i>{{$user->profile->website}}
+                @if(Auth::check() && Auth::id() != $user->id)
+
+                @if(getFriend(Auth::id(), $user->id) == false)
+                <a href="/account/friend/{{$user->id}}/add" name="user_id" type="user_id"><i class="fa fa-user-plus fa-1-5x red"></i>Lägg till som vän!</a>
+                @else
+                 <a href="/account/friend/{{$user->id}}/remove" name="user_id" type="user_id"><i class="fa fa-heartbeat fa-1-5x red"></i>Vänner</a>
+                @endif
+
+                @else
+                @endif
+            </p>
         </div>
 
     </div>
+
+        <div class="col-md-12">
+        </div>
+
 </div>
 <!-- Slut Profileheader -->
 
 <div class="row">
 
-    @if(Auth::check() && Auth::id() != $user->id)
-    <div class="col-md-12">
-    @if(getFriend(Auth::id(), $user->id) == false)
-        {{Form::open(['method'=>'POST', 'route'=>['friend.store'], 'class'=>'form-horizontal style-form', 'id'=>'review'])}}
-        {{Form::hidden('user_id', $user->id)}}
-        {{Form::submit('Lägg till vän!', ['class'=>'btn btn-sm btn-success'])}}
-        {{Form::close()}}
-    @else
-             {{Form::open(['method'=>'DELETE', 'route'=>['friend.destroy', $user->id]])}}
-            {{Form::submit('Ta bort vän..', ['class'=>'btn btn-sm btn-danger'])}}
-            {{Form::close()}}
-    @endif
-    </div>
-    @else
-    <div class="col-md-12">
-    </div>
-    @endif
+
 </div>
 
 <!-- Nav-pills -->
@@ -256,10 +255,10 @@
 
                 <div class="col-md-6">
                      <h4 class="tab-rub text-center page-header-custom">Vänner</h4>
-                    @foreach($user->friends as $friend)
+                    @foreach($user->friends as $user)
                         <div class="well well-sm">
-                            <a href="/user/{{$friend->user_id}}/show/">{{$friend->user->first_name}}
-                            <span class="pull-right">{{$friend->user->club->name}}</span>
+                            <a href="/user/{{$user->user->id}}/show/">{{$user->user->first_name}}
+                            <span class="pull-right"></span>
                             </a>
                         </div>
                     @endforeach

@@ -24,7 +24,7 @@ class UserNotifier extends EventListener{
             $round = Round::whereId($event->comment->commentable_id)->first();
 
             $user = User::whereId($round->user_id)->first();
-            
+
             $user->newNotification()
                 ->from(Auth::user())
                 ->withType('CommentWasPosted')
@@ -35,7 +35,6 @@ class UserNotifier extends EventListener{
                 ->deliver();
         }
         if($event->comment->commentable_type == 'course') {
-
 
             $course = Course::whereId($event->comment->commentable_id)->first();
 
@@ -51,7 +50,6 @@ class UserNotifier extends EventListener{
                     ->regarding($event->comment)
                     ->withUrl('/course/'.$course->id.'/show')
                     ->deliver();
-
             }
         }
     }

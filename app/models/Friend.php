@@ -36,7 +36,7 @@ class Friend extends Eloquent {
     }
 
     public function user(){
-        return $this->belongsTo('User');
+        return $this->belongsTo('User', 'friend_id');
     }
 
 }

@@ -11,11 +11,10 @@ class FriendsController extends \BaseController {
 		//
 	}
 
-	public function store()
+	public function store($id)
 	{
         if(Auth::check()){
 
-        $id = Input::get('user_id');
         $user = User::whereId($id)->firstOrFail();
 		$user_id = Auth::id();
 
