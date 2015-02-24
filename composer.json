@@ -23,10 +23,10 @@
             "app/tests/TestCase.php"
         ],
         "files": [
-            "app/Dg/helpers.php"
+            "app/dg/helpers.php"
         ],
         "psr-4": {
-            "dg\\": "app/Dg"
+            "dg\\": "app/dg"
         }
 
     },

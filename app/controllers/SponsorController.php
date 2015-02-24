@@ -45,7 +45,7 @@ class SponsorController extends \BaseController {
             {
                 $file = Input::file('file');
 
-                $filepath = '/img/Dg/';
+                $filepath = '/img/dg/';
                 $filename = time() . '-sponsor.jpg';
 
                 $file = $file->move(public_path($filepath), ($filename));
@@ -119,7 +119,7 @@ class SponsorController extends \BaseController {
             {
                 $file = Input::file('file');
 
-                $filepath = '/img/Dg/';
+                $filepath = '/img/dg/';
                 $filename = time() . '-sponsor.jpg';
 
                 $file = $file->move(public_path($filepath), ($filename));

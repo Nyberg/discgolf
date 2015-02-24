@@ -3,7 +3,7 @@
 return [
 
     'listeners' => [
-        'Dg\Listeners\UserNotifier'
+        'dg\Listeners\UserNotifier'
     ]
 
 ];

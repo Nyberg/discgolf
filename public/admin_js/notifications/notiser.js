@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var i = 0;
-    $.get('http://Dg.dev:8000/notiser', function(data){
+    $.get('http://dg.dev:8000/notiser', function(data){
         $.each(data, function(index, value) {
             console.log(value);
             $('#notificationMenu').append('<li><a href="'+value.url+'" class="margin-top-bottom">'+ value.body +'</a></li>');
@@ -23,7 +23,7 @@ $(document).ready(function() {
                 $('.badge-notify').addClass('hidden');
             }
         }
-        $.get('http://Dg.dev:8000/removereadnotifications', function(data){
+        $.get('http://dg.dev:8000/removereadnotifications', function(data){
 
         })
     })

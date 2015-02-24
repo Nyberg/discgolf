@@ -120,7 +120,7 @@
         imageObj.onload = function() {
           context.drawImage(imageObj, x, y, width, height);
         };
-        imageObj.src = '/img/Dg/test.gif';
+        imageObj.src = '/img/dg/test.gif';
 
        canvas.addEventListener("click", setPoint, false);
 

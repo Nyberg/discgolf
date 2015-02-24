@@ -72,7 +72,7 @@ $(document).ready(function() {
         $("#scorePage").show();
         $("#scorecard").show();
 
-        $.post('http://Dg.dev:8000/getScore', {id: $('#target').find(":selected").val()}, function (data) {
+        $.post('http://dg.dev:8000/getScore', {id: $('#target').find(":selected").val()}, function (data) {
             $.each(data, function (index, value) {
                 $('#scorecard').append(' <div class="col-lg-6"><p>' + value.id + ' ' + value.par + '</p></div>');
             })

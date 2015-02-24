@@ -73,7 +73,7 @@ class ActivationController extends \BaseController {
             $user->save();
 
             $profile = new Profile;
-            $profile->image = '/img/Dg/header.jpg';
+            $profile->image = '/img/dg/header.jpg';
             $profile->country_id = 1;
             $profile->state_id = Input::get('state');
             $profile->city_id = Input::get('city');

@@ -117,7 +117,7 @@ class HoleController extends \BaseController {
 
                     $file = Input::file('file');
 
-                    $filepath = '/img/Dg/course/holes/';
+                    $filepath = '/img/dg/course/holes/';
                     $filename = time() . '-hole'.$hole->id.'.jpg';
 
                     $file = $file->move(public_path($filepath), ($filename));
