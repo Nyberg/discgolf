@@ -107,14 +107,16 @@ Route::group(['before'=>'auth'], function(){
     #   Dashboard   #
     Route::get('/dashboard', 'HomeController@dashboard');
 
+
+
     #   Round       #
     Route::get('/account/round/add', 'RoundController@getCourse');
     Route::get('/account/rounds/{id}/user', 'RoundController@user_round');
-    Route::post('/account/round/add/{id}/score', array('as'=>'account-round-add-score','uses' => 'RoundController@create'));
+    Route::post('/account/round/add/score', array('as'=>'account-round-add-score','uses' => 'RoundController@create'));
     Route::get('/account/round/{id}/course/{course_id}/score/add', 'ScoreController@create');
     Route::get('/account/round/{id}/course/{course_id}/par/', 'RoundController@createPar');
     Route::get('/account/round/{id}/edit/{course_id}', 'RoundController@edit');
-    Route::get('/account/round/{id}/active', 'RoundController@setActive');
+    Route::get('/account/round/{id}/active', 'RecordsController@store');
     Route::get('/account/round/{id}/edit-score', 'RoundController@editScore');
 
     Route::post('/getTees', 'TeeController@getTeepads');
@@ -171,6 +173,9 @@ Route::group(['before'=>'auth'], function(){
     Route::get('/account/review/add', 'ReviewController@create');
     Route::get('/account/review/{id}/edit', 'ReviewController@edit');
     Route::get('/account/review/user', 'ReviewController@show');
+
+    # Friends       #
+    Route::get('/account/friend/add', 'FriendsController@store');
 
     # Request       #
     Route::post('/account/request/{id}/club', ['as'=>'club-request', 'uses'=> 'MembershipController@store']);
@@ -262,6 +267,9 @@ Route::post('/getRoundsPerMonthReload', ['as' => 'user.rounds', 'uses'=>'HoleCon
 Route::post('/getUserDataReload', ['as' => 'user.data', 'uses'=>'HoleController@getUserDataReload']);
 Route::post('/getCourseRoundsReload', ['as' => 'course.rounds', 'uses'=>'HoleController@getCourseRoundsReload']);
 
+#   Statistik   #
+Route::get('/statistics', 'HomeController@stats');
+
 // Shot
 Route::get('/hole/{id}/score/{score_id}', 'ShotController@show');
 
@@ -283,6 +291,10 @@ Route::get('/sponsor/{id}/redirect/', 'SponsorController@redirect');
 #   Activation  #
 Route::get('/activation/{token}/', ['as'=>'confirmation_path', 'uses'=> 'RegistrationController@create']);
 Route::get('/alfa', 'RegistrationController@alfa');
+
+#notiser (lazy way) #
+Route::get('/notiser', 'NotificationsController@show');
+Route::get('/removereadnotifications','NotificationsController@update');
 
 
 Route::resource('session','SessionController', ['only'=>['create', 'store', 'destroy']]);
@@ -308,3 +320,4 @@ Route::resource('country', 'CountryController');
 Route::resource('lost', 'LostController');
 Route::resource('links', 'LinksController');
 Route::resource('activation', 'ActivationController');
+Route::resource('friend', 'FriendsController');

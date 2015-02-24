@@ -17,7 +17,11 @@ class ScoreController extends \BaseController {
         $tee = Tee::with('hole')->where('id', $tee_id)->firstOrFail();
         $round = Round::whereId($id)->firstOrFail();
 
-        return View::make('score.create', ['tee'=>$tee, 'round'=>$round]);
+        if($round->status == 0){
+            return View::make('score.create', ['tee'=>$tee, 'round'=>$round]);
+        }else{
+            return Redirect::back()->with('danger', 'Du har redan lagt till ett resultat för denna rundan');
+        }
     }
 
 

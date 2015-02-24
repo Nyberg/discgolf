@@ -406,7 +406,7 @@ function getRoundAvg(){
     function getFirstPie() {
 
         $('#stats').append('<br /><br/><i class="fa fa-spinner fa-spin fa-2x"></i>');
-        $.get('http://dg.dev:8000/getHoleStats', {id: $("#id").val(), model: $("#model").val()}, function (data) {
+        $.get('http://178.62.90.148/getHoleStats', {id: $("#id").val(), model: $("#model").val()}, function (data) {
 
                 if (data['msg'] == 'success') {
                     $('.fa-spinner').remove();
@@ -890,3 +890,90 @@ function getUserRoundsReload(){
         return false;
     }
 
+function getRoundAvgStats(){
+
+    $.post(
+        $(this).prop('action'),
+        {
+            "id": $('#id').val(),
+            "user_id": $('#user_id').val(),
+            "model": $('#model').val(),
+            "date_from": $('#date_from').val(),
+            "date_to": $('#date_to').val(),
+            "course_id": $('#teepads').val()
+
+        },
+        function (data) {
+
+            console.log(data);
+
+
+                $('#chart-round-avg').highcharts({
+                    chart: {
+                        type: 'areaspline',
+                        backgroundColor: {
+                            linearGradient: {x1: 0, y1: 0, x2: 1, y2: 1},
+                            stops: [
+                                [0, '#2C3E50'],
+                                [1, '#2C3E50']
+                            ]
+                        },
+                        style: {
+                            fontFamily: "'Unica One', sans-serif",
+                            color: '#ffffff'
+                        },
+                        plotBorderColor: '#E74C3C'
+                    },
+                    title: {
+                        text: 'Senaste resultaten',
+                        style: {
+                            color: '#E0E0E3',
+                            textTransform: 'uppercase',
+                            fontSize: '1em'
+                        }
+                    },
+
+                    legend: {
+                        enabled: false
+                    },
+                    xAxis: {
+                        categories: data[2]['date'],
+                        labels: {
+                            style: {
+                                color: '#E0E0E3'
+                            }
+                        }
+                    },
+                    yAxis: {
+                        gridLineColor: '#2C3E50',
+                        labels: {
+                            style: {
+                                color: '#E0E0E3'
+                            }
+                        },
+                        lineColor: '#E74C3C',
+                        minorGridLineColor: '#E74C3C',
+                        tickColor: '#E74C3C',
+                        tickWidth: 0,
+                        title: {
+                            style: {
+                                color: '#E0E0E3'
+                            }
+                        }
+                    },
+                    colors: ["#E74C3C", "#E74C3C", "#E74C3C", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+                        "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+                    tooltip: {
+                        valueSuffix: '',
+                        formatter: function() {
+                            return 'Resultat:<br/>'+
+                            this.x +': <b>'+ this.y+'</b>';
+                        }
+                    },
+                    series: data
+                });
+
+        },'json'
+    );
+    return false;
+}

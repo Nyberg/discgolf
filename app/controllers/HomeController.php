@@ -1,6 +1,18 @@
 <?php
 
+use dg\statistics\Stat;
+
 class HomeController extends BaseController {
+
+    /**
+     * @var Stat
+     */
+    private $stat;
+
+    public function __construct(Stat $stat){
+
+        $this->stat = $stat;
+    }
 
     public function index(){
 
@@ -48,6 +60,20 @@ class HomeController extends BaseController {
 
     public function discdb(){
         return View::make('index.discdb');
+    }
+
+    public function stats(){
+
+        $rounds = Round::get();
+        $stats = $this->stat->holeAvgStats($rounds);
+
+        $courses = Course::get();
+
+      #  dd(Response::json($stats));
+
+
+
+        return View::make('index.stats', ['courses'=>$courses]);
     }
 
 }

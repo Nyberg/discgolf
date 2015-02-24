@@ -1,8 +1,26 @@
 <?php
 
-function errors_for($attribute, $errors){
+function errors_for($attribute, $errors)
+{
 
     return $errors->first($attribute, '<br/><div class="alert alert-danger col-md-8"><b>Oh snap!</b> :message</div>');
+
+}
+
+function getFriend($id, $user_id){
+
+    $friends = Friend::where('user_id', $id)->get();
+    $check = false;
+
+    foreach($friends as $friend){
+
+        if($friend->friend_id == $user_id){
+            return $check = true;
+        }
+
+    }
+
+    return $check;
 
 }
 

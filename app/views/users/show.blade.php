@@ -24,9 +24,24 @@
 <!-- Slut Profileheader -->
 
 <div class="row">
-    <div class="col-md-12">
 
+    @if(Auth::check() && Auth::id() != $user->id)
+    <div class="col-md-12">
+    @if(getFriend(Auth::id(), $user->id) == false)
+        {{Form::open(['method'=>'POST', 'route'=>['friend.store'], 'class'=>'form-horizontal style-form', 'id'=>'review'])}}
+        {{Form::hidden('user_id', $user->id)}}
+        {{Form::submit('Lägg till vän!', ['class'=>'btn btn-sm btn-success'])}}
+        {{Form::close()}}
+    @else
+             {{Form::open(['method'=>'DELETE', 'route'=>['friend.destroy', $user->id]])}}
+            {{Form::submit('Ta bort vän..', ['class'=>'btn btn-sm btn-danger'])}}
+            {{Form::close()}}
+    @endif
     </div>
+    @else
+    <div class="col-md-12">
+    </div>
+    @endif
 </div>
 
 <!-- Nav-pills -->
@@ -124,60 +139,135 @@
              <h4 class="tab-rub text-center page-header-custom">Senaste rundorna</h4>
             @foreach($rounds as $round)
                 <div class="well well-sm">
+                <p>
                     <a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->created_at->format('d M') . ' - ' . $round->course->name . ' ' . $round->tee->color . ''}}
                     <span class="pull-right">{{$round->type}} | {{calcScore($round->total, $round->tee['par'])}}</span>
                     </a>
+                </p>
                 </div>
             @endforeach
         </div>
 
         <div class="col-md-6">
-             <h4 class="tab-rub text-center page-header-custom">Bags</h4>
-            @foreach($user->bags as $bag)
-                <div class="well well-sm" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+             <h4 class="tab-rub text-center page-header-custom">Senaste aktiviteterna</h4>
+             @foreach($notifications as $notification)
 
-                    <a>{{$bag->type}}</a>
-
+             @if(strpos($notification->type, 'Updated'))
+              <div class="well well-sm">
+                <p>
+                <a href="{{$notification->url}}">
+                <i class="fa fa-trophy red"></i> {{$notification->subject}} <span class="pull-right">{{$notification->sent_at->format('d M')}}</span>
+                </a>
+                </p>
+              </div>
+              @elseif($notification->type ==  'FriendWasPosted')
+              <div class="well well-sm">
+                <p>
+                <a href="{{$notification->url}}">
+                <i class="fa fa-user"></i> {{$notification->subject}} <span class="pull-right">{{$notification->sent_at->format('d M')}}</span>
+                </a>
+                </p>
+              </div>
+              @elseif($notification->type ==  'CommentWasPosted')
+                <div class="well well-sm">
+                   <p>
+                   <a href="{{$notification->url}}">
+                   <i class="fa fa-comment-o"></i> {{$notification->subject}} <span class="pull-right">{{$notification->sent_at->format('d M')}}</span>
+                   </a>
+                   </p>
                 </div>
-
-            <div class="col-md-12 collapse well well-sm"  id="collapseExample">
-                      <div class="col-lg-3">
-                        <p>Putters</p>
-                            @foreach($bag->disc as $disc)
-                            @if($disc->type == 'Putter')
-                            <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
-                            @endif
-                            @endforeach
-                      </div>
-                      <div class="col-lg-3">
-                        <p>Midranges</p>
-                            @foreach($bag->disc as $disc)
-                            @if($disc->type == 'Midrange')
-                             <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
-                            @endif
-                            @endforeach
-                      </div>
-                      <div class="col-lg-3">
-                        <p>Fairway Drivers</p>
-                            @foreach($bag->disc as $disc)
-                            @if($disc->type == 'Fairway Driver')
-                             <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
-                            @endif
-                            @endforeach
-                      </div>
-                      <div class="col-lg-3">
-                        <p>Drivers</p>
-                            @foreach($bag->disc as $disc)
-                            @if($disc->type == 'Driver')
-                             <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
-                            @endif
-                            @endforeach
-                      </div>
-            </div>
-
+              @elseif($notification->type == 'RoundWasActivated')
+                <div class="well well-sm">
+                <p>
+                <a href="{{$notification->url}}">
+                <i class="fa fa-trophy red"></i> {{$notification->subject}} <span class="pull-right">{{$notification->sent_at->format('d M')}}</span>
+                </a>
+                </p>
                 </div>
+              @elseif($notification->type == 'ReviewWasPosted')
+                <div class="well well-sm">
+                <p>
+                <a href="{{$notification->url}}">
+                <i class="fa fa-align-left"></i> {{$notification->subject}} <span class="pull-right">{{$notification->sent_at->format('d M')}}</span>
+                </a>
+                </p>
+                </div>
+              @else
+              @endif
+
             @endforeach
         </div>
+
+
+
+        </div>
+
+            <div class="row">
+            <br/>
+                   <div class="col-md-12">
+
+                   </div>
+
+                           <div class="col-md-6">
+                                <h4 class="tab-rub text-center page-header-custom">Bags</h4>
+                               @foreach($user->bags as $bag)
+                                   <div class="well well-sm" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+
+                                       <a>{{$bag->type}}</a>
+
+                                   </div>
+
+                               <div class="col-md-12 collapse well well-sm"  id="collapseExample">
+                                         <div class="col-lg-3">
+                                           <p>Putters</p>
+                                               @foreach($bag->disc as $disc)
+                                               @if($disc->type == 'Putter')
+                                               <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
+                                               @endif
+                                               @endforeach
+                                         </div>
+                                         <div class="col-lg-3">
+                                           <p>Midranges</p>
+                                               @foreach($bag->disc as $disc)
+                                               @if($disc->type == 'Midrange')
+                                                <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
+                                               @endif
+                                               @endforeach
+                                         </div>
+                                         <div class="col-lg-3">
+                                           <p>Fairway Drivers</p>
+                                               @foreach($bag->disc as $disc)
+                                               @if($disc->type == 'Fairway Driver')
+                                                <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
+                                               @endif
+                                               @endforeach
+                                         </div>
+                                         <div class="col-lg-3">
+                                           <p>Drivers</p>
+                                               @foreach($bag->disc as $disc)
+                                               @if($disc->type == 'Driver')
+                                                <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
+                                               @endif
+                                               @endforeach
+                                         </div>
+                               </div>
+                                   @endforeach
+                                   </div>
+
+                <div class="col-md-6">
+                     <h4 class="tab-rub text-center page-header-custom">Vänner</h4>
+                    @foreach($user->friends as $friend)
+                        <div class="well well-sm">
+                            <a href="/user/{{$friend->user_id}}/show/">{{$friend->user->first_name}}
+                            <span class="pull-right">{{$friend->user->club->name}}</span>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+
+
+
+                </div>
 
     </div>
 

@@ -29,7 +29,7 @@
           <label class="col-sm-2 col-sm-2 control-label">Din recension</label>
           <div class="col-sm-12">
 
-            {{Form::textarea('body')}}
+            {{Form::textarea('body', '')}}
 
           </div>
       </div>

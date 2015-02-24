@@ -208,6 +208,29 @@ class Stat {
 
     }
 
+    public function holeAvgStats($rounds){
+
+        $name = ['name'=>'Resultat'];
+        $date = ['date'=>[
+        ]];
+        $data = ['data'=>[
+        ]];
+        $i = 1;
+
+        foreach($rounds as $round){
+
+            array_push($data['data'], $this->getRoundScore($round->total, $round->tee->par));
+            array_push($date['date'], $round->date);
+
+            $i++;
+        }
+
+        $data = [$name, $data, $date];
+
+        return $data;
+
+    }
+
     public function getRoundScore($total, $par){
 
             $avg = $total - $par;
@@ -561,6 +584,69 @@ class Stat {
         }
 
         return $data;
+
+    }
+
+
+    public function getRoundsPerMonthStats($stats){
+
+        $data = ['jan'=>0, 'feb'=>0, 'mar'=>0,'apr'=>0,'maj'=>0,'jun'=>0,'jul'=>0,'aug'=>0,'sep'=>0,'okt'=>0,'nov'=>0,'dec'=>0];
+        $results = [];
+
+        foreach($stats as $round){
+            array_push($results, $this->getMonth($round->created_at));
+        }
+
+        foreach($results as $result){
+
+            switch($result){
+                case '01':
+                    $data['jan']++;
+                    break;
+                case '02':
+                    $data['feb']++;
+                    break;
+                case '03':
+                    $data['mar']++;
+                    break;
+                case '04':
+                    $data['apr']++;
+                    break;
+                case '05':
+                    $data['maj']++;
+                    break;
+                case '06':
+                    $data['jun']++;
+                    break;
+                case '07':
+                    $data['jul']++;
+                    break;
+                case '08':
+                    $data['aug']++;
+                    break;
+                case '09':
+                    $data['sep']++;
+                    break;
+                case '10':
+                    $data['okt']++;
+                    break;
+                case '11':
+                    $data['nov']++;
+                    break;
+                case '12':
+                    $data['dec']++;
+                    break;
+            }
+        }
+
+        $array = [];
+        $max = sizeof($data);
+
+        for($i = 0; $i<$max; $i++ ){
+            array_push($array,$results[$i]);
+        }
+
+        return $array;
 
     }
 

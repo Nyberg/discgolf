@@ -1,15 +1,10 @@
 <?php
 
-use dg\Forms\AddReviewForm;
+use dg\Reviews\PostReviewCommand;
+use dg\Reviews\RemoveReviewsCommand;
+use dg\Reviews\UpdateReviewCommand;
 
 class ReviewController extends \BaseController {
-
-    private $addReviewForm;
-
-    public function __construct(AddReviewForm $addReviewForm){
-
-        $this->addReviewForm = $addReviewForm;
-    }
 
 	public function index()
 	{
@@ -26,19 +21,23 @@ class ReviewController extends \BaseController {
 	public function store()
 	{
 
-        $this->addReviewForm->validate($input = Input::all());
+        $user_id = Auth::user()->id;
+        $course_id = Input::get('id');
+        $heading = Input::get('head');
+        $body = Input::get('body');
+        $rating = Input::get('rating');
 
-		$review = new Review;
+        $command = new PostReviewCommand(
+            $user_id,
+            $course_id,
+            $heading,
+            $body,
+            $rating
+        );
 
-        $review->user_id = Auth::user()->id;
-        $review->course_id = Input::get('id');
-        $review->head = Input::get('head');
-        $review->body = Input::get('body');
-        $review->rating = Input::get('rating');
+        $this->CommandBus->execute($command);
 
-        $review->save();
-
-        return Redirect::to('/course/'.$review->course_id.'/show')->with('success', 'Din recension är tillagd!');
+        return Redirect::to('/course/'.$course_id.'/show')->with('success', 'Din recension är tillagd!');
 	}
 
 	public function show()
@@ -53,7 +52,6 @@ class ReviewController extends \BaseController {
         $review = Review::with('course')->whereId($id)->firstOrFail();
 
         if(Auth::id() == $review->user_id){
-
             $courses = Course::lists('name', 'id');
 
             return View::make('review.edit', ['courses'=>$courses, 'review'=>$review]);
@@ -66,27 +64,33 @@ class ReviewController extends \BaseController {
 
 	public function update($id)
 	{
-
-        $review = Review::whereId($id)->firstOrFail();
+        $review = Review::with('course')->whereId($id)->firstOrFail();
 
         if(Auth::id() == $review->user_id){
 
-            $this->addReviewForm->validate($input = Input::all());
+            $id = $review->id;
+            $user_id = Auth::id();
+            $course_id = Input::get('id');
+            $body = Input::get('body');
+            $head = Input::get('head');
+            $rating = Input::get('rating');
 
-            $review = Review::whereId($id)->firstOrFail();
+            $command = new UpdateReviewCommand(
+                $id,
+                $user_id,
+                $course_id,
+                $body,
+                $head,
+                $rating
+            );
 
-            $review->user_id = Auth::user()->id;
-            $review->course_id = Input::get('id');
-            $review->head = Input::get('head');
-            $review->body = Input::get('body');
-            $review->rating = Input::get('rating');
+            $this->CommandBus->execute($command);
 
-            $review->save();
-
-            return Redirect::to('/account/review/user')->with('success', 'Din recension är uppdaterad!');
+            return Redirect::to('/course/'.$course_id.'/show')->with('success', 'Din recension är uppdaterad!');
 
         }else{
-            return Redirect::back()->with('danger', 'Du kan inte uppdatera detta..');
+
+            return Redirect::back()->with('danger', 'Du kan inte redigera detta..');
         }
 	}
 
@@ -96,7 +100,11 @@ class ReviewController extends \BaseController {
 
         if(Auth::id() == $review->user_id) {
 
-            $review->delete();
+          $id = $review->id;
+
+            $command = new RemoveReviewsCommand($id);
+
+            $this->CommandBus->execute($command);
 
             return Redirect::back()->with('success', 'Recension ' . $review->head . ' borttagen');
         }else{

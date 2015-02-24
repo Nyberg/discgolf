@@ -369,6 +369,14 @@ class HoleController extends \BaseController {
         $id = Input::get('id');
         $model = Input::get('model');
 
+        if($model == 'stats'){
+            $rounds = Round::get();
+            $data = $this->stat->holeAvgStats($rounds);
+
+            $message = $data;
+
+        }
+
         if($model == 'user'){
 
             $user = User::whereId($id)->firstOrFail();
@@ -619,7 +627,7 @@ class HoleController extends \BaseController {
 
     }
 
-    # Andra charten #
+    # 5 senaste resultaten #
     public function getRoundAvg()
     {
         $id = Input::get('id');
@@ -632,29 +640,78 @@ class HoleController extends \BaseController {
 
         $rounds = Round::where('course_id',$id)->limit(5)->get();
             $stats = $this->stat->roundAvg($rounds);
+
+            $message = [
+                'msg' => 'success',
+                '1'  =>  $stats['1'],
+                '2'   => $stats['2'],
+                '3'   => $stats['3'],
+                '4'   => $stats['4'],
+                '5'   => $stats['5'],
+                'd1'   => $stats['date-1'],
+                'd2'   => $stats['date-2'],
+                'd3'   => $stats['date-3'],
+                'd4'   => $stats['date-4'],
+                'd5'   => $stats['date-5'],
+            ];
         }
         if($model == 'user'){
             $rounds = Round::where('user_id',$id)->limit(5)->get();
             $stats = $this->stat->roundAvg($rounds);
+
+            $message = [
+                'msg' => 'success',
+                '1'  =>  $stats['1'],
+                '2'   => $stats['2'],
+                '3'   => $stats['3'],
+                '4'   => $stats['4'],
+                '5'   => $stats['5'],
+                'd1'   => $stats['date-1'],
+                'd2'   => $stats['date-2'],
+                'd3'   => $stats['date-3'],
+                'd4'   => $stats['date-4'],
+                'd5'   => $stats['date-5'],
+            ];
         }
         if($model == 'hole'){
             $scores = Score::where('hole_id', $id)->limit(5)->get();
             $stats = $this->stat->holeAvg($scores);
+
+            $message = [
+                'msg' => 'success',
+                '1'  =>  $stats['1'],
+                '2'   => $stats['2'],
+                '3'   => $stats['3'],
+                '4'   => $stats['4'],
+                '5'   => $stats['5'],
+                'd1'   => $stats['date-1'],
+                'd2'   => $stats['date-2'],
+                'd3'   => $stats['date-3'],
+                'd4'   => $stats['date-4'],
+                'd5'   => $stats['date-5'],
+            ];
+        }
+        if($model == 'stats'){
+
+            $date_to = Input::get('date_to');
+            $date_from = Input::get('date_from');
+            $course_id = Input::get('course_id');
+
+            if($course_id == 0){
+                $rounds = Round::where('date', '>=', $date_from)->where('date', '<=', $date_to)->get();
+            }else{
+                $rounds = Round::where('date', '>=', $date_from)->where('date', '<=', $date_to)->where('course_id', $course_id)->get();
+            }
+
+
+
+            #$rounds = Round::get();
+            $data = $this->stat->holeAvgStats($rounds);
+
+            $message = $data;
+
         }
 
-        $message = [
-            'msg' => 'success',
-            '1'  =>  $stats['1'],
-            '2'   => $stats['2'],
-            '3'   => $stats['3'],
-            '4'   => $stats['4'],
-            '5'   => $stats['5'],
-            'd1'   => $stats['date-1'],
-            'd2'   => $stats['date-2'],
-            'd3'   => $stats['date-3'],
-            'd4'   => $stats['date-4'],
-            'd5'   => $stats['date-5'],
-        ];
 
         return Response::json($message);
 

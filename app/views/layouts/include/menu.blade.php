@@ -37,6 +37,8 @@
                     <li class="divider"></li>
                      <li class="dropdown-header">Banor</li>
                     <li><a href="/courses">Alla Banor</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/statistics">Statistik</a></li>
                   </ul>
                 </li>
 
@@ -55,11 +57,21 @@
                   </ul>
                 </li>
 
+
                  <li class="{{ Request::is('forum','forum/*') ? 'active' : '' }}"><a href="/forum">Forum</a></li>
           </ul>
 
         <ul class="nav navbar-nav navbar-right pull-right col-lg-offset-right-1">
                 @if(Auth::user())
+
+                <li class="dropdown">
+                    <a href="#" class="" id="notification" data-toggle="dropdown">
+                    <span class="fa fa-bell"> </span>
+                    <span class="badge badge-notify"></span>  </a>
+                    <ul class="dropdown-menu" id="notificationMenu">
+
+                    </ul>
+                </li>
                       <li class="{{ Request::is('account/*', 'admin/*', 'admin', 'dashboard') ? 'active' : '' }}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                        {{Auth::user()->first_name}} <span class="caret"></span>

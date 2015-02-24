@@ -125,7 +125,8 @@ return array(
         'Intervention\Image\ImageServiceProvider',
         'Zizaco\Entrust\EntrustServiceProvider',
         'Way\Generators\GeneratorsServiceProvider',
-        "Khill\Lavacharts\Laravel\LavachartsServiceProvider"
+        "Khill\Lavacharts\Laravel\LavachartsServiceProvider",
+        "dg\Eventing\EventingsServiceProvider"
 	),
 
 	/*

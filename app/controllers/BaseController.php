@@ -1,12 +1,16 @@
 <?php
 
+use dg\Commanding\ValidationCommandBus;
+
 class BaseController extends Controller {
 
-	/**
-	 * Setup the layout used by the controller.
-	 *
-	 * @return void
-	 */
+    protected $CommandBus;
+
+    function __construct(ValidationCommandBus $commandBus)
+    {
+        $this->CommandBus = $commandBus;
+    }
+
 	protected function setupLayout()
 	{
 		if ( ! is_null($this->layout))

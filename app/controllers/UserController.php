@@ -2,6 +2,7 @@
 
 use dg\Forms\UserSettingsForm;
 use dg\Forms\ChangePasswordForm;
+use dg\Notification\NotificationFetcher;
 use dg\statistics\Stat;
 use Khill\Lavacharts\Lavacharts;
 
@@ -35,26 +36,14 @@ class UserController extends \BaseController {
     public function show($id)
     {
 
-    /*    $total = Round::where('user_id', $id)->count();
-
-            $scores = Score::where('user_id', $id)->get();
-            $courses_played = Round::where('user_id', $id)->lists('tee_id');
-            $datarounds = Round::with('score')->where('user_id', $id)->where('status', 1)->orWhere('par_id',$id)->get();
-
-            $data = $this->stat->calc($scores);
-            $shots = $this->stat->calcShots($scores);
-            $cp = $this->stat->getCourses($courses_played);
-            $bfr = $this->stat->getBfr($datarounds);
-            $avg = $this->stat->getAvg($scores, $datarounds);
-            $birdies = $this->stat->getBirdies($datarounds); */
-
-
             $user = User::with('profile')->whereId($id)->firstOrFail();
 
             $rounds = Round::with('tee')->where('user_id', $id)->where('status', 1)->orWhere('par_id', $id)->limit(5)->get();
             $club = Club::whereId($user->club_id)->firstOrFail();
             $bags = Bag::with('disc')->where('user_id', $id)->get();
             $sponsors = Sponsor::where('user_id', $id)->get();
+            $fetcher = new NotificationFetcher($user);
+            $notifications = $fetcher->take(5)->fetch();
 
             foreach ($sponsors as $sponsor) {
                 $sponsor->views++;
@@ -64,7 +53,7 @@ class UserController extends \BaseController {
             $user->views++;
             $user->save();
 
-            return View::make('users.show', ['user' => $user, 'rounds' => $rounds, 'club' => $club, 'bags' => $bags, 'sponsors' => $sponsors/*, 'data' => $data, 'shots' => $shots, 'cp' => $cp, 'bfr' => $bfr, 'avg' => $avg, 'birdies' => $birdies*/]);
+            return View::make('users.show', ['user' => $user, 'rounds' => $rounds, 'club' => $club, 'bags' => $bags, 'notifications'=> $notifications]);
 
     }
 

@@ -23,7 +23,7 @@ $(document).ready(function() {
 
         }
 
-            $.post('http://178.62.90.148/getTees', {id: $(".teepads" ).val()}, function(data){
+            $.post('/getTees', {id: $(".teepads" ).val()}, function(data){
             $.each(data, function(index, value) {
 
                 $('#target').append(' <option value='+value.id+' id="dropdown">' + value.color +'</option>');

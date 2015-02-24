@@ -12,7 +12,7 @@
              <label class="col-sm-2 col-sm-2 control-label">Välj bana att recensera</label>
              <div class="col-sm-10">
 
-               {{Form::select('id', $courses,$review->course_id,array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
+               {{Form::select('id', $courses, $review->course_id,array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
                  {{errors_for('id', $errors)}}
              </div>
          </div>
