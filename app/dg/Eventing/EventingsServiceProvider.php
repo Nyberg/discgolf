@@ -10,7 +10,7 @@ class EventingsServiceProvider extends ServiceProvider {
         $listeners = $this->app['config']->get('discgolf.listeners');
         foreach($listeners as $listener)
         {
-            $this->app['events']->listen('discgolf.*', $listener);
+            $this->app['events']->listen('dg.*', $listener);
         }
     }
 }
