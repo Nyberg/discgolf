@@ -7,10 +7,10 @@ class EventingsServiceProvider extends ServiceProvider {
 
     public function register()
     {
-        $listeners = $this->app['config']->get('dg.listeners');
+        $listeners = $this->app['config']->get('Dg.listeners');
         foreach($listeners as $listener)
         {
-            $this->app['events']->listen('dg.*', $listener);
+            $this->app['events']->listen('Dg.*', $listener);
         }
     }
 }
