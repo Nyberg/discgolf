@@ -146,18 +146,20 @@ class CourseController extends \BaseController {
 
         $course = Course::whereId($id)->firstOrFail();
         if (is_null($course)) {
+
             return Redirect::route('/admin/course');
+
         } else {
             $course = Course::whereId($id)->firstOrFail();
             $course->name = Input::get('name');
             $course->country_id = Input::get('country');
             $course->state_id = Input::get('state');
             $course->city_id = Input::get('city');
-         //   $course->holes = Input::get('holes');
             $course->information = Input::get('information');
             $course->status = Input::get('status');
             $course->long = Input::get('long');
             $course->lat = Input::get('lat');
+            $course->club_id = Input::get('club');
 
             $course->save();
 

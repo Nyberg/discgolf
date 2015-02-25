@@ -20,8 +20,8 @@ class UserController extends \BaseController {
 
 	public function index()
 	{
-            $users = User::paginate(15);
-            $clubs = Club::get();
+        $users = User::paginate(15);
+        $clubs = Club::get();
 
         return View::make('users.users',compact('users'), ['clubs'=>$clubs]);
 	}
@@ -36,25 +36,24 @@ class UserController extends \BaseController {
     public function show($id)
     {
 
-            $user = User::with('profile')->whereId($id)->firstOrFail();
+        $user = User::with('profile')->whereId($id)->firstOrFail();
 
-            $rounds = Round::with('tee')->where('user_id', $id)->where('status', 1)->orWhere('par_id', $id)->limit(5)->get();
-            $club = Club::whereId($user->club_id)->firstOrFail();
-            $bags = Bag::with('disc')->where('user_id', $id)->get();
-            $sponsors = Sponsor::where('user_id', $id)->get();
-            $fetcher = new NotificationFetcher($user);
-            $notifications = $fetcher->take(5)->fetch();
+        $rounds = Round::with('tee')->where('user_id', $id)->where('status', 1)->orWhere('par_id', $id)->limit(5)->get();
+        $club = Club::whereId($user->club_id)->firstOrFail();
+        $bags = Bag::with('disc')->where('user_id', $id)->get();
+        $sponsors = Sponsor::where('user_id', $id)->get();
+        $fetcher = new NotificationFetcher($user);
+        $notifications = $fetcher->take(5)->fetch();
 
-            foreach ($sponsors as $sponsor) {
-                $sponsor->views++;
-                $sponsor->save();
-            }
+        foreach ($sponsors as $sponsor) {
+            $sponsor->views++;
+            $sponsor->save();
+        }
 
-            $user->views++;
-            $user->save();
+        $user->views++;
+        $user->save();
 
-            return View::make('users.show', ['user' => $user, 'rounds' => $rounds, 'club' => $club, 'bags' => $bags, 'notifications'=> $notifications]);
-
+        return View::make('users.show', ['user' => $user, 'rounds' => $rounds, 'club' => $club, 'bags' => $bags, 'notifications'=> $notifications]);
     }
 
 
@@ -175,7 +174,6 @@ class UserController extends \BaseController {
         if (Hash::check($old_password, $user->password)) {
 
             $user->password = $password;
-
             $user->save();
 
             if ($user->save()) {
@@ -199,17 +197,14 @@ class UserController extends \BaseController {
     public function userRound($id){
 
         $user = User::find($id);
-
         $rounds = Round::where('user_id', $id)->orWhere('par_id', $id)->paginate(15);
 
         return View::make('round.user', compact('rounds'), ['user'=>$user]);
-
     }
 
 
     public function getPlayers()
     {
-
         $users = User::get();
 
         return Response::json($users);

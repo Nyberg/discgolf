@@ -173,7 +173,7 @@ class Stat {
         return $dirArray;
 
     }
-
+ /*
     public function roundAvg($rounds){
 
         $stats = ['1'=>0, '2'=>0,'3'=>0,'4'=>0,'5'=>0, 'date-1'=>0, 'date-2'=>0, 'date-3'=>0, 'date-4'=>0, 'date-5'=>0];
@@ -206,9 +206,10 @@ class Stat {
 
         return $stats;
 
-    }
+    } */
 
-    public function holeAvgStats($rounds){
+    # Genrererar senaste resultaten #
+    public function roundScores($rounds){
 
         $name = ['name'=>'Resultat'];
         $date = ['date'=>[
@@ -231,6 +232,29 @@ class Stat {
 
     }
 
+    # Genererar senaste resultaten på ett hål #
+    public function holeScores($scores){
+
+        $name = ['name'=>'Resultat'];
+        $date = ['date'=>[
+        ]];
+        $data = ['data'=>[
+        ]];
+        $i = 1;
+
+        foreach($scores as $score){
+
+            array_push($data['data'], $score->score - $score->par);
+            array_push($date['date'], $score->round->date);
+
+            $i++;
+        }
+
+        $data = [$name, $data, $date];
+
+        return $data;
+    }
+
     public function getRoundScore($total, $par){
 
             $avg = $total - $par;
@@ -238,20 +262,18 @@ class Stat {
         return $avg;
     }
 
+    # Genererar resultat för en runda #
     public function generateRound($rounds, $tee){
 
-        if($tee->holes == 18){
-            $dirArray = ['1'=>0,'2'=>0,'3'=>0,'4'=>0,'5'=>0,'6'=>0,'7'=>0,'8'=>0,'9'=>0,'10'=>0,'11'=>0,'12'=>0,'13'=>0,'14'=>0,'15'=>0,'16'=>0,'17'=>0,'18'=>0,];
-        }
-        if($tee->holes == 9){
-            $dirArray = ['1'=>0,'2'=>0,'3'=>0,'4'=>0,'5'=>0,'6'=>0,'7'=>0,'8'=>0,'9'=>0];
+        $dirArray = [];
+
+        foreach($tee->hole as $hole){
+            $dirArray[$hole->number] = 0;
         }
 
-        $i = 1;
         foreach($rounds->score as $s)
         {
-                $dirArray[$i]= $s->score;
-                $i++;
+                $dirArray[$s->hole->number]= $s->score;
 
         }
         return $dirArray;

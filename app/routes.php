@@ -258,18 +258,20 @@ Route::get('/records', 'RoundController@records');
 // Hole
 Route::get('/holes', 'HoleController@index');
 Route::get('/hole/{id}/show', 'HoleController@show');
-Route::post('/stats/hole/', ['as' => 'hole.stats', 'uses' => 'HoleController@getStats']);
-Route::get('/getHoleStats', 'HoleController@getHoleStats');
-Route::get('/getRoundsPerMonth', 'HoleController@getRoundsPerMonth');
-Route::get('/getRoundAvgScore', 'HoleController@getRoundAvgScore');
-Route::get('/getUserData', 'HoleController@getUserData');
-Route::post('/getRoundAvg', ['as' => 'course.stats', 'uses'=>'HoleController@getRoundAvg']);
-Route::post('/getRoundsPerMonthReload', ['as' => 'user.rounds', 'uses'=>'HoleController@getRoundsPerMonthReload']);
-Route::post('/getUserDataReload', ['as' => 'user.data', 'uses'=>'HoleController@getUserDataReload']);
-Route::post('/getCourseRoundsReload', ['as' => 'course.rounds', 'uses'=>'HoleController@getCourseRoundsReload']);
+
 
 #   Statistik   #
-Route::get('/statistics', 'HomeController@stats');
+Route::get('/statistics', 'StatisticsController@index');
+Route::post('/stats/hole/', ['as' => 'hole.stats', 'uses' => 'StatisticsController@getStats']);
+Route::get('/getHoleStats', 'StatisticsController@getHoleStats');
+Route::get('/getRoundsPerMonth', 'StatisticsController@getRoundsPerMonth');
+Route::get('/getRoundAvgScore', 'StatisticsController@getRoundAvgScore');
+Route::get('/getUserData', 'StatisticsController@getUserData');
+Route::post('/getRoundAvg', ['as' => 'course.stats', 'uses'=>'StatisticsController@getRoundAvg']);
+Route::post('/getRoundsPerMonthReload', ['as' => 'user.rounds', 'uses'=>'StatisticsController@getRoundsPerMonthReload']);
+Route::post('/getUserDataReload', ['as' => 'user.data', 'uses'=>'StatisticsController@getUserDataReload']);
+Route::post('/getCourseRoundsReload', ['as' => 'course.rounds', 'uses'=>'StatisticsController@getCourseRoundsReload']);
+
 
 // Shot
 Route::get('/hole/{id}/score/{score_id}', 'ShotController@show');

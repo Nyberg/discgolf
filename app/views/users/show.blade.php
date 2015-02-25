@@ -257,8 +257,8 @@
                      <h4 class="tab-rub text-center page-header-custom">Vänner</h4>
                     @foreach($user->friends as $user)
                         <div class="well well-sm">
-                            <a href="/user/{{$user->user->id}}/show/">{{$user->user->first_name}}
-                            <span class="pull-right"></span>
+                            <a href="/user/{{$user->user->id}}/show/">{{$user->user->first_name . ' ' . $user->user->last_name}}
+                            <span class="pull-right">{{$user->user->club->name}}</span>
                             </a>
                         </div>
                     @endforeach

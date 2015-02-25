@@ -322,82 +322,75 @@ function getRoundAvg(){
             "id": $('#id').val(),
             "user_id": $('#user_id').val(),
             "model": $('#model').val()
+
         },
         function (data) {
 
-            if (data['msg'] == 'success') {
-                $('#chart-round-avg').highcharts({
-                    chart: {
-                        type: 'areaspline',
-                        backgroundColor: {
-                            linearGradient: {x1: 0, y1: 0, x2: 1, y2: 1},
-                            stops: [
-                                [0, '#2C3E50'],
-                                [1, '#2C3E50']
-                            ]
-                        },
-                        style: {
-                            fontFamily: "'Unica One', sans-serif",
-                            color: '#ffffff'
-                        },
-                        plotBorderColor: '#E74C3C'
+            $('#chart-round-avg').highcharts({
+                chart: {
+                    type: 'areaspline',
+                    backgroundColor: {
+                        linearGradient: {x1: 0, y1: 0, x2: 1, y2: 1},
+                        stops: [
+                            [0, '#2C3E50'],
+                            [1, '#2C3E50']
+                        ]
                     },
-                    title: {
-                        text: 'Senaste resultaten',
-                        style: {
-                            color: '#E0E0E3',
-                            textTransform: 'uppercase',
-                            fontSize: '1em'
-                        }
+                    style: {
+                        fontFamily: "'Unica One', sans-serif",
+                        color: '#ffffff'
                     },
+                    plotBorderColor: '#E74C3C'
+                },
+                title: {
+                    text: 'Senaste resultaten',
+                    style: {
+                        color: '#E0E0E3',
+                        textTransform: 'uppercase',
+                        fontSize: '1em'
+                    }
+                },
 
-                    legend: {
-                        itemStyle: {
+                legend: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: data[2]['date'],
+                    labels: {
+                        style: {
                             color: '#E0E0E3'
-                        },
-                        itemHoverStyle: {
-                            color: '#FFF'
-                        },
-                        itemHiddenStyle: {
-                            color: '#606063'
+                        }
+                    }
+                },
+                yAxis: {
+                    gridLineColor: '#2C3E50',
+                    labels: {
+                        style: {
+                            color: '#E0E0E3'
                         }
                     },
-                    xAxis: {
-                        categories: [data['d1'], data['d2'], data['d3'], data['d4'], data['d5']],
-                        labels: {
-                            style: {
-                                color: '#E0E0E3'
-                            }
+                    lineColor: '#E74C3C',
+                    minorGridLineColor: '#E74C3C',
+                    tickColor: '#E74C3C',
+                    tickWidth: 0,
+                    title: {
+                        style: {
+                            color: '#E0E0E3'
                         }
-                    },
-                    yAxis: {
-                        gridLineColor: '#2C3E50',
-                        labels: {
-                            style: {
-                                color: '#E0E0E3'
-                            }
-                        },
-                        lineColor: '#E74C3C',
-                        minorGridLineColor: '#E74C3C',
-                        tickColor: '#E74C3C',
-                        tickWidth: 0,
-                        title: {
-                            style: {
-                                color: '#E0E0E3'
-                            }
-                        }
-                    },
-                    colors: ["#E74C3C", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
-                        "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
-                    tooltip: {
-                        valueSuffix: ''
-                    },
-                    series: [{
-                        name: 'Resultat',
-                        data: [data['1'], data['2'], data['3'], data['4'], data['5']]
-                    }]
-                });
-            }
+                    }
+                },
+                colors: ["#E74C3C", "#E74C3C", "#E74C3C", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+                    "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+                tooltip: {
+                    valueSuffix: '',
+                    formatter: function() {
+                        return 'Resultat:<br/>'+
+                        this.x +': <b>'+ this.y+'</b>';
+                    }
+                },
+                series: data
+            });
+
         },'json'
     );
     return false;
