@@ -105,7 +105,7 @@ class RecordsController extends \BaseController {
 
         }else{
 
-            return Redirect::back()->with('headsup', 'Du måste vara inloggad för att kunna kommentera');
+            return Redirect::back()->with('headsup', 'Du måste vara inloggad för att kunna göra detta!');
         }
 	}
 

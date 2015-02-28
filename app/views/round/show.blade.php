@@ -1,10 +1,9 @@
     @extends('master')
-
-
     @section('content')
+
               <h2 class="text-center page-header-custom"><a href="/course/{{$course->id}}/show">{{$course->name . ' - ' . $tee->color}}</a>, {{$round->date}} av
-               @if($round->type == 'Par')
-                 <td>{{showPar($round->par_id, $round->user_id)}}</td>
+                  @if($round->type == 'Par')
+                    <td>{{showPar($round->par_id, $round->user_id)}}</td>
                   @else
                   <a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a>
                   @endif
