@@ -45,14 +45,9 @@
                                                   <label class="col-sm-2 col-sm-2 control-label">Klubb</label>
                                                   <div class="col-sm-10">
 
-                                                @if(Auth::user()->hasRole('ClubOwner'))
 
-                                                        {{Form::select('club',$clubs , $user->club_id, ['data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control', 'disabled'])}}
-
-                                                         <span class="help-block">Du är klubbägare. Du kan därför inte ändra din klubb.</span>
-                                                @else
                                                 {{Form::select('club',$clubs , $user->club_id, ['data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'])}}
-                                                @endif
+
 
                                                   </div>
                                               </div>

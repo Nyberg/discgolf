@@ -73,7 +73,7 @@ class UserController extends \BaseController {
         if(Auth::User()->id == $id || Auth::user()->hasRole('Admin')){
         $check = Input::get('country');
             $old = User::with('profile')->whereId($id)->firstOrFail();
-
+            $role = Role::where('name', 'ClubOwner')->firstOrFail();
 
             if(!empty($check)){
 
@@ -102,14 +102,7 @@ class UserController extends \BaseController {
                 $user->last_name = Input::get('last_name');
                 $user->email = Input::get('email');
                 $user->metric = Input::get('metric');
-
-                if(Auth::user()->hasRole('ClubOwner')){
-                    $user->club_id = $user->club_id;
-                }else{
-                    $user->club_id = Input::get('club');
-                }
-
-
+                $user->club_id = Input::get('club');
 
                 if(Input::hasFile('file')) {
 
