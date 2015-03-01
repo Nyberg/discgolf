@@ -39,7 +39,6 @@ class ClubController extends \BaseController {
                 $filename = time() . '-club.png';
                 $file = $file->move(public_path($filepath), ($filename));
                 $club->image = $filepath.$filename;
-
             }
             catch(Exception $e) {
                 return 'Något gick snett mannen: ' .$e;
