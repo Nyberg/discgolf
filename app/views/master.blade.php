@@ -31,7 +31,7 @@
 {{HTML::script('admin_js/jquery-ui.min.js')}}
 {{HTML::script('packages/jleach/laravelmce/js/tinymce/tinymce.min.js')}}
 {{HTML::script('//tinymce.cachefly.net/4.1/tinymce.min.js')}}
-{{HTML::script('https://maps.googleapis.com/maps/api/js?key=AIzaSyCMaFerIs2B3QmhCTjer-s1x_8THiBDYSs')}}
+
 
 <script type="text/javascript">
 

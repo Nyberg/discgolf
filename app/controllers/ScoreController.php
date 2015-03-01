@@ -94,6 +94,8 @@ class ScoreController extends \BaseController {
 
             $score = Score::whereId($id)->firstOrFail();
 
+        if($score->user_id == Auth::id()){
+
             $score->score = Input::get('score');
             $score->save();
 
@@ -121,15 +123,14 @@ class ScoreController extends \BaseController {
         }
 
         return Redirect::to('/account/round/'.$round_id.'/edit/'.$round->course_id.'')->with('success', 'Score updated!');
+
+        }else{
+
+            return Redirect::back()->with('danger', 'Du kan inte redigera detta!');
+        }
 	}
 
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
 		//

@@ -171,7 +171,7 @@ class RoundController extends BaseController {
         if(Auth::id() == $round->user_id){
             return View::make('round.editScore', ['round' => $round]);
         }else{
-            return Redirect::to('/')->with('danger', 'Du kan inte redigera det!');
+            return Redirect::to('/')->with('danger', 'Du kan inte redigera detta!');
         }
 
     }

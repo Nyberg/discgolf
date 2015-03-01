@@ -107,7 +107,7 @@ class SponsorController extends \BaseController {
 	{
         $sponsor = Sponsor::whereId($id)->firstOrFail();
 
-        if($sponsor){
+        if($sponsor->user_id == Auth::id()){
 
         $sponsor->name = Input::get('name');
         $sponsor->user_id = Auth::user()->id;
@@ -138,25 +138,22 @@ class SponsorController extends \BaseController {
                 return Redirect::to('/dashboard')->with('success', 'Sponsor updated!');
             }
         }else{
-            return Redirect::back()->with('danger', 'Something went wrong!');
+            return Redirect::back()->with('danger', 'Du kan inte redigera detta!');
         }
 
     }
 
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
         $sponsor = Sponsor::whereId($id)->firstOrFail();
 
+        if($sponsor->user_id == Auth::id()){
+
         $sponsor->delete();
         return Redirect::back()->with('success', 'Sponsor deleted!');
+
+        }else{
+            return Redirect::back()->with('danger', 'Du kan inte ta bort detta!');
+        }
 	}
-
-
 }

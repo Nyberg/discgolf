@@ -1,9 +1,13 @@
-@extends('master')
+@extends('db')
 
 @section('content')
 
+    <div class="showback">
+
     {{Form::open(['route'=>'news.store', 'class'=>'form-horizontal style-form'])}}
-            <h4 class="tab-rub">Lägg till nyhet</h4>
+
+         <h2 class="text-center page-header-custom">Skriv Nyhet</h2>
+         <div class="divider-header"></div>
 
             <div class="form-group">
              <label class="col-sm-12 col-sm-12 control-label">Rubrik</label>
@@ -25,4 +29,5 @@
 
          {{Form::submit('Spara nyhet', ['class'=>'btn btn-success'])}}
     {{Form::close()}}
+    </div>
 @stop

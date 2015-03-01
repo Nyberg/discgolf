@@ -16,8 +16,8 @@
   </div>
 
 <br/>
-  <div class="row">
 
+<div class="row">
     <div class="col-md-10 col-md-offset-1 col-md-offset-right-1">
 
     <h4 class="tab-rub text-center page-header-custom">Välkommen till Penguin Projects Alfatest!</h4>
@@ -26,84 +26,104 @@
 
         <p class="text-center"><b>All data som läggs upp kan/kommer att försvinna under testperioden. Lägg inte upp data som ni inte vill bli av med!</b></p><hr>
 
-        <br/>
+    </div>
+</div>
 
-        <a href="/about-pp" class="center-block btn btn-success btn-lg">Läs mer om Penguin Project!</a>
+<div class="row">
+    <div class="col-md-9">
 
-        <br/>
 
-        @if(Auth::check())
+      <div class="col-md-12 panel panel-sub">
+            <!-- Default panel contents -->
+            <div class="row panel-heading panel-subheading text-center">Nyheter</div>
 
-        <div class="row mtbox">
-            <div class="col-md-4 col-sm-4 box0">
-              <a  href="/account/round/add">  <div class="box1">
-                    <span class="li_user"></span>
-                    <h4>Lägg till en runda</h4>
-                </div>
-                    <p>Testa att lägga upp en runda</p></a>
+            @foreach($news as $new)
+
+            <div class="col-md-6">
+                <h2 class="page-subheader-custom"> <a href="/news/{{$new->id}}/show" class="">{{$new->head}}</a></h2>
+                <p>{{Str::limit(strip_tags($new->body), 220)}}</p>
+                <br/>
+                <p class="">{{$new->created_at->format('Y-m-d') . ' av '}}  <a href="/user/{{$new->user_id}}/show">{{$new->user->first_name . ' ' . $new->user->last_name}}</a></p>
+
             </div>
 
-            <div class="col-md-4 col-sm-4 box0">
-               <a href="/forum/"> <div class="box1">
-                    <span class="li_star"></span>
-                    <h4>Forum</h4>
-                </div>
-                    <p>Skriv i forumet</p></a>
-            </div>
-
-               <div class="col-md-4 col-sm-4 box0">
-                <a  href="/courses/"> <div class="box1">
-                    <span class="li_cloud"></span>
-                    <h4>Banor</h4>
-                </div>
-                    <p>Besök en bana</p></a>
-            </div>
-        </div><!-- /row mt -->
-
-    @else
-    @endif
-
-         <h4>Tack för att du vill vara med och testa och förbättra Penguin Project!</h4>
-
-        <p>Sidan är i ett väldit tidigt stadie, men det finns tillräckligt med funktionalitet för att personer kan använda sig av den.
-        Under alfa-stadiet kommer väldigt många buggar och krockar uppstå så ni får inte gripas av panik om det flashar världens error för er.</p>
-
-        <h4>Bugghantering</h4>
-        <p>När ni stöter på en bugg, var vänlig att gå till forumets alfadel och leta reda på rätt område.
-        Kolla noga innan ni postar något nytt, så att vi kan undvika dubletter. Forumet kommer vara uppbyggt med en kategori för varje specifikt område.</p>
-
-        <h4>Förslag på funktionalitet</h4>
-        <p>Om ni skulle komma på något som ni vill ha med på sidan (inom vissa rimliga ramar) så postar ni det i "Förslag" i alfaforumet. Förslaget kommer att läsas igenom och undersökas.
-        Vill ni ha något tillägg eller påbyggnad, posta det i samma forum.</p>
-
-        <h4>Design & Rättigheter</h4>
-        <p>För tillfället så är det mesta öppet för en alfatestare. Det finns dock viss funktionalitet som fortfarande är låst (som jag inte anser behöver testas). Framförallt rör det sig om admindelen.
-        I en användares dashboard kommer det finnas en del funktionalitet som inte är tillgänglig, men ni kan fortfarande se det.</p>
-        <p>När det kommer till design så är det en väldigt öppen fråga. Det är inte min prio just nu. Framförallt dashboardgränssnittet är inte alls påbörjat rent designmässigt. Lämna dessa funderingar/klagomål utanför sidan.</p>
-        <p>Har ni dock förslag på konkreta designförändringar på framsidan, lämna en kommentar i forumets del för design. Glöm inte använda sidan på er platta eller mobil.</p>
-
-        <h4>Statistik</h4>
-        <p>Statistiken är väldigt grundläggande. Har ni frågor kring hur det fungerar och vilken data som används, lämna en kommentar i alfadelens statistikdel. Förslag på statistik lämnas även där.</p>
-
-        <h4>Klubbar</h4>
-        <p>För tillfället så vet jag inte hur/eller om klubbar ska finnas med på sidan. Modulen finns där, men efter en dialog med Svenska Discgolfutskottet (DU) så ligger det på is ett tag.</p>
-
-        <h4>Banor och rundor</h4>
-        <p>Det ligger 2 banor uppe för tillfället. Det är den del som är närmast klar. Lägg upp era rundor så statistiken kan visa rättvisa siffror.</p>
-
-        <h4>Korrenkturläsning och textförslag</h4>
-        <p>Alla förslag på informativa texter mottages varmt. Även länkar är vamrt välkomna. Posta det i alfaforumets informationsdel. </p>
-
-        <h4>App</h4>
-        <p>Som ni kanske vet kommer det byggas en app under alfa & betatester. Kom gärna med förslag i alfaforumets del för appen. Försök hålla förslagen rimliga.</p>
-
-        <h4>Avslutningsvis</h4>
-        <p>Som alfatestare har ni ett ansvar. Testa så mycket ni kan, kom med ideer och förslag. Försök hålla en öppen & glad diskussion med varandra. Användare som missköter sig är välkomna tillbaka när sidan går live på riktigt.</p>
+            @endforeach
+        </div>
 
     </div>
 
+    <div class="col-md-3">
+
+          <div class="col-md-12 panel panel-sub">
+                <!-- Default panel contents -->
+                <div class="row panel-heading panel-subheading text-center">Rundor senaste två veckorna</div>
+
+                <div class="col-md-12">
+                    <div class="caption text-center">
+                    <br/>
+                        <h1 class="red">{{$num}}</h1>
+                        <h4 class="">
+                           Rundor
+                        </h4>
+                        <p>Spelade dom senaste två veckorna</p>
+                   <br/>
+                   </div>
+                </div>
+
+            </div>
+
+                      <div class="col-md-12 panel panel-sub">
+                            <!-- Default panel contents -->
+                            <div class="row panel-heading panel-subheading text-center">Senaste medlemmen</div>
+
+                            <div class="col-md-12">
+                                <div class="caption text-center">
+                                <br/>
+                                    <img src="{{$latest->image}}" class="img-circle" width="50px"/>
+                                    <h4 class="">
+                                       <a href="/user/{{$latest->id}}/show">{{$latest->first_name . ' ' . $latest->last_name}}</a>
+                                    </h4>
+
+                               <br/>
+                               </div>
+                            </div>
+
+                        </div>
 
     </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="col-md-12 panel panel-sub">
+                <!-- Default panel contents -->
+            <div class="row panel-heading panel-subheading text-center">Senaste Rundorna</div>
+            <br/>
+
+            @foreach($rounds as $round)
+
+            <a href="/round/{{$round->id}}/course/{{$round->course_id}}">
+                <div class="col-sm-3 col-md-3">
+                      <div class="thumbnail">
+                        <div class="caption text-center">
+                            <h1 class="red">{{calcScore($round->total, $round->tee->par)}}</h1>
+                            <h4 class="">
+                                {{$round->course->name . ' - ' . $round->tee->color}}
+                            </h4>
+                            <p>{{$round->created_at->format('Y-m-d') . ' av ' . $round->user->first_name . ' ' . $round->user->last_name}}</p>
+                       </div>
+                      </div>
+                </div>
+            </a>
+
+            @endforeach
+
+        </div>
+
+    </div>
+</div>
 
 @stop
 

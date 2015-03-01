@@ -16,6 +16,11 @@ class NewsController extends Controller {
 		//
 	}
 
+    public function admin(){
+        $news = News::get();
+        return View::make('admin.news', ['news'=>$news]);
+    }
+
 	public function create()
 	{
         if(Auth::user()->hasRole('ClubOwner')){
@@ -36,11 +41,11 @@ class NewsController extends Controller {
         $news->head = Input::get('head');
         $news->body = Input::get('body');
         $news->views = 0;
-        $news->club_id = Auth::user()->club_id;
+        $news->user_id = Auth::id();
 
         $news->save();
 
-        return Redirect::to('/club/'.Auth::user()->club_id.'/show')->with('success', 'Nyhet sparad!');
+        return Redirect::to('/admin/news')->with('success', 'Nyhet sparad!');
 
 	}
 
@@ -57,7 +62,7 @@ class NewsController extends Controller {
 	public function edit($id)
 	{
         $news = News::find($id);
-        if(Auth::user()->hasRole('ClubOwner') && Auth::user()->club_id == $news->club_id){
+        if(Auth::id() == $news->user_id){
 
             return View::make('news.edit', ['news'=>$news]);
         }
@@ -70,12 +75,17 @@ class NewsController extends Controller {
 
         $news = News::find($id);
 
-        $news->head = Input::get('head');
-        $news->body = Input::get('body');
+        if(Auth::id() == $news->user_id) {
 
-        $news->save();
+            $news->head = Input::get('head');
+            $news->body = Input::get('body');
 
-        return Redirect::to('/club/'.Auth::user()->club_id.'/show')->with('success', 'Nyhet uppdaterad!');
+            $news->save();
+
+            return Redirect::to('/admin/news')->with('success', 'Nyhet uppdaterad!');
+        }else{
+            return Redirect::back()->with('danger', 'Du har inte rättigheter för detta..');
+        }
 	}
 
 
@@ -83,13 +93,12 @@ class NewsController extends Controller {
 	{
 		$new = News::whereId($id)->firstOrFail();
 
-        if(Auth::user()->hasRole('ClubOwner') && $new->club_id == Auth::user()->club_id){
+        if(Auth::id() == $new->user_id){
 
             $new->delete();
 
-            return Redirect::to('/dashboard')->with('success', 'Nyhet borttagen!');
+            return Redirect::back()->with('success', 'Nyhet borttagen!');
         }else{
-            $new->delete();
 
             return Redirect::back()->with('danger', 'Du har inte rättigheter för detta..');
         }

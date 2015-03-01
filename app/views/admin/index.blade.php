@@ -48,6 +48,14 @@
 
         <div class="row mt">
             <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+                        <a  href="/admin/news">  <div class="box1">
+                        <span class="li_pen"></span>
+                        <h4>Nyheter</h4>
+                        </div>
+                        <p>Skriv en nyhet</p></a>
+
+            </div>
+            <div class="col-md-2 col-sm-2 box0">
                 <a  href="/admin/location">  <div class="box1">
                 <span class="li_world"></span>
                 <h4>Geografi</h4>

@@ -62,6 +62,10 @@ Route::group(['before'=>'checkAdmin'], function(){
         Route::get('/admin/clubs', 'AdminController@clubs');
         Route::get('/admin/club/owners', 'AdminController@clubOwners');
 
+        # News          #
+        Route::get('/admin/add/news', 'NewsController@create');
+        Route::get('/admin/news/{id}/edit', 'NewsController@edit');
+        Route::get('/admin/news', 'NewsController@admin');
 
         #   Land, Landskap & Stad   #
         Route::get('/admin/location/', 'CountryController@index');
@@ -82,10 +86,6 @@ Route::group(['before'=>'checkClubOwner'], function(){
         #   Tee         #
         Route::get('/admin/tee/{id}/add', 'TeeController@create');
         Route::get('/admin/tee/{id}/edit', 'TeeController@edit');
-
-        # News          #
-        Route::get('/admin/add/news', 'NewsController@create');
-        Route::get('/admin/news/{id}/edit', 'NewsController@edit');
 
         #   Club        #
         Route::get('/admin/club/{id}/edit', 'ClubController@edit');
@@ -188,7 +188,7 @@ Route::group(['before'=>'auth'], function(){
         Route::get('/thread/{id}/delete', ['as' => 'forum-delete-comment', 'uses' => 'ForumsController@deleteThread']);
         Route::get('/comment/{id}/delete', ['as' => 'forum-delete-comment', 'uses' => 'ForumsController@deleteComment']);
         Route::get('/comment/{id}/edit', 'ForumsController@editComment');
-
+        Route::get('/category/{id}/delete', ['as' => 'forum-delete-category', 'uses' => 'ForumsController@deleteCategory']);
 
         Route::group(['before' => 'csrf'], function(){
             Route::post('/group/club', ['as' => 'forum-store-club-group', 'uses' => 'ForumsController@storeClubGroup']);
@@ -246,7 +246,7 @@ Route::get('/lost-and-found', 'LostController@index');
 
 #   News    #
 
-Route::get('/club/news/{id}/show', 'NewsController@show');
+Route::get('/news/{id}/show', 'NewsController@show');
 
 // Rounds
 Route::get('/rounds', 'RoundController@index');

@@ -17,7 +17,7 @@ class CreateNewsTables extends Migration {
             $table->increments('id');
             $table->string('head', '255');
             $table->longText('body', '2000');
-            $table->integer('club_id');
+            $table->integer('user_id');
             $table->integer('views');
             $table->timestamps();
         });

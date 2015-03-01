@@ -4,7 +4,7 @@
             <div class="col-md-3 footer-section">
                 <ul>
                     <li class="footer-heading">Penguin Project</li>
-                    <li class="footer-child"><a href="#">Blogg</a></li>
+                    <li class="footer-child"><a href="/about-pp">Om</a></li>
                     <li class="footer-child"><a href="#">Kontakt</a></li>
                     <li class="footer-child"><a href="/forum">Forum</a></li>
                 </ul>
