@@ -132,7 +132,7 @@ class HoleController extends \BaseController {
 
             $hole->save();
 
-            $img = Image::make(public_path($hole->image))->resize(400,550);
+            $img = Image::make(public_path($hole->image));
 
             $img->save();
 
