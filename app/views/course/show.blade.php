@@ -99,7 +99,7 @@
     <div id="section{{$tee->id}}" class="tab-pane fade">
 
 <h4 class="tab-rub text-center page-header-custom" id="hole-gallery-{{$tee->id}}">{{$tee->color . ' tee - ' .$course->name}}</h4>
-<p class="text-center">Hoovra över banans par för att se snittresultat för varje hål.</p>
+<p class="text-center">Klicka på varje kors nummer för att se en bild på banan. Hoovra över banans par för att se snittresultat för varje hål.</p>
      <div class="divider-header"></div>
 
     <table class="table table-hover">
