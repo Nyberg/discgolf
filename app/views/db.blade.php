@@ -88,6 +88,7 @@
 <!--script for this page-->
 {{HTML::script('admin_js/sparkline-chart.js')}}
 {{HTML::script('admin_js/round/round.js')}}
+{{HTML::script('admin_js/notifications/notiser.js')}}
 
 @yield('scripts')
 
