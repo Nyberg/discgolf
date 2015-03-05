@@ -232,8 +232,8 @@ class StatisticsController extends BaseController {
 
         }
         if($model == 'course'){
-            $rounds = Round::where('course_id', $id)->get();
-            $user_rounds = Round::where('user_id', Auth::id())->where('course_id', $id)->get();
+            $rounds = Round::where('course_id', $id)->where('status', 1)->get();
+            $user_rounds = Round::where('user_id', Auth::id())->where('course_id', $id)->where('status', 1)->get();
             $course = Course::whereId($id)->firstOrFail();
             $course = $course->name;
 
@@ -285,8 +285,8 @@ class StatisticsController extends BaseController {
         $user = User::whereId(Auth::id())->firstOrFail();
         $name = $user->first_name . ' ' . $user->last_name;
 
-        $rounds = Round::where('course_id', $id)->get();
-        $user_rounds = Round::where('user_id', Auth::id())->where('course_id', $id)->get();
+        $rounds = Round::where('course_id', $id)->where('status',1)->get();
+        $user_rounds = Round::where('user_id', Auth::id())->where('course_id', $id)->where('status',1)->get();
         $course = Course::whereId($id)->firstOrFail();
         $course = $course->name;
 
