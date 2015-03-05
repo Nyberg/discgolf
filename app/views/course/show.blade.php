@@ -107,7 +107,7 @@
             <tr>
             <td>Hål</td>
             @foreach($tee->hole as $hole)
-            <td><a href="{{$hole->image}}" data-toggle="lightbox" data-gallery="hole-gallery-{{$tee->id}}" data-parent="" data-footer="<a href='/hole/{{$hole->id}}/show'>Klicka här för att visa mer information</a>" data-title="{{'Basket '.$hole->number. ', '.$course->name.' - '.$tee->color.'.<br/>Length ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></td>
+            <td><a href="{{$hole->image}}" data-toggle="lightbox" data-gallery="hole-gallery-{{$tee->id}}" data-parent="" data-footer="<a href='/hole/{{$hole->id}}/show'>Klicka här för att visa mer information</a>" data-title="{{'Korg '.$hole->number. ', '.$course->name.' - '.$tee->color.'.<br/>Längd ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></td>
             @endforeach
             <td>Total</td>
             </tr>

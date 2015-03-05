@@ -34,7 +34,6 @@
                            <li class="divider"></li>
                                                      <li class="dropdown-header">Klubbägare</li>
                           <li><a  href="/admin/club/{{Auth::user()->club_id}}/edit">Redigera din klubb</a></li>
-                          <li><a  href="/admin/club/{{Auth::user()->club_id}}/users">Hantera medlemmar</a></li>
                           <li><a  href="/admin/club/{{Auth::user()->club_id}}/courses">Hantera din klubbs banor</a></li>
                           <li><a  href="/admin/course/add">Lägg till bana</a></li>
                           @else

@@ -24,6 +24,8 @@
 
         <div class="divider-header"></div>
 
+
+
         <p class="text-center"><b>All data som läggs upp kan/kommer att försvinna under testperioden. Lägg inte upp data som ni inte vill bli av med!</b></p><hr>
 
     </div>
