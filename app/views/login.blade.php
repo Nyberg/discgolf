@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="keyword" content="">
+        <title>Penguin Project | Alfa</title>
 
 {{HTML::style('admin_css/css/bootstrap.css')}}
 {{HTML::style('admin_css/font-awesome/css/font-awesome.css')}}
