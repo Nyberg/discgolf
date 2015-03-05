@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Johannes Nyberg">
     <meta name="keyword" content="">
+    <title>Penguin Project | Alfa</title>
 
 
 {{HTML::style('admin_css/css/bootstrap2.css')}}
