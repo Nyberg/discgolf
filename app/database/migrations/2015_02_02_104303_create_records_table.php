@@ -17,6 +17,7 @@ class CreateRecordsTable extends Migration {
             $table->string('type');
             $table->integer('total');
             $table->integer('par_id');
+            $table->integer('status');
             $table->string('date');
             $table->timestamps();
 
@@ -25,7 +26,7 @@ class CreateRecordsTable extends Migration {
 
 	public function down()
 	{
-		//
+		Schema::drop('records');
 	}
 
 }

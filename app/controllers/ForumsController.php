@@ -18,6 +18,7 @@ class ForumsController extends \BaseController {
         }
 
     }
+
     public function category($id)
     {
         $category = ForumCategory::find($id);
@@ -68,43 +69,50 @@ class ForumsController extends \BaseController {
 
         $category = ForumCategory::find($id);
 
-        $category->title = Input::get('title');
-        $category->subtitle = Input::get('subtitle');
+        if($category->author_id == Auth::id() || Auth::user()->hasRole('Admin')){
 
-        $category->save();
+            $category->title = Input::get('title');
+            $category->subtitle = Input::get('subtitle');
 
-        return Redirect::back()->with('success', 'Kategori ' . $category->title . ' uppdaterad');
+            $category->save();
 
+            return Redirect::back()->with('success', 'Kategori ' . $category->title . ' uppdaterad');
+        }else{
+            return Redirect::back()->with('danger', 'Du kan inte redigera detta!');
+        }
     }
 
     public function deleteCategory($id)
     {
         $category = ForumCategory::find($id);
-        if($category == null)
-        {
+
+
+        if ($category == null) {
             return Redirect::back()->with('headsup', 'Kategorin existerar inte.');
-        }
-        $threads = $category->threads();
-        $comments = $category->comments();
-        $thr = true;
-        $com = true;
-        if($threads->count() > 0)
-        {
-            $thr = $threads->delete();
-        }
-        if($comments->count() > 0)
-        {
-            $com = $comments->delete();
-        }
-        if($thr && $com && $category->delete())
-        {
-            return Redirect::to('/forum')->with('headsup', 'Kategorin har tagits bort.');
-        }
-        else
-        {
-            return Redirect::to('/forum')->with('danger', 'Något gick fel.');
+
+        } else {
+
+            if ($category->author_id == Auth::id() || Auth::user()->hasRole('Admin')) {
+                $threads = $category->threads();
+                $comments = $category->comments();
+                $thr = true;
+                $com = true;
+
+                if ($threads->count() > 0) {
+                    $thr = $threads->delete();
+                }
+                if ($comments->count() > 0) {
+                    $com = $comments->delete();
+                }
+                if ($thr && $com && $category->delete()) {
+                    return Redirect::to('/forum')->with('headsup', 'Kategorin har tagits bort.');
+                }
+            } else {
+                return Redirect::back()->with('danger', 'Du kan inte ta bort detta!');
+            }
         }
     }
+
     public function thread($id)
     {
         $thread = ForumThread::with('comments')->find($id);
@@ -137,7 +145,7 @@ class ForumsController extends \BaseController {
         $thread->body = Input::get('body');
         $thread->status = 1;
         $thread->category_id = $category->id;
-        $thread->author_id = Auth::user()->id;
+        $thread->author_id = Auth::id();
         $thread->group_id = $category->group_id;
         $thread->save();
         return Redirect::to('/forum/thread/'.$thread->id.'')->with('success', 'Tråd skapad!');
@@ -182,18 +190,23 @@ class ForumsController extends \BaseController {
         if($thread == null)
         {
             return Redirect::to('/forum')->with('headsup', 'Tråden existerar inte');
+        }else{
+            if($thread->author_id == Auth::id() || Auth::user()->hasRole('Admin')){
+            $comments = $thread->comments();
+            $delCom = true;
+            if($comments->count() > 0)
+            {
+                $delCom = $comments->delete();
+            }
+            if($delCom && $thread->delete())
+            {
+                return Redirect::to('/forum')->with('success', 'Tråden har tagits bort');
+            }
+            }else{
+
+                return Redirect::to('/forum')->with('danger', 'Du kan inte ta bort detta!');
+            }
         }
-        $comments = $thread->comments();
-        $delCom = true;
-        if($comments->count() > 0)
-        {
-            $delCom = $comments->delete();
-        }
-        if($delCom && $thread->delete())
-        {
-            return Redirect::to('/forum')->with('success', 'Tråden har tagits bort');
-        }
-        return Redirect::to('/forum')->with('danger', 'Något gick fel');
     }
     public function storeComment($id)
     {

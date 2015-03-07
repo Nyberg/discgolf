@@ -4,7 +4,7 @@
             <div class="col-md-3 footer-section">
                 <ul>
                     <li class="footer-heading">Penguin Project</li>
-                    <li class="footer-child"><a href="#">Blogg</a></li>
+                    <li class="footer-child"><a href="/about-pp">Om</a></li>
                     <li class="footer-child"><a href="#">Kontakt</a></li>
                     <li class="footer-child"><a href="/forum">Forum</a></li>
                 </ul>
@@ -22,6 +22,7 @@
                     <li class="footer-heading">Villkor</li>
                     <li class="footer-child"><a href="#">Användarvillkor</a></li>
                     <li class="footer-child"><a href="#">Rättigheter</a></li>
+                    <li class="footer-child"><a href="#">Medlemskap</a></li>
                 </ul>
             </div>
             <div class="col-md-3 footer-section">

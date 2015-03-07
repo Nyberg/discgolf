@@ -24,6 +24,7 @@
                     <li class="divider"></li>
                     <li><a href="/links/">Länkar</a></li>
                     <li><a href="/lost-and-found">Lost & Found</a></li>
+                    <li><a href="/disc-db">Discdatabas</a></li>
                   </ul>
                 </li>
 
@@ -33,9 +34,15 @@
                    <li class="dropdown-header">Rundor</li>
                     <li><a href="/rounds">Alla rundor</a></li>
                     <li><a href="/records">Alla rekordrundor</a></li>
+                    @if(Auth::check())
+                    <li><a href="/account/round/add">Lägg till runda</a></li>
+                    @else
+                    @endif
                     <li class="divider"></li>
                      <li class="dropdown-header">Banor</li>
                     <li><a href="/courses">Alla Banor</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/statistics">Statistik</a></li>
                   </ul>
                 </li>
 
@@ -47,18 +54,24 @@
                     <li class="divider"></li>
                      <li class="dropdown-header">Klubbar</li>
                     <li><a href="/clubs">Alla Klubbar</a></li>
-                    @if(Auth::check())
-                    <li><a href="/club/{{Auth::user()->club_id}}/show">Besök din klubb</a></li>
-                    @else
-                    @endif
                   </ul>
                 </li>
+
 
                  <li class="{{ Request::is('forum','forum/*') ? 'active' : '' }}"><a href="/forum">Forum</a></li>
           </ul>
 
         <ul class="nav navbar-nav navbar-right pull-right col-lg-offset-right-1">
                 @if(Auth::user())
+
+                <li class="dropdown">
+                    <a href="#" class="" id="notification" data-toggle="dropdown">
+                    <span class="fa fa-bell"> </span>
+                    <span class="badge badge-notify"></span>  </a>
+                    <ul class="dropdown-menu" id="notificationMenu">
+
+                    </ul>
+                </li>
                       <li class="{{ Request::is('account/*', 'admin/*', 'admin', 'dashboard') ? 'active' : '' }}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                        {{Auth::user()->first_name}} <span class="caret"></span>
@@ -109,23 +122,8 @@
                       @else
 
                           <li>
-                            <a href="/registration">Registrera</a>
+                            <a href="/alfa">Registrera</a>
                     </li>
-
-                    <ul class="nav pull-right top-menu">
-                           {{Form::open(['route' => 'searchresult', 'method' => 'GET', 'class' => 'navbar-form navbar-left'])}}
-                         <div class="input-group">
-                                  <input type="text" class="form-control input-sm" name="auto" id="auto" placeholder="Search Course">
-
-                              <span class="input-group-btn">
-                                   {{Form::submit('Search Course', ['class' => 'btn btn-primary btn-sm'])}}
-
-                             {{Form::close()}}
-                              </span>
-                          </div>
-                    </ul>
-
-
                 @endif
 
 

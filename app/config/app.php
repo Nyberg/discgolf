@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => false,
+	'debug' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -125,7 +125,8 @@ return array(
         'Intervention\Image\ImageServiceProvider',
         'Zizaco\Entrust\EntrustServiceProvider',
         'Way\Generators\GeneratorsServiceProvider',
-        "Khill\Lavacharts\Laravel\LavachartsServiceProvider"
+        'Khill\Lavacharts\Laravel\LavachartsServiceProvider',
+        'dg\Eventing\EventingsServiceProvider'
 	),
 
 	/*
@@ -195,8 +196,6 @@ return array(
         'Image'             => 'Intervention\Image\Facades\Image',
         'Entrust'           => 'Zizaco\Entrust\EntrustFacade',
         'Gmaps'             => 'Appitventures\Phpgmaps\Facades\Phpgmaps'
-
-
 
 	),
 

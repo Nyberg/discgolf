@@ -30,7 +30,28 @@ class ClubController extends \BaseController {
         $club->website = Input::get('website');
         $club->information = Input::get('information');
         $club->membership = Input::get('membership');
-        $club->image = '/img/dg/header.jpg';
+
+        if(Input::hasFile('file')) {
+
+            try {
+                $file = Input::file('file');
+                $filepath = '/img/headers/';
+                $filename = time() . '-club.png';
+                $file = $file->move(public_path($filepath), ($filename));
+                $club->image = $filepath.$filename;
+            }
+            catch(Exception $e) {
+                return 'Något gick snett mannen: ' .$e;
+            }
+        }
+
+        $club->save();
+
+        $img = Image::make(public_path($club->image));
+
+        $img->save();
+
+        $img->destroy();
 
         $club->save();
 

@@ -6,12 +6,17 @@ class HomeController extends BaseController {
 
         if(Auth::check()){
 
-            $rounds = Round::where('status', 1)->limit(5)->get();
-            $reviews = Review::with('course')->limit(5)->get();
+            $date = date('Y-m-d', strtotime('-2 week'));
 
-            return View::make('index.loggedin', ['rounds'=>$rounds, 'reviews'=>$reviews]);
+            $rounds = Round::where('status', 1)->orderBy('created_at', 'desc')->limit(8)->get();
+            $reviews = Review::with('course')->limit(3)->get();
+            $news = News::orderBy('created_at', 'desc')->limit(4)->get();
+            $num = Round::where('status', 1)->where('date', '>=' , $date)->orderBy('created_at', 'desc')->count();
+            $latest = User::orderBy('created_at', 'desc')->limit(1)->first();
+
+            return View::make('index.loggedin', ['rounds'=>$rounds, 'reviews'=>$reviews, 'news'=>$news, 'num'=>$num, 'latest'=>$latest]);
         }else{
-            return View::make('index.startsida');
+            return View::make('session.create');
         }
     }
 
@@ -20,6 +25,7 @@ class HomeController extends BaseController {
         $user = User::with('profile')->whereId($id)->firstOrFail();
         $rounds = Round::where('user_id', $id)->count();
         $club = Club::whereId(Auth::user()->club_id)->firstOrFail();
+
         return View::make('dashboard.dashboard', ['user'=>$user, 'rounds'=>$rounds, 'club'=>$club]);
     }
 
@@ -28,7 +34,10 @@ class HomeController extends BaseController {
     }
 
     public function links(){
-        return View::make('index.links');
+
+        $links = Link::get();
+
+        return View::make('index.links', ['links'=>$links]);
     }
 
     public function discgolf(){
@@ -38,5 +47,15 @@ class HomeController extends BaseController {
     public function about(){
         return View::make('index.about');
     }
+
+    public function about_pp(){
+        return View::make('index.aboutpp');
+    }
+
+    public function discdb(){
+        return View::make('index.discdb');
+    }
+
+
 
 }

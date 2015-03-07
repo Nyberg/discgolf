@@ -2,11 +2,6 @@
 
 class LostController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
 		$losts = Lost::where('solved', 0)->orderBy('date', 'desc')->get();
@@ -27,19 +22,19 @@ class LostController extends \BaseController {
 
         $lost = Lost::find($id);
 
+        if($lost->user_id == Auth::id()){
+
         $lost->solved = 1;
 
         $lost->save();
 
         return Redirect::back()->with('success', 'Fallet är markerat som löst!');
 
+        }else{
+            return Redirect::back()->with('danger', 'Du kan inte utföra detta!');
+        }
     }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
 	public function create()
 	{
         $id = Auth::id();
@@ -72,49 +67,21 @@ class LostController extends \BaseController {
         return Redirect::to('/lost-and-found')->with('success', 'Disc tillagd. May the force be with you!');
 	}
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function show($id)
 	{
 		//
 	}
 
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function edit($id)
 	{
 		//
 	}
 
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function update($id)
 	{
 		//
 	}
 
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
 		//

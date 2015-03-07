@@ -5,7 +5,7 @@ class DiscController extends \BaseController {
 	public function store()
 	{
         $id = Input::get('id');
-		$disc = New disc();
+		$disc = new Disc;
 
         $disc->name = Input::get('name');
         $disc->author = Input::get('author');
@@ -15,6 +15,7 @@ class DiscController extends \BaseController {
         $disc->bag_id = Input::get('id');
         $disc->type = Input::get('type');
         $disc->mixed = $disc->plastic . ' ' . $disc->name . ' ' . $disc->weight . 'g';
+        $disc->user_id = Auth::id();
 
         $disc->save();
         $bag = Bag::whereId($id)->firstOrFail();
@@ -30,7 +31,7 @@ class DiscController extends \BaseController {
 	{
 		$disc = Disc::whereId($id)->firstOrFail();
 
-        if($disc){
+        if($disc->user_id == Auth::id()){
 
             $disc->name = Input::get('name');
             $disc->author = Input::get('author');
@@ -46,7 +47,7 @@ class DiscController extends \BaseController {
             return Redirect::back()->with('success', 'Disc '.$disc->name.' uppdaterad!');
 
         }else{
-            return Redirect::back()->with('danger', 'Något gick snett..');
+            return Redirect::back()->with('danger', 'Du kan inte redigera detta!');
         }
 	}
 
@@ -54,16 +55,21 @@ class DiscController extends \BaseController {
 	{
 		$disc = Disc::whereId($id)->firstOrFail();
 
-        $disc->delete();
+        if($disc->user_id == Auth::id()) {
 
-        $bag = Bag::whereId($disc->bag_id)->firstOrFail();
+            $disc->delete();
 
-        $bag->discs--;
+            $bag = Bag::whereId($disc->bag_id)->firstOrFail();
 
-        $bag->save();
+            $bag->discs--;
 
-        return Redirect::back()->with('success', 'Disc '.$disc->name.' borttagen!');
+            $bag->save();
 
+            return Redirect::back()->with('success', 'Disc ' . $disc->name . ' borttagen!');
+
+        }else{
+            return Redirect::back()->with('danger', 'Du kan inte ta bort detta!');
+        }
 	}
 
 

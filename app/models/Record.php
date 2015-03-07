@@ -1,8 +1,34 @@
 <?php
 
+use dg\Eventing\EventGenerator;
+use dg\Records\RecordWasPosted;
+
 class Record extends \Eloquent {
 	protected $fillable = [];
     protected $table = 'records';
+
+    use EventGenerator;
+
+
+    public function post($user_id, $course_id, $tee_id, $type, $total, $date, $par_id, $round_id, $status){
+
+        $this->user_id = $user_id;
+        $this->course_id = $course_id;
+        $this->tee_id = $tee_id;
+        $this->type = $type;
+        $this->total = $total;
+        $this->date = $date;
+        $this->par_id = $par_id;
+        $this->round_id = $round_id;
+        $this->status = $status;
+
+        $this->save();
+
+        $this->raise(new RecordWasPosted($this));
+
+        return $this;
+
+    }
 
     public function course(){
         return $this->belongsTo('Course');

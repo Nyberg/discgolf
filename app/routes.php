@@ -26,6 +26,10 @@ Route::group(['before'=>'checkAdmin'], function(){
         #   Dashboard   #
         Route::get('/admin','AdminController@index');
 
+        #   Alfa        #
+        Route::get('/admin/alfa', 'ActivationController@index');
+        Route::post('/admin/alfa/{id}/send', ['as'=>'alfa.send', 'uses'=>'ActivationController@sendAlfa']);
+
         #   User        #
         Route::get('/admin/user/{id}', 'UserController@adminshow');
         Route::get('/admin/users', 'AdminController@users');
@@ -58,9 +62,18 @@ Route::group(['before'=>'checkAdmin'], function(){
         Route::get('/admin/clubs', 'AdminController@clubs');
         Route::get('/admin/club/owners', 'AdminController@clubOwners');
 
+        # News          #
+        Route::get('/admin/add/news', 'NewsController@create');
+        Route::get('/admin/news/{id}/edit', 'NewsController@edit');
+        Route::get('/admin/news', 'NewsController@admin');
 
         #   Land, Landskap & Stad   #
         Route::get('/admin/location/', 'CountryController@index');
+
+        #   Länkar      #
+        Route::get('/admin/links/', 'LinksController@admin');
+        Route::get('/admin/link/add', 'LinksController@create');
+        Route::get('/admin/link/{id}/edit', 'LinksController@edit');
     }
 );
 
@@ -73,10 +86,6 @@ Route::group(['before'=>'checkClubOwner'], function(){
         #   Tee         #
         Route::get('/admin/tee/{id}/add', 'TeeController@create');
         Route::get('/admin/tee/{id}/edit', 'TeeController@edit');
-
-        # News          #
-        Route::get('/admin/add/news', 'NewsController@create');
-        Route::get('/admin/news/{id}/edit', 'NewsController@edit');
 
         #   Club        #
         Route::get('/admin/club/{id}/edit', 'ClubController@edit');
@@ -98,14 +107,16 @@ Route::group(['before'=>'auth'], function(){
     #   Dashboard   #
     Route::get('/dashboard', 'HomeController@dashboard');
 
+
+
     #   Round       #
     Route::get('/account/round/add', 'RoundController@getCourse');
     Route::get('/account/rounds/{id}/user', 'RoundController@user_round');
-    Route::post('/account/round/add/{id}/score', array('as'=>'account-round-add-score','uses' => 'RoundController@create'));
+    Route::post('/account/round/add/score', array('as'=>'account-round-add-score','uses' => 'RoundController@create'));
     Route::get('/account/round/{id}/course/{course_id}/score/add', 'ScoreController@create');
     Route::get('/account/round/{id}/course/{course_id}/par/', 'RoundController@createPar');
     Route::get('/account/round/{id}/edit/{course_id}', 'RoundController@edit');
-    Route::get('/account/round/{id}/active', 'RoundController@setActive');
+    Route::get('/account/round/{id}/active', 'RecordsController@store');
     Route::get('/account/round/{id}/edit-score', 'RoundController@editScore');
 
     Route::post('/getTees', 'TeeController@getTeepads');
@@ -163,6 +174,10 @@ Route::group(['before'=>'auth'], function(){
     Route::get('/account/review/{id}/edit', 'ReviewController@edit');
     Route::get('/account/review/user', 'ReviewController@show');
 
+    # Friends       #
+    Route::get('/account/friend/{id}/add', 'FriendsController@store');
+    Route::get('/account/friend/{id}/remove', 'FriendsController@destroy');
+
     # Request       #
     Route::post('/account/request/{id}/club', ['as'=>'club-request', 'uses'=> 'MembershipController@store']);
 
@@ -173,7 +188,7 @@ Route::group(['before'=>'auth'], function(){
         Route::get('/thread/{id}/delete', ['as' => 'forum-delete-comment', 'uses' => 'ForumsController@deleteThread']);
         Route::get('/comment/{id}/delete', ['as' => 'forum-delete-comment', 'uses' => 'ForumsController@deleteComment']);
         Route::get('/comment/{id}/edit', 'ForumsController@editComment');
-
+        Route::get('/category/{id}/delete', ['as' => 'forum-delete-category', 'uses' => 'ForumsController@deleteCategory']);
 
         Route::group(['before' => 'csrf'], function(){
             Route::post('/group/club', ['as' => 'forum-store-club-group', 'uses' => 'ForumsController@storeClubGroup']);
@@ -213,7 +228,9 @@ Route::get('/app', 'RoundController@app');
 Route::get('/about-discgol/', 'HomeController@discgolf');
 Route::get('/rules-discgolf/', 'HomeController@rules');
 Route::get('/about/', 'HomeController@about');
-Route::get('/links/', 'HomeController@links');
+Route::get('/about-pp/', 'HomeController@about_pp');
+Route::get('/link','LinksController@index');
+Route::get('/disc-db','HomeController@discdb');
 
 // Course
 Route::get('/course/{id}/show' , 'CourseController@show');
@@ -229,7 +246,7 @@ Route::get('/lost-and-found', 'LostController@index');
 
 #   News    #
 
-Route::get('/club/news/{id}/show', 'NewsController@show');
+Route::get('/news/{id}/show', 'NewsController@show');
 
 // Rounds
 Route::get('/rounds', 'RoundController@index');
@@ -241,8 +258,20 @@ Route::get('/records', 'RoundController@records');
 // Hole
 Route::get('/holes', 'HoleController@index');
 Route::get('/hole/{id}/show', 'HoleController@show');
-Route::post('/stats/hole/', ['as' => 'hole.stats', 'uses' => 'HoleController@getStats']);
-Route::get('/getHoleStats', 'HoleController@getHoleStats');
+
+
+#   Statistik   #
+Route::get('/statistics', 'StatisticsController@index');
+Route::post('/stats/hole/', ['as' => 'hole.stats', 'uses' => 'StatisticsController@getStats']);
+Route::get('/getHoleStats', 'StatisticsController@getHoleStats');
+Route::get('/getRoundsPerMonth', 'StatisticsController@getRoundsPerMonth');
+Route::get('/getRoundAvgScore', 'StatisticsController@getRoundAvgScore');
+Route::get('/getUserData', 'StatisticsController@getUserData');
+Route::post('/getRoundAvg', ['as' => 'course.stats', 'uses'=>'StatisticsController@getRoundAvg']);
+Route::post('/getRoundsPerMonthReload', ['as' => 'user.rounds', 'uses'=>'StatisticsController@getRoundsPerMonthReload']);
+Route::post('/getUserDataReload', ['as' => 'user.data', 'uses'=>'StatisticsController@getUserDataReload']);
+Route::post('/getCourseRoundsReload', ['as' => 'course.rounds', 'uses'=>'StatisticsController@getCourseRoundsReload']);
+
 
 // Shot
 Route::get('/hole/{id}/score/{score_id}', 'ShotController@show');
@@ -254,7 +283,7 @@ Route::get('/bags/{id}/show', 'BagController@show');
 // Users
 Route::get('/users', 'UserController@index');
 Route::get('/user/{id}/show', 'UserController@show');
-Route::get('/registration', 'RegistrationController@create');
+Route::get('/registration/{token}', 'RegistrationController@create');
 
 #   Password    #
 Route::controller('password', 'RemindersController');
@@ -262,6 +291,13 @@ Route::controller('password', 'RemindersController');
 #   Sponsors    #
 Route::get('/sponsor/{id}/redirect/', 'SponsorController@redirect');
 
+#   Activation  #
+Route::get('/activation/{token}/', ['as'=>'confirmation_path', 'uses'=> 'RegistrationController@create']);
+Route::get('/alfa', 'RegistrationController@alfa');
+
+#notiser (lazy way) #
+Route::get('/notiser', 'NotificationsController@show');
+Route::get('/removereadnotifications','NotificationsController@update');
 
 
 Route::resource('session','SessionController', ['only'=>['create', 'store', 'destroy']]);
@@ -285,3 +321,6 @@ Route::resource('forum', 'ForumsController');
 Route::resource('request', 'RequestController');
 Route::resource('country', 'CountryController');
 Route::resource('lost', 'LostController');
+Route::resource('links', 'LinksController');
+Route::resource('activation', 'ActivationController');
+Route::resource('friend', 'FriendsController');

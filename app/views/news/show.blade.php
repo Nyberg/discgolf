@@ -3,7 +3,7 @@
 @section('content')
 
                   <h2 class="text-center page-header-custom">{{$news->head}}</h2>
-                  <p class="text-center">{{$news->created_at . ' av '}}  <a href="/club/{{$news->club_id}}/show">{{$news->club->name}}</a> | {{$news->views}} visningar</p>
+                  <p class="text-center">{{$news->created_at . ' av '}}  <a href="/user/{{$news->user_id}}/show">{{$news->user->first_name . ' ' . $news->user->last_name}}</a> | {{$news->views}} visningar</p>
 
                   <div class="divider-header"></div>
 
@@ -17,7 +17,7 @@
 
                   </div>
 
-                @if(Auth::check() && Auth::user()->hasRole('ClubOwner') && Auth::user()->club_id == $news->club_id)
+                @if(Auth::check() && Auth::user()->hasRole('Admin'))
 
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">

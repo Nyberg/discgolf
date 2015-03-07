@@ -22,7 +22,7 @@
           <tbody>
           @foreach($records as $round)
            <tr>
-            <td class="hidden-phone"><a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->date}}</a></td>
+            <td class="hidden-phone"><a href="/round/{{$round->round_id}}/course/{{$round->course_id}}">{{$round->date}}</a></td>
             <td>
             @if($round->type == 'Par')
                             {{showPar($round->par_id, $round->user_id)}}

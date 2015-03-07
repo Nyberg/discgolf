@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Johannes Nyberg">
     <meta name="keyword" content="">
+    <title>Penguin Project | Alfa</title>
 
 {{HTML::style('admin_css/css/bootstrap2.css')}}
 {{HTML::style('admin_css/font-awesome/css/font-awesome.css')}}
@@ -27,8 +28,6 @@
 {{HTML::script('packages/jleach/laravelmce/js/tinymce/tinymce.min.js')}}
 {{HTML::script('//tinymce.cachefly.net/4.1/tinymce.min.js')}}
 {{HTML::script('admin_js/form-validator/jquery.form-validator.js')}}
-
-{{HTML::script('https://maps.googleapis.com/maps/api/js?key=AIzaSyAqPB9cgeF7VZw7JTd2qYD2K4TPbCNDicc&sensor=false')}}
 
 <script>tinymce.init({selector:'textarea'});</script>
 
@@ -89,6 +88,7 @@
 <!--script for this page-->
 {{HTML::script('admin_js/sparkline-chart.js')}}
 {{HTML::script('admin_js/round/round.js')}}
+{{HTML::script('admin_js/notifications/notiser.js')}}
 
 @yield('scripts')
 

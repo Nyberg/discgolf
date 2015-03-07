@@ -2,6 +2,7 @@
 
 use dg\Forms\UserSettingsForm;
 use dg\Forms\ChangePasswordForm;
+use dg\Notification\NotificationFetcher;
 use dg\statistics\Stat;
 use Khill\Lavacharts\Lavacharts;
 
@@ -19,8 +20,9 @@ class UserController extends \BaseController {
 
 	public function index()
 	{
-		$users = Profile::with('user')->where('state_id', Auth::user()->profile->state_id)->paginate(15);
+        $users = User::paginate(15);
         $clubs = Club::get();
+
         return View::make('users.users',compact('users'), ['clubs'=>$clubs]);
 	}
 
@@ -34,98 +36,24 @@ class UserController extends \BaseController {
     public function show($id)
     {
 
-        $total = Round::where('user_id', $id)->count();
+        $user = User::with('profile')->whereId($id)->firstOrFail();
 
-        if($total >= 5){
+        $rounds = Round::with('tee')->where('user_id', $id)->where('status', 1)->orWhere('par_id', $id)->limit(5)->get();
+        $club = Club::whereId($user->club_id)->firstOrFail();
+        $bags = Bag::with('disc')->where('user_id', $id)->get();
+        $sponsors = Sponsor::where('user_id', $id)->get();
+        $fetcher = new NotificationFetcher($user);
+        $notifications = $fetcher->take(5)->fetch();
 
-            $scores = Score::where('user_id', $id)->get();
-            $courses_played = Round::where('user_id', $id)->lists('tee_id');
-            $datarounds = Round::with('score')->where('user_id', $id)->where('status', 1)->orWhere('par_id',$id)->get();
-
-            $data = $this->stat->calc($scores);
-            $shots = $this->stat->calcShots($scores);
-            $cp = $this->stat->getCourses($courses_played);
-            $bfr = $this->stat->getBfr($datarounds);
-            $avg = $this->stat->getAvg($scores, $datarounds);
-            $birdies = $this->stat->getBirdies($datarounds);
-
-
-            $user = User::with('profile')->whereId($id)->firstOrFail();
-
-            $rounds = Round::with('tee')->where('user_id', $id)->where('status', 1)->orWhere('par_id', $id)->limit(5)->get();
-            $club = Club::whereId($user->club_id)->firstOrFail();
-            $bags = Bag::with('disc')->where('user_id', $id)->get();
-            $sponsors = Sponsor::where('user_id', $id)->get();
-
-            foreach ($sponsors as $sponsor) {
-                $sponsor->views++;
-                $sponsor->save();
-            }
-
-            $lava = new Lavacharts;
-            $reasons = Lava::DataTable();
-
-            $reasons->addStringColumn('Reasons')
-                ->addNumberColumn('Percent')
-                ->addRow(array('Ace', $data['ace']))
-                ->addRow(array('Albatross', $data['albatross']))
-                ->addRow(array('Eagle', $data['eagle']))
-                ->addRow(array('Birdie', $data['birdie']))
-                ->addRow(array('Par', $data['par']))
-                ->addRow(array('Bogey', $data['bogey']))
-                ->addRow(array('Double Bogey', $data['dblbogey']))
-                ->addRow(array('Triple Bogey', $data['trpbogey']))
-                ->addRow(array('Quad Bogey', $data['quad']));
-
-
-            $piechart = Lava::PieChart('Resultat')
-                ->setOptions(array(
-                    'datatable' => $reasons,
-                    'title' => 'Antal resultat',
-                    'is3D' => true,
-                    'width' => 500,
-                    'height' => 350,
-                    'colors' => array('#FFCE00','#000', '#90FF7E','#C0FFB6', '#F5F5F5', '#FFC1C1', '#f99090','#f97777', '#f55656'),
-                    'slices' => array(
-                        $lava->Slice(array(
-                            'offset' => 0.,
-                        )),
-
-                        $lava->Slice(array(
-                            'offset' => 0.25
-                        )),
-                        $lava->Slice(array(
-                            'offset' => 0.3
-                        ))
-                    )
-                ));
-
-            return View::make('users.show', ['user' => $user, 'rounds' => $rounds, 'club' => $club, 'bags' => $bags, 'sponsors' => $sponsors, 'data' => $data, 'shots' => $shots, 'cp' => $cp, 'bfr' => $bfr, 'avg' => $avg, 'birdies' => $birdies]);
-
-        }else{
-
-                $cp = 0;
-                $bfr = 0;
-                $avg = 0;
-                $birdies = 0;
-                $shots = 0;
-                $data = 0;
-
-                $rounds = Round::with('tee')->where('user_id', $id)->where('status', 1)->orWhere('par_id', $id)->limit(5)->get();
-                $user = User::with('profile', 'club')->whereId($id)->firstOrFail();
-               # $club = Club::whereId($user->club_id)->firstOrFail();
-                $bags = Bag::with('disc')->where('user_id', $id)->get();
-                $sponsors = Sponsor::where('user_id', $id)->get();
-
-                foreach ($sponsors as $sponsor) {
-                    $sponsor->views++;
-                    $sponsor->save();
-                }
-
-                return View::make('users.show', ['user' => $user, 'rounds' => $rounds, 'bags' => $bags, 'sponsors' => $sponsors, 'data' => $data, 'shots' => $shots, 'cp' => $cp, 'bfr' => $bfr, 'avg' => $avg, 'birdies' => $birdies]);
-
-
+        foreach ($sponsors as $sponsor) {
+            $sponsor->views++;
+            $sponsor->save();
         }
+
+        $user->views++;
+        $user->save();
+
+        return View::make('users.show', ['user' => $user, 'rounds' => $rounds, 'club' => $club, 'bags' => $bags, 'notifications'=> $notifications]);
     }
 
 
@@ -145,7 +73,7 @@ class UserController extends \BaseController {
         if(Auth::User()->id == $id || Auth::user()->hasRole('Admin')){
         $check = Input::get('country');
             $old = User::with('profile')->whereId($id)->firstOrFail();
-
+            $role = Role::where('name', 'ClubOwner')->firstOrFail();
 
             if(!empty($check)){
 
@@ -157,43 +85,13 @@ class UserController extends \BaseController {
                 $user->profile->state_id = Input::get('state');
                 $user->profile->location = Input::get('location');
                 $user->profile->city_id = Input::get('city');
-                $user->profile->club = Input::get('club');
+                $user->profile->club_id = Input::get('club');
                 $user->profile->website = Input::get('website');
                 $user->profile->info = Input::get('info');
 
-                if(Input::hasFile('file')) {
-
-                    try
-                    {
-                        $file = Input::file('file');
-
-                        $filepath = '/img/headers/';
-                        $filename = time() . '-header.png';
-                        $file = $file->move(public_path($filepath), ($filename));
-                        $user->profile->image = $filepath.$filename;
-                        $img = Image::make(public_path($user->profile->image));
-
-                        $img->save();
-
-                        $img->destroy();
-
-
-                    }
-                    catch(Exception $e)
-                    {
-                        return 'Något gick snett mannen: ' .$e;
-                    }
-                }
-
                 $user->profile->save();
 
-                if($old->profile->image == '/img/dg/header.jpg'){
-
-                }else{
-                    File::delete(public_path().$old->profile->image);
-                }
-
-                return Redirect::back()->with('success', 'Profile updated!');
+                return Redirect::back()->with('success', 'Profil uppdaterad!');
 
             }else {
 
@@ -204,14 +102,7 @@ class UserController extends \BaseController {
                 $user->last_name = Input::get('last_name');
                 $user->email = Input::get('email');
                 $user->metric = Input::get('metric');
-
-                if(Auth::user()->hasRole('ClubOwner')){
-                    $user->club_id = $user->club_id;
-                }else{
-                    $user->club_id = Input::get('club');
-                }
-
-
+                $user->club_id = Input::get('club');
 
                 if(Input::hasFile('file')) {
 
@@ -241,10 +132,10 @@ class UserController extends \BaseController {
 
                 $user->save();
 
-                return Redirect::back()->with('success', 'Settings updated!');
+                return Redirect::back()->with('success', 'Inställningar uppdaterade!');
             }
         }
-        return Redirect::back()->withFlashMessage('You cant edit that!');
+        return Redirect::back()->withFlashMessage('Du kan inte redigera detta!');
     }
 
     public function addRole($id){
@@ -261,6 +152,8 @@ class UserController extends \BaseController {
 
     }
 
+
+
     public function changePassword()
     {
 
@@ -274,7 +167,6 @@ class UserController extends \BaseController {
         if (Hash::check($old_password, $user->password)) {
 
             $user->password = $password;
-
             $user->save();
 
             if ($user->save()) {
@@ -298,17 +190,14 @@ class UserController extends \BaseController {
     public function userRound($id){
 
         $user = User::find($id);
-
         $rounds = Round::where('user_id', $id)->orWhere('par_id', $id)->paginate(15);
 
         return View::make('round.user', compact('rounds'), ['user'=>$user]);
-
     }
 
 
     public function getPlayers()
     {
-
         $users = User::get();
 
         return Response::json($users);

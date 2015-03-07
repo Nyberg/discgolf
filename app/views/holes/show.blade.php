@@ -48,50 +48,77 @@
     </div>
     </div>
   </div>
+    <!-- Nav-pills -->
 
-  </div>
+    @if(Auth::check())
 
-    @if(Auth::check() && Auth::user()->hasRole('Admin'))
-         <div class="showback">
-          <div class="row">
-          <div class="col-md-12 statistics">
-              <!-- Statistik -->
-                  <div class="panel panel-default hidden-phone">
-                     <!-- Default panel contents -->
-                     <div class="panel-heading">Statistik
-                     </div>
+    <div class="row">
 
-                     <input hidden="id" id="id" value="{{$hole->id}}"/>
-                     <input hidden="model" id="model" value="hole"/>
+        <div class="col-md-12">
+            <div class="row">
 
-                    <div class="col-md-6" id="stats">
-                     <div class="col-md-12 text-center">
-
-                     <br/><h4>Översiktlig Statistik - hål 9</h4>
-                     <p>Snittresultat: {{round($avg['avg'], 1)}} | Antal kast: {{round($avg['shots'])}} | Antal rundor: {{$avg['rounds']}}</p>
-                     </div>
-                     <div id="donut-stats" style="height: 250px;"></div>
-                    </div>
-
-                    <div class="col-md-6">
-                     <div class="col-md-12 text-center" id="result"></div>
-                     <div id="donut-example" style="height: 250px;"></div>
-                    </div>
-
-                  </div>
-                </div>
-                    <div class="col-md-12">
-                         {{Form::open(['method' => 'POST','route' => ['hole.stats'],'class' => 'form-inline', 'id' => 'user_stat'])}}
-                         {{Form::hidden('id', $hole->id, ['id'=>'id'])}}
-                         {{Form::hidden('model', 'hole', ['id'=>'model'])}}
-                         {{Form::hidden('user_id', Auth::id(), ['id'=>'user_id'])}}
-                         {{Form::submit('Visa din statistik', ['class' => 'btn btn-primary btn-sm btn-block'])}}
-                         {{Form::close()}}
-                    </div>
-                </div>
+            </div>
         </div>
-    @else
-    @endif
+
+        <div class="col-md-12">
+            <div class="row">
+                <ul class="nav nav-pills nav-justified">
+                  <li class="active" id="menu_item"><a data-toggle="tab" href="#sectionA">Statistik</a></li>
+                  <li id="menu_item_2"></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <!-- Slut navpills -->
+
+        <div class="tab-section">
+
+        <div id="sectionA" class="tab-pane fade in active">
+
+        <div class="row">
+           <div id="chart-round-avg" style="min-width: 300px; height: 400px; width: 100%; margin: 0 auto"></div>
+            <input hidden="id" id="id" value="{{$hole->id}}"/>
+            <input hidden="model" id="model" value="hole"/>
+        </div>
+        <div class="row">
+        <!-- Sidomeny -->
+        <div class="col-md-12">
+            <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                {{Form::open(['method' => 'POST','route' => ['course.stats'],'class' => 'form-inline', 'id' => 'round_avg'])}}
+                {{Form::hidden('id', $hole->id, ['id'=>'id'])}}
+                {{Form::hidden('model', 'hole', ['id'=>'model'])}}
+                {{Form::hidden('user_id', Auth::id(), ['id'=>'user_id'])}}
+                {{Form::submit('Senaste resultaten', ['class' => 'btn btn-red btn-sm btn-block'])}}
+                {{Form::close()}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    {{Form::open(['method' => 'POST','route' => ['hole.stats'],'class' => 'form-inline', 'id' => 'user_stat'])}}
+                    {{Form::hidden('id', $hole->id, ['id'=>'id'])}}
+                    {{Form::hidden('model', 'hole', ['id'=>'model'])}}
+                    {{Form::hidden('user_id', Auth::id(), ['id'=>'user_id'])}}
+                    {{Form::submit('Visa hålresultat', ['class' => 'btn btn-red btn-sm btn-block'])}}
+                    {{Form::close()}}
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <br/>
+
+            </div>
+
+            </div>
+        </div>
+        <!-- Slut sidomeny -->
+        </div>
+
+        @else
+        @endif
+
 
 @stop
 
@@ -99,16 +126,17 @@
 @section('scripts')
 
 {{HTML::script('admin_js/stats/stats.js')}}
+<script src="http://code.highcharts.com/highcharts.js"></script>
 
-<script>
+    <script>
 
-jQuery(document).ready(function($) {
+    jQuery(document).ready(function($) {
 
-     $('#user_stat').submit(getUserPie);
+            $('#round_avg').submit(getRoundAvg);
+            $('#user_stat').submit(getUserPie);
 
-    getFirstPie();
-});
-
+        });
 </script>
+
 
 @stop

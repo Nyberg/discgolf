@@ -4,20 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="Dashboard">
-    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <meta name="author" content="">
+    <meta name="keyword" content="">
+        <title>Penguin Project | Alfa</title>
 
 {{HTML::style('admin_css/css/bootstrap.css')}}
 {{HTML::style('admin_css/font-awesome/css/font-awesome.css')}}
-{{HTML::style('admin_css/css/zabuto_calendar.css')}}
 {{HTML::style('admin_js/gritter/css/jquery.gritter.css')}}
-{{HTML::style('admin_css/lineicons/style.css')}}
 {{HTML::style('admin_css/css/style.css')}}
 {{HTML::style('admin_css/css/style-responsive.css')}}
-{{HTML::style('admin_css/css/datepicker.css')}}
-{{HTML::style('css/lightbox.css')}}
 {{HTML::script('js/jquery-1.11.0.min.js')}}
-{{HTML::script('js/lightbox.min.js')}}
 {{HTML::script('admin_js/form-validator/jquery.form-validator.js')}}
 
 
@@ -25,14 +21,14 @@
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.1.47/jquery.form-validator.min.js"></script>
 
-<style>body{padding-top: 85px;}</style>
+<style>body{padding-top: 125px;}</style>
 
 <!--
     <link href="assets/css/docs.css" rel="stylesheet">
     <link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet">
      <link href="assets/css/style.css" rel="stylesheet"> -->
     </head>
-  <body data-spy="scroll" data-target=".bs-docs-sidebar" onload="initialize()">
+  <body data-spy="scroll" data-target=".bs-docs-sidebar" onload="">
 
 
 
@@ -54,15 +50,13 @@
 
     {{HTML::script('admin_js/gritter/js/jquery.gritter.js')}}
     {{HTML::script('admin_js/gritter-conf.js')}}
-    {{HTML::script('admin_js/bootstrap-datepicker.js')}}
 
-    <!--script for this page-->
-    {{HTML::script('admin_js/sparkline-chart.js')}}
-    {{HTML::script('admin_js/zabuto_calendar.js')}}
     {{HTML::script('admin_js/jquery.backstretch.min.js')}}
-    @yield('scripts')
+
+
+  @yield('scripts')
      <script>
-                 $.backstretch("../img/login-bg.jpg", {speed: 500});
+                 $.backstretch("../img/bg-johannes.jpg", {speed: 500});
      </script>
   </body>
 </html>

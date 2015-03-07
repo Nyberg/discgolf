@@ -1,7 +1,7 @@
 
 
-<h2>Välkommen, {{$name}}!</h2>
+<h2>Tack för din anmälan, {{$name}}!</h2>
 
-<p>Björns mammas email är: {{$email}}</p>
+<p>Du kommer få ett mail när sidan går live för alfa-tester. Ett ungefärligt uppskattat datum är den första veckan i Mars 2015.</p>
 
-<h1>HEJDÅ!</h1>
+<p>Med Vänlig Hälsning, Johannes Nyberg - Penguin Project</p>

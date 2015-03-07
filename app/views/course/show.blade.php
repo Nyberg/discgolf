@@ -13,23 +13,31 @@
 
 @endforeach
 
-          <span class="text-center span-h2 col-lg-4">{{$course->city->city . ', ' . $course->state->state}}</span>
-               <span class="text-center span-h2 col-lg-4">{{'Tees: '. count($course->tee)}}</span>
-               <span class="text-center span-h2 col-lg-4">{{checkFee($course->fee)}}</span>
+    <span class="hidden-phone">
+        <span class="text-center span-h2 col-md-4">{{$course->city->city . ', ' . $course->state->state}}</span>
+        <span class="text-center span-h2 col-md-4">{{'Tees: '. count($course->tee)}}</span>
+        <span class="text-center span-h2 col-md-4">{{checkFee($course->fee)}}</span>
+    </span>
 
 </div>
 <div class="row">
 <br/>
-<div class="col-lg-6">
-<h4 class="">Information</h4>
+<div class="col-md-6">
+<h4 class="tab-rub text-center page-header-custom">Information</h4>
 
+    <div class="divider-header"></div>
 
-<p>{{$course->information}}</p>
+    <div class="col-sm-12">
+
+    <p class="margin-left">{{$course->information}}</p>
+
+    </div>
 
 </div>
-<div class="col-lg-6">
-<div class="col-lg-12">
-<h4 class="">Location</h4>
+<div class="col-md-6">
+<div class="col-md-12">
+<h4 class="tab-rub text-center page-header-custom">Hitta hit</h4>
+     <div class="divider-header"></div>
 <div id="map-canvas"></div>
 </div>
 
@@ -48,9 +56,9 @@
 <ul class="nav nav-tabs nav-justified">
 <li class="active"><a data-toggle="tab" href="#sectionA">Översikt</a></li>
     @foreach($course->tee as $tee)
-<li class=""><a data-toggle="tab" href="#section{{$tee->id}}">{{$tee->color}} Tee</a></li>
+<li class="hidden-phone"><a data-toggle="tab" href="#section{{$tee->id}}">{{$tee->color}} Tee</a></li>
     @endforeach
-<li class=""><a data-toggle="tab" href="#sectionX">Rekordrundor</a></li>
+<li class="hidden-phone"><a data-toggle="tab" href="#sectionX">Rekordrundor</a></li>
 </ul>
 <div class="tab-content">
 
@@ -62,26 +70,26 @@
 
           @foreach($course->tee as $tee)
 
+            @if(count($course->tee) == 1)
+            <div class="col-sm-6 col-md-6">
+            @elseif(count($course->tee) == 2)
+            <div class="col-sm-6 col-md-6">
+            @elseif(count($course->tee) == 3)
+            <div class="col-sm-4 col-md-4">
+            @else
             <div class="col-sm-3 col-md-3">
-                <div class="thumbnail stat">
-                 <div class="caption text-center stat">
+            @endif
+                <div class="thumbnail">
+                 <div class="caption text-center">
                      <i class="fa fa-tree fa-4x"></i>
-                    <h4>{{$tee->color}}</h4>
-                    <p>Par: {{$tee->par}} | Antal hål: {{$tee->holes}}</p>
+                    <h4 class="">{{$tee->color}}</h4>
+                    <p class="">Par: {{$tee->par}} | Antal hål: {{$tee->holes}}</p>
+                  <p class="">Längst hål: {{convert($data[$tee->id]['longest'])}} | Kortaste hål: {{convert($data[$tee->id]['shortest'])}} | Medellängd: {{convert($data[$tee->id]['avg'])}} | Totallängd: {{convert($data[$tee->id]['total'])}}</p>
+
                   </div>
                 </div>
               </div>
           @endforeach
-            <div class="col-sm-6 col-md-6">
-                  <div class="thumbnail stat">
-                    <div class="caption text-center stat">
-                        <i class="fa fa-exclamation fa-4x"></i>
-                      <h4> Banöversikt</h4>
-                      <p>Längst hål: {{convert($data['longest'])}} | Kortaste hål: {{convert($data['shortest'])}} | Medellängd: {{convert($data['avg'])}} | <span data-toggle="tooltip" data-placement="bottom" title="Visar medellängd av alla tees">Totallängd: {{convert($data['total'])}}</span></p>
-                    </div>
-                  </div>
-            </div>
-
           </div>
         </div>
      </div>
@@ -91,7 +99,7 @@
     <div id="section{{$tee->id}}" class="tab-pane fade">
 
 <h4 class="tab-rub text-center page-header-custom" id="hole-gallery-{{$tee->id}}">{{$tee->color . ' tee - ' .$course->name}}</h4>
-<p class="text-center">Hoovra över banans par för att se snittresultat för varje hål.</p>
+<p class="text-center">Klicka på varje korgs nummer för att se en bild på banan. Hoovra över banans par för att se snittresultat för varje hål.</p>
      <div class="divider-header"></div>
 
     <table class="table table-hover">
@@ -99,7 +107,7 @@
             <tr>
             <td>Hål</td>
             @foreach($tee->hole as $hole)
-            <td><a href="{{$hole->image}}" data-toggle="lightbox" data-gallery="hole-gallery-{{$tee->id}}" data-parent="" data-footer="<a href='/hole/{{$hole->id}}/show'>Klicka här för att visa mer information</a>" data-title="{{'Basket '.$hole->number. ', '.$course->name.' - '.$tee->color.'.<br/>Length ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></td>
+            <td><a href="{{$hole->image}}" class="item" data-toggle="lightbox" data-gallery="hole-gallery-{{$tee->id}}" data-parent="" data-footer="<a href='/hole/{{$hole->id}}/show'>Klicka här för att visa mer information</a>" data-title="{{'Korg '.$hole->number. '. Längd ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></td>
             @endforeach
             <td>Total</td>
             </tr>
@@ -133,7 +141,7 @@
      <div class="divider-header"></div>
        @foreach($records as $rec)
            <div class="panel panel-default">
-               <div class="panel-heading">{{$rec->round->type}} | Resultat: {{calcScore($rec->round->total, $rec->tee->par)}}
+               <div class="panel-heading"><a href="/round/{{$rec->round_id}}/course/{{$rec->course_id}}">{{$rec->round->type}} | Resultat: {{calcScore($rec->round->total, $rec->tee->par)}}</a>
 
                           @if($rec->type == 'Singel')
                               av <a href="/user/{{$rec->user_id}}/show">{{$rec->user->first_name . ' ' . $rec->user->last_name}}</a>
@@ -146,7 +154,8 @@
                 <tr>
                     <td>{{$rec->tee->color}} | Hål</td>
                     @foreach($rec->tee->hole as $hole)
-                    <td class="text-center ">{{$hole->number}}</td>
+                 <td><a href="{{$hole->image}}" data-toggle="lightbox" data-gallery="hole-gallery-{{$tee->id}}" data-parent="" data-footer="<a href='/hole/{{$hole->id}}/show'>Klicka här för att visa mer information</a>" data-title="{{'Basket '.$hole->number. '<br/>Length ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></td>
+
                     @endforeach
                 </tr>
 
@@ -179,56 +188,78 @@
 
 </div></div></div>
 
-            @if(Auth::check() && Auth::user()->hasRole('Admin'))
-                    <div class="showback">
-                  <div class="row">
 
-                  <div class="col-md-12 statistics">
+<!-- Nav-pills -->
+<div class="showback hidden-phone">
+<div class="row">
 
-                      <!-- Statistik -->
-                          <div class="panel panel-default hidden-phone">
-                             <!-- Default panel contents -->
-                             <div class="panel-heading">Statistik
-                             </div>
+    <div class="col-md-12">
+        <div class="row">
 
-                            <div class="col-md-6" id="stats">
-                             <div class="col-md-12 text-center">
-                                  <br/><h4>Översiktlig Statistik - {{$course->name}}</h4>
-                                  <p>Resultat</p>
+        </div>
+    </div>
 
-                            </div>
-                                <div id="donut-stats" style="height: 250px;"></div>
-                            </div>
+    <div class="col-md-12">
+        <div class="row">
+            <ul class="nav nav-pills nav-justified">
+              <li class="active" id="menu_item"><a data-toggle="tab" href="#sectionA">Statistik</a></li>
+              <li id="menu_item_2"></li>
+            </ul>
+        </div>
+    </div>
 
-                                <div class="col-md-6">
-                                 <div class="col-md-12 text-center" id="result">
+</div>
 
-                                </div>
-                                    <div id="donut-example" style="height: 250px;"></div>
-                                </div>
+<div id="sectionA" class="tab-pane fade in active">
 
-                          </div>
+    <div class="row">
+       <div id="chart-round-avg" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
+        <input hidden="id" id="id" value="{{$course->id}}"/>
+        <input hidden="model" id="model" value="course"/>
+    </div>
+    <div class="row">
+    <!-- Sidomeny -->
+    <div class="col-md-12">
+        <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+            {{Form::open(['method' => 'POST','route' => ['course.rounds'],'class' => 'form-inline', 'id' => 'month'])}}
+            {{Form::hidden('id', $course->id, ['id'=>'id'])}}
+            {{Form::hidden('model', 'course', ['id'=>'model'])}}
+            {{Form::hidden('user_id', Auth::id(), ['id'=>'user_id'])}}
+            {{Form::submit('Rundor', ['class' => 'btn btn-red btn-sm btn-block'])}}
+            {{Form::close()}}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+            {{Form::open(['method' => 'POST','route' => ['course.stats'],'class' => 'form-inline', 'id' => 'round_avg'])}}
+            {{Form::hidden('id', $course->id, ['id'=>'id'])}}
+            {{Form::hidden('model', 'course', ['id'=>'model'])}}
+            {{Form::hidden('user_id', Auth::id(), ['id'=>'user_id'])}}
+            {{Form::submit('Senaste resultaten', ['class' => 'btn btn-red btn-sm btn-block'])}}
+            {{Form::close()}}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                {{Form::open(['method' => 'POST','route' => ['hole.stats'],'class' => 'form-inline', 'id' => 'user_stat'])}}
+                {{Form::hidden('id', $course->id, ['id'=>'id'])}}
+                {{Form::hidden('model', 'course', ['id'=>'model'])}}
+                {{Form::hidden('user_id', Auth::id(), ['id'=>'user_id'])}}
+                {{Form::submit('Visa hålresultat', ['class' => 'btn btn-red btn-sm btn-block'])}}
+                {{Form::close()}}
+            </div>
+        </div>
+
+        </div>
+    </div>
+    <!-- Slut sidomeny -->
+    </div>
 
 
-                        <div class="col-md-12">
-                        </div>
-
-                              </div>
-                            <div class="col-md-12">
-                             <input hidden="id" id="id" value="{{$course->id}}"/>
-                             <input hidden="model" id="model" value="course"/>
-                                 {{Form::open(['method' => 'POST','route' => ['hole.stats'],'class' => 'form-inline', 'id' => 'user_stat'])}}
-                                 {{Form::hidden('id', $course->id, ['id'=>'id'])}}
-                                 {{Form::hidden('model', 'course', ['id'=>'model'])}}
-                                 {{Form::hidden('user_id', Auth::id(), ['id'=>'user_id'])}}
-                                 {{Form::submit('Visa din statistik', ['class' => 'btn btn-primary btn-sm btn-block'])}}
-                                 {{Form::close()}}
-                            </div>
-                        </div>
-                        </div>
-
-            @else
-            @endif
+</div>
+</div>
 
 <div class="row">
 <div class="col-lg-12 main-chart">
@@ -251,8 +282,8 @@
                 <tr>
                     <th>Datum</th>
                     <th>Användare</th>
-                    <th>Tee</th>
-                    <th>Typ</th>
+                    <th class="hidden-phone">Tee</th>
+                    <th class="hidden-phone">Typ</th>
                     <th>Resultat</th>
                 </tr>
 
@@ -266,8 +297,8 @@
                     @else
                     <td>{{showPar($round->par_id, $round->user_id)}}</td>
                     @endif
-                    <td>{{$round->tee['color']}}</td>
-                    <td>{{$round->type}}</td>
+                    <td class="hidden-phone">{{$round->tee['color']}}</td>
+                    <td class="hidden-phone">{{$round->type}}</td>
                     <td>{{calcScore($round->total, $round->tee->par)}}</td>
                 </tr>
                 @endforeach
@@ -381,14 +412,18 @@
 @section('scripts')
 
 {{HTML::script('admin_js/stats/stats.js')}}
+<script src="http://code.highcharts.com/highcharts.js"></script>
 
     <script>
 
     jQuery(document).ready(function($) {
 
-        getFirstPie();
 
-         $('#user_stat').submit(getUserPie);
+        getUserRounds();
+
+            $('#round_avg').submit(getRoundAvg);
+            $('#month').submit(getUserRoundsReload);
+            $('#user_stat').submit(getUserPie);
 
         });
 </script>
@@ -402,7 +437,14 @@
           $('[data-toggle="tooltip"]').tooltip()
         })
 
+
     </script>
+
+<script>
+
+
+
+</script>
 
 @stop
 

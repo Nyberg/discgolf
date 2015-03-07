@@ -1,5 +1,10 @@
 <?php
 
+use dg\Comments\PostCommentCommand;
+use dg\Comments\RemoveCommentCommand;
+use dg\Comments\UpdateCommentCommand;
+use Illuminate\Support\Facades\Redirect;
+
 class CommentController extends \BaseController
 {
 
@@ -12,59 +17,29 @@ class CommentController extends \BaseController
 
     public function store()
     {
-
         if (Auth::user()) {
 
-            $comment = new Comment;
-            $comment->body = Input::get('body');
-            $comment->user_id = Auth::user()->id;
-            $comment->commentable_id = Input::get('type_id');
-            $comment->save();
+            $body = Input::get('body');
+            $user_id = Auth::id();
+            $type_id = Input::get('type_id');
+            $type = Input::get('model');
 
-            if (Input::get('model') == 'user') {
+            $command = new PostCommentCommand(
+                $body,
+                $type_id,
+                $user_id,
+                $type
+            );
 
-                $user = User::whereId($comment->commentable_id)->firstOrFail();
-
-                $user->comments()->save($comment);
-            }
-            if (Input::get('model') == 'course') {
-
-                $course = Course::whereId($comment->commentable_id)->firstOrFail();
-
-                $course->comments()->save($comment);
-            }
-            if (Input::get('model') == 'round') {
-
-                $round = Round::whereId($comment->commentable_id)->firstOrFail();
-
-                $round->comments()->save($comment);
-            }
-            if(Input::get('model') == 'score') {
-
-                $score = Score::whereId($comment->commentable_id)->firstOrFail();
-
-                $score->comments()->save($comment);
-
-            }if(Input::get('model') == 'club'){
-
-                $club = Club::whereId($comment->commentable_id)->firstOrFail();
-
-                $club->comments()->save($comment);
-
-            }if(Input::get('model') == 'news'){
-
-                $news = News::whereId($comment->commentable_id)->firstOrFail();
-
-                $news->comments()->save($comment);
-
-            }
+            $this->CommandBus->execute($command);
 
             return Redirect::back()->with('success', 'Kommenatar sparad!');
 
-        } else {
+        }else{
 
             return Redirect::back()->with('headsup', 'Du måste vara inloggad för att kunna kommentera');
         }
+
     }
 
 	public function edit($id)
@@ -76,22 +51,41 @@ class CommentController extends \BaseController
 	{
         $comment = Comment::whereId($id)->firstOrFail();
 
-        $comment->body = Input::get('body');
-        $comment->save();
+        if($comment->user_id == Auth::id()){
+
+        $id = $comment->id;
+        $body = Input::get('body');
+
+        $command = new UpdateCommentCommand(
+            $id,
+            $body
+        );
+
+        $this->CommandBus->execute($command);
 
         return Redirect::back()->with('success', 'Kommentar uppdaterad');
+
+        }else{
+            return Redirect::back()->with('danger', 'Du har inte behörighet för detta!');
+        }
 	}
 
 	public function destroy($id)
 	{
 		$comment = Comment::whereId($id)->firstOrFail();
 
-        if($comment){
-            $comment->delete();
-            return Redirect::back()->with('success', 'Kommentar borttagen!');
-        }else{
-            return Redirect::back()->with('danger', 'Något gick fel..');
-        }
+        if($comment->user_id == Auth::id()){
 
+        $id = $comment->id;
+
+        $command = new RemoveCommentCommand($id);
+
+        $this->CommandBus->execute($command);
+
+        return Redirect::back()->with('success', 'Kommentar borttagen!');
+
+        }else{
+            return Redirect::back()->with('danger', 'Du har inte behörighet för detta!');
+        }
 	}
 }

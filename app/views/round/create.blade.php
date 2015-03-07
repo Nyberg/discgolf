@@ -4,7 +4,9 @@
 
 	<div class="showback">
 
-  <h4 class="mb"><i class="fa fa-angle-right"></i> Skapa runda</h4>
+ <h4 class="tab-rub text-center page-header-custom">Skapa Runda</h4>
+        <div class="divider-header"></div>
+
    {{Form::open(['method'=>'POST', 'route'=>['account-round-add-score'], 'class'=>'form-horizontal style-form', 'id'=>'round_form'])}}
 
       <div class="form-group">

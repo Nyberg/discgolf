@@ -35,7 +35,7 @@ class BagController extends \BaseController {
 	{
         $this->addBagForm->validate($input = Input::only('type'));
 
-		$bag = New bag();
+		$bag = new Bag;
 
         $bag->type = Input::get('type');
         $bag->user_id = Auth::id();
@@ -66,18 +66,32 @@ class BagController extends \BaseController {
 
 		$bag = Bag::whereId($id)->firstOrFail();
 
+        if($bag->user_id == Auth::id()){
+
         $bag->type = Input::get('type');
         $bag->save();
 
         return Redirect::to('/account/user/'.Auth::user()->id.'/bags')->with('success', 'Bag updated!');
+
+        }else{
+
+            return Redirect::back()->with('danger', 'Du kan inte redigera detta!');
+        }
 	}
 
 	public function destroy($id)
 	{
         $bag = Bag::whereId($id)->firstOrFail();
+
+        if($bag->user_id == Auth::id()){
         $bag->delete();
 
         return Redirect::back()->with('success', 'Bag ' . $bag->type . ' deleted!');
+
+        }else{
+
+            return Redirect::back()->with('danger', 'Du kan inte ta bort detta!');
+        }
 	}
 
 

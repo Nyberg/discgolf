@@ -1,86 +1,112 @@
 <?php
 
+use dg\Records\PostRecordsCommand;
+use dg\Rounds\ActiveRoundCommand;
+
 class RecordsController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
 		//
 	}
 
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
+	public function store($id)
 	{
-		//
+
+        $round = Round::whereId($id)->firstOrFail();
+
+        if(Auth::id() == $round->user_id) {
+
+            $id = $round->id;
+
+            $command = new ActiveRoundCommand($id);
+
+            $this->CommandBus->execute($command);
+
+            $user_id = Auth::id();
+            $course_id = $round->course_id;
+            $tee_id = $round->tee_id;
+            $type = $round->type;
+            $total = $round->total;
+            $date = $round->date;
+            $par_id = $round->par_id;
+            $round_id = $round->id;
+            $status = 1;
+
+
+            $command = new PostRecordsCommand(
+                $user_id,
+                $course_id,
+                $tee_id,
+                $type,
+                $total,
+                $date,
+                $par_id,
+                $round_id,
+                $status
+            );
+
+
+            if ($round->type == 'Singel') {
+
+                $num = Record::where('course_id', $round->course_id)->where('type', 'Singel')->where('tee_id', $round->tee_id)->where('status', 1)->orderBy('total', 'asc')->pluck('total');
+
+                if ($num == null && $round->type == 'Singel' || $num == 0 && $round->type == 'Singel') {
+
+                    $this->CommandBus->execute($command);
+                }
+
+                if ($round->total == (int)$num) {
+
+                    $this->CommandBus->execute($command);
+
+                }
+                if ($round->total < (int)$num) {
+
+                    $recs = Record::where('course_id', $round->course_id)->where('total', $num)->where('type', 'Singel')->where('status', 1)->get();
+
+                    foreach ($recs as $rec) {
+                        $rec->status = 0;
+                        $rec->save();
+                    }
+
+                    $this->CommandBus->execute($command);
+                }
+            }
+
+            if ($round->type == 'Par') {
+
+                $num = Record::where('course_id', $round->course_id)->where('type', 'Par')->where('tee_id', $round->tee_id)->where('status', 1)->orderBy('total', 'asc')->pluck('total');
+
+                if ($num == null && $round->type == 'Par' || $num = 0 && $round->type == 'Par') {
+
+                    $this->CommandBus->execute($command);
+                }
+
+                if ($round->total == (int)$num) {
+
+                    $this->CommandBus->execute($command);
+
+                }
+                if ($round->total < (int)$num) {
+
+                    $recs = Record::where('course_id', $round->course_id)->where('total', $num)->where('type', 'Par')->where('status', 1)->get();
+
+                    foreach ($recs as $rec) {
+                        $rec->delete();
+                    }
+
+                    $this->CommandBus->execute($command);
+                }
+
+            }
+
+            return Redirect::back()->with('success', 'Runda sparad som aktiv!');
+
+        }else{
+
+            return Redirect::back()->with('headsup', 'Du måste vara inloggad för att kunna göra detta!');
+        }
 	}
-
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
 
 }

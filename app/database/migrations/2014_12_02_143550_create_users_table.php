@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration {
             $table->string('image', '255')->nullable();
             $table->string('metric', '255')->nullable();
             $table->integer('club_id');
+            $table->integer('activated');
             $table->string('remember_token')->nullable();
             $table->timestamps();
         });

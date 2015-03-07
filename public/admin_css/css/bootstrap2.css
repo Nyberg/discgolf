@@ -1111,7 +1111,8 @@ h6,
   font-size: 12px;
 }
 p {
-  margin: 0 0 10px;
+  margin: 0 0 0 0;
+    line-height: 2em;
 }
 .lead {
   margin-bottom: 20px;
@@ -3737,7 +3738,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   color: #E74C3C;
   cursor: default;
   background-color: #fff;
-    border-bottom: 1px solid #E74C3C;
 }
 .nav-tabs.nav-justified {
   width: 100%;
@@ -3769,7 +3769,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs.nav-justified > .active > a,
 .nav-tabs.nav-justified > .active > a:hover,
 .nav-tabs.nav-justified > .active > a:focus {
-    border-bottom: 1px solid #1ABC9C;
 }
 @media (min-width: 768px) {
   .nav-tabs.nav-justified > li > a {
@@ -3785,7 +3784,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   float: left;
 }
 .nav-pills > li > a {
-  border-radius: 4px;
+  border-radius: 0px;
 }
 .nav-pills > li + li {
   margin-left: 2px;
@@ -3794,7 +3793,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   color: #fff;
-  background-color: #337ab7;
+  background-color: #E74C3C;
 }
 .nav-stacked > li {
   float: none;
@@ -4614,7 +4613,7 @@ a.label:focus {
   font-size: 12px;
   font-weight: bold;
   line-height: 1;
-  color: #fff;
+  color: #000;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
@@ -5327,14 +5326,26 @@ a.list-group-item-danger.active:focus {
 .panel-group .panel-footer + .panel-collapse .panel-body {
   border-bottom: 1px solid #ddd;
 }
-.panel-default {
+.panel-sub {
   border-color: #ddd;
+}
+.panel-sub > .panel-heading {
+  color: #fff;
+  background-color: #2C3E50;
+  border-color: #ddd;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.panel-default {
+    border-color: #ddd;
 }
 .panel-default > .panel-heading {
-  color: #333;
-  background-color: #F5F5F5;
-  border-color: #ddd;
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
 }
+
 
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #ddd;

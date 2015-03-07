@@ -34,7 +34,6 @@
                            <li class="divider"></li>
                                                      <li class="dropdown-header">Klubbägare</li>
                           <li><a  href="/admin/club/{{Auth::user()->club_id}}/edit">Redigera din klubb</a></li>
-                          <li><a  href="/admin/club/{{Auth::user()->club_id}}/users">Hantera medlemmar</a></li>
                           <li><a  href="/admin/club/{{Auth::user()->club_id}}/courses">Hantera din klubbs banor</a></li>
                           <li><a  href="/admin/course/add">Lägg till bana</a></li>
                           @else
@@ -81,6 +80,14 @@
 
         <ul class="nav navbar-nav navbar-right pull-right col-lg-offset-right-1">
                 @if(Auth::user())
+                <li class="dropdown">
+                        <a href="#" class="" id="notification" data-toggle="dropdown">
+                        <span class="fa fa-bell"> </span>
+                        <span class="badge badge-notify"></span>  </a>
+                        <ul class="dropdown-menu" id="notificationMenu">
+
+                        </ul>
+                    </li>
                       <li class="{{ Request::is('account/*', 'admin/*', 'admin', 'dashboard') ? 'active' : '' }}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                        {{Auth::user()->first_name}} <span class="caret"></span>

@@ -20,4 +20,5 @@ abstract class Mailer
                 ->subject($subject);
         });
     }
+
 }

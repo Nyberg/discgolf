@@ -14,6 +14,20 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	protected $hidden = array('password', 'remember_token');
 
+
+    public function newNotification()
+    {
+        $notification = new Notification;
+        $notification->user()->associate($this);
+        return $notification;
+    }
+
+
+    public function notifications()
+    {
+        return $this->hasMany('Notification');
+    }
+
     public function getRememberTokenName()
     {
         return 'remember_token';
@@ -76,4 +90,18 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function losts(){
         return $this->hasMany('Lost');
     }
+
+    public function bags(){
+        return $this->hasMany('Bag');
+    }
+
+    public function friends(){
+        return $this->hasMany('Friend', 'user_id');
+    }
+
+    public function news(){
+        return $this->hasMany('News');
+    }
+
+
 }

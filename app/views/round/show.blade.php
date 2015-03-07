@@ -1,13 +1,12 @@
     @extends('master')
-
-
     @section('content')
+
               <h2 class="text-center page-header-custom"><a href="/course/{{$course->id}}/show">{{$course->name . ' - ' . $tee->color}}</a>, {{$round->date}} av
-                           @if($round->type == 'Par')
-                                     <td>{{showPar($round->par_id, $round->user_id)}}</td>
-                                      @else
-                                      <a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a>
-                                      @endif
+                  @if($round->type == 'Par')
+                    <td>{{showPar($round->par_id, $round->user_id)}}</td>
+                  @else
+                  <a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a>
+                  @endif
               </h2>
               <div class="divider-header"></div>
      </h4>
@@ -34,7 +33,7 @@
          <div class="panel panel-default">
            <!-- Default panel contents -->
            <div class="panel-heading">  Resultat: {{calcScore($round->total, $round->tee->par)}}</div>
-    <table class="table table-hover text-center">
+    <table class="table table-hover text-center hidden-phone">
     <thead>
         <tr>
             <td>Hål</td>
@@ -60,17 +59,49 @@
     </table>
     </div>
     </div>
+     <div class="showback hidden-phone">
+
+     @if(Auth::check())
+
+            <div class="row">
+
+              <div class="col-md-12">
+                 <input hidden="id" id="id" value="{{$round->id}}"/>
+                 <input hidden="model" id="model" value="round"/>
+                 <div id="chart-two" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
+              </div>
+
+              <hr/>
+
+            </div>
+
+     @else
+
+            <div class="row">
+
+              <div class="col-md-12">
+                <h2 class="text-center page-header-custom">Statistik</h2>
+                 <p class="text-center">Som medlem eller licensierad spelare får du extra statistik. Här kan du bland annat se resultatet jämfört med banans snitt för varje hål. </p>
+                 <p class="text-center"><a href="#">Läs mer om medlemskap här!</a></p>
+                <div class="divider-header"></div>
+              </div>
+
+              <div class="col-md-12">
+
+              </div>
+
+              <hr/>
+
+            </div>
+
+
+     @endif
+
+    </div>
 
     <div class="row">
-    <div class="col-md-4">
-        <div class="showback">
-            <div class="panel panel-default">
-                <div class="panel-heading">Mer om {{$round->user->first_name}}</div>
-                <img src="{{$round->user->image}}" class="" width="120px"/>
-             </div>
-        </div>
-    </div>
-    <div class="col-lg-8">
+
+    <div class="col-lg-12">
     <div class="showback">
 
               <div class="panel panel-default">
@@ -135,6 +166,18 @@
 
 @section('scripts')
 
+{{HTML::script('admin_js/stats/stats.js')}}
+{{HTML::script('http://code.highcharts.com/highcharts.js')}}
+
+    <script>
+
+    jQuery(document).ready(function($) {
+
+        getRoundAvgScore();
+
+        });
+</script>
+
     <script>
 
         $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
@@ -145,4 +188,3 @@
     </script>
 
 @stop
-

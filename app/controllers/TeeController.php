@@ -17,7 +17,7 @@ class TeeController extends \BaseController {
 
 	public function store()
 	{
-		$tee = New tee;
+		$tee = new Tee;
 
         $tee->course_id = Input::get('course_id');
         $tee->color = Input::get('color');

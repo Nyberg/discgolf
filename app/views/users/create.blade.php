@@ -2,17 +2,16 @@
 
 @section('content')
 
- @include('layouts/include/flash')
-
-
-
 	  <div id="login-page">
 	  	<div class="container">
 	  	<div class="form-horizontal">
+	  	 @include('layouts/include/flash') <!-- Visar alla flashmeddelanden som skickas ut av systemet -->
 
 		     {{Form::open(['route' => 'registration.store', 'class'=>'form-login'])}}
+		     {{Form::hidden('token', $token->token)}}
+		     {{Form::hidden('token_id', $token->id)}}
 
-		        <h2 class="form-login-heading">Bli medlem idag!</h2>
+		        <h2 class="form-login-heading">Skapa konto</h2>
 
 		        <div class="login-wrap">
 
@@ -43,6 +42,33 @@
                   </div>
               </div>
 
+             <div class="form-group">
+                 <label class="col-sm-12 col-sm-12 control-label">Landskap</label>
+                 <div class="col-sm-12">
+                       <select name="state" class="form-control teepads" id="teepads">
+                          <option value="0">Välj Landskap</option>
+                          @foreach($states as $state)
+                          <option id="{{$state->id}}" value="{{$state->id}}">{{$state->state}}</option>
+                          @endforeach
+                          </select>
+                      {{errors_for('state', $errors)}}
+                      </div>
+                 </div>
+
+
+               <div class="form-group">
+                   <label class="col-sm-12 col-sm-12 control-label">Stad</label>
+                   <div class="col-sm-12">
+                         <select name="city" class="form-control teepads" id="teepads">
+                            <option value="0">Välj Stad</option>
+                            @foreach($cities as $city)
+                            <option id="{{$city->id}}" value="{{$city->id}}">{{$city->city}}</option>
+                            @endforeach
+                            </select>
+                        {{errors_for('city', $errors)}}
+                        </div>
+                   </div>
+
 
 
                 <div class="form-group">
@@ -66,7 +92,7 @@
             </div>
           </div>
 
-            {{Form::submit('Register', ['class'=>'btn btn-primary btn-block'])}}
+            {{Form::submit('Registrera dig', ['class'=>'btn btn-primary btn-block'])}}
             {{Form::close()}}
 
 		        </div>

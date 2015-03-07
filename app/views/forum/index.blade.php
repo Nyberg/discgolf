@@ -9,6 +9,9 @@
     <div class="col-md-12">
         <h2 class="text-center page-header-custom">Forum</h2>
         <div class="divider-header"></div>
+
+        <p class="text-center">Välkommen till Penguin Projects forum! Har ni hittat en bugg eller vill skriva något som är relaterat till alfatester? Då ska ni använda er av delforumet "Alfatester".</p>
+    <hr>
     </div>
     <div class="col-md-12">
     <div class="table-responsive">
