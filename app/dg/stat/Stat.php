@@ -108,6 +108,10 @@ class Stat{
                 $total = 0;
                 $rounds_num = 0;
 
+                if(count($hole->score) == 0){
+                    $total = $hole->par;
+                    $rounds_num = 1;
+                }else{
 
                 foreach($hole->score as $score){
 
@@ -119,6 +123,7 @@ class Stat{
                     }else{
 
                     }
+                }
                 }
                 $avg = $total / $rounds_num;
                 $dirArray[$tee->id][$hole->number] = round($avg,1);

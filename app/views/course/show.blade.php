@@ -139,6 +139,8 @@
 
 <h4 class="tab-rub text-center page-header-custom">Rekordrundor {{$course->name}}</h4>
      <div class="divider-header"></div>
+     @if(count($records) == 0 || count($records) == null)
+     @else
        @foreach($records as $rec)
            <div class="panel panel-default">
                <div class="panel-heading"><a href="/round/{{$rec->round_id}}/course/{{$rec->course_id}}">{{$rec->round->type}} | Resultat: {{calcScore($rec->round->total, $rec->tee->par)}}</a>
@@ -179,6 +181,7 @@
       </table>
     </div>
        @endforeach
+       @endif
 
       </div>
 
