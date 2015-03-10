@@ -373,7 +373,7 @@ class StatisticsController extends BaseController {
 
         $tee = Tee::where('id', $round->tee_id)->firstOrFail();
         $tees = Tee::with('round')->where('id', $round->tee_id)->get();
-        $rounds = Round::whereId($round->tee_id)->where('status', 1)->get();
+        $rounds = Round::where('tee_id', $round->tee_id)->where('status', 1)->get();
         $round = Round::where('id', $round->id)->firstOrFail();
 
         if($num == 0 || $num == null){
