@@ -4,7 +4,7 @@
 @section('content')
 
               <h2 class="text-center page-header-custom">Rundor</h2>
-             
+
               <div class="divider-header"></div>
 
  <table class="table table-hover">
