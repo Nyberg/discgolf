@@ -4,7 +4,7 @@
 @section('content')
 
               <h2 class="text-center page-header-custom">Rundor</h2>
-              <p class="text-center">Visar alla rundor 7 dagar tillbaka i tiden</p>
+             
               <div class="divider-header"></div>
 
  <table class="table table-hover">

@@ -9,10 +9,10 @@ class RoundController extends BaseController {
 
 	public function index()
 	{
-        $date = date('Y-m-d', strtotime('-1 week'));
+        #$date = date('Y-m-d', strtotime('-1 week'));
 
-		$rounds = Round::with('course', 'user')->where('status', 1)->where('date', '>=' , $date)->orderBy('created_at', 'desc')->paginate(15);
-
+		#$rounds = Round::with('course', 'user')->where('status', 1)->where('date', '>=' , $date)->orderBy('created_at', 'desc')->paginate(15);
+        $rounds = Round::where('status', 1)->get();
         return View::make('round.index',compact('rounds'));
 	}
 
