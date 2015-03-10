@@ -4,7 +4,9 @@
 
 <div class="showback">
 
-  <h4 class="mb"><i class="fa fa-angle-right"></i> Skapa recension</h4>
+ <h2 class="text-center page-header-custom">Skapa Recension</h2>
+ <div class="divider-header"></div>
+
    {{Form::open(['method'=>'POST', 'route'=>['review.store'], 'class'=>'form-horizontal style-form', 'id'=>'review'])}}
 
          <div class="form-group">

@@ -5,13 +5,14 @@
 <div class="showback">
 
 <ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" href="#sectionA"><i class="fa fa-star-o"></i> {{$course->name}}</a></li>
-<li class=""><a data-toggle="tab" href="#sectionB"><i class="fa fa-bookmark-o"></i> Tees</a></li>
+<li class="active"><a data-toggle="tab" href="#sectionA">{{$course->name}}</a></li>
+<li class=""><a data-toggle="tab" href="#sectionB">Tees</a></li>
 </ul>
 <div class="tab-content">
     <div id="sectionA" class="tab-pane fade in active">
 
-                    <h4 class="mb"><i class="fa fa-angle-right"></i> Redigera Bana - {{$course->name}}</h4>
+                     <h2 class="text-center page-header-custom"> Redigera Bana - {{$course->name}}</h2>
+                      <div class="divider-header"></div>
                     <div class="form-horizontal style-form">
                     {{Form::model($course, ['method'=>'PATCH', 'route'=> ['course.update', $course->id], 'files'=>true])}}
                     <div class="form-group">
@@ -181,7 +182,8 @@
     <div class="row">
          <div class="col-lg-12">
 
-           <h4 class="mb"><i class="fa fa-angle-right"></i> Redigera Tees - {{$course->name}}</h4>
+           <h2 class="text-center page-header-custom"> Redigera Tees - {{$course->name}}</h2>
+            <div class="divider-header"></div>
 
   <table class="table table-striped table-advance table-hover">
 
@@ -189,10 +191,10 @@
       <thead>
       <tr>
 
-          <th><i class="fa fa-bullseye"></i> Color</th>
+          <th>Color</th>
           <th>Status</th>
           <th>Antal hål</th>
-           <th><i class=" fa fa-star"></i> Lägg till hål</th>
+          <th>Lägg till hål</th>
           <th>Edit</th>
           <th>Delete</th>
       </tr>

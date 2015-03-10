@@ -6,7 +6,8 @@
 
     <div class="showback">
 
-      <h4><i class="fa fa-angle-right"></i> Dina kommentarer</h4>
+                 <h2 class="text-center page-header-custom">Dina kommentarer</h2>
+                 <div class="divider-header"></div>
 
       @if(count($comments) == 0)
 

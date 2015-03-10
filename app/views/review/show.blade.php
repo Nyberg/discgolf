@@ -7,10 +7,11 @@
        <div class="row">
        <div class="col-lg-12">
 
-      <h4><i class="fa fa-angle-right"></i> Dina recensioner</h4>
+                       <h2 class="text-center page-header-custom">Dina Recensioner</h2>
+                       <div class="divider-header"></div>
 
       @if(count($reviews) == 0)
-        <p>Inga recensioner..</p>
+        <p>Du har inte skrivit några recensioner..</p>
       @else
           @foreach($reviews as $rev)
 

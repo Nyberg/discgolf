@@ -14,7 +14,8 @@
 
                         <div id="sectionA" class="tab-pane fade in active">
                                <br/>
-                           	  <h4 class="mb"><i class="fa fa-angle-right"></i> Redigera Användare</h4>
+                                <h2 class="text-center page-header-custom">Redigera Användare</h2>
+                                <div class="divider-header"></div>
 
                                       	  {{Form::model($user, ['method'=>'PATCH', 'route'=> ['user.update', $user->id], 'files'=>true])}}
 
@@ -88,7 +89,8 @@
 
                         <div id="sectionB" class="tab-pane fade">
                         <br/>
-                            <h4 class="mb"><i class="fa fa-angle-right"></i> Redigera Profil</h4>
+                                <h2 class="text-center page-header-custom">Redigera Profil</h2>
+                                <div class="divider-header"></div>
                                               	  {{Form::model($user->profile, ['method'=>'PATCH', 'route'=> ['user.update', $user->id], 'files'=>true])}}
 
                                                      <div class="form-group">

@@ -3,7 +3,6 @@
 @section('content')
 
                  <h2 class="text-center page-header-custom">Klubbar</h2>
-
                  <div class="divider-header"></div>
 
 <div class="row">

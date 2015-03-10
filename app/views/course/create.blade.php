@@ -4,7 +4,8 @@
 
 <div class="showback">
 
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Lägg till Bana</h4>
+                 <h2 class="text-center page-header-custom">Lägg till bana</h2>
+                 <div class="divider-header"></div>
 
                   	   {{Form::open(['route'=>'course.store', 'class'=>'form-horizontal style-form', 'files' => true])}}
 

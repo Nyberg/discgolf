@@ -58,7 +58,6 @@ class StatisticsController extends BaseController {
         ];
 
         return Response::json($message);
-
     }
 
     # Visa översiktlig statistik - reloaded #
@@ -120,11 +119,11 @@ class StatisticsController extends BaseController {
         }
         if($input['model'] == 'course'){
             $scores = Score::where('course_id', $input['id'])->where('user_id', Auth::id())->get();
-            $rounds = Round::where('course_id', $input['id'])->where('user_id', Auth::id())->get();
+            $rounds = Round::where('course_id', $input['id'])->where('user_id', Auth::id())->where('status', 1)->get();
         }
         if($input['model'] == 'user'){
             $scores = Score::where('user_id', $input['id'])->get();
-            $rounds = Round::where('user_id', $input['id'])->get();
+            $rounds = Round::where('user_id', $input['id'])->where('status', 1)->get();
         }
 
         $stats = $this->stat->calc($scores);
@@ -337,7 +336,7 @@ class StatisticsController extends BaseController {
 
         if($model == 'user'){
 
-            $rounds = Round::where('user_id', $id)->get();
+            $rounds = Round::where('user_id', $id)->where('status', 1)->get();
 
         }
 
@@ -374,20 +373,19 @@ class StatisticsController extends BaseController {
 
         $tee = Tee::where('id', $round->tee_id)->firstOrFail();
         $tees = Tee::with('round')->where('id', $round->tee_id)->get();
+        $rounds = Round::whereId($round->tee_id)->where('status', 1)->get();
         $round = Round::where('id', $round->id)->firstOrFail();
 
         if($num == 0 || $num == null){
             $user = $this->stat->generateBlank($tee);
 
         }else{
-            $user_rounds = Round::where('tee_id', $round->tee_id)->where('user_id', Auth::id())->get();
+            $user_rounds = Round::where('tee_id', $round->tee_id)->where('user_id', Auth::id())->where('status', 1)->get();
             $user = $this->stat->generateUserAvg($tee, $user_rounds);
         }
 
-
         $stats = $this->stat->generateRound($round, $tee);
-        $avg = $this->stat->generateAvg($tees);
-
+        $avg = $this->stat->generateAvg($rounds, $tees);
 
         $message = [
             'msg' => 'success',

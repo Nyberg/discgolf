@@ -1,7 +1,7 @@
 @extends('db')
 
 @section('content')
-
+        <div class="showback">
             <div class="row mtbox">
                 <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
                   <a  href="/admin/users">  <div class="box1">
@@ -33,11 +33,12 @@
                             <p>Hantera kommentarer</p></a>
                     </div>
                       <div class="col-md-2 col-sm-2 box0">
-                      <a href="/admin/club/owners">  <div class="box1">
-                            <span class="li_lock"></span>
-                            <h4>Klubbägare</h4>
+                      <a href="/admin/rounds/">  <div class="box1">
+                            <span class="li_note"></span>
+                            <h4>Rundor</h4>
                         </div>
-                            <p>Visa klubbägare</p></a>
+                            <p>Visa alla rundor</p>
+                      </a>
                     </div>
 
 
@@ -55,6 +56,13 @@
                         <p>Skriv en nyhet</p></a>
 
             </div>
+                                  <div class="col-md-2 col-sm-2 box0">
+                                  <a href="/admin/club/owners">  <div class="box1">
+                                        <span class="li_lock"></span>
+                                        <h4>Klubbägare</h4>
+                                    </div>
+                                        <p>Visa klubbägare</p></a>
+                                </div>
             <div class="col-md-2 col-sm-2 box0">
                 <a  href="/admin/location">  <div class="box1">
                 <span class="li_world"></span>
@@ -90,7 +98,7 @@
             <div class="row mt">
 
             </div><!-- /row -->
-
+</div>
 
 
 @stop

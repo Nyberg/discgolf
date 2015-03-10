@@ -3,6 +3,7 @@
 @section('content')
 
  <h2 class="text-center page-header-custom">Lost and Found</h2>
+
  @if(Auth::check())
  <p class="text-center"><a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Hur funkar detta?</a> | <a href="/account/lost/add">Lägg till disc</a></p>
  @else

@@ -1,9 +1,11 @@
-@extends('master')
+@extends('db')
 
 @section('content')
+    <div class="showback">
 
     {{Form::open(['route'=>'lost.store', 'class'=>'form-horizontal style-form'])}}
-            <h4 class="tab-rub">Lägg till Lost & Found</h4>
+          <h2 class="text-center page-header-custom">Lägg till Lost and Found</h2>
+          <div class="divider-header"></div>
 
            <div class="form-group">
                  <label class="col-sm-2 col-sm-2 control-label">Status</label>

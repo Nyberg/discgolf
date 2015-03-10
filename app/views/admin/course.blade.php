@@ -5,8 +5,8 @@
 @section('content')
 
     <div class="showback">
-
-  <h4><i class="fa fa-angle-right"></i> Courses Admin</h4>
+                 <h2 class="text-center page-header-custom">Banor</h2>
+                 <div class="divider-header"></div>
 
      <div class="row">
           <div class="col-lg-12">
@@ -19,12 +19,12 @@
 
       <thead>
       <tr>
-          <th><i class="fa fa-tree"></i> Course</th>
+          <th><i class="fa fa-tree"></i> Bana</th>
           <th class="hidden-phone"><i class="fa fa-globe"></i> Location</th>
           <th><i class="fa fa-bullseye"></i> Tees (Par)</th>
            <th><i class=" fa fa-star"></i> Lägg till tee</th>
-          <th>Edit</th>
-          <th>Delete</th>
+          <th>Redigera</th>
+          <th>Ta bort</th>
       </tr>
       </thead>
       <tbody>
@@ -49,7 +49,7 @@
          </td>
          <td>
           {{Form::open(['method'=>'DELETE', 'route'=>['course.destroy', $course->id]])}}
-          {{Form::submit('Delete', ['class'=>'btn btn-danger btn-xs'])}}
+          {{Form::submit('Ta bort', ['class'=>'btn btn-danger btn-xs'])}}
           {{Form::close()}}
 
           </td>

@@ -5,7 +5,9 @@
 @section('content')
 
     <div class="showback">
-  <h4><i class="fa fa-angle-right"></i> Lost & Found</h4>
+ <h2 class="text-center page-header-custom">Lost and Found</h2>
+ <p class="text-center"><a href="/account/lost/add">Lägg till disc</a></p>
+  <div class="divider-header"></div>
 
   @if(count($losts) == 0)
 
@@ -44,7 +46,8 @@
 
   @endif
 
-    <h4><i class="fa fa-angle-right"></i> Lösta fall</h4>
+   <h2 class="text-center page-header-custom">Lost and Found</h2>
+    <div class="divider-header"></div>
 
     @if(count($solveds) == 0)
 

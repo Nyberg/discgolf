@@ -2,34 +2,37 @@
 
 @section('content')
 
-	<div class="showback">
+<div class="showback">
+      <h2 class="text-center page-header-custom">Redigera Resultat</h2>
+            @if($round->status == 1)
+              <p class="text-center">Denna rundan är markerad som aktiv och kan därför inte redigeras.</p>
+              <br/>
+            @else
+            @endif
+      <div class="divider-header"></div>
 
-      <h4 class="mb"><i class="fa fa-angle-right"></i> Redigera Kast</h4>
-      <table class="table table-hover">
+      <table class="table table-hover table-responsive text-center">
       <thead>
       <tr>
-          <th>#</th>
-          <th>Längd</th>
-          <th>Par</th>
-          <th>Resultat</th>
-          <th>Kast</th>
-
+          <th class="text-center">Hål</th>
+          <th class="text-center">Längd</th>
+          <th class="text-center">Par</th>
+          <th class="text-center">Score</th>
       </tr>
       </thead>
       <tbody>
     @foreach($round->score as $score)
 
-    <tr>
+        <tr>
           <td>{{$score->hole->number}}</td>
           <td>{{convert($score->hole->length)}}</td>
           <td>{{$score->par}}</td>
-          <td>{{$score->score}}</td>
-          <td><a href="/account/shots/{{$round->id}}/{{checkShot($score->score_added)}}/{{$score->hole_id}}"><span class="btn btn-primary btn-xs"><i class="fa fa-{{setIcon($score->score_added)}}"></i></span></a></td>
-        @endforeach
-      </tr>
+          <td class="{{checkScore($score->score, $score->par)}} text-center">{{$score->score}} ({{$score->par}})</td>
+        </tr>
+      @endforeach
 
       </tbody>
   </table>
-     </div>
+</div>
 
 @stop

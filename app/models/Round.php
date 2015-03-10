@@ -84,6 +84,10 @@ class Round extends Eloquent{
         return $this->belongsTo('Tee');
     }
 
+    public function tour(){
+        return $this->belongsTo('Tour');
+    }
+
     public function course()
     {
         return $this->belongsTo('Course');

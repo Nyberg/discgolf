@@ -5,9 +5,13 @@
 
 
      		<div class="showback">
+      @if(count($rounds) == 0)
 
-      <h4><i class="fa fa-angle-right"></i> Dina rundor</h4>
-      <p>Här ligger alla rundor efter att dom lagts till. När du klickar på <a href="#" class="btn btn-xs btn-success">Markera som aktiv</a> kan du inte ändra ditt resultat på rundan. Rundan kan inte heller tas bort för tillfället. Detta för att modulen med rekordrundor ska fungera korrekt.</p>
+      @else
+       <h2 class="text-center page-header-custom">Dina Rundor</h2>
+       <div class="divider-header"></div>
+            <p class="text-center">Här ligger alla rundor efter att dom lagts till. När du klickar på <a href="#" class="btn btn-xs btn-success">Markera som aktiv</a> kan du inte ändra ditt resultat på rundan. Rundan kan inte heller tas bort för tillfället. Detta för att modulen med rekordrundor ska fungera korrekt.</p>
+
       <table class="table table-hover">
           <thead>
           <tr>
@@ -51,9 +55,15 @@
            @endforeach
           </tbody>
       </table>
+      @endif
 
+ <h2 class="text-center page-header-custom"> Dina Aktiva rundor</h2>
+ <div class="divider-header"></div>
 
-            <h4><i class="fa fa-angle-right"></i> Dina Aktiva rundor</h4>
+     @if(count($actives) == 0)
+        <p class="text-center">Du har inga aktiva rundor än.</p>
+     @else
+
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -63,7 +73,6 @@
                   <th>Bana</th>
                   <th>Typ</th>
                   <th>Resultat</th>
-                  <th>Kast</th>
                 </tr>
 
                 </thead>
@@ -81,12 +90,11 @@
                   @endif
                   </td>
                   <td>{{calcScore($round->total, $round->tee['par'])}}</td>
-                  <td><a href="/account/round/{{$round->id}}/edit-score"><span class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></span></a></td>
-                 </tr>
+                  </tr>
                  @endforeach
                 </tbody>
             </table>
-
+@endif
       </div>
 
 @stop

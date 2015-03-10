@@ -5,7 +5,8 @@
 <div class="showback">
 
 
-          		 <h4><i class="fa fa-angle-right"></i> Existerande hål vid {{$course->name . ' - ' . $tee->color}}</h4>
+          		  <h2 class="text-center page-header-custom">Existerande hål vid {{$course->name . ' - ' . $tee->color}}</h2>
+          		   <div class="divider-header"></div>
                                           <table class="table table-hover">
 
 
@@ -38,7 +39,8 @@
 
                         @if($number == $tee->holes)
                         @else
-                      <h4 class="mb"><i class="fa fa-angle-right"></i> Lägg till {{$total}} mer hål vid {{$course->name . ' - ' . $tee->color}}</h4>
+                      <h2 class="text-center page-header-custom">Lägg till {{$total}} mer hål vid {{$course->name . ' - ' . $tee->color}}</h2>
+                      <div class="divider-header"></div>
 
                         {{Form::open(['route'=>'hole.store', 'class'=>'form-horizontal style-form'])}}
                         {{Form::hidden('hidden_holes', $tee->holes)}}
@@ -80,7 +82,7 @@
                        <p>Du kan inte lägga till fler hål till denna banan.</p>
                        <a href=""><span class="btn btn-theme" role="button" onclick="window.history.go(-1); return false;">Tillbaka</span></a>
                        @else
-                        {{Form::submit('Save', ['class'=>'btn btn-primary btn-xs'])}}
+                        {{Form::submit('Spara', ['class'=>'btn btn-primary btn-xs'])}}
                        {{Form::close()}}
                        @endif
 

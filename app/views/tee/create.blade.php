@@ -4,7 +4,8 @@
 
 	<div class="showback">
 
-  <h4 class="mb"><i class="fa fa-angle-right"></i> Skapa tee för {{$course->name}}</h4>
+                 <h2 class="text-center page-header-custom">Skapa Tee för {{$course->name}}</h2>
+                 <div class="divider-header"></div>
    {{Form::open(['route'=>'tee.store', 'class'=>'form-horizontal style-form', 'id'=>'tee'])}}
     {{Form::hidden('course_id', $course->id)}}
 

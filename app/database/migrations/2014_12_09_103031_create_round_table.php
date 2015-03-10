@@ -22,6 +22,7 @@ class CreateRoundTable extends Migration {
             $table->string('type');
             $table->integer('total');
             $table->integer('par_id');
+            $table->integer('tour_id');
             $table->longText('comment');
             $table->boolean('status');
             $table->string('date');

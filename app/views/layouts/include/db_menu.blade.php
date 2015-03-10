@@ -27,21 +27,6 @@
                 </li>
 
                 <li class="{{ Request::is('users', 'user/*', 'clubs', 'club/*') ? 'active' : '' }}">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Klubb <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                          <li><a  href="/club/{{Auth::user()->club_id}}/show">Besök din klubb</a></li>
-                          @if(Auth::user()->hasRole('ClubOwner'))
-                           <li class="divider"></li>
-                                                     <li class="dropdown-header">Klubbägare</li>
-                          <li><a  href="/admin/club/{{Auth::user()->club_id}}/edit">Redigera din klubb</a></li>
-                          <li><a  href="/admin/club/{{Auth::user()->club_id}}/courses">Hantera din klubbs banor</a></li>
-                          <li><a  href="/admin/course/add">Lägg till bana</a></li>
-                          @else
-                          @endif
-                  </ul>
-                </li>
-
-                <li class="{{ Request::is('users', 'user/*', 'clubs', 'club/*') ? 'active' : '' }}">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bag <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                      <li><a  href="/account/user/{{Auth::id()}}/bags">Hantera dina bags</a></li>

@@ -3,7 +3,8 @@
 @section('content')
 
             <div class="showback">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Skapa Bag</h4>
+                  	                   <h2 class="text-center page-header-custom">Skapa Bag</h2>
+                                       <div class="divider-header"></div>
                   	   {{Form::open(['route'=>'bag.store', 'class'=>'form-horizontal style-form', 'id'=>'bag'])}}
 
                           <div class="form-group">

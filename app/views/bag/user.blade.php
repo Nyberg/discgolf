@@ -5,7 +5,11 @@
 
 <div class="showback">
 
-<h4><i class="fa fa-angle-right"></i> Dina Bags</h4>
+                 <h2 class="text-center page-header-custom">Dina Bags</h2>
+                 <div class="divider-header"></div>
+    @if(count($bags) == 0)
+    <p class="text-center"> Du har inga bags än. Klicka på "Skapa ny bag" för att skapa en</p>
+    @else
     <p>Klicka på namnet för att visa väskans discar.</p>
       <div class="row">
            <div class="col-lg-12">
@@ -272,6 +276,7 @@
 
 </div>
 
+@endif
      <div class="row">
 
       <div class="col-lg-12">
@@ -280,7 +285,6 @@
       </div>
         </div>
 </div>
-
 
 
 
