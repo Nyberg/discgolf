@@ -91,7 +91,7 @@ class Stat {
        return $avg = $total / $num;
     }
 
-    public function generateAvg($rounds, $tees){
+    public function generateAvg($tees){
 
         $total = 0;
         $dirArray = [];

@@ -71,8 +71,18 @@
       <file leaf-file-name="StatisticsController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/StatisticsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43879172" vertical-offset="7952" max-vertical-offset="11132">
-              <caret line="374" column="21" selection-start-line="374" selection-start-column="21" selection-end-line="374" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.3688394" vertical-offset="8018" max-vertical-offset="11132">
+              <caret line="375" column="9" selection-start-line="375" selection-start-column="9" selection-end-line="375" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Stat.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/dg/stat/Stat.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="19.25" vertical-offset="2486" max-vertical-offset="15048">
+              <caret line="93" column="32" selection-start-line="93" selection-start-column="32" selection-end-line="93" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -127,7 +137,6 @@
         <option value="$PROJECT_DIR$/app/views/tee/create.blade.php" />
         <option value="$PROJECT_DIR$/app/views/course/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/views/holes/create.blade.php" />
-        <option value="$PROJECT_DIR$/app/dg/stat/Stat.php" />
         <option value="$PROJECT_DIR$/app/views/score/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/views/round/editScore.blade.php" />
         <option value="$PROJECT_DIR$/app/views/bag/user.blade.php" />
@@ -148,6 +157,7 @@
         <option value="$PROJECT_DIR$/public/admin_js/round/round.js" />
         <option value="$PROJECT_DIR$/app/views/master.blade.php" />
         <option value="$PROJECT_DIR$/public/admin_js/notifications/notiser.js" />
+        <option value="$PROJECT_DIR$/app/dg/stat/Stat.php" />
         <option value="$PROJECT_DIR$/app/controllers/StatisticsController.php" />
       </list>
     </option>
@@ -861,14 +871,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/dg/stat/Stat.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3034483" vertical-offset="1892" max-vertical-offset="15048">
-          <caret line="95" column="19" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/round/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.583333" vertical-offset="730" max-vertical-offset="4312">
@@ -1076,10 +1078,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/dg/stat/Stat.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="19.25" vertical-offset="2486" max-vertical-offset="15048">
+          <caret line="93" column="32" selection-start-line="93" selection-start-column="32" selection-end-line="93" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/StatisticsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43879172" vertical-offset="7952" max-vertical-offset="11132">
-          <caret line="374" column="21" selection-start-line="374" selection-start-column="21" selection-end-line="374" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.3688394" vertical-offset="8018" max-vertical-offset="11132">
+          <caret line="375" column="9" selection-start-line="375" selection-start-column="9" selection-end-line="375" selection-end-column="9" />
           <folding />
         </state>
       </provider>
