@@ -373,7 +373,7 @@ class StatisticsController extends BaseController {
 
         $tee = Tee::where('id', $round->tee_id)->firstOrFail();
         $tees = Tee::where('id', $round->tee_id)->get();
-        #$rounds = Round::where('tee_id', $round->tee_id)->where('status', 1)->get();
+        $rounds = Round::where('tee_id', $round->tee_id)->where('status', 1)->get();
         $round = Round::where('id', $round->id)->firstOrFail();
 
         if($num == 0 || $num == null){
@@ -385,7 +385,7 @@ class StatisticsController extends BaseController {
         }
 
         $stats = $this->stat->generateRound($round, $tee);
-        $avg = $this->stat->generateAvg($tees);
+        $avg = $this->stat->generateAvg($tees,$rounds);
 
         $message = [
             'msg' => 'success',

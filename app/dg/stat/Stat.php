@@ -5,7 +5,7 @@ namespace dg\statistics;
 use User;
 use Illuminate\Database\Eloquent;
 
-class Stat {
+class Stat{
 
     public function getBirdies($rounds){
 
@@ -91,23 +91,23 @@ class Stat {
        return $avg = $total / $num;
     }
 
-    public function generateAvg($tees){
+    public function generateAvg($tees, $rounds){
 
         $total = 0;
         $dirArray = [];
         $j = 1;
 
+
         foreach($tees as $tee){
 
-            $dirArray[$tee->id][] = 0;
             $k = 1;
-            $rounds_num = 0;
-
+            $rounds_num = 1;
 
             foreach($tee->hole as $hole){
                 $avg = 0;
                 $total = 0;
                 $rounds_num = 0;
+
 
                 foreach($hole->score as $score){
 

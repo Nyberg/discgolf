@@ -117,11 +117,10 @@ class CourseController extends \BaseController {
         $holes = Hole::where('course_id', $id)->get();
         $records = Record::where('course_id', $id)->where('status', 1)->get();
         $data = $this->stat->generateInfo($holes, $tees);
-        $avg = $this->stat->generateAvg($tees);
+        $avg = $this->stat->generateAvg($tees, $rounds);
 
         return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'tees'=>$tees, 'club'=>$club,'reviews'=>$reviews, 'data'=>$data, 'records'=>$records, 'avg'=>$avg]);
 }
-
 
 	public function edit($id)
 	{
