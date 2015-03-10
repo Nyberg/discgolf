@@ -58,11 +58,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StatisticsController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StatisticsController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/StatisticsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3688394" vertical-offset="8018" max-vertical-offset="11132">
-              <caret line="375" column="41" selection-start-line="375" selection-start-column="41" selection-end-line="375" selection-end-column="41" />
+            <state vertical-scroll-proportion="-28.0" vertical-offset="7952" max-vertical-offset="11132">
+              <caret line="392" column="33" selection-start-line="392" selection-start-column="33" selection-end-line="392" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="master.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/master.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6645469" vertical-offset="330" max-vertical-offset="3586">
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -98,7 +108,6 @@
         <option value="$PROJECT_DIR$/app/views/course/show.blade.php" />
         <option value="$PROJECT_DIR$/app/views/course/index.blade.php" />
         <option value="$PROJECT_DIR$/app/views/db.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/master.blade.php" />
         <option value="$PROJECT_DIR$/app/database/migrations/2014_12_09_103031_create_round_table.php" />
         <option value="$PROJECT_DIR$/app/models/Round.php" />
         <option value="$PROJECT_DIR$/app/models/Tour.php" />
@@ -129,6 +138,7 @@
         <option value="$PROJECT_DIR$/public/admin_js/stats/stats.js" />
         <option value="$PROJECT_DIR$/public/admin_js/round/round.js" />
         <option value="$PROJECT_DIR$/app/controllers/StatisticsController.php" />
+        <option value="$PROJECT_DIR$/app/views/master.blade.php" />
       </list>
     </option>
   </component>
@@ -723,14 +733,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/master.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.416666" vertical-offset="330" max-vertical-offset="3586">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/database/migrations/2014_12_09_103031_create_round_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7260726" vertical-offset="66" max-vertical-offset="1078">
@@ -1036,8 +1038,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/StatisticsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3688394" vertical-offset="8018" max-vertical-offset="11132">
-          <caret line="375" column="41" selection-start-line="375" selection-start-column="41" selection-end-line="375" selection-end-column="41" />
+        <state vertical-scroll-proportion="-28.0" vertical-offset="7952" max-vertical-offset="11132">
+          <caret line="392" column="33" selection-start-line="392" selection-start-column="33" selection-end-line="392" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/master.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6645469" vertical-offset="330" max-vertical-offset="3586">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding />
         </state>
       </provider>
