@@ -2,11 +2,11 @@
 
 class AdminController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+	public function rounds(){
+        $rounds = Round::get();
+        return View::make('admin.rounds', compact('rounds'));
+    }
+
     public function index()
     {
         $id = Auth::User()->id;

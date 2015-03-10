@@ -109,8 +109,9 @@ class Stat{
                 $rounds_num = 0;
 
                 if(count($hole->score) == 0){
-                    $total = $hole->par;
+                    $total = 0;
                     $rounds_num = 1;
+
                 }else{
 
                 foreach($hole->score as $score){

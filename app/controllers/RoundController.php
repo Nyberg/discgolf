@@ -205,7 +205,7 @@ class RoundController extends BaseController {
 	{
 		$round = Round::whereId($id)->firstOrFail();
 
-        if($round->user_id == Auth::user()->id){
+        if($round->user_id == Auth::user()->id || Auth::user()->hasRole('Admin')){
 
         $id = $round->id;
 

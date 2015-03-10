@@ -53,6 +53,8 @@ Route::group(['before'=>'checkAdmin'], function(){
         Route::get('/admin/course', 'CourseController@admin');
         Route::get('/admin/course/{id}/edit', 'CourseController@edit');
 
+        #   Rounds      #
+        Route::get('/admin/rounds', 'AdminController@rounds');
         #   Hole        #
         Route::get('/admin/holes/{id}/add', 'HoleController@create');
         Route::get('/admin/holes/{id}/edit', 'HoleController@edit');
