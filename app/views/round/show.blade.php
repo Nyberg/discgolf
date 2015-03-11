@@ -221,8 +221,8 @@
 
     jQuery(document).ready(function($) {
 
-         $( "#res_par" ).hide();
-
+        getRoundAvgScore();
+         
         $('#compare_form').submit(getCompareRound);
 
         });
