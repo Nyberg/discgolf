@@ -183,7 +183,6 @@
                              <div class="col-sm-12">
 
                                         <select name="type_id" class="form-control type_id" id="type_id">
-                                        <option value="0" selected="disabled">Du har inte spelat några rundor på denna bana</option>
                                         <option value="0" selected="selected">Välj Runda</option>
                                         @foreach($u_rounds as $r)
                                         <option value="{{$r->id}}">{{$r->date . ' | ' . calcScore($r->total, $r->tee->par)}}</option>
