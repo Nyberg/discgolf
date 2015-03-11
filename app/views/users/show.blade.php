@@ -139,7 +139,7 @@
             @foreach($rounds as $round)
                 <div class="well well-sm">
                 <p>
-                    <a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->created_at->format('d M') . ' - ' . $round->course->name . ' ' . $round->tee->color . ''}}
+                    <a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->date . ' - ' . $round->course->name . ' ' . $round->tee->color . ''}}
                     <span class="pull-right">{{$round->type}} | {{calcScore($round->total, $round->tee['par'])}}</span>
                     </a>
                 </p>
