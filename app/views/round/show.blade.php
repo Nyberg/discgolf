@@ -215,14 +215,16 @@
 @stop
 
 @section('scripts')
-
+{{HTML::script('admin_js/stats/stats.js')}}
+<script src="http://code.highcharts.com/highcharts.js"></script>
 {{HTML::script('admin_js/compare/compare.js')}}
+
 <script>
 
     jQuery(document).ready(function($) {
 
         getRoundAvgScore();
-         
+
         $('#compare_form').submit(getCompareRound);
 
         });
