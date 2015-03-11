@@ -497,4 +497,24 @@ class StatisticsController extends BaseController {
         return Response::json($message);
 
     }
+
+    public function getRoundCompare(){
+
+        $id = Input::get('id');
+        #$model = Input::get('model');
+
+        #$rounds = Round::whereId($id)->first();
+        $scores = Score::where('round_id', $id)->get();
+        $data = [];
+        $i = 1;
+
+        foreach($scores as $sc){
+            $data[$i] = $sc->score;
+            $i++;
+        }
+
+        $message = $scores;
+
+        return Response::json($message);
+    }
 }

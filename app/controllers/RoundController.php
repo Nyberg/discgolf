@@ -146,6 +146,11 @@ class RoundController extends BaseController {
         $records = Record::where('course_id', $course_id)->where('tee_id', $round->tee_id)->where('type', $round->type)->where('status', 1)->get();
         $sum = Hole::where('tee_id', $id)->sum('length');
 
+        if(Auth::check()){
+            $u_rounds = Round::where('status', 1)->where('user_id', Auth::id())->where('tee_id', $round->tee_id)->get();
+            return View::make('round.show', ['round'=>$round, 'tee'=>$tee, 'shots'=>$shots, 'scores'=>$scores, 'records'=>$records, 'sum'=>$sum, 'course'=>$course, 'u_rounds'=>$u_rounds]);
+        }
+
         return View::make('round.show', ['round'=>$round, 'tee'=>$tee, 'shots'=>$shots, 'scores'=>$scores, 'records'=>$records, 'sum'=>$sum, 'course'=>$course]);
     }
 

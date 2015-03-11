@@ -29,10 +29,22 @@
                </div>
            </div>
 
+       <div class="row">
+
+
+       </div>
+
         <br/>
          <div class="panel panel-default">
            <!-- Default panel contents -->
-           <div class="panel-heading">  Resultat: {{calcScore($round->total, $round->tee->par)}}</div>
+           <div class="panel-heading" id="compare_result">  Resultat: {{calcScore($round->total, $round->tee->par)}}
+           @if(Auth::check() && count($u_rounds) >= 1)
+           <span class="pull-right input-group-sm">
+           <a href="" class="btn btn-xs btn-success compare" data-toggle="modal" data-target="#compare">Jämför runda</a>
+           </span>
+           @else
+           @endif
+           </div>
     <table class="table table-hover text-center hidden-phone">
     <thead>
         <tr>
@@ -48,6 +60,9 @@
             @foreach($round->score as $score)
             <td class="{{checkScore($score->score, $score->par)}}">{{$score->score}} ({{$score->par}})</td>
             @endforeach
+        </tr>
+        <tr id="compare_round">
+
         </tr>
         <tr>
             <td>Längd</td>
@@ -150,10 +165,46 @@
              </div>
            </div>
         </div>
-
-
-
         </div></div><!-- --/content-panel ---->
+
+            @if(Auth::check())
+                <div class="modal fade" id="compare" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Jämför Runda</h4>
+                      </div>
+
+                      <div class="modal-body">
+                      {{Form::open(['route'=>'round.compare', 'class'=>'form-horizontal style-form', 'id'=>'compare_form'])}}
+                       <div class="form-group">
+
+                             <div class="col-sm-12">
+
+                                        <select name="type_id" class="form-control type_id" id="type_id">
+                                        <option value="0" selected="disabled">Du har inte spelat några rundor på denna bana</option>
+                                        <option value="0" selected="selected">Välj Runda</option>
+                                        @foreach($u_rounds as $r)
+                                        <option value="{{$r->id}}">{{$r->date . ' | ' . calcScore($r->total, $r->tee->par)}}</option>
+                                        @endforeach
+                                        </select>
+
+                             </div>
+                         </div>
+                      </div>
+                      <div class="modal-footer">
+                          {{Form::submit('Jämför', ['class'=>'btn btn-primary'])}}
+                              {{Form::close()}}
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
+
+                     </div>
+
+                </div>
+
+                </div></div><!-- --/content-panel ---->
+                @else
+                @endif
 
     </div>
     </div>
@@ -166,25 +217,25 @@
 
 @section('scripts')
 
-{{HTML::script('admin_js/stats/stats.js')}}
-{{HTML::script('http://code.highcharts.com/highcharts.js')}}
-
-    <script>
+{{HTML::script('admin_js/compare/compare.js')}}
+<script>
 
     jQuery(document).ready(function($) {
 
-        getRoundAvgScore();
+         $( "#res_par" ).hide();
+
+        $('#compare_form').submit(getCompareRound);
 
         });
 </script>
 
-    <script>
+<script>
 
         $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
             event.preventDefault();
             $(this).ekkoLightbox();
         });
 
-    </script>
+</script>
 
 @stop

@@ -121,6 +121,8 @@ Route::group(['before'=>'auth'], function(){
     Route::get('/account/round/{id}/active', 'RecordsController@store');
     Route::get('/account/round/{id}/edit-score', 'RoundController@editScore');
 
+    Route::post('/getCompareRounds', ['as' => 'round.compare', 'uses'=>'StatisticsController@getRoundCompare']);
+
     Route::post('/getTees', 'TeeController@getTeepads');
     Route::post('/getHoles', 'HoleController@getHoles');
     Route::get('/getUsers', 'UserController@getPlayers');
