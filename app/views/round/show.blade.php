@@ -230,9 +230,10 @@
 @stop
 
 @section('scripts')
+{{HTML::script('admin_js/compare/compare.js')}}
 {{HTML::script('admin_js/stats/stats.js')}}
 <script src="http://code.highcharts.com/highcharts.js"></script>
-{{HTML::script('admin_js/compare/compare.js')}}
+
 
 <script>
 
