@@ -30,16 +30,23 @@
            </div>
 
        <div class="row">
-
-
+        <br/>
+        @if($round->comment == null)
+        @else
+            <div class="col-sm-8 col-sm-offset-right-4">
+                <blockquote>
+                  <p class="">{{$round->comment}}</p>
+                </blockquote>
+            </div>
+        @endif
        </div>
 
-        <br/>
+
          <div class="panel panel-default">
            <!-- Default panel contents -->
            <div class="panel-heading" id="compare_result">  Resultat: {{calcScore($round->total, $round->tee->par)}}
            @if(Auth::check() && count($u_rounds) >= 1)
-           <span class="pull-right input-group-sm">
+           <span class="pull-right input-group-sm hidden-phone">
            <a href="" class="btn btn-xs btn-success compare" data-toggle="modal" data-target="#compare">Jämför runda</a>
            </span>
            @else
@@ -61,9 +68,16 @@
             <td class="{{checkScore($score->score, $score->par)}}">{{$score->score}} ({{$score->par}})</td>
             @endforeach
         </tr>
-        <tr id="compare_round">
-
-        </tr>
+        <tr id="compare_round_1"></tr>
+        <tr id="compare_round_2"></tr>
+        <tr id="compare_round_3"></tr>
+        <tr id="compare_round_4"></tr>
+        <tr id="compare_round_5"></tr>
+        <tr id="compare_round_6"></tr>
+        <tr id="compare_round_7"></tr>
+        <tr id="compare_round_8"></tr>
+        <tr id="compare_round_9"></tr>
+        <tr id="compare_round_10"></tr>
         <tr>
             <td>Längd</td>
             @foreach($tee->hole as $hole)
@@ -181,6 +195,7 @@
                        <div class="form-group">
 
                              <div class="col-sm-12">
+                             <p>Du kan jämföra upp till 10 rundor åt gången.</p>
 
                                         <select name="type_id" class="form-control type_id" id="type_id">
                                         <option value="0" selected="selected">Välj Runda</option>

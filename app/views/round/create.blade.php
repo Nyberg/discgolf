@@ -72,6 +72,18 @@
                  </div>
         </div>
 
+        <div class="form-group">
+            <label class="col-sm-1 col-sm-1 control-label">Kommentar</label>
+                 <div class="col-sm-11">
+
+                     {{Form::textarea('comment', '', ['class'=>'form-control'])}}
+
+                     {{errors_for('comment', $errors)}}
+
+                 </div>
+        </div>
+
+
 
 
         {{Form::submit('Nästa', ['class'=>'btn btn-primary'])}}

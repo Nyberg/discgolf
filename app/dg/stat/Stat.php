@@ -121,10 +121,10 @@ class Stat{
                         $total = $total + $score->score;
                         $rounds_num++;
 
-                    }else{
+                        }else{
 
+                        }
                     }
-                }
                 }
                 $avg = $total / $rounds_num;
                 $dirArray[$tee->id][$hole->number] = round($avg,1);
@@ -148,7 +148,6 @@ class Stat{
             $dirArray[$hole->tee_id][$hole->number] = 0;
             $total[$hole->tee_id][$hole->number] = 0;
         }
-
 
         foreach($rounds as $round){
 
@@ -174,7 +173,6 @@ class Stat{
         }
 
         return $dirArray;
-
     }
  /*
     public function roundAvg($rounds){
@@ -672,7 +670,6 @@ class Stat{
         }
 
         return $array;
-
     }
 
     public function getMonth($value){
@@ -680,7 +677,6 @@ class Stat{
         $date = $value->format('m');
 
         return $date;
-
     }
 
 } 

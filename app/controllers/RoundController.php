@@ -61,9 +61,8 @@ class RoundController extends BaseController {
             $par_id = Input::get('players');
         }
 
-
         $username = $user->first_name . ' ' . $user->last_name;
-        $comment = '';
+        $comment = Input::get('comment');
 
         $command = new PostRoundsCommand(
             $user_id,

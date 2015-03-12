@@ -1,6 +1,11 @@
+var i = 0;
 
 function getCompareRound(){
-    $('#compare_round').append('<br /><br/><i class="fa fa-spinner fa-spin center-block"></i>');
+    $('#compare_round_'+i+'').append('<i class="fa fa-spinner fa-spin center-block"></i>');
+    $('#compare').modal('hide');
+    var info =  $('#type_id option:selected').text();
+    i++;
+
     $.post(
         $(this).prop('action'),
         {
@@ -9,10 +14,10 @@ function getCompareRound(){
         function (data) {
             console.log(data);
             $('.fa-spinner').remove();
-            $('#compare_round').html('<td>Ditt resultat</td>');
+            $('#compare_round_'+i+'').html('<td>'+info+'</td>');
             $.each(data, function(index, value) {
                 var result = getScore(value.score, value.par);
-                $('#compare_round').append('<td class="'+result+'">' + value.score + ' (' + value.par + ')</td>');
+                $('#compare_round_'+i+'').append('<td class="'+result+'">' + value.score + ' (' + value.par + ')</td>');
             })
         },'json'
     );

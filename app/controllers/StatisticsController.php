@@ -503,7 +503,7 @@ class StatisticsController extends BaseController {
         $id = Input::get('id');
         #$model = Input::get('model');
 
-        #$rounds = Round::whereId($id)->first();
+        $round = Round::whereId($id)->first();
         $scores = Score::where('round_id', $id)->get();
         $data = [];
         $i = 1;
