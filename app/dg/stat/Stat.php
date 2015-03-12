@@ -350,23 +350,21 @@ class Stat{
              $j++;
             }
 
-        $bfr = 0;
-        for($k=1; $k<=$sum; $k++) {
+            $bfr = 0;
+            for($k=1; $k<=$sum; $k++) {
 
-            $quad = $this->in_array_r("quad", $dirArray[$k]) ? 'found' : 'not';
-            $trpbogey = $this->in_array_r("trpbogey", $dirArray[$k]) ? 'found' : 'not';
-            $dblbogey = $this->in_array_r("dblbogey", $dirArray[$k]) ? 'found' : 'not';
-            $bogey = $this->in_array_r("bogey", $dirArray[$k]) ? 'found' : 'not';
+                $quad = $this->in_array_r("quad", $dirArray[$k]) ? 'found' : 'not';
+                $trpbogey = $this->in_array_r("trpbogey", $dirArray[$k]) ? 'found' : 'not';
+                $dblbogey = $this->in_array_r("dblbogey", $dirArray[$k]) ? 'found' : 'not';
+                $bogey = $this->in_array_r("bogey", $dirArray[$k]) ? 'found' : 'not';
 
-
-            if ($quad == 'found' || $trpbogey == 'found' || $dblbogey == 'found' || $bogey == 'found') {
-            } else {
-                $bfr++;
+                if ($quad == 'found' || $trpbogey == 'found' || $dblbogey == 'found' || $bogey == 'found') {
+                } else {
+                    $bfr++;
+                }
             }
+          return $bfr;
         }
-      return $bfr;
-    }
-
 
     function in_array_r($needle, $haystack) {
         $found = false;
