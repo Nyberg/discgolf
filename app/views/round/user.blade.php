@@ -24,7 +24,7 @@
             <td>{{$round->type}}
 
             @if($round->type == 'Par')
-                {{' | '. getParPlayer($round->par_id, $user->id, $round->user_id)}}
+                {{' | '. getParPlayer($round->type_id, $user->id, $round->user_id)}}
             @else
             @endif
             </td>

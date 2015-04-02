@@ -5,11 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTeesTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
     public function up()
     {
         Schema::create('tees', function (Blueprint $table) {
@@ -23,11 +18,7 @@ class CreateTeesTable extends Migration {
             $table->timestamps();
         });
     }
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
+
 	public function down()
 	{
 		Schema::drop('tees');

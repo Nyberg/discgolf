@@ -4,7 +4,7 @@ class ClubController extends \BaseController {
 
 	public function index()
 	{
-        $clubs = Club::all();
+        $clubs = Club::orderBy('name', 'asc')->get();
         $countries = Country::get();
         $states = State::get();
         $cities = City::get();
@@ -71,11 +71,8 @@ class ClubController extends \BaseController {
 	public function show($id)
 	{
 		$club = Club::with('course', 'users')->whereId($id)->firstOrFail();
-        $news = News::where('club_id', $id)->orderBy('created_at', 'desc')->limit(5)->get();
-        $mosts = News::where('club_id', $id)->orderBy('views', 'desc')->limit(3)->get();
-		$users = User::where('club_id', $id)->limit(18)->get();
 
-        return View::make('club.show', ['club'=>$club, 'users'=>$users, 'news'=>$news, 'mosts'=>$mosts]);
+        return View::make('club.show', ['club'=>$club]);
 	}
 
 	public function edit($id)

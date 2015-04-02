@@ -47,13 +47,13 @@ class LostController extends \BaseController {
 
 	public function store()
 	{
-		$lost = New lost;
+		$lost = new Lost;
 
         $lost->user_id = Auth::id();
         $lost->course_id = Input::get('course');
         $lost->status = Input::get('status');
         $lost->date = Input::get('date');
-        $lost->hole_id = Input::get('hole');
+    #   $lost->hole_id = Input::get('hole');
         $lost->solved = 0;
 
         if(Input::get('status') == 'lost'){

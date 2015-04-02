@@ -1,9 +1,9 @@
 $(document).ready(function() {
     var i = 0;
-    $.get('http://178.62.90.148/notiser', function(data){
+    $.get('http://dg.dev:8000/notiser', function(data){
         $.each(data, function(index, value) {
             console.log(value);
-            $('#notificationMenu').append('<li><a href="'+value.url+'" class="margin-top-bottom">'+ value.body +'</a></li>');
+            $('#notificationMenu').append('<li class="text-center"><a href="'+value.url+'" class="margin-top-bottom">'+ value.body +'</a></li>');
             if(value.is_read == 0)
             {
                 i++;
@@ -23,7 +23,7 @@ $(document).ready(function() {
                 $('.badge-notify').addClass('hidden');
             }
         }
-        $.get('http://178.62.90.148/removereadnotifications', function(data){
+        $.get('http://dg.dev:8000/removereadnotifications', function(data){
 
         })
     })

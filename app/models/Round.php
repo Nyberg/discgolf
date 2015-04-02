@@ -1,6 +1,7 @@
 <?php
 
 use dg\Eventing\EventGenerator;
+use dg\Rounds\GroupRoundWasPosted;
 use dg\Rounds\RoundWasActivated;
 use dg\Rounds\RoundWasPosted;
 use dg\Rounds\RoundWasRemoved;
@@ -9,13 +10,11 @@ use dg\Rounds\RoundWasUpdated;
 class Round extends Eloquent{
 
     protected $table = 'rounds';
-    protected $fillable = ['course_id', 'user_id', 'comment', 'tee_id', 'type', 'date', 'par_id', 'status', 'username'];
-
+    protected $fillable = ['course_id', 'user_id', 'comment', 'tee_id', 'type', 'date', 'type_id', 'status', 'username', 'group_id'];
 
     use EventGenerator;
 
-
-    public function post($user_id, $course_id, $tee_id, $date, $status, $type, $par_id, $username, $comment){
+    public function post($user_id, $course_id, $tee_id, $date, $status, $type, $type_id, $username, $comment, $group_id, $weather_id, $wind_id){
 
         $this->user_id = $user_id;
         $this->course_id = $course_id;
@@ -23,14 +22,39 @@ class Round extends Eloquent{
         $this->date = $date;
         $this->status = $status;
         $this->type = $type;
-        $this->par_id = $par_id;
+        $this->type_id = $type_id;
         $this->username = $username;
         $this->comment = $comment;
-
+        $this->group_id = $group_id;
+        $this->weather_id = $weather_id;
+        $this->wind_id = $wind_id;
 
         $this->save();
 
         $this->raise(new RoundWasPosted($this));
+
+        return $this;
+
+    }
+
+    public function postGroupRound($user_id, $course_id, $tee_id, $date, $status, $type, $type_id, $username, $comment, $group_id, $weather_id, $wind_id){
+
+        $this->user_id = $user_id;
+        $this->course_id = $course_id;
+        $this->tee_id = $tee_id;
+        $this->date = $date;
+        $this->status = $status;
+        $this->type = $type;
+        $this->type_id = $type_id;
+        $this->username = $username;
+        $this->comment = $comment;
+        $this->group_id = $group_id;
+        $this->weather_id = $weather_id;
+        $this->wind_id = $wind_id;
+
+        $this->save();
+
+        $this->raise(new GroupRoundWasPosted($this));
 
         return $this;
 
@@ -107,6 +131,18 @@ class Round extends Eloquent{
 
     public function record(){
         return $this->belongsTo('Record');
+    }
+
+    public function group(){
+        return $this->belongsTo('GroupRound');
+    }
+
+    public function weather(){
+        return $this->belongsTo('Weather');
+    }
+
+    public function wind(){
+        return $this->belongsTo('Wind');
     }
 
 }

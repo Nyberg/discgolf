@@ -26,7 +26,7 @@
 
             <div class="col-md-6">
             <p>Välj datum (från och till) för att generera era resultat mellan valda datum.</p>
-            <p>Ni kan även välja vilken bana det ska gälla. Vill ni inte välja bana så lämna fältet som det är.</p>
+            <p>Ni kan även välja vilken bana det ska gälla. Vill ni inte välja bana så lämna fältet som det är. Under grafen kan ni sedan klicka er vidare till era rundor (rundorna öppnas i nytt fönster).</p>
             </div>
 
                       <div class="col-md-6">
@@ -81,13 +81,15 @@
 <div class="row">
 
 </div>
-
     <div class="row">
        <div id="chart-round-avg" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
     </div>
+</div>
 
+<div class="row">
+   <div class="col-sm-12" id="round-data">
 
-
+    </div>
 </div>
 
 @else
@@ -104,101 +106,10 @@
 <script>
 
     jQuery(document).ready(function($) {
-
+            $('#info').hide();
+            getUserRounds();
             $('#round_avg').submit(getRoundAvgStats);
-
         });
-
-
-        /*
-
-
-function visitorData (data, name) {
-   $('#container').highcharts({
-                chart: {
-                    type: 'areaspline',
-                    backgroundColor: {
-                        linearGradient: {x1: 0, y1: 0, x2: 1, y2: 1},
-                        stops: [
-                            [0, '#2C3E50'],
-                            [1, '#2C3E50']
-                        ]
-                    },
-                    style: {
-                        fontFamily: "'Unica One', sans-serif",
-                        color: '#ffffff'
-                    },
-                    plotBorderColor: '#E74C3C'
-                },
-                title: {
-                    text: 'Senaste resultaten',
-                    style: {
-                        color: '#E0E0E3',
-                        textTransform: 'uppercase',
-                        fontSize: '1em'
-                    }
-                },
-                legend: {
-                    itemStyle: {
-                        color: '#E0E0E3'
-                    },
-                    itemHoverStyle: {
-                        color: '#FFF'
-                    },
-                    itemHiddenStyle: {
-                        color: '#606063'
-                    }
-                },
-                xAxis: {
-                    categories: data[2]['date'],
-                    labels: {
-                        style: {
-                            color: '#E0E0E3'
-                        }
-                    }
-                },
-                yAxis: {
-                    gridLineColor: '#2C3E50',
-                    labels: {
-                        style: {
-                            color: '#E0E0E3'
-                        }
-                    },
-                    lineColor: '#E74C3C',
-                    minorGridLineColor: '#E74C3C',
-                    tickColor: '#E74C3C',
-                    tickWidth: 0,
-                    title: {
-                        style: {
-                            color: '#E0E0E3'
-                        }
-                    }
-                },
-                colors: ["#ffffff", "#E74C3C", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
-                    "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
-                tooltip: {
-                    valueSuffix: '',
-                    formatter: function() {
-                                                    return 'Resultat:<br/>'+
-                                                    this.x +': <b>'+ this.y+'</b>';
-                                                    }
-                },
-                series:
-                        data
-                });
-
-}
-
-$(document).ready(function() {
-
-           $.get('/getRoundsPerMonth', {id: 0, model: 'stats'}, function (json) {
-                        console.log(json[0]);
-                        visitorData(json, json[0]);
-
-
-            });
-
-        }); */
 
 
       $(function() {

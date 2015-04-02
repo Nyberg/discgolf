@@ -54,8 +54,6 @@ class ScoreController extends \BaseController {
 	}
 
 
-
-
 	/**
 	 * Display the specified resource.
 	 *

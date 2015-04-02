@@ -12,12 +12,14 @@
     <div class="col-md-12" id="Container">
         <ul class="list-inline list-unstyled" id="Container">
                @foreach($clubs as $club)
+               <a href="/club/{{$club->id}}/show">
                <li class="col-sm-3 text-center thread mix category-{{$club->country->country}} category-{{$club->state->state}} category-{{$club->city->city}}" data-myorder="2">
 
                   <img src="{{$club->image}}" class="center-block club-index"/>
-                  <p><a href="{{$club->website}}" target="_blank">{{$club->name .', ' . $club->city->city}}</a></p>
+                  <p>{{$club->name .', ' . $club->city->city}}</p>
 
                </li>
+               </a>
                @endforeach
            </ul>
     </div>

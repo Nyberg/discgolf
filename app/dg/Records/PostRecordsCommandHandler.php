@@ -19,7 +19,7 @@ class PostRecordsCommandHandler implements CommandHandler{
 
     public function handle($command)
     {
-        $record = $this->record->post($command->user_id, $command->course_id, $command->tee_id, $command->type, $command->total, $command->date, $command->par_id, $command->round_id, $command->status);
+        $record = $this->record->post($command->user_id, $command->course_id, $command->tee_id, $command->type, $command->total, $command->date, $command->par_id, $command->round_id, $command->status, $command->group_id);
         $this->dispatcher->dispatch($record->releaseEvents());
     }
 

@@ -77,10 +77,7 @@ class RegistrationController extends \BaseController
 
 
         $user->roles()->attach($role);
-
         $user->profile()->save($profile);
-
-
 
         $reg = Registration::where('id', $token->user_id)->firstOrFail();
 

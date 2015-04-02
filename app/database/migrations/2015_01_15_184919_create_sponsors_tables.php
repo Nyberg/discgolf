@@ -5,11 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateSponsorsTables extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
 	public function up()
 	{
         Schema::create('sponsors', function(Blueprint $table){
@@ -26,11 +21,6 @@ class CreateSponsorsTables extends Migration {
         });
 	}
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
 	public function down()
 	{
 		Schema::drop('sponsors');

@@ -26,11 +26,11 @@
                 </div>
 
                     <div class="col-md-2 col-sm-2 box0">
-                      <a href="#">  <div class="box1">
+                      <a href="/admin/tours">  <div class="box1">
                             <span class="li_bubble"></span>
-                            <h4>Kommentarer</h4>
+                            <h4>Tävlingar</h4>
                         </div>
-                            <p>Hantera kommentarer</p></a>
+                            <p>Hantera tävlingar</p></a>
                     </div>
                       <div class="col-md-2 col-sm-2 box0">
                       <a href="/admin/rounds/">  <div class="box1">
@@ -90,12 +90,15 @@
 
         </div><!-- /row -->
 
-
-            <div class="row">
-
-            </div><!-- /row -->
-
             <div class="row mt">
+
+                <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+                  <a href="#">  <div class="box1">
+                        <span class="li_bubble"></span>
+                        <h4>Kommentarer</h4>
+                    </div>
+                        <p>Hantera kommentarer</p></a>
+                </div>
 
             </div><!-- /row -->
 </div>

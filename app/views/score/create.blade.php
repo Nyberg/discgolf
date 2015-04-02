@@ -5,9 +5,38 @@
     	<div class="showback">
 
     <div class="col-md-12">
-        <h2 class="text-center page-header-custom">Skapa Runda - {{$tee->course['name'] . ' - ' . $tee->color}}</h2>
+        <h2 class="text-center page-header-custom">Runda - {{$tee->course['name'] . ' - ' . $tee->color}} - {{$round->created_at->format('Y-m-d')}}</h2>
         <div class="divider-header"></div>
-    </div> <hr/>
+        @if($round->type == 'Group')
+        <p class="text-center">Detta är en grupprunda med:
+        @foreach($round->group->rounds as $r)
+        <br/>
+        <a href="/user/{{$r->user_id}}/show">{{$r->username}}</a>
+        @endforeach
+        </p>
+
+        @else
+        @endif
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-3"></div>
+            <div class="col-md-3 text-center">
+                <img src="{{$round->weather->image}}" alt="" width="80px" class="text-center"/>
+                <p class="text-center">{{$round->weather->name}}</p>
+            </div>
+            <div class="col-md-3 text-center">
+                <img src="/img/weather/flag.png" alt="" width="80px" class="text-center"/>
+                <p class="text-center">{{$round->wind->name}}</p>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+
+     <hr class="divider row"/>
+
       <table class="table table-hover">
 
 
@@ -37,6 +66,8 @@
            </tr>
           </tbody>
       </table>
+
+         <hr class="divider row"/>
 
         <h2 class="text-center page-header-custom">Lägg till resultat</h2>
         <div class="divider-header"></div>

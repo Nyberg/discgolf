@@ -1,73 +1,78 @@
-    @extends('master')
-    @section('content')
+@extends('master')
+@section('content')
 
-              <h2 class="text-center page-header-custom"><a href="/course/{{$course->id}}/show">{{$course->name . ' - ' . $tee->color}}</a>, {{$round->date}} av
-                  @if($round->type == 'Par')
-                    <td>{{showPar($round->par_id, $round->user_id)}}</td>
-                  @else
-                  <a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a>
-                  @endif
-              </h2>
-              <div class="divider-header"></div>
-     </h4>
+  <h2 class="text-center page-header-custom"><a href="/course/{{$course->id}}/show">{{$course->name . ' - ' . $tee->color}}</a>, {{$round->date}} av
+      @if($round->type == 'Par')
+        <td>{{showPar($round->type_id, $round->user_id)}}</td>
+      @else
+      <a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a>
+      @endif
+  </h2>
+
     <div class="row">
-    @foreach($course->photos as $photo)
-         <img class="" src="{{$photo->url}}" width="100%"/>
-    @endforeach
-    <div class="hidden-phone">
-               <span class="text-center span-h2 col-lg-3">{{$course->city->city . ', ' . $course->state->state}}</span>
-               <span class="text-center span-h2 col-lg-2">{{'Hål: '. $tee->holes}}</span>
-               <span class="text-center span-h2 col-lg-2">{{'Par: ' . $tee->par}}</span>
-               <span class="text-center span-h2 col-lg-3">
-               Bästa resultat:
-               @foreach($records as $record)
+        @foreach($course->photos as $photo)
+            <img class="" src="{{$photo->url}}" width="100%"/>
+        @endforeach
 
-               {{calcRecord($record->total, $tee->par, $record->id, $record->course_id)}}
-               @endforeach
-               </span>
-               <span class="text-center span-h2 col-lg-2">{{checkFee($course->fee)}}</span>
-               </div>
-           </div>
+        <div class="hidden-phone">
+           <span class="text-center span-h2 col-lg-3">{{$course->city->city . ', ' . $course->state->state}}</span>
+           <span class="text-center span-h2 col-lg-2">{{'Hål: '. $tee->holes}}</span>
+           <span class="text-center span-h2 col-lg-2">{{'Par:'}} <span id="par">{{$tee->par}}</span></span>
+           <span class="text-center span-h2 col-lg-3">
+           Bästa resultat:
+           @foreach($records as $record)
+
+           {{calcRecord($record->total, $tee->par, $record->id, $record->course_id)}}
+           @endforeach
+           </span>
+           <span class="text-center span-h2 col-lg-2">{{checkFee($course->fee)}}</span>
+        </div>
+    </div>
 
        <div class="row">
         <br/>
-        @if($round->comment == null)
-        @else
-            <div class="col-sm-8 col-sm-offset-right-4">
+            <div class="col-sm-8">
+            @if($round->comment == null)
+            @else
                 <blockquote>
                   <p class="">{{$round->comment}}</p>
                 </blockquote>
+            @endif
             </div>
-        @endif
+            <div class="col-sm-2 text-center weather-icon">
+            <a href="/rounds/weather/{{$round->weather_id}}/show">
+                <img src="{{$round->weather->image}}" class="" width="64px"/>
+                <p class="">{{$round->weather->name}}</p>
+            </a>
+            </div>
+            <div class="col-sm-2 text-center weather-icon">
+                <img src="/img/weather/flag.png" class="" width="64px"/>
+                <p>{{$round->wind->name}}</p>
+            </div>
        </div>
 
 
          <div class="panel panel-default">
            <!-- Default panel contents -->
            <div class="panel-heading" id="compare_result">  Resultat: {{calcScore($round->total, $round->tee->par)}}
-           @if(Auth::check() && count($u_rounds) >= 1)
-           <span class="pull-right input-group-sm hidden-phone">
-           <a href="" class="btn btn-xs btn-success compare" data-toggle="modal" data-target="#compare">Jämför runda</a>
-           </span>
-           @else
-           @endif
+
            </div>
-    <table class="table table-hover text-center hidden-phone">
+    <table class="table table-hover text-center hidden-phone hidden-tablet">
     <thead>
         <tr>
             <td>Hål</td>
             @foreach($tee->hole as $hole)
-                 <td><a href="{{$hole->image}}" data-toggle="lightbox" data-gallery="hole-gallery" data-parent="" data-footer="" data-title="{{'Basket '.$hole->number. ', '.$course->name.' - ' . $tee->color . '.<br/>Length ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></td>
+                 <td><a href="{{$hole->image}}" data-toggle="lightbox" data-gallery="hole-gallery" data-parent="" data-footer="" data-title="{{'Hål '.$hole->number. ', '.$course->name.' - ' . $tee->color . '.<br/>Length ' . convert($hole->length). ', Par '. $hole->par}}">{{$hole->number}}</a></td>
             @endforeach
         </tr>
     </thead>
     <tbody>
-        <tr>
+            <tr>
             <td>Resultat/Par</td>
             @foreach($round->score as $score)
             <td class="{{checkScore($score->score, $score->par)}}">{{$score->score}} ({{$score->par}})</td>
             @endforeach
-        </tr>
+            </tr>
         <tr id="compare_round_1"></tr>
         <tr id="compare_round_2"></tr>
         <tr id="compare_round_3"></tr>
@@ -78,6 +83,16 @@
         <tr id="compare_round_8"></tr>
         <tr id="compare_round_9"></tr>
         <tr id="compare_round_10"></tr>
+
+         <tr id="group_round_1"></tr>
+         <tr id="group_round_2"></tr>
+         <tr id="group_round_3"></tr>
+         <tr id="group_round_4"></tr>
+         <tr id="group_round_5"></tr>
+         <tr id="group_round_6"></tr>
+         <tr id="group_round_7"></tr>
+         <tr id="group_round_8"></tr>
+
         <tr>
             <td>Längd</td>
             @foreach($tee->hole as $hole)
@@ -87,43 +102,53 @@
     </tbody>
     </table>
     </div>
+
+   <span class="input-group-sm hidden-phone">
+       <div class="row">
+       @if($round->type == 'Group')
+
+           <div class="col-sm-6">
+                {{Form::open(['method' => 'POST','route' => ['group.rounds'], 'id'=>'group_form'])}}
+                {{Form::hidden('id', $round->group_id, ['id'=>'group_id'])}}
+                {{Form::hidden('round_id', $round->id, ['id'=>'round_id'])}}
+                {{Form::submit('Visa Grupprundor', ['class' => 'btn btn-primary btn-sm btn-block', 'id'=>'submit_gr'])}}
+                {{Form::close()}}
+           </div>
+       @else
+       @endif
+       @if(Auth::check() && count($u_rounds) >= 1)
+       <div class="col-sm-6">
+          <button type="button" class="btn btn-sm btn-primary btn-block" id="submit_compare" data-toggle="modal" data-target="#compare">Jämför runda</button>
+        </div>
+       @else
+       @endif
+       </div>
+   </span>
+
     </div>
      <div class="showback hidden-phone">
 
      @if(Auth::check())
-
             <div class="row">
-
               <div class="col-md-12">
                  <input hidden="id" id="id" value="{{$round->id}}"/>
                  <input hidden="model" id="model" value="round"/>
                  <div id="chart-two" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
               </div>
-
               <hr/>
-
             </div>
-
      @else
-
             <div class="row">
-
               <div class="col-md-12">
                 <h2 class="text-center page-header-custom">Statistik</h2>
                  <p class="text-center">Som medlem eller licensierad spelare får du extra statistik. Här kan du bland annat se resultatet jämfört med banans snitt för varje hål. </p>
                  <p class="text-center"><a href="#">Läs mer om medlemskap här!</a></p>
                 <div class="divider-header"></div>
               </div>
-
               <div class="col-md-12">
-
               </div>
-
               <hr/>
-
             </div>
-
-
      @endif
 
     </div>
@@ -133,23 +158,22 @@
     <div class="col-lg-12">
     <div class="showback">
 
-              <div class="panel panel-default">
-                <div class="panel-heading">Kommentarer ({{count($round->comments)}})
-                     @if(Auth::user())
-                        <a class="pull-right btn btn-primary btn-xs" data-toggle="modal" data-target="#comment">Kommentera</a>
-                     @endif
-                </div>
-             </div>
-<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">Kommentarer ({{count($round->comments)}})
+         @if(Auth::user())
+            <a class="pull-right btn btn-primary btn-xs" data-toggle="modal" data-target="#comment">Kommentera</a>
+         @endif
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @foreach($round->comments as $comment)
 
-  <div class="col-md-12">
-        @foreach($round->comments as $comment)
+            @include('layouts/include/comment')
 
-        @include('layouts/include/comment')
-
-        @endforeach
-</div>
-</div>
+            @endforeach
+        </div>
+    </div>
         <div class="modal fade" id="comment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -220,39 +244,35 @@
                 @else
                 @endif
 
-    </div>
-    </div>
-
-
-
+            </div>
+        </div>
     </div>
 
 @stop
 
 @section('scripts')
+
 {{HTML::script('admin_js/compare/compare.js')}}
 {{HTML::script('admin_js/stats/stats.js')}}
+{{HTML::script('admin_js/round/group.js')}}
 <script src="http://code.highcharts.com/highcharts.js"></script>
-
 
 <script>
 
     jQuery(document).ready(function($) {
 
         getRoundAvgScore();
-
+        $('#group_form').submit(getGroupRounds);
         $('#compare_form').submit(getCompareRound);
 
         });
 </script>
 
 <script>
-
         $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
             event.preventDefault();
             $(this).ekkoLightbox();
         });
-
 </script>
 
 @stop

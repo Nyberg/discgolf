@@ -5,11 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateScoreTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
 	public function up()
 	{
 		Schema::create('scores', function(Blueprint $table){
@@ -27,11 +22,6 @@ class CreateScoreTable extends Migration {
 	});
 }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
 	public function down()
 	{
 		Schema::drop('scores');

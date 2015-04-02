@@ -34,7 +34,9 @@ class StatisticsController extends BaseController {
         if($model == 'user'){
             $scores = Score::where('user_id', $id)->get();
             $courses_played = Round::where('user_id', $id)->lists('tee_id');
-            $datarounds = Round::with('score')->where('user_id', $id)->where('status', 1)->orWhere('par_id',$id)->get();
+            $datarounds = Round::with('score')->where('user_id', $id)->where('status', 1)->get();
+            $rounds = Round::where('user_id', $id)->where('status', 1)->count();
+            $total = Round::where('user_id', $id)->where('status', 1)->sum('total');
 
             $data = $this->stat->calc($scores);
             $shots = $this->stat->calcShots($scores);
@@ -49,11 +51,11 @@ class StatisticsController extends BaseController {
             'msg' => 'success',
             'user' => $name,
             'avg' => $avg,
-            'shots' => $shots,
+            'shots' => $total,
             'cp'    => count($cp),
             'bfr'   => $bfr,
             'birdies' => $birdies,
-            'rounds'    => count($user->round)
+            'rounds'    => $rounds
 
         ];
 
@@ -79,7 +81,9 @@ class StatisticsController extends BaseController {
         if($model == 'user'){
             $scores = Score::where('user_id', $id)->get();
             $courses_played = Round::where('user_id', $id)->lists('tee_id');
-            $datarounds = Round::with('score')->where('user_id', $id)->where('status', 1)->orWhere('par_id',$id)->get();
+            $datarounds = Round::with('score')->where('user_id', $id)->where('status', 1)->get();
+            $total = Round::where('user_id', $id)->where('status', 1)->sum('total');
+            $rounds = Round::where('user_id', $id)->where('status', 1)->count();
 
             $data = $this->stat->calc($scores);
             $shots = $this->stat->calcShots($scores);
@@ -94,11 +98,11 @@ class StatisticsController extends BaseController {
             'msg' => 'success',
             'user' => $name,
             'avg' => $avg,
-            'shots' => $shots,
+            'shots' => $total,
             'cp'    => count($cp),
             'bfr'   => $bfr,
             'birdies' => $birdies,
-            'rounds'    => count($user->round)
+            'rounds'    => $rounds
 
         ];
 
@@ -106,7 +110,7 @@ class StatisticsController extends BaseController {
 
     }
 
-    # Personlig statistik #
+    # Personlig statistik (pie)#
     public function getStats()
     {
 
@@ -115,7 +119,7 @@ class StatisticsController extends BaseController {
         if($input['model'] == 'hole'){
             $hole = Hole::where('id', $input['id'])->firstOrFail();
             $scores = Score::where('hole_id', $input['id'])->where('user_id', Auth::id())->get();
-            $rounds = Round::where('user_id', Auth::id())->where('tee_id', $hole->tee_id)->orWhere('par_id', Auth::id())->where('status', 1)->get();
+            $rounds = Round::where('user_id', Auth::id())->where('tee_id', $hole->tee_id)->where('status', 1)->get();
         }
         if($input['model'] == 'course'){
             $scores = Score::where('course_id', $input['id'])->where('user_id', Auth::id())->get();
@@ -156,7 +160,7 @@ class StatisticsController extends BaseController {
         $model = Input::get('model');
         $user = User::find(Auth::id());
 
-        $name = $user->first_name + ' ' + $user->last_name;
+        $name = $user->first_name . ' ' . $user->last_name;
 
         if($model == 'course'){
             $scores = Score::where('course_id', $id)->get();
@@ -198,10 +202,25 @@ class StatisticsController extends BaseController {
         $model = Input::get('model');
 
         if($model == 'stats'){
-            $rounds = Round::get();
-            $data = $this->stat->holeAvgStats($rounds);
+            $rounds = Round::where('status', 1)->get();
+            $stats = $this->stat->getRoundsPerMonth($rounds);
 
-            $message = $data;
+            $message = [
+                'msg' => 'success',
+                'user' => 'Whatever',
+                'jan'  =>  $stats['jan'],
+                'feb'   => $stats['feb'],
+                'mar'   => $stats['mar'],
+                'apr'   => $stats['apr'],
+                'maj'   => $stats['maj'],
+                'jun'   => $stats['jun'],
+                'jul'   => $stats['jul'],
+                'aug'   => $stats['aug'],
+                'sep'   => $stats['sep'],
+                'okt'   => $stats['okt'],
+                'nov'   => $stats['nov'],
+                'dec'   => $stats['dec'],
+            ];
         }
 
         if($model == 'user'){
@@ -209,7 +228,7 @@ class StatisticsController extends BaseController {
             $user = User::whereId($id)->firstOrFail();
             $name = $user->first_name . ' ' . $user->last_name;
 
-            $rounds = Round::where('user_id', $id)->get();
+            $rounds = Round::where('user_id', $id)->where('status', 1)->get();
 
             $stats = $this->stat->getRoundsPerMonth($rounds);
             $message = [
@@ -239,8 +258,9 @@ class StatisticsController extends BaseController {
             $user = User::whereId(Auth::id())->firstOrFail();
             $name = $user->first_name . ' ' . $user->last_name;
 
-            $stats = $this->stat->getRoundsPerMonth($rounds);
             $data = $this->stat->getRoundsPerMonth($user_rounds);
+            $stats = $this->stat->getRoundsPerMonth($rounds);
+
             $message = [
                 'msg' => 'success',
                 'user' => $name,
@@ -368,13 +388,13 @@ class StatisticsController extends BaseController {
         $id = Input::get('id');
         $model = Input::get('model');
 
-        $round = Round::find($id);
-        $num = Round::where('tee_id', $round->tee_id)->where('user_id', Auth::id())->count();
+        $round = Round::where('id', $id)->first();
+        $num = Round::where('tee_id', $round->tee_id)->where('user_id', Auth::id())->where('status', 1)->count();
 
-        $tee = Tee::where('id', $round->tee_id)->firstOrFail();
+        $tee = Tee::where('id', $round->tee_id)->first();
         $tees = Tee::where('id', $round->tee_id)->get();
         $rounds = Round::where('tee_id', $round->tee_id)->where('status', 1)->get();
-        $round = Round::where('id', $round->id)->firstOrFail();
+        #$round = Round::where('id', $round->id)->firstOrFail();
 
         if($num == 0 || $num == null){
             $user = $this->stat->generateBlank($tee);
@@ -456,16 +476,15 @@ class StatisticsController extends BaseController {
         $id = Input::get('id');
         $model = Input::get('model');
 
-
         if($model == 'course') {
 
-            $rounds = Round::where('course_id',$id)->limit(5)->get();
+            $rounds = Round::where('course_id',$id)->where('status', 1)->get();
             $data = $this->stat->roundScores($rounds);
 
             $message = $data;
         }
         if($model == 'user'){
-            $rounds = Round::where('user_id',$id)->get();
+            $rounds = Round::where('user_id',$id)->where('status', 1)->get();
             $data = $this->stat->roundScores($rounds);
 
             $message = $data;
@@ -483,9 +502,9 @@ class StatisticsController extends BaseController {
             $course_id = Input::get('course_id');
 
             if($course_id == 0){
-                $rounds = Round::where('date', '>=', $date_from)->where('date', '<=', $date_to)->where('user_id', Auth::id())->get();
+                $rounds = Round::where('date', '>=', $date_from)->where('date', '<=', $date_to)->where('user_id', Auth::id())->where('status', 1)->orderBy('date', 'asc')->get();
             }else{
-                $rounds = Round::where('date', '>=', $date_from)->where('date', '<=', $date_to)->where('course_id', $course_id)->where('user_id', Auth::id())->get();
+                $rounds = Round::where('date', '>=', $date_from)->where('date', '<=', $date_to)->where('course_id', $course_id)->where('user_id', Auth::id())->where('status', 1)->orderBy('date', 'asc')->get();
             }
 
             $data = $this->stat->roundScores($rounds);
@@ -517,4 +536,31 @@ class StatisticsController extends BaseController {
 
         return Response::json($message);
     }
+
+    public function test($id){
+
+        $id = $id;
+
+        $round = Round::where('id', $id)->first();
+        $num = Round::where('tee_id', $round->tee_id)->where('user_id', Auth::id())->where('status', 1)->count();
+
+        $tee = Tee::where('id', $round->tee_id)->first();
+        $tees = Tee::where('id', $round->tee_id)->get();
+        $rounds = Round::where('tee_id', $round->tee_id)->where('status', 1)->get();
+        #$round = Round::where('id', $round->id)->firstOrFail();
+
+        if($num == 0 || $num == null){
+            $user = $this->stat->generateBlank($tee);
+
+        }else{
+            $user_rounds = Round::where('tee_id', $round->tee_id)->where('user_id', Auth::id())->where('status', 1)->get();
+            $user = $this->stat->generateUserAvg($tee, $user_rounds);
+        }
+
+        $stats = $this->stat->generateRound($round, $tee);
+        $avg = $this->stat->generateAvg($tees,$rounds);
+
+        dd($stats, $avg, $user);
+}
+
 }

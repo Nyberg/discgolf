@@ -63,7 +63,7 @@
 
           </ul>
 
-        <ul class="nav navbar-nav navbar-right pull-right col-lg-offset-right-1">
+        <ul class="nav navbar-nav navbar-right pull-right col-lg-offset-right-1 hidden-phone">
                 @if(Auth::user())
                 <li class="dropdown">
                         <a href="#" class="" id="notification" data-toggle="dropdown">
@@ -86,7 +86,7 @@
 
                           <li class="divider"></li>
                           <li class="dropdown-header">Discgolf</li>
-                          <li><a href="/account/round/add">Lägg till Runda</a></li>
+                          <li><a href="/round/start">Lägg till Runda</a></li>
                              @if(Auth::user())
                               <li><a  href="/account/rounds/{{Auth::User()->id}}/user">Dina Rundor</a></li>
                               @else
@@ -115,7 +115,7 @@
                       </li>
                        @if(Auth::user())
 
-                      <li>
+                      <li class="hidden-phone">
                            <a href="/user/{{Auth::user()->id}}/show" style="padding-top: 10px; margin-top: 10px; margin-bottom: -5px">
                           <img alt="Brand" src="{{Auth::user()->image}}" width="30px" height="30px" class="img-circle"/>
                           </a>

@@ -30,6 +30,16 @@
     <div class="col-sm-12">
 
     <p class="margin-left">{{$course->information}}</p>
+    <hr class="divider"/>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+      Visa väder i {{$course->city->city}}
+    </button>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#bankarta">
+      Visa bankarta
+    </button>
 
     </div>
 
@@ -41,11 +51,8 @@
 <div id="map-canvas"></div>
 </div>
 
-
-
 </div>
 </div>
-
 
 <p id="long">{{$course->long}}</p>
 <p id="lat">{{$course->lat}}</p>
@@ -53,20 +60,20 @@
 <div class="row">
 <div class="col-lg-12 main-chart">
 
-<ul class="nav nav-tabs nav-justified">
-<li class="active"><a data-toggle="tab" href="#sectionA">Översikt</a></li>
-    @foreach($course->tee as $tee)
-<li class="hidden-phone"><a data-toggle="tab" href="#section{{$tee->id}}">{{$tee->color}} Tee</a></li>
-    @endforeach
-<li class="hidden-phone"><a data-toggle="tab" href="#sectionX">Rekordrundor</a></li>
-</ul>
+    <ul class="nav nav-tabs nav-justified">
+        <li class="active"><a data-toggle="tab" href="#sectionA">Översikt</a></li>
+            @foreach($course->tee as $tee)
+        <li class="hidden-phone"><a data-toggle="tab" href="#section{{$tee->id}}">{{$tee->color}} Tee</a></li>
+            @endforeach
+        <li class="hidden-phone"><a data-toggle="tab" href="#sectionX">Rekordrundor</a></li>
+        <li class="hidden-phone"><a data-toggle="tab" href="#sectionY">Aces</a></li>
+    </ul>
+
 <div class="tab-content">
 
      <div id="sectionA" class="tab-pane fade in active">
         <br/><br/>
           <div class="row">
-
-          <div class="col-lg-12">
 
           @foreach($course->tee as $tee)
 
@@ -91,7 +98,7 @@
               </div>
           @endforeach
           </div>
-        </div>
+
      </div>
 
     @foreach($course->tee as $tee)
@@ -145,10 +152,10 @@
            <div class="panel panel-default">
                <div class="panel-heading"><a href="/round/{{$rec->round_id}}/course/{{$rec->course_id}}">{{$rec->round->type}} | Resultat: {{calcScore($rec->round->total, $rec->tee->par)}}</a>
 
-                          @if($rec->type == 'Singel')
+                          @if($rec->type == 'Singel' || $rec->type == 'Group')
                               av <a href="/user/{{$rec->user_id}}/show">{{$rec->user->first_name . ' ' . $rec->user->last_name}}</a>
                           @else
-                              av {{showPar($rec->par_id, $rec->user_id)}}
+                              av {{showPar($rec->type_id, $rec->user_id)}}
                           @endif</div>
 
           <table class="table table-hover">
@@ -185,7 +192,34 @@
 
       </div>
 
+<div id="sectionY" class="tab-pane fade">
 
+     <h4 class="tab-rub text-center page-header-custom">Aces {{$course->name}}</h4>
+     <div class="divider-header"></div>
+    <div class="col-md-12">
+
+    @if(count($aces) == 0)
+    <p class="text-center">Inga aces ännu!</p>
+    @else
+
+     @foreach($aces as $ace)
+                <div class="col-sm-3 col-md-3">
+                      <div class="thumbnail">
+                        <div class="caption text-center">
+                            <i class="fa fa-trophy fa-4x red"></i>
+                            <h5 class="">
+                                {{$ace->user->first_name . ' ' . $ace->user->last_name}}
+                            </h5>
+                           <p>{{$ace->round->tee->color . ' - hål ' . $ace->hole->number}}</p>
+                           <p>{{$ace->round->date}}</p>
+                       </div>
+                      </div>
+                </div>
+     @endforeach
+     @endif
+          </div>
+
+</div>
 
     </div>
 
@@ -295,10 +329,10 @@
                 @foreach($rounds as $round)
                 <tr>
                     <td><a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->created_at->format('Y-m-d')}}</a></td>
-                    @if($round->type == 'Singel')
+                    @if($round->type == 'Singel' || $round->type == 'Group')
                     <td><a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a></td>
                     @else
-                    <td>{{showPar($round->par_id, $round->user_id)}}</td>
+                    <td>{{showPar($round->type_id, $round->user_id)}}</td>
                     @endif
                     <td class="hidden-phone">{{$round->tee['color']}}</td>
                     <td class="hidden-phone">{{$round->type}}</td>
@@ -411,6 +445,48 @@
 </div></div><!-- --/content-panel ---->
 </div><!-- --/content-panel ---->
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Väder i {{$course->city->city}}</h4>
+      </div>
+      <div class="modal-body text-center">
+      <script src="http://www.yr.no/sted/{{$course->country->country}}/{{$course->state->state}}/{{$course->city->city}}/ekstern_boks_tre_dager.js"></script><noscript><a href="http://www.yr.no/sted/{{$course->country->country}}/{{$course->state->state}}/{{$course->city->city}}/">yr.no: Værvarsel for Örebro</a></noscript>
+        <span class=""><script src="http://www.yr.no/sted/{{$course->country->country}}/{{$course->state->state}}/{{$course->city->city}}/ekstern_boks_time_for_time.js"></script><noscript><a href="http://www.yr.no/sted/{{$course->country->country}}/{{$course->state->state}}/{{$course->city->city}}/">yr.no: Værvarsel for Örebro</a></noscript>
+        </span>
+     </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="bankarta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Bankarta {{$course->name}}</h4>
+      </div>
+      <div class="modal-body text-center">
+      @if($course->course_map == null)
+      <p>Ingen bankarta finns tillgänglig</p>
+      @else
+     <img src="{{$course->course_map}}" width="100%"/>
+      @endif
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 @section('scripts')
 
@@ -443,13 +519,6 @@
 
     </script>
 
-<script>
-
-
-
-</script>
-
 @stop
-
 
 @stop

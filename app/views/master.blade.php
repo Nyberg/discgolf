@@ -6,60 +6,61 @@
     <meta name="description" content="">
     <meta name="author" content="Johannes Nyberg">
     <meta name="keyword" content="">
+    <link rel="shortcut icon" type="image/png" href="/img/penguin-png.png"/>
     <title>Penguin Project | Alfa</title>
 
-
-{{HTML::style('admin_css/css/bootstrap2.css')}}
-{{HTML::style('admin_css/font-awesome/css/font-awesome.css')}}
-{{HTML::style('admin_js/gritter/css/jquery.gritter.css')}}
-{{HTML::style('admin_css/lineicons/style.css')}}
-{{HTML::style('admin_css/css/style.css')}}
-{{HTML::style('admin_css/css/style-responsive.css')}}
-{{HTML::style('admin_css/css/datepicker.css')}}
-{{HTML::style('admin_css/css/jquery-ui.css')}}
-{{HTML::style('admin_css/css/morris.css')}}
-{{HTML::style('admin_css/css/ekko-lightbox.css')}}
-{{HTML::style('admin_css/css/ekko-lightbox.min.css')}}
-{{HTML::script('http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js')}}
-{{HTML::script('http://code.jquery.com/jquery-1.11.0.min.js')}}
-{{HTML::script('admin_js/form-validator/jquery.form-validator.js')}}
-
-{{HTML::script('admin_js/Chart.js')}}
-{{HTML::script('admin_js/Chart.min.js')}}
-{{HTML::script('admin_js/jquery.mixitup.js')}}
-{{HTML::script('admin_js/ekko-lightbox.js')}}
-{{HTML::script('admin_js/ekko-lightbox.min.js')}}
-{{HTML::script('admin_js/jquery-ui.min.js')}}
-{{HTML::script('packages/jleach/laravelmce/js/tinymce/tinymce.min.js')}}
-{{HTML::script('//tinymce.cachefly.net/4.1/tinymce.min.js')}}
-{{HTML::script('https://maps.googleapis.com/maps/api/js?key=AIzaSyCMaFerIs2B3QmhCTjer-s1x_8THiBDYSs')}}
+    {{HTML::style('admin_css/css/bootstrap2.css')}}
+    {{HTML::style('admin_css/font-awesome/css/font-awesome.css')}}
+    {{HTML::style('admin_css/lineicons/style.css')}}
+    {{HTML::style('admin_css/css/style.css')}}
+    {{HTML::style('admin_css/css/style-responsive.css')}}
+    {{HTML::style('admin_css/css/datepicker.css')}}
+    {{HTML::style('admin_css/css/flexslider.css')}}
+    {{HTML::style('admin_css/css/owl/owl.theme.css')}}
+    {{HTML::style('admin_css/css/owl/owl.carousel.css')}}
+    {{HTML::style('admin_css/css/owl/owl.transitions.css')}}
+    {{HTML::style('admin_css/css/jquery-ui.css')}}
+    {{HTML::style('admin_css/css/ekko-lightbox.css')}}
+    {{HTML::style('admin_css/css/ekko-lightbox.min.css')}}
+    {{HTML::script('http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js')}}
+    {{HTML::script('http://code.jquery.com/jquery-1.11.0.min.js')}}
+    {{HTML::script('admin_js/form-validator/jquery.form-validator.js')}}
+    {{HTML::script('admin_js/jquery.mixitup.js')}}
+    {{HTML::script('admin_js/ekko-lightbox.js')}}
+    {{HTML::script('admin_js/ekko-lightbox.min.js')}}
+    {{HTML::script('admin_js/jquery-ui.min.js')}}
+    {{HTML::script('admin_js/jquery.flexslider.js')}}
+    {{HTML::script('packages/jleach/laravelmce/js/tinymce/tinymce.min.js')}}
+    {{HTML::script('//tinymce.cachefly.net/4.1/tinymce.min.js')}}
 
 <script type="text/javascript">
 
-function initialize() {
+    function initialize() {
 
-    document.getElementById('lat').style.display = 'none';
-    document.getElementById('long').style.display = 'none';
+        document.getElementById('lat').style.display = 'none';
+        document.getElementById('long').style.display = 'none';
 
-    var long = document.getElementById('long').textContent;
-    var lat = document.getElementById('lat').textContent;
+        var long = document.getElementById('long').textContent;
+        var lat = document.getElementById('lat').textContent;
 
-    var myLatlng = new google.maps.LatLng(long, lat);
-    var mapOptions = {
-        zoom: 10,
-        center: myLatlng
-        }
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    var marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      title: 'Hello World!'
-    });
-}
+        var myLatlng = new google.maps.LatLng(long, lat);
+        var mapOptions = {
+            zoom: 10,
+            center: myLatlng
+            }
+        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title: 'Hello World!'
+        });
+    }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+    google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>
+
+
 
 <script>tinymce.init({selector:'textarea'});</script>
 
@@ -72,9 +73,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <section id="container">
    <div class="row-fluid back">
     <div class="col-lg-10 col-md-offset-1">
-    <!-- <a class="navbar-brand" href="/"> -->
-   <!-- <img src="/img/logo.png" class="col-md-offset-1"/> -->
-   <!-- </a> -->
+
     </div>
     </div>
 
@@ -111,14 +110,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
 {{HTML::script('admin_js/jquery.dcjqaccordion.2.7.js', ['class'=>'include'])}}
 {{HTML::script('admin_js/jquery.scrollTo.min.js')}}
 {{HTML::script('admin_js/jquery.nicescroll.js')}}
-{{HTML::script('admin_js/jquery.sparkline.js')}}
 <!--common script for all pages-->
 {{HTML::script('admin_js/common-scripts.js')}}
-{{HTML::script('admin_js/gritter/js/jquery.gritter.js')}}
-{{HTML::script('admin_js/gritter-conf.js')}}
 {{HTML::script('admin_js/bootstrap-datepicker.js')}}
 <!--script for this page-->
-{{HTML::script('admin_js/sparkline-chart.js')}}
 {{HTML::script('admin_js/app.js')}}
 {{HTML::script('admin_js/round/lost.js')}}
 {{HTML::script('admin_js/notifications/notiser.js')}}
@@ -130,17 +125,21 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 <script>
 
-
+    $(window).load(function() {
+      $('.flexslider').flexslider({
+        animation: "fade"
+      });
+    });
 
     $('#auto').autocomplete({
         source: '/query',
         minLength: 1
     });
 
-        $('#getPlayer').autocomplete({
-            source: '/getplayer',
-            minLength: 1
-        });
+    $('#getPlayer').autocomplete({
+        source: '/getplayer',
+        minLength: 1
+    });
 
     $('#myAffix').affix({
       offset: {
@@ -152,18 +151,35 @@ google.maps.event.addDomListener(window, 'load', initialize);
     });
 
 
-        </script>
+</script>
 
-        <script>
-          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-          ga('create', 'UA-60693522-1', 'auto');
-          ga('send', 'pageview');
+  ga('create', 'UA-60693522-1', 'auto');
+  ga('send', 'pageview');
+</script>
 
-        </script>
+  <script type="text/javascript">
+    $(function(){
+      SyntaxHighlighter.all();
+    });
+    $(window).load(function(){
+      $('.flexslider').flexslider({
+        animation: "slide",
+        animationLoop: false,
+        itemWidth: 210,
+        itemMargin: 5,
+        pausePlay: true,
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+    });
+  </script>
 
   </body>
 </html>

@@ -1,44 +1,32 @@
 @extends('master')
-
-
 @section('content')
 
-              <h2 class="text-center page-header-custom">Rundor</h2>
+    <div class="row">
+        <div class="col-md-12">
+              <h1 class="text-center">Rundor</h1>
+                <br/>
 
-              <div class="divider-header"></div>
+                @foreach($rounds as $round)
 
- <table class="table table-hover">
-          <thead>
-          <tr>
+                <a href="/round/{{$round->id}}/course/{{$round->course_id}}">
+                    <div class="col-sm-3 col-md-3">
+                          <div class="thumbnail">
+                            <div class="caption text-center">
+                                <h1 class="green">{{calcScore($round->total, $round->tee->par)}}</h1>
+                                <h4 class="">
+                                    {{$round->course->name . ' - ' . $round->tee->color}}
+                                </h4>
+                                <p>{{$round->created_at->format('Y-m-d') . ' av ' . $round->user->first_name . ' ' . $round->user->last_name}}</p>
+                           </div>
+                          </div>
+                    </div>
+                </a>
 
-           <th class="hidden-phone">Datum</th>
-            <th>Användare</th>
-            <th>Bana</th>
-            <th class="hidden-phone">Typ</th>
-            <th>Resultat</th>
-          </tr>
+                @endforeach
 
-          </thead>
-          <tbody>
-          @foreach($rounds as $round)
-           <tr>
-            <td class="hidden-phone"><a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->date}}</a></td>
-            <td>
-                @if($round->type == 'Par')
-                {{showPar($round->par_id, $round->user_id)}}
-                @else
-                <a href="/user/{{$round->user_id}}/show"> {{$round->user->first_name . ' ' . $round->user->last_name}}</a>
-                @endif
-            </td>
-            <td><a href="/course/{{$round->course_id}}/show">{{$round->course['name'] . ' - ' . $round->tee['color']}}</a></td>
-            <td class="hidden-phone">{{$round->type}}
+            </div>
 
-            </td>
-            <td>{{calcScore($round->total, $round->tee['par'])}}</td>
-           </tr>
-           @endforeach
-          </tbody>
-      </table>
+        </div>
 
 <div class="row">
     <div class="col-sm-12 text-center">

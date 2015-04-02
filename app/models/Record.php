@@ -10,7 +10,7 @@ class Record extends \Eloquent {
     use EventGenerator;
 
 
-    public function post($user_id, $course_id, $tee_id, $type, $total, $date, $par_id, $round_id, $status){
+    public function post($user_id, $course_id, $tee_id, $type, $total, $date, $par_id, $round_id, $status, $group_id){
 
         $this->user_id = $user_id;
         $this->course_id = $course_id;
@@ -18,9 +18,10 @@ class Record extends \Eloquent {
         $this->type = $type;
         $this->total = $total;
         $this->date = $date;
-        $this->par_id = $par_id;
+        $this->type_id = $par_id;
         $this->round_id = $round_id;
         $this->status = $status;
+        $this->group_id = $group_id;
 
         $this->save();
 

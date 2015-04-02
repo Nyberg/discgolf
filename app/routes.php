@@ -10,6 +10,9 @@ Route::get('/logout', 'SessionController@destroy');
 
 Route::group(['before'=>'checkAdmin'], function(){
 
+        #   Test        #
+        Route::get('/test/{id}', 'StatisticsController@test');
+
         #   Forum       #
         Route::group(['prefix' => '/forum'], function(){
             Route::group(['before' => 'csrf'], function(){
@@ -29,6 +32,12 @@ Route::group(['before'=>'checkAdmin'], function(){
         #   Alfa        #
         Route::get('/admin/alfa', 'ActivationController@index');
         Route::post('/admin/alfa/{id}/send', ['as'=>'alfa.send', 'uses'=>'ActivationController@sendAlfa']);
+
+        #   Tour        #
+        Route::get('/admin/tour/create', 'TourController@create');
+        Route::get('/admin/tour/{id}/edit', 'TourController@edit');
+        Route::get('/admin/tours', 'TourController@admin');
+        Route::get('/tours', 'TourController@index');
 
         #   User        #
         Route::get('/admin/user/{id}', 'UserController@adminshow');
@@ -112,14 +121,19 @@ Route::group(['before'=>'auth'], function(){
 
 
     #   Round       #
+    Route::get('/round/start', 'RoundController@startRound');
+    Route::get('/round/group', 'RoundController@groupRound');
     Route::get('/account/round/add', 'RoundController@getCourse');
     Route::get('/account/rounds/{id}/user', 'RoundController@user_round');
     Route::post('/account/round/add/score', array('as'=>'account-round-add-score','uses' => 'RoundController@create'));
+    Route::post('/account/group-round/add/score', array('as'=>'account-group-round-add-score','uses' => 'RoundController@groupCreate'));
     Route::get('/account/round/{id}/course/{course_id}/score/add', 'ScoreController@create');
     Route::get('/account/round/{id}/course/{course_id}/par/', 'RoundController@createPar');
     Route::get('/account/round/{id}/edit/{course_id}', 'RoundController@edit');
     Route::get('/account/round/{id}/active', 'RecordsController@store');
     Route::get('/account/round/{id}/edit-score', 'RoundController@editScore');
+    Route::get('/account/group-round/add', 'RoundController@group');
+    Route::get('/rounds/weather/{id}/show', 'RoundController@weather');
 
     Route::post('/getCompareRounds', ['as' => 'round.compare', 'uses'=>'StatisticsController@getRoundCompare']);
 
@@ -216,6 +230,7 @@ Route::group(['prefix' => '/forum'], function(){
 #   Sök     #
 Route::get('/query', 'SearchController@query');
 Route::get('/searchresult', ['as' => 'searchresult', 'uses' => 'SearchController@searchResult']);
+Route::get('/searchplayer', ['as' => 'searchplayer', 'uses' => 'SearchController@searchPlayer']);
 Route::get('/search/{result}','SearchController@search');
 
 #   Hämta medspelare     #
@@ -275,6 +290,7 @@ Route::post('/getRoundAvg', ['as' => 'course.stats', 'uses'=>'StatisticsControll
 Route::post('/getRoundsPerMonthReload', ['as' => 'user.rounds', 'uses'=>'StatisticsController@getRoundsPerMonthReload']);
 Route::post('/getUserDataReload', ['as' => 'user.data', 'uses'=>'StatisticsController@getUserDataReload']);
 Route::post('/getCourseRoundsReload', ['as' => 'course.rounds', 'uses'=>'StatisticsController@getCourseRoundsReload']);
+Route::post('/getGroupRounds', ['as' => 'group.rounds', 'uses'=>'RoundController@getGroupRounds']);
 
 
 // Shot
@@ -298,6 +314,9 @@ Route::get('/sponsor/{id}/redirect/', 'SponsorController@redirect');
 #   Activation  #
 Route::get('/activation/{token}/', ['as'=>'confirmation_path', 'uses'=> 'RegistrationController@create']);
 Route::get('/alfa', 'RegistrationController@alfa');
+
+# Ansök om ny bana #
+Route::post('/course/request', array('as'=>'course-request','uses' => 'CourseController@request'));
 
 #notiser (lazy way) #
 Route::get('/notiser', 'NotificationsController@show');
@@ -328,3 +347,4 @@ Route::resource('lost', 'LostController');
 Route::resource('links', 'LinksController');
 Route::resource('activation', 'ActivationController');
 Route::resource('friend', 'FriendsController');
+Route::resource('tour', 'TourController');

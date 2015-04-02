@@ -5,11 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateNewsTables extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
 	public function up()
 	{
         Schema::create('news', function(Blueprint $table){
@@ -19,15 +14,11 @@ class CreateNewsTables extends Migration {
             $table->longText('body', '2000');
             $table->integer('user_id');
             $table->integer('views');
+            $table->string('image');
             $table->timestamps();
         });
 	}
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
 	public function down()
 	{
 		Schema::drop('news');

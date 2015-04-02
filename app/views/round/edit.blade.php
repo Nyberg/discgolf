@@ -4,7 +4,8 @@
 
 	<div class="showback">
 
-      <h4 class="mb"><i class="fa fa-angle-right"></i> Redigera Runda</h4>
+        <h2 class="text-center page-header-custom">Redigera runda</h2>
+        <div class="divider-header"></div>
       <div class="form-horizontal style-form">
 
 

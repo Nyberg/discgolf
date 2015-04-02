@@ -13,128 +13,152 @@
     </div><!-- /input-group -->
        {{Form::close()}}
   </div><!-- /.col-lg-6 -->
-  </div>
 
-<br/>
-
-<div class="row">
-    <div class="col-md-10 col-md-offset-1 col-md-offset-right-1">
-
-    <h4 class="tab-rub text-center page-header-custom">Välkommen till Penguin Projects Alfatest!</h4>
-
-        <div class="divider-header"></div>
-
-
-
-        <p class="text-center"><b>All data som läggs upp kan/kommer att försvinna under testperioden. Lägg inte upp data som ni inte vill bli av med!</b></p><hr>
-
-    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-9">
+<!--
+<div class="row-fluid">
+-->
+<!-- Place somewhere in the <body> of your page -->
+<!--
+<div class="flexslider">
+  <ul class="slides">
+    <li>
+      <img src="img/slide/forshaga.jpg" />
+      <p class="flex-caption">Allt du behöver veta om banor!</p>
+    </li>
+        <li>
+          <img src="img/slide/stat_1.png" />
+          <p class="flex-caption">Statistik för varje bana!</p>
+        </li>
+    <li>
+      <img src="img/slide/stat_2.png" />
+      <p class="flex-caption">Jämför upp till 10 rundor samtidigt!</p>
+    </li>
+  </ul>
+</div>
+</div>
 
+-->
 
-      <div class="col-md-12 panel panel-sub">
-            <!-- Default panel contents -->
-            <div class="row panel-heading panel-subheading text-center">Nyheter</div>
-
-            @foreach($news as $new)
-
-            <div class="col-md-6">
-                <h2 class="page-subheader-custom"> <a href="/news/{{$new->id}}/show" class="">{{$new->head}}</a></h2>
-                <p>{{Str::limit(strip_tags($new->body), 220)}}</p>
-                <br/>
-                <p class="">{{$new->created_at->format('Y-m-d') . ' av '}}  <a href="/user/{{$new->user_id}}/show">{{$new->user->first_name . ' ' . $new->user->last_name}}</a></p>
-
-            </div>
-
-            @endforeach
-        </div>
-
-    </div>
-
-    <div class="col-md-3">
-
-          <div class="col-md-12 panel panel-sub">
-                <!-- Default panel contents -->
-                <div class="row panel-heading panel-subheading text-center">Rundor senaste två veckorna</div>
-
-                <div class="col-md-12">
-                    <div class="caption text-center">
-                    <br/>
-                        <h1 class="red">{{$num}}</h1>
-                        <h4 class="">
-                           Rundor
-                        </h4>
-                        <p>Spelade dom senaste två veckorna</p>
-                   <br/>
-                   </div>
-                </div>
-
-            </div>
-
-                      <div class="col-md-12 panel panel-sub">
-                            <!-- Default panel contents -->
-                            <div class="row panel-heading panel-subheading text-center">Senaste medlemmen</div>
-
-                            <div class="col-md-12">
+<div class="row hidden-phone">
+<hr class="divider"/>
+    <h1 class="text-center">Välkommen {{Auth::user()->first_name}}!</h1>
+    <h4 class="text-center">Vad vill du göra?</h4>
+    <div class="col-sm-10 col-md-offset-1 col-md-offset-right-1 text-center">
+                     <a href="/forum">
+                        <div class="col-sm-3 col-md-3">
+                              <div class="thumbnail dark">
                                 <div class="caption text-center">
-                                <br/>
-                                    <img src="{{$latest->image}}" class="img-circle" width="50px"/>
-                                    <h4 class="">
-                                       <a href="/user/{{$latest->id}}/show">{{$latest->first_name . ' ' . $latest->last_name}}</a>
-                                    </h4>
-
-                               <br/>
+                                    <i class="fa fa-comments fa-4x white"></i>
+                                    <h3 class="white">
+                                        Forum
+                                    </h3>
+                                    <h5 class="white">Besök Forumet</h5>
                                </div>
-                            </div>
-
+                              </div>
                         </div>
+                    </a>
+
+                    <a href="/rounds">
+                    <div class="col-sm-3 col-md-3">
+                          <div class="thumbnail theme-green">
+                            <div class="caption text-center">
+                                <i class="fa fa-trophy fa-4x white"></i>
+                                <h3 class="white">
+                                    Rundor
+                                </h3>
+                                <h5 class="white">Se rundor</h5>
+
+                           </div>
+                          </div>
+                    </div>
+                    </a>
+                    <a href="/courses">
+                    <div class="col-sm-3 col-md-3">
+                          <div class="thumbnail theme-green">
+                            <div class="caption text-center">
+                                <i class="fa fa-tree fa-4x white"></i>
+                                <h3 class="white">
+                                    Banor
+                                </h3>
+                                <h5 class="white">Se banor</h5>
+
+                           </div>
+                          </div>
+                    </div>
+                    </a>
+
+                    <a href="/statistics">
+                        <div class="col-sm-3 col-md-3">
+                              <div class="thumbnail dark">
+                                <div class="caption text-center">
+                                    <i class="fa fa-area-chart fa-4x white"></i>
+                                    <h3 class="white">
+                                        Statistik
+                                    </h3>
+                                     <h5 class="white">Studera lite siffror</h5>
+
+                               </div>
+                              </div>
+                        </div>
+                    </a>
 
     </div>
-
 </div>
 
 <div class="row">
-    <div class="col-md-12">
+    <hr class="divider"/>
 
-        <div class="col-md-12 panel panel-sub">
-                <!-- Default panel contents -->
-            <div class="row panel-heading panel-subheading text-center">Senaste Rundorna</div>
+
+    <div class="col-md-12" id="#sectionA">
+    <h1 class="text-center">Senaste nyheterna</h1>
+
             <br/>
+        @foreach($news as $new)
 
-            @foreach($rounds as $round)
+            <div class="col-sm-4">
+                <img src="{{$new->image}}" alt="" width="100%"/>
+            <span class="news-header-front">
+                <h5 class="news-head grey"><a href="/news/{{$new->id}}/show">{{$new->head}}</a></h5>
+            </span>
+            <p class="margin-top-bottom">{{Str::limit(strip_tags($new->body), 140)}}</p>
+            <p class="news-link margin-top-bottom"><i class="fa fa-chevron-circle-right green"></i> <a href="/news/{{$new->id}}/show"> Läs mer | <i class="fa fa-calendar"></i> {{$new->created_at->format('Y-m-d')}} | <i class="fa fa-comments-o"></i> {{count($new->comments)}}</a></p>
+            </div>
 
-            <a href="/round/{{$round->id}}/course/{{$round->course_id}}">
-                <div class="col-sm-3 col-md-3">
-                      <div class="thumbnail">
-                        <div class="caption text-center">
-                            <h1 class="red">{{calcScore($round->total, $round->tee->par)}}</h1>
-                            <h4 class="">
-                                {{$round->course->name . ' - ' . $round->tee->color}}
-                            </h4>
-                            <p>{{$round->created_at->format('Y-m-d') . ' av ' . $round->user->first_name . ' ' . $round->user->last_name}}</p>
-                       </div>
-                      </div>
-                </div>
-            </a>
+        @endforeach
 
-            @endforeach
+    </div>
+    </div>
+
+    <div class="row">
+        <hr class="divider"/>
+        <div class="col-md-12">
+
+              <h1 class="text-center">Senast spelade rundorna</h1>
+
+                <br/>
+
+                @foreach($rounds as $round)
+
+                <a href="/round/{{$round->id}}/course/{{$round->course_id}}">
+                    <div class="col-sm-3 col-md-3">
+                          <div class="thumbnail">
+                            <div class="caption text-center">
+                                <h1 class="green">{{calcScore($round->total, $round->tee->par)}}</h1>
+                                <h4 class="">
+                                    {{$round->course->name . ' - ' . $round->tee->color}}
+                                </h4>
+                                <p>{{$round->created_at->format('Y-m-d') . ' av ' . $round->user->first_name . ' ' . $round->user->last_name}}</p>
+                           </div>
+                          </div>
+                    </div>
+                </a>
+
+                @endforeach
+
+            </div>
 
         </div>
 
-    </div>
-</div>
-
-@stop
-
-
-@section('scripts')
-
-<script>
-
-
-
-</script>
 @stop

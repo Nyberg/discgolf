@@ -16,7 +16,10 @@ class CreateRecordsTable extends Migration {
             $table->integer('round_id');
             $table->string('type');
             $table->integer('total');
-            $table->integer('par_id');
+            $table->integer('type_id');
+            $table->integer('group_id');
+            $table->integer('weather_id');
+            $table->integer('wind_id');
             $table->integer('status');
             $table->string('date');
             $table->timestamps();

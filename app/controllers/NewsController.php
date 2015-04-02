@@ -43,6 +43,22 @@ class NewsController extends Controller {
         $news->views = 0;
         $news->user_id = Auth::id();
 
+        if(Input::hasFile('file')) {
+
+            try {
+                $file = Input::file('file');
+                $filepath = '/img/news/';
+                $filename = time() . '-news.png';
+                $file = $file->move(public_path($filepath), ($filename));
+                $news->image = $filepath.$filename;
+                $img = Image::make(public_path($news->image));
+                $img->save();
+            }
+            catch(Exception $e) {
+                return 'Något gick snett mannen: ' .$e;
+            }
+        }
+
         $news->save();
 
         return Redirect::to('/admin/news')->with('success', 'Nyhet sparad!');
@@ -56,7 +72,9 @@ class NewsController extends Controller {
         $news->views++;
         $news->save();
 
-        return View::make('news.show', ['news'=>$news]);
+        $alls = News::orderBy('views', 'desc')->limit(10)->get();
+
+        return View::make('news.show', ['news'=>$news, 'alls'=>$alls]);
 	}
 
 	public function edit($id)

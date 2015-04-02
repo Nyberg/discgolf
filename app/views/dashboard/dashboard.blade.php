@@ -11,7 +11,7 @@
                         <p>Redigera din profil</p></a>
                 </div>
                       <div class="col-md-5 col-sm-5 box0">
-                      <a href="/account/round/add/">  <div class="box1">
+                      <a href="/round/start/">  <div class="box1">
                             <span class="li_star"></span>
                             <h4>Runda</h4>
                         </div>

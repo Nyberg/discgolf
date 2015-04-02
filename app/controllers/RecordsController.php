@@ -29,9 +29,10 @@ class RecordsController extends \BaseController {
             $type = $round->type;
             $total = $round->total;
             $date = $round->date;
-            $par_id = $round->par_id;
+            $par_id = $round->type_id;
             $round_id = $round->id;
             $status = 1;
+            $group_id = $round->group_id;
 
 
             $command = new PostRecordsCommand(
@@ -43,15 +44,16 @@ class RecordsController extends \BaseController {
                 $date,
                 $par_id,
                 $round_id,
-                $status
+                $status,
+                $group_id
             );
 
 
-            if ($round->type == 'Singel') {
+            if ($round->type == 'Singel' || $round->type == 'Group') {
 
-                $num = Record::where('course_id', $round->course_id)->where('type', 'Singel')->where('tee_id', $round->tee_id)->where('status', 1)->orderBy('total', 'asc')->pluck('total');
+                $num = Record::where('course_id', $round->course_id)->where('type', 'Singel')->where('type', 'Group')->where('tee_id', $round->tee_id)->where('status', 1)->orderBy('total', 'asc')->pluck('total');
 
-                if ($num == null && $round->type == 'Singel' || $num == 0 && $round->type == 'Singel') {
+                if ($num == null && $round->type == 'Singel' || $num == 0 && $round->type == 'Singel' || $num == null && $round->type == 'Group' || $num == 0 && $round->type == 'Group') {
 
                     $this->CommandBus->execute($command);
                 }

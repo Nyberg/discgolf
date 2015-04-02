@@ -14,11 +14,11 @@
           <div class="col-sm-5">
 
          <select name="course" class="form-control teepads" id="teepads" data-validation="required" data-validation-error-msg="Du måste fylla i detta fältet..">
-                              <option value="0" readonly>Välj Bana</option>
-                              @foreach($courses as $course)
-                              <option id="{{$course->id}}" value="{{$course->id}}">{{$course->name}}</option>
-                              @endforeach
-                              </select>
+              <option value="0" readonly>Välj Bana</option>
+              @foreach($courses as $course)
+              <option id="{{$course->id}}" value="{{$course->id}}">{{$course->name}}</option>
+              @endforeach
+              </select>
           </div>
 
           <div class="tee">
@@ -36,20 +36,16 @@
 
         </div>
 
-
-
         <div class="form-group">
 
          <label class="col-sm-1 col-sm-1 control-label">Välj typ</label>
-                  <div class="col-sm-5">
-
-                                <select name="type" class="form-control type" id="type">
-                                        <option id="1" value="Singel">Singel</option>
-                                        <option id="2" value="Par">Par</option>
-                                </select>
-                    </div>
-
-
+            <div class="col-sm-5">
+               <select name="type" class="form-control type" id="type">
+                        <option id="1" value="Singel">Singel</option>
+                        <option id="2" value="Par">Par</option>
+                        <option id="3" value="Grupp">Grupp</option>
+                </select>
+            </div>
 
         <div class="user">
 
@@ -68,8 +64,26 @@
                      {{Form::text('date', '', ['class'=>'form-control datepicker'])}}
                       <span class="help-block">Klicka på fältet för att välja datum</span>
                      {{errors_for('date', $errors)}}
-
                  </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-1 col-sm-1 control-label">Väder</label>
+             <div class="col-sm-5">
+                <select name="weather" class="form-control" id="" data-validation="required" data-validation-error-msg="Du måste fylla i detta fältet..">
+                  @foreach($weathers as $w)
+                  <option id="{{$w->id}}" value="{{$w->id}}">{{$w->name}}</option>
+                  @endforeach
+                </select>
+             </div>
+             <label class="col-sm-1 col-sm-1 control-label">Vind</label>
+              <div class="col-sm-5">
+                <select name="wind" class="form-control" id="" data-validation="required" data-validation-error-msg="Du måste fylla i detta fältet..">
+                    @foreach($winds as $w)
+                    <option id="{{$w->id}}" value="{{$w->id}}">{{$w->name}}</option>
+                    @endforeach
+                </select>
+             </div>
         </div>
 
         <div class="form-group">
@@ -83,14 +97,9 @@
                  </div>
         </div>
 
-
-
-
-        {{Form::submit('Nästa', ['class'=>'btn btn-primary'])}}
-     {{Form::close()}}
-
-
-        </div>
+    {{Form::submit('Nästa', ['class'=>'btn btn-primary'])}}
+    {{Form::close()}}
+</div>
 
 @stop
 

@@ -1,5 +1,6 @@
 <?php
 
+use dg\Rounds\PostGroupRoundsCommand;
 use dg\Rounds\PostRoundsCommand;
 use dg\Rounds\RemoveRoundCommand;
 use dg\Rounds\UpdateRoundCommand;
@@ -10,21 +11,32 @@ class RoundController extends BaseController {
 	public function index()
 	{
         #$date = date('Y-m-d', strtotime('-1 week'));
-
 		#$rounds = Round::with('course', 'user')->where('status', 1)->where('date', '>=' , $date)->orderBy('created_at', 'desc')->paginate(15);
-        $rounds = Round::where('status', 1)->orderBy('date', 'desc')->paginate(15);
+        $rounds = Round::where('status', 1)->orderBy('date', 'desc')->paginate(30);
         return View::make('round.index',compact('rounds'));
 	}
 
     public function user_round($id){
-
         $rounds = Round::with('course')->where('user_id', $id)->where('status', 0)->get();
         $actives = Round::with('course')->where('user_id', $id)->where('status', 1)->get();
         return View::make('round.user_round', ['rounds'=>$rounds, 'actives'=>$actives]);
     }
 
+    public function weather($id){
+        $winds = Wind::get();
+        $weathers = Weather::get();
+        $courses = Course::get();
+        $weather = Weather::whereId($id)->firstOrFail();
+        $rounds = Round::where('weather_id', $id)->where('status', 1)->orderBy('date', 'desc')->get();
+        return View::make('round.weather', ['rounds'=>$rounds, 'weather'=>$weather, 'winds'=>$winds, 'weathers'=>$weathers, 'courses'=>$courses]);
+    }
+
     public function admin(){
 
+    }
+
+    public function startRound(){
+        return View::make('round.start');
     }
 
     public function createPar($id, $course_id){
@@ -43,51 +55,92 @@ class RoundController extends BaseController {
 
     }
 
+    public function groupCreate(){
+        $num = Input::get('num');
+
+        $group = new GroupRound();
+        $group->user_id = Auth::id();
+        $group->save();
+
+        for($i = 1; $i<=$num; $i++) {
+
+            $user_id = Input::get('player-' . $i . '');
+
+            $user = User::whereId($user_id)->first();
+
+            $course_id = Input::get('course');
+            $tee_id = Input::get('teepad');
+            $date = Input::get('date');
+            $status = 0;
+            $type = 'Group';
+            $type_id = 0;
+            $username = $user->first_name . ' ' . $user->last_name;
+            $comment = Input::get('comment');
+            $group_id = $group->id;
+            $weather_id = Input::get('weather');
+            $wind_id = Input::get('wind');
+
+            $command = new PostGroupRoundsCommand(
+                $user_id,
+                $course_id,
+                $tee_id,
+                $date,
+                $status,
+                $type,
+                $type_id,
+                $username,
+                $comment,
+                $group_id,
+                $weather_id,
+                $wind_id
+            );
+
+            $this->CommandBus->execute($command);
+
+        }
+
+        return Redirect::to('/');
+    }
+
 	public function create()
 	{
         $user = User::whereId(Auth::id())->first();
 
-        $user_id = Auth::id();
-        $course_id = Input::get('course');
-        $tee_id = Input::get('teepad');
-        $date =  Input::get('date');
-        $status = 0;
+        $round = new Round();
+
+        $round->user_id = Auth::id();
+        $round->course_id = Input::get('course');
+        $round->tee_id = Input::get('teepad');
+        $round->date =  Input::get('date');
+        $round->status = 0;
+        $round->group_id = 0;
+        $round->weather_id = Input::get('weather');
+        $round->wind_id = Input::get('wind');
 
         if(Input::get('type') == 'Singel'){
-            $type = 'Singel';
-            $par_id = 0;
-        }else{
-            $type = 'Par';
-            $par_id = Input::get('players');
+            $round->type = 'Singel';
+            $round->type_id = 0;
+        }if(Input::get('type') == 'Par'){
+            $round->type = 'Par';
+            $round->type_id = Input::get('players');
         }
 
-        $username = $user->first_name . ' ' . $user->last_name;
-        $comment = Input::get('comment');
+        $round->username = $user->first_name;
+        $round->comment = Input::get('comment');
 
-        $command = new PostRoundsCommand(
-            $user_id,
-            $course_id,
-            $tee_id,
-            $date,
-            $status,
-            $type,
-            $par_id,
-            $username,
-            $comment
-        );
+        $round->save();
 
-    #    dd($command);
+        return Redirect::to('/account/round/'.$round->id.'/course/'.$round->course_id.'/score/add/')->with('headsup', 'Runda tillagd!');
+    }
 
-        $this->CommandBus->execute($command);
-
-        return Redirect::to('/')->with('headsup', 'Klicka bland dina notifikationer för att lägga till ditt resultat!');
-        }
 
     public function getCourse(){
 
         $courses = Course::whereStatus(1)->get();
+        $weathers = Weather::get();
+        $winds = Wind::get();
 
-        return View::make('round.create')->with('courses', $courses);
+        return View::make('round.create',['courses'=>$courses, 'weathers'=>$weathers, 'winds'=>$winds]);
     }
 
 	public function store()
@@ -118,10 +171,6 @@ class RoundController extends BaseController {
             };
 
             $round = Round::whereId($id)->firstOrFail();
-
-            /*  $p_rating = Auth::user()->rating;
-              $c_rating = $round->course->rating;
-              $base = $c_rating - $p_rating; */
 
             $round->total = $total;
             $round->status = 0;
@@ -198,10 +247,9 @@ class RoundController extends BaseController {
 
             return Redirect::back()->with('success', 'Runda uppdaterad!');
 
-        } else {
+        }else {
 
             return Redirect::back()->with('danger', 'Du kan inte redigera detta..');
-
         }
 	}
 
@@ -237,11 +285,44 @@ class RoundController extends BaseController {
 
     }
 
+    public function group(){
+        return View::make('round.group');
+    }
+
+    public function groupRound(){
+        $courses = Course::whereStatus(1)->get();
+        $users = User::get();
+        $weathers = Weather::get();
+        $winds = Wind::get();
+        return View::make('round.create-group', ['courses'=>$courses, 'users'=>$users, 'weathers'=>$weathers, 'winds'=>$winds]);
+    }
 
     public function records(){
         $records = Record::where('status', 1)->orderBy('date', 'desc')->paginate(15);
 
         return View::make('round.records', compact('records'));
+    }
+
+    public function getGroupRounds(){
+
+        $id = Input::get('id');
+        $round_id = Input::get('round_id');
+        $rounds = Round::where('group_id',$id)->where('status', 1)->orderBy('total', 'asc')->get();
+        $data = [];
+        $i = 1;
+
+        foreach($rounds as $r){
+            if($r->id == $round_id){
+            }else{
+                $data[$i] = $r;
+                $data[$i][0] = $r->score;
+                $i++;
+            }
+        }
+
+        $message = $data;
+
+        return Response::json($message);
     }
 
 }

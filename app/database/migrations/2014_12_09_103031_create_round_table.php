@@ -5,11 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateRoundTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
 	public function up()
 	{
 		Schema::create('rounds', function(Blueprint $table) {
@@ -21,8 +16,11 @@ class CreateRoundTable extends Migration {
             $table->string('username');
             $table->string('type');
             $table->integer('total');
-            $table->integer('par_id');
+            $table->integer('type_id');
+            $table->integer('group_id');
             $table->integer('tour_id');
+            $table->integer('weather_id');
+            $table->integer('wind_id');
             $table->longText('comment');
             $table->boolean('status');
             $table->string('date');
@@ -31,11 +29,6 @@ class CreateRoundTable extends Migration {
         });
 	}
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
 	public function down()
 	{
 		Schema::drop('rounds');

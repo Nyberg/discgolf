@@ -21,6 +21,10 @@ class Comment extends Eloquent
         return $this->belongsTo('User', 'user_id');
     }
 
+    public function replies(){
+        return $this->hasMany('Comment', 'commentable_id');
+    }
+
     public function post($body, $type_id, $user_id, $type){
 
         $this->body = $body;

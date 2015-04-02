@@ -24,25 +24,25 @@ function getFriend($id, $user_id){
 
 }
 
-function getParPlayer($par_id, $show, $user_id){
+function getParPlayer($type_id, $show, $user_id){
 
-    if($par_id == $show){
+    if($type_id == $show){
 
             $user = User::whereId($user_id)->firstOrFail();
 
             return '<a href="/user/'.$user->id.'/show">'.$user->first_name . ' ' . $user->last_name . '</a>';
 
     }else{
-        $user = User::whereId($par_id)->firstOrFail();
+        $user = User::whereId($type_id)->firstOrFail();
 
         return '<a href="/user/'.$user->id.'/show">'.$user->first_name . ' ' . $user->last_name . '</a>';
     }
 
 }
 
-function showPar($par_id, $user_id){
+function showPar($type_id, $user_id){
 
-    $user1 = User::whereId($par_id)->firstOrFail();
+    $user1 = User::whereId($type_id)->firstOrFail();
     $user2 = User::whereId($user_id)->firstOrFail();
 
     return '<a href="/user/'.$user2->id.'/show">'.$user2->first_name . ' ' . $user2->last_name.'</a> & <a href="/user/'.$user1->id.'/show">'.$user1->first_name . ' '.$user1->last_name.'</a>';

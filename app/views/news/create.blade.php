@@ -4,7 +4,7 @@
 
     <div class="showback">
 
-    {{Form::open(['route'=>'news.store', 'class'=>'form-horizontal style-form'])}}
+    {{Form::open(['route'=>'news.store', 'class'=>'form-horizontal style-form', 'files'=>true])}}
 
          <h2 class="text-center page-header-custom">Skriv Nyhet</h2>
          <div class="divider-header"></div>
@@ -26,6 +26,12 @@
                      {{errors_for('body', $errors)}}
                  </div>
              </div>
+
+            <div class="form-group">
+            <label class="col-sm-12 col-sm-12 control-label">Bild</label>
+            <div class="col-sm-12">
+               {{Form::file('file', '', ['class'=>'form-control'])}} </div>
+            </div>
 
          {{Form::submit('Spara nyhet', ['class'=>'btn btn-success'])}}
     {{Form::close()}}

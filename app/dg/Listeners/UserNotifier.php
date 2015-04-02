@@ -8,12 +8,15 @@ use dg\Eventing\EventListener;
 use dg\Friends\FriendWasPosted;
 use dg\Records\RecordWasPosted;
 use dg\Reviews\ReviewWasPosted;
+use dg\Rounds\GroupRoundWasPosted;
 use dg\Rounds\RoundWasActivated;
 use dg\Rounds\RoundWasPosted;
+use dg\Tours\TourWasPosted;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Round;
 use User;
+use Profile;
 
 class UserNotifier extends EventListener{
 
@@ -81,11 +84,26 @@ class UserNotifier extends EventListener{
                 ->from(Auth::user())
                 ->withType('RoundWasPosted')
                 ->withSubject('Ny runda!')
-                ->withBody('Klicka här för att lägga till din score.')
+                ->withBody('Klicka här för att lägga till din score för '.$event->round->course->name.' - '.$event->round->tee->color.', '.$event->round->created_at->format('Y-m-d').'')
                 ->regarding($event->round)
                 ->withUrl('/account/round/'.$event->round->id.'/course/'.$event->round->course_id.'/score/add')
                 ->deliver();
         }
+
+    public function whenGroupRoundWasPosted(GroupRoundWasPosted $event){
+        $id = $event->round->user_id;
+        $sender = User::whereId(Auth::id())->first();
+        $user = User::whereId($id)->first();
+
+        $user->newNotification()
+            ->from(Auth::user())
+            ->withType('GroupRoundWasPosted')
+            ->withSubject('Ny grupprunda!')
+            ->withBody('{{users}} har lagt till en grupprunda. Klicka här för att lägga till din score.')
+            ->regarding($event->round)
+            ->withUrl('/account/round/'.$event->round->id.'/course/'.$event->round->course_id.'/score/add')
+            ->deliver();
+    }
 
     public function whenReviewWasPosted(ReviewWasPosted $event){
 
@@ -138,6 +156,25 @@ class UserNotifier extends EventListener{
             ->regarding($event->friend)
             ->withUrl('/user/' . $event->friend->user_id . '/show/')
             ->deliver();
+
+    }
+
+    public function whenTourWasPosted(TourWasPosted $event){
+        $profiles = Profile::with('user')->where('state_id', $event->tour->state_id)->get();
+
+        foreach($profiles as $p) {
+
+            $user = User::whereId($p->user_id)->first();
+
+            $user->newNotification()
+                ->from(Auth::user())
+                ->withType('TourWasPosted')
+                ->withSubject('Ny tävling!')
+                ->withBody('{{users}} har lagt upp tävlingen '.$event->tour->name.'!')
+                ->regarding($event->tour)
+                ->withUrl('/tour/' . $event->tour->id . '/show/')
+                ->deliver();
+        }
 
     }
 

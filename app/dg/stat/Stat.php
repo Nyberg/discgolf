@@ -217,17 +217,22 @@ class Stat{
         ]];
         $data = ['data'=>[
         ]];
+        $rounds_data = ['rounds'=>[]
+        ];
+        $courses = ['data'=>[]];
         $i = 1;
 
         foreach($rounds as $round){
 
             array_push($data['data'], $this->getRoundScore($round->total, $round->tee->par));
             array_push($date['date'], $round->date);
+            array_push($rounds_data['rounds'], $round);
+            array_push($courses['data'], $round->course->name);
 
             $i++;
         }
 
-        $data = [$name, $data, $date];
+        $data = [$name, $data, $date, $rounds_data];
 
         return $data;
 
@@ -559,7 +564,8 @@ class Stat{
         $results = [];
 
         foreach($stats as $round){
-            array_push($results, $this->getMonth($round->created_at));
+
+            array_push($results, $this->getMonth($round->date));
         }
 
         foreach($results as $result){
@@ -615,7 +621,7 @@ class Stat{
         $results = [];
 
         foreach($stats as $round){
-            array_push($results, $this->getMonth($round->created_at));
+            array_push($results, $this->getMonth($round->date));
         }
 
         foreach($results as $result){
@@ -672,7 +678,8 @@ class Stat{
 
     public function getMonth($value){
 
-        $date = $value->format('m');
+        $time = strtotime($value);
+        $date = date('m', $time);
 
         return $date;
     }

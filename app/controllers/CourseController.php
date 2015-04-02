@@ -109,6 +109,9 @@ class CourseController extends \BaseController {
 	public function show($id)
 	{
         $course = Course::with('tee')->whereId($id)->firstOrFail();
+
+        if($course->status == 1){
+
         $tees = Tee::where('course_id', $id)->get();
         $rounds = Round::where('course_id', $id)->where('status', 1)->get();
         $club = Club::whereId($course->club_id)->firstOrFail();
@@ -118,9 +121,14 @@ class CourseController extends \BaseController {
         $records = Record::where('course_id', $id)->where('status', 1)->get();
         $data = $this->stat->generateInfo($holes, $tees);
         $avg = $this->stat->generateAvg($tees, $rounds);
+        $aces = Score::where('course_id', $id)->where('score', 1)->get();
 
-        return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'tees'=>$tees, 'club'=>$club,'reviews'=>$reviews, 'data'=>$data, 'records'=>$records, 'avg'=>$avg]);
-}
+        return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'tees'=>$tees, 'club'=>$club,'reviews'=>$reviews, 'data'=>$data, 'records'=>$records, 'avg'=>$avg, 'aces'=>$aces]);
+
+        }else{
+            return Redirect::to('/')->with('danger', 'Du kan inte besöka denna sida!');
+        }
+    }
 
 	public function edit($id)
 	{

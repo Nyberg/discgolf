@@ -1,7 +1,7 @@
-
+/* Översiktligt statistik, birdies, bfr, unika banor (laddas automatiskt) */
 function getData(){
 
-    $.get('http://178.62.90.148/getUserData', {id: $("#id").val(), model: $("#model").val()}, function (data) {
+    $.get('/getUserData', {id: $("#id").val(), model: $("#model").val()}, function (data) {
 
     if (data['msg'] == 'success') {
 
@@ -11,15 +11,15 @@ function getData(){
                 backgroundColor: {
                     linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
                     stops: [
-                        [0, '#2C3E50'],
-                        [1, '#2C3E50']
+                        [0, '#333'],
+                        [1, '#333']
                     ]
                 },
                 style: {
                     fontFamily: "'Unica One', sans-serif",
                     color: '#ffffff'
                 },
-                plotBorderColor: '#E74C3C'
+                plotBorderColor: '#87D37C'
             },
             title: {
                 text: 'Data',
@@ -57,9 +57,9 @@ function getData(){
                         color: '#E0E0E3'
                     }
                 },
-                lineColor: '#E0E0E3',
-                minorGridLineColor: '#E74C3C',
-                tickColor: '#E74C3C',
+                lineColor: '#555',
+                minorGridLineColor: '#555',
+                tickColor: '#555',
                 tickWidth: 0,
                 title: {
                     style: {
@@ -68,15 +68,15 @@ function getData(){
                 }
             },
             yAxis: {
-                gridLineColor: '#3e5871',
+                gridLineColor: '#444',
                 labels: {
                     style: {
                         color: '#E0E0E3'
                     }
                 },
-                lineColor: '#E74C3C',
-                minorGridLineColor: '#E74C3C',
-                tickColor: '#E74C3C',
+                lineColor: '#444',
+                minorGridLineColor: '#444',
+                tickColor: '#444',
                 tickWidth: 0,
                 title: {
                     style: {
@@ -87,7 +87,7 @@ function getData(){
             credits: {
                 enabled: false
             },
-            colors: ["#E74C3C", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+            colors: ["#87D37C", "#87D37C", "#87D37C", "#87D37C", "#aaeeee", "#ff0066", "#eeaaee",
                 "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
             series: [{
                 name: data['user'],
@@ -100,9 +100,8 @@ function getData(){
         return false;
     }
 
-
+/* Översiktligt statistik, birdies, bfr, unika banor (laddas vid klick) */
 function getDataReload(){
-
 
     $.post(
         $(this).prop('action'),
@@ -123,15 +122,15 @@ function getDataReload(){
                         backgroundColor: {
                             linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
                             stops: [
-                                [0, '#2C3E50'],
-                                [1, '#2C3E50']
+                                [0, '#333'],
+                                [1, '#333']
                             ]
                         },
                         style: {
                             fontFamily: "'Unica One', sans-serif",
                             color: '#ffffff'
                         },
-                        plotBorderColor: '#E74C3C'
+                        plotBorderColor: '#87D37C'
                     },
                     title: {
                         text: 'Data',
@@ -169,9 +168,9 @@ function getDataReload(){
                                 color: '#E0E0E3'
                             }
                         },
-                        lineColor: '#E0E0E3',
-                        minorGridLineColor: '#E74C3C',
-                        tickColor: '#E74C3C',
+                        lineColor: '#555',
+                        minorGridLineColor: '#555',
+                        tickColor: '#555',
                         tickWidth: 0,
                         title: {
                             style: {
@@ -180,15 +179,15 @@ function getDataReload(){
                         }
                     },
                     yAxis: {
-                        gridLineColor: '#3e5871',
+                        gridLineColor: '#444',
                         labels: {
                             style: {
                                 color: '#E0E0E3'
                             }
                         },
-                        lineColor: '#E74C3C',
-                        minorGridLineColor: '#E74C3C',
-                        tickColor: '#E74C3C',
+                        lineColor: '#444',
+                        minorGridLineColor: '#444',
+                        tickColor: '#444',
                         tickWidth: 0,
                         title: {
                             style: {
@@ -199,7 +198,7 @@ function getDataReload(){
                     credits: {
                         enabled: false
                     },
-                    colors: ["#E74C3C", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+                    colors: ["#87D37C", "#87D37C", "#87D37C", "#87D37C", "#aaeeee", "#ff0066", "#eeaaee",
                         "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
                     series: [{
                         name: data['user'],
@@ -236,8 +235,8 @@ function getUserPie() {
                         backgroundColor: {
                             linearGradient: {x1: 0, y1: 0, x2: 1, y2: 1},
                             stops: [
-                                [0, '#2C3E50'],
-                                [1, '#2C3E50']
+                                [0, '#333333'],
+                                [1, '#333333']
                             ]
                         },
                         style: {
@@ -332,15 +331,15 @@ function getRoundAvg(){
                     backgroundColor: {
                         linearGradient: {x1: 0, y1: 0, x2: 1, y2: 1},
                         stops: [
-                            [0, '#2C3E50'],
-                            [1, '#2C3E50']
+                            [0, '#333333'],
+                            [1, '#333333']
                         ]
                     },
                     style: {
                         fontFamily: "'Unica One', sans-serif",
                         color: '#ffffff'
                     },
-                    plotBorderColor: '#E74C3C'
+                    plotBorderColor: '#87D37C'
                 },
                 title: {
                     text: 'Senaste resultaten',
@@ -363,15 +362,15 @@ function getRoundAvg(){
                     }
                 },
                 yAxis: {
-                    gridLineColor: '#2C3E50',
+                    gridLineColor: '#444444',
                     labels: {
                         style: {
                             color: '#E0E0E3'
                         }
                     },
-                    lineColor: '#E74C3C',
-                    minorGridLineColor: '#E74C3C',
-                    tickColor: '#E74C3C',
+                    lineColor: '#87D37C',
+                    minorGridLineColor: '#87D37C',
+                    tickColor: '#87D37C',
                     tickWidth: 0,
                     title: {
                         style: {
@@ -379,7 +378,7 @@ function getRoundAvg(){
                         }
                     }
                 },
-                colors: ["#E74C3C", "#E74C3C", "#E74C3C", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+                colors: ["#87D37C", "#87D37C", "#87D37C", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
                     "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
                 tooltip: {
                     valueSuffix: '',
@@ -412,7 +411,7 @@ function getRoundAvg(){
                             text: 'Antal resultat för alla rundor'
                         },
                         subtitle: {
-                            text: 'Antal kast: ' + data['shots'] + ' | Snittresultat: ' + data['avg'],
+                            text: 'Antal kast: ' + data['shots'] + ' | Snittresultat: ' + data['avg']
                         },
                         tooltip: {
                             formatter: function () {
@@ -465,8 +464,8 @@ function getRoundAvg(){
                     backgroundColor: {
                         linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
                         stops: [
-                            [0, '#2C3E50'],
-                            [1, '#2C3E50']
+                            [0, '#333333'],
+                            [1, '#333333']
                         ]
                     },
                     style: {
@@ -549,15 +548,14 @@ function getRoundAvg(){
             function (data) {
 
                 if (data['msg'] == 'success') {
-
                     $('#chart-round-avg').highcharts({
                         chart: {
                             type: 'areaspline',
                             backgroundColor: {
                                 linearGradient: {x1: 0, y1: 0, x2: 1, y2: 1},
                                 stops: [
-                                    [0, '#2C3E50'],
-                                    [1, '#2C3E50']
+                                    [0, '#333333'],
+                                    [1, '#333333']
                                 ]
                             },
                             style: {
@@ -595,7 +593,7 @@ function getRoundAvg(){
                             }
                         },
                         yAxis: {
-                            gridLineColor: '#2C3E50',
+                            gridLineColor: '#444444',
                             labels: {
                                 style: {
                                     color: '#E0E0E3'
@@ -611,7 +609,7 @@ function getRoundAvg(){
                                 }
                             }
                         },
-                        colors: ["#E74C3C", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+                        colors: ["#87D37C", "#87D37C", "#87D37C", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
                             "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
                         tooltip: {
                             valueSuffix: 'st'
@@ -627,29 +625,30 @@ function getRoundAvg(){
     return false;
 }
 
+    /* Rundor per måndad (bana och användare. (autoladdas) */
     function getUserRounds(){
 
         $('.fa-spinner').remove();
         $('#stats').append('<br /><br/><i class="fa fa-spinner fa-spin fa-2x"></i>');
-        $.get('http://178.62.90.148/getRoundsPerMonth', {id: $("#id").val(), model: $("#model").val()}, function (data) {
+        $.get('/getRoundsPerMonth', {id: $("#id").val(), model: $("#model").val()}, function (data) {
 
                 console.log(data);
 
-                $('#chart-round-avg').highcharts({
+                $("#chart-round-avg").highcharts({
                     chart: {
                         type: 'areaspline',
                         backgroundColor: {
                             linearGradient: {x1: 0, y1: 0, x2: 1, y2: 1},
                             stops: [
-                                [0, '#2C3E50'],
-                                [1, '#2C3E50']
+                                [0, '#333333'],
+                                [1, '#333333']
                             ]
                         },
                         style: {
                             fontFamily: "'Unica One', sans-serif",
                             color: '#ffffff'
                         },
-                        plotBorderColor: '#E74C3C'
+                        plotBorderColor: '#87D37C'
                     },
                     title: {
                         text: 'Rundor varje månad',
@@ -680,15 +679,15 @@ function getRoundAvg(){
                         }
                     },
                     yAxis: {
-                        gridLineColor: '#2C3E50',
+                        gridLineColor: '#444',
                         labels: {
                             style: {
                                 color: '#E0E0E3'
                             }
                         },
-                        lineColor: '#E74C3C',
-                        minorGridLineColor: '#E74C3C',
-                        tickColor: '#E74C3C',
+                        lineColor: '#87D37C',
+                        minorGridLineColor: '#87D37C',
+                        tickColor: '#87D37C',
                         tickWidth: 0,
                         title: {
                             style: {
@@ -696,18 +695,19 @@ function getRoundAvg(){
                             }
                         }
                     },
-                    colors: ["#ffffff", "#E74C3C", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+                    colors: ["#ffffff", "#87D37C", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
                         "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
                     tooltip: {
                         valueSuffix: 'st'
                     },
-                    series: [{
-                            name: data['user'],
-                            data: [data['u_jan'], data['u_feb'], data['mar'], data['apr'], data['maj'], data['jun'], data['jul'], data['aug'], data['sep'], data['okt'], data['nov'], data['dec']]
-                        },
+                    series: [
                         {
                             name: data['model_name'],
                             data: [data['jan'], data['feb'], data['mar'], data['apr'], data['maj'], data['jun'], data['jul'], data['aug'], data['sep'], data['okt'], data['nov'], data['dec']]
+                        },
+                        {
+                            name: data['user'],
+                            data: [data['u_jan'], data['u_feb'], data['mar'], data['apr'], data['maj'], data['jun'], data['jul'], data['aug'], data['sep'], data['okt'], data['nov'], data['dec']]
                         }]
                 });
 
@@ -735,15 +735,15 @@ function getUserRoundsReload(){
                     backgroundColor: {
                         linearGradient: {x1: 0, y1: 0, x2: 1, y2: 1},
                         stops: [
-                            [0, '#2C3E50'],
-                            [1, '#2C3E50']
+                            [0, '#333333'],
+                            [1, '#333333']
                         ]
                     },
                     style: {
                         fontFamily: "'Unica One', sans-serif",
                         color: '#ffffff'
                     },
-                    plotBorderColor: '#E74C3C'
+                    plotBorderColor: '#87D37C'
                 },
                 title: {
                     text: 'Rundor varje månad',
@@ -774,15 +774,15 @@ function getUserRoundsReload(){
                     }
                 },
                 yAxis: {
-                    gridLineColor: '#2C3E50',
+                    gridLineColor: '#444444',
                     labels: {
                         style: {
                             color: '#E0E0E3'
                         }
                     },
-                    lineColor: '#E74C3C',
+                    lineColor: '#444444',
                     minorGridLineColor: '#E74C3C',
-                    tickColor: '#E74C3C',
+                    tickColor: '#87D37C',
                     tickWidth: 0,
                     title: {
                         style: {
@@ -790,7 +790,7 @@ function getUserRoundsReload(){
                         }
                     }
                 },
-                colors: ["#ffffff", "#E74C3C", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+                colors: ["#ffffff", "#87D37C", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
                     "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
                 tooltip: {
                     valueSuffix: 'st'
@@ -814,7 +814,7 @@ function getUserRoundsReload(){
 
     function getRoundAvgScore(){
 
-        $.get('http://178.62.90.148/getRoundAvgScore', {id: $("#id").val(), model: $("#model").val()}, function (data) {
+        $.get('/getRoundAvgScore', {id: $("#id").val(), model: $("#model").val()}, function (data) {
 
                 console.log(data);
 
@@ -883,8 +883,9 @@ function getUserRoundsReload(){
         return false;
     }
 
+var i = 0;
 function getRoundAvgStats(){
-
+    $('#info').show();
     $.post(
         $(this).prop('action'),
         {
@@ -897,6 +898,24 @@ function getRoundAvgStats(){
 
         },
         function (data) {
+            i++;
+            var from = $('#date_from').val();
+            var to = $('#date_to').val();
+            var bana = $('#teepads').val();
+
+            if(bana == 0){
+                bana = 'Ingen bana vald';
+            }else{
+                bana = $('#teepads option:selected').text();
+            }
+
+            $('#round-data').append('<div class="row"><div class="col-sm-12"><h5 class="text-center">Sökning '+i+': '+bana+' - '+from+' - '+to+'</h5></div>');
+            $.each(data[3]['rounds'], function(index, value) {
+                var par = getTotal(value.total, value['tee'].par);
+                $('#round-data').append('<div class="col-sm-3 col-md-3 text-center"><a href="/round/'+value.id+'/course/'+value.course_id+'" target="_blank"><div class="thumbnail"><div class="caption text-center"><h3 class="green">'+value.total+' '+par+'</h3><h4>'+value['course'].name+'</h4> <p>'+value.date+' </p></a></div></div></div>');
+
+            })
+            $('#round-data').append('</div><div class="row"></div><hr class="divider"/>');
 
             console.log(data);
 
@@ -907,8 +926,8 @@ function getRoundAvgStats(){
                         backgroundColor: {
                             linearGradient: {x1: 0, y1: 0, x2: 1, y2: 1},
                             stops: [
-                                [0, '#2C3E50'],
-                                [1, '#2C3E50']
+                                [0, '#333333'],
+                                [1, '#333333']
                             ]
                         },
                         style: {
@@ -938,15 +957,15 @@ function getRoundAvgStats(){
                         }
                     },
                     yAxis: {
-                        gridLineColor: '#2C3E50',
+                        gridLineColor: '#444444',
                         labels: {
                             style: {
                                 color: '#E0E0E3'
                             }
                         },
-                        lineColor: '#E74C3C',
-                        minorGridLineColor: '#E74C3C',
-                        tickColor: '#E74C3C',
+                        lineColor: '#87D37C',
+                        minorGridLineColor: '#87D37C',
+                        tickColor: '#87D37C',
                         tickWidth: 0,
                         title: {
                             style: {
@@ -954,7 +973,7 @@ function getRoundAvgStats(){
                             }
                         }
                     },
-                    colors: ["#E74C3C", "#E74C3C", "#E74C3C", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+                    colors: ["#87D37C", "#87D37C", "#87D37C", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
                         "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
                     tooltip: {
                         valueSuffix: '',
@@ -969,4 +988,11 @@ function getRoundAvgStats(){
         },'json'
     );
     return false;
+}
+
+/* Övriga funktioner */
+
+function getTotal(total, par){
+    var sum = total - par;
+    return '(' + sum + ')';
 }

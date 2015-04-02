@@ -20,6 +20,70 @@ body {
     font-weight: 100;
 }
 
+.weather-icon{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+#owl-demo .item{
+    margin: 3px;
+}
+#owl-demo .item img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.front-item{
+    padding: 30px 0px;
+    color: #FFF;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.dodgerBlue {
+    background: #388bd1;
+}
+
+.darkCyan {
+    background: #42bdc2;
+}
+
+.orange {
+    background: #ff8a3c;
+}
+
+.theme-green{
+    background-color: #87D37C;
+}
+
+.btn a{
+    color: #87D37C;
+}
+
+.dark{
+    background-color: #333;
+}
+
+.green{
+    color: #87D37C;
+}
+
+.yellowLight {
+    background: #fee664;
+}
+.skyBlue {
+    background: #a1def8;
+}
+
+.front-itm h3{
+    font-size: 28px;
+    font-weight: 300;
+    margin: 25px 0 0;
+}
+
 .margin-left{
     margin-left: 2em;
 }
@@ -71,7 +135,7 @@ body {
 
 
 .badge-notify{
-    background: #E74C3C;
+    background: #87D37C;
     position:relative;
 
 }
@@ -85,12 +149,26 @@ body {
 }
 
 .rounds li a:hover{
-    background-color: #E74C3C;
+    background-color: #87D37C;
 }
 
 .data{
     min-height: 50px;
     margin: 10px;
+}
+
+.grey{
+    color: #666;
+}
+
+.news-icon{
+    margin-right: 25px;
+    font-size: 2em;
+}
+
+.news-head{
+    margin-top: 15px;
+    font-size: 1.2em;
 }
 
 .hole-in-one{
@@ -154,15 +232,15 @@ body {
 }
 
 .over-img h2, .over-img-club h2{
-    color: white; text-shadow: #E74C3C 0.1em 0.1em 0.4em
+    color: white; text-shadow: #87D37C 0.1em 0.1em 0.4em
 }
 
 .over-img a{
-    color: white; text-shadow: #E74C3C 0.1em 0.1em 0.4em
+    color: white; text-shadow: #87D37C 0.1em 0.1em 0.4em
 }
 
 .over-img a:hover{
-    color: #E74C3C;
+    color: #87D37C;
 }
 
 .news-header{
@@ -170,7 +248,7 @@ body {
 }
 
 .table th a{
-    color: #E74C3C;
+    color: #87D37C;
 }
 
 .table th a:hover{
@@ -180,7 +258,6 @@ body {
 .divider{
     border-bottom: 1px solid #ededed;
     margin-bottom: 20px;
-
 }
 
 .divider p{
@@ -219,23 +296,18 @@ body {
 }
 
 .divider-header {
-    background: none repeat scroll 0% 0% #2C3E50;
+
 }
 
 .divider-header {
-    display: block;
-    width: 60px;
-    height: 2px;
-    margin: 0px auto 30px;
 }
 
 .page-header-custom {
-    color: #2C3E50;
-    font-size: 1.5em;
+    color: #333;
+    font-size: 2em;
     letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    font-weight: 400;
+    margin-bottom: 20px;
+    font-weight: 300;
 }
 
 .page-subheader-custom {
@@ -251,11 +323,11 @@ body {
 }
 
 .page-subheader-custom a:hover{
-    color: #E74C3C;
+    color: #87D37C;
 }
 
 .btn-red{
-    background: #E74C3C;
+    background: #87D37C;
     color: #fff;
     border-radius: 0;
 }
@@ -265,6 +337,10 @@ body {
     margin-top: 10px;
 }
 
+.margin-top{
+    margin-top: 7px;
+}
+
 .thread-options{
     font-size: .8em;
     margin-top: 10px;
@@ -272,7 +348,7 @@ body {
 
 .back{
     min-height: 10px;
-    background-color: #E74C3C;
+    background-color: #87D37C;
 }
 
 .profile-back{
@@ -322,7 +398,7 @@ i{
 }
 
 .red{
-    color: #E74C3C;
+    color: #87D37C;
     margin-top: 5px;
 }
 
@@ -350,7 +426,7 @@ i{
     color: #ffffff;
     text-transform: uppercase;
     font: 1.4em;
-    background-color: #E74C3C;
+    background-color: #87D37C;
     padding: 10px;
 
 }
@@ -377,7 +453,7 @@ a, a:hover, a:focus {
     color: #fff; */
 }
 ::-moz-selection {
-    background: #E74C3C;
+    background: #87D37C;
     color: #000;
 }
 
@@ -388,7 +464,7 @@ a, a:hover, a:focus {
 
 /* Bootstrap Modifications */
 .modal-header {
-	background: #E74C3C;
+	background: #87D37C;
 }
 
 .modal-title {
@@ -449,7 +525,7 @@ a, a:hover, a:focus {
 .btn-theme.active,
 .open .dropdown-toggle.btn-theme {
   color: #fff;
-  background-color: #E74C3C;
+  background-color: #87D37C;
 }
 
 .btn-theme02 {
@@ -2290,7 +2366,7 @@ label {
 	margin: 0;
 	padding: 25px 20px;
 	text-align: center;
-	background: #E74C3C;
+	background: #87D37C;
 	border-radius: 5px 5px 0 0;
 	-webkit-border-radius: 5px 5px 0 0;
 	color: #fff;
@@ -2585,7 +2661,7 @@ label {
 }
 
 .footer-section a:hover{
-    color: #E74C3C;
+    color: #87D37C;
 }
 
 .footer-heading{
@@ -2593,7 +2669,7 @@ label {
     font-size: 1em;
     letter-spacing: 1px;
     padding-bottom: 15px;
-    color: #E74C3C;
+    color: #87D37C;
 }
 
 .footer-child{
