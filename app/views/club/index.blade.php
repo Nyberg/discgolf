@@ -11,15 +11,13 @@
 
                @foreach($clubs as $club)
                 <a href="/club/{{$club->id}}/show/">
-                    <div class="col-sm-3 col-md-3">
+                    <div class="col-sm-4 col-md-4">
                           <div class="thumbnail">
                             <div class="caption text-center">
 
                                 <img src="{{$club->image}}" alt="" height="60px"/>
-                                <h4 class="">
-                                                                    {{$club->name . ', ' . $club->city->city}}
-                                                                </h4>
-               
+                                <p class="margin-top">{{$club->name . ', ' . $club->city->city}}</p>
+
                            </div>
                           </div>
                     </div>
