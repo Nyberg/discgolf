@@ -30,10 +30,10 @@ class RegistrationController extends \BaseController
         $setToken = Activation::whereToken($token)->firstOrFail();
         if($setToken->token == $token){
 
-            $clubs = Club::get();
-            $cities = City::get();
-            $states = State::get();
-            $countries = Country::get();
+            $clubs = Club::orderBy('name', 'asc')->get();
+            $cities = City::orderBy('city', 'asc')->get();
+            $states = State::orderBy('state', 'asc')->get();
+            $countries = Country::orderBy('country', 'asc')->get();
 
             return View::make('users.create', ['clubs' => $clubs, 'cities' => $cities, 'states' => $states, 'countries' => $countries, 'token'=>$setToken])->with('success', 'Välkommen. Du kan nu skapa en användare!');
 

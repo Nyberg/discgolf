@@ -81,8 +81,9 @@
 
             @foreach($tee->hole as $hole)
 
-            {{Form::hidden('hole_id-'.$hole->number.'', $hole->id)}}
+            {{Form::hidden('hole_id-'.$hole->id.'', $hole->id)}}
             {{Form::hidden('par-'.$hole->number.'', $hole->par)}}
+            {{Form::hidden('hole-number-'.$hole->number.'', $hole->par)}}
 
               <div class="col-sm-2 col-md-2">
                 <div class="thumbnail">

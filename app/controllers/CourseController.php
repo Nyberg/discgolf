@@ -16,10 +16,10 @@ class CourseController extends \BaseController {
 
 	public function index()
 	{
-        $courses = Course::whereStatus(1)->get();
-        $countries = Country::get();
-        $states = State::get();
-        $cities = City::get();
+        $courses = Course::whereStatus(1)->orderBy('name', 'asc')->get();
+        $countries = Country::orderBy('country', 'asc')->get();
+        $states = State::orderBy('state', 'asc')->get();
+        $cities = City::orderBy('city', 'asc')->get();
 		return View::make('course.index', ['courses' => $courses, 'countries'=>$countries, 'states'=>$states, 'cities'=>$cities]);
 	}
 
@@ -121,6 +121,7 @@ class CourseController extends \BaseController {
         $records = Record::where('course_id', $id)->where('status', 1)->get();
         $data = $this->stat->generateInfo($holes, $tees);
         $avg = $this->stat->generateAvg($tees, $rounds);
+
         $aces = Score::where('course_id', $id)->where('score', 1)->get();
 
         return View::make('course.show', ['course'=>$course, 'rounds'=>$rounds, 'tees'=>$tees, 'club'=>$club,'reviews'=>$reviews, 'data'=>$data, 'records'=>$records, 'avg'=>$avg, 'aces'=>$aces]);

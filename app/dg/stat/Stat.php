@@ -97,8 +97,9 @@ class Stat{
         $dirArray = [];
         $j = 1;
 
-
         foreach($tees as $tee){
+
+            $dirArray[$tee->id][] = 0;
 
             $k = 1;
             $rounds_num = 1;

@@ -130,7 +130,7 @@ class RoundController extends BaseController {
 
         $round->save();
 
-        return Redirect::to('/account/round/'.$round->id.'/course/'.$round->course_id.'/score/add/')->with('headsup', 'Runda tillagd!');
+        return Redirect::to('/account/round/'.$round->id.'/course/'.$round->tee_id.'/score/add/')->with('headsup', 'Runda tillagd!');
     }
 
 
@@ -147,23 +147,24 @@ class RoundController extends BaseController {
 	{
         $id = Input::get('round_id');
         $round = Round::whereId($id)->firstOrFail();
+        $holes = Hole::where('tee_id', $round->tee_id)->get();
 
         if(Auth::id() == $round->user_id){
 
             $total = 0;
             $number = Input::get('holes');
 
-            for($i = 1; $i <= $number; $i++){
+            foreach($holes as $hole){
 
                 $score = new Score();
 
                 $score->user_id = Auth::User()->id;
-                $score->hole_id = Input::get('hole_id-'.$i.'');
+                $score->hole_id = Input::get('hole_id-'.$hole->id.'');
                 $score->round_id = Input::get('round_id');
                 $score->course_id = $round->course_id;
-                $score->score = Input::get('score-'.$i.'');
-                $score->par = Input::get('par-'.$i.'');
-                $x = Input::get('score-'.$i.'');
+                $score->score = Input::get('score-'.$hole->number.'');
+                $score->par = Input::get('par-'.$hole->number.'');
+                $x = Input::get('score-'.$hole->number.'');
 
                 $total = (int)$total + (int)$x;
                 $score->save();

@@ -48,23 +48,19 @@
 
     </div>
 
-    <div class="col-md-12">
-        <div class="col-md-12">
+        <div class="col-md-12" id="Container">
 
-    <ul class="list-inline list-unstyled" id="Container">
         @foreach($courses as $course)
-        <li class="col-sm-2 text-center thread mix category-none category-{{$course->country->country}} category-{{$course->state->state}} category-{{$course->city->city}}" data-myorder="2">
+        <div class="col-sm-4 text-center thread mix category-none category-{{$course->country->country}} category-{{$course->state->state}} category-{{$course->city->city}}" data-myorder="2">
 
         @foreach($course->photos as $photo)
-           <a href="/course/{{$course->id}}/show"><img src="{{$photo->url}}" class="img-responsive thumbnail center-block" width="100%;" min-height="60px;"/></a>
+           <a href="/course/{{$course->id}}/show"><img src="{{$photo->url}}" class="img-responsive thumbnail center-block" width="100%;" height="60px;"/></a>
         @endforeach
            <p><a href="/course/{{$course->id}}/show">{{$course->name .', ' . $course->city->city}}</a></p>
            <small>Klubb: {{$course->club->name}}</small>
-        </li>
+        </div>
         @endforeach
-    </ul>
     </div>
-</div>
 </div>
 
 
