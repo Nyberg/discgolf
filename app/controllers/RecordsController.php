@@ -65,7 +65,7 @@ class RecordsController extends \BaseController {
                 }
                 if ($round->total < (int)$num) {
 
-                    $recs = Record::where('course_id', $round->course_id)->where('total', $num)->where('type', 'Singel')->where('status', 1)->get();
+                    $recs = Record::where('course_id', $round->course_id)->where('total', $num)->where('type', 'Singel')->where('type', 'Group')->where('status', 1)->get();
 
                     foreach ($recs as $rec) {
                         $rec->status = 0;

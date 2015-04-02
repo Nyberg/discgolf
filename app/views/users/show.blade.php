@@ -150,7 +150,7 @@
         <div class="col-md-6">
              <h4 class="tab-rub text-center page-header-custom">Vänner</h4>
             @foreach($user->friends as $u)
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <div class="well well-sm">
                     <a href="/user/{{$u->user->id}}/show/" class="text-center">
                         <img src="{{$u->user->image}}" alt="" width="25px" class="img-circle"/> {{$u->user->first_name . ' ' . $u->user->last_name}} - {{$u->user->club->name}}
