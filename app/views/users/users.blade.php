@@ -12,7 +12,7 @@
                       <div class="thumbnail">
                         <div class="caption text-center">
                          <img src="{{$u->image}}" alt="" class="img-circle" width="60px"/>
-                            <h5 class="">{{$u->username}}</h5>
+                            <h5 class="">{{$u->first_name . ' ' . $u->last_name}}</h5>
                             <p>{{$u->profile->city->city . ', ' . $u->profile->state->state}}</p>
                        </div>
                       </div>

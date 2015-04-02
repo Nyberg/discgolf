@@ -33,6 +33,9 @@
         <br/>
             <div class="col-sm-8">
             @if($round->comment == null)
+                <blockquote>
+                  <p class="">Ingen kommentar skriven.</p>
+                </blockquote>
             @else
                 <blockquote>
                   <p class="">{{$round->comment}}</p>
