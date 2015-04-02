@@ -39,7 +39,7 @@
                 </blockquote>
             @endif
             </div>
-            <div class="col-sm-2 text-center weather-icon">
+            <div class="col-sm-2 text-center weather-icon" data-toggle="tooltip" data-placement="top" title="Klicka på ikonen för att se andra rundor med samma väder.">
             <a href="/rounds/weather/{{$round->weather_id}}/show">
                 <img src="{{$round->weather->image}}" class="" width="64px"/>
                 <p class="">{{$round->weather->name}}</p>
@@ -273,6 +273,10 @@
             event.preventDefault();
             $(this).ekkoLightbox();
         });
+
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
 </script>
 
 @stop
