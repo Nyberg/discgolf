@@ -9,19 +9,22 @@
 
     <div class="col-md-12">
 
-    <div class="col-md-12" id="Container">
-        <ul class="list-inline list-unstyled" id="Container">
                @foreach($clubs as $club)
-               <a href="/club/{{$club->id}}/show">
-               <li class="col-sm-3 text-center thread mix category-{{$club->country->country}} category-{{$club->state->state}} category-{{$club->city->city}}" data-myorder="2">
+                <a href="/club/{{$club->id}}/show/">
+                    <div class="col-sm-3 col-md-3">
+                          <div class="thumbnail">
+                            <div class="caption text-center">
 
-                  <img src="{{$club->image}}" class="center-block club-index" height="60px"/>
-                  <p>{{$club->name .', ' . $club->city->city}}</p>
-
-               </li>
-               </a>
+                                <img src="{{$club->image}}" alt="" height="60px"/>
+                                <h4 class="">
+                                                                    {{$club->name . ', ' . $club->city->city}}
+                                                                </h4>
+               
+                           </div>
+                          </div>
+                    </div>
+                </a>
                @endforeach
-           </ul>
     </div>
 
 </div>
