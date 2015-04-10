@@ -43,7 +43,6 @@
                <select name="type" class="form-control type" id="type">
                         <option id="1" value="Singel">Singel</option>
                         <option id="2" value="Par">Par</option>
-                        <option id="3" value="Grupp">Grupp</option>
                 </select>
             </div>
 

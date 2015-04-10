@@ -51,7 +51,7 @@ class RecordsController extends \BaseController {
 
             if ($round->type == 'Singel' || $round->type == 'Group') {
 
-                $num = Record::where('course_id', $round->course_id)->where('type', 'Singel')->where('type', 'Group')->where('tee_id', $round->tee_id)->where('status', 1)->orderBy('total', 'asc')->pluck('total');
+                $num = Record::where('tee_id', $round->tee_id)->where('type', 'Singel')->orWhere('type', 'Group')->where('status', 1)->orderBy('total', 'asc')->pluck('total');
 
                 if ($num == null && $round->type == 'Singel' || $num == 0 && $round->type == 'Singel' || $num == null && $round->type == 'Group' || $num == 0 && $round->type == 'Group') {
 
@@ -65,11 +65,23 @@ class RecordsController extends \BaseController {
                 }
                 if ($round->total < (int)$num) {
 
-                    $recs = Record::where('course_id', $round->course_id)->where('total', $num)->where('type', 'Singel')->where('type', 'Group')->where('status', 1)->get();
+                    $recs = Record::where('tee_id', $round->tee_id)->where('total', $num)->where('status', 1)->where('type', 'Singel')->get();
+                    $grecs = Record::where('tee_id', $round->tee_id)->where('total', $num)->where('status', 1)->where('type', 'Group')->get();
 
                     foreach ($recs as $rec) {
-                        $rec->status = 0;
-                        $rec->save();
+
+                        $r = Record::whereId($rec->id)->first();
+                        $r->status = 0;
+                        $r->save();
+
+                    }
+
+                    foreach ($grecs as $rec) {
+
+                        $r = Record::whereId($rec->id)->first();
+                        $r->status = 0;
+                        $r->save();
+
                     }
 
                     $this->CommandBus->execute($command);
@@ -78,7 +90,7 @@ class RecordsController extends \BaseController {
 
             if ($round->type == 'Par') {
 
-                $num = Record::where('course_id', $round->course_id)->where('type', 'Par')->where('tee_id', $round->tee_id)->where('status', 1)->orderBy('total', 'asc')->pluck('total');
+                $num = Record::where('type', 'Par')->where('tee_id', $round->tee_id)->where('status', 1)->orderBy('total', 'asc')->pluck('total');
 
                 if ($num == null && $round->type == 'Par' || $num = 0 && $round->type == 'Par') {
 
@@ -95,7 +107,9 @@ class RecordsController extends \BaseController {
                     $recs = Record::where('course_id', $round->course_id)->where('total', $num)->where('type', 'Par')->where('status', 1)->get();
 
                     foreach ($recs as $rec) {
-                        $rec->delete();
+                        $r = Record::whereId($rec->id)->first();
+                        $r->status = 0;
+                        $r->save();
                     }
 
                     $this->CommandBus->execute($command);
