@@ -113,14 +113,14 @@ class CourseController extends \BaseController {
         if($course->status == 1){
 
         $tees = Tee::where('course_id', $id)->get();
-        $rounds = Round::where('course_id', $id)->where('status', 1)->orderby('date', 'desc')->get();
+        $rounds = Round::where('course_id', $id)->where('status', 1)->orderby('date', 'desc')->limit(10)->get();
         $club = Club::whereId($course->club_id)->firstOrFail();
         $reviews = Review::where('course_id', $id)->orderBy('created_at', 'desc')->get();
 
         $holes = Hole::where('course_id', $id)->get();
         $records = Record::where('course_id', $id)->where('status', 1)->get();
         $data = $this->stat->generateInfo($holes, $tees);
-        $avg = $this->stat->generateAvg($tees, $rounds);
+        $avg = $this->stat->generateCourseAvg($tees, $rounds);
 
         $aces = Score::where('course_id', $id)->where('score', 1)->get();
 

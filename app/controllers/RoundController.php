@@ -190,7 +190,7 @@ class RoundController extends BaseController {
     {
         $round = Round::with('score')->whereId($id)->firstOrFail();
         $course = Course::whereId($course_id)->firstOrFail();
-        $tee = Tee::with('hole')->where('course_id', $course_id)->firstOrFail();
+        $tee = Tee::with('hole')->where('id', $round->tee_id)->firstOrFail();
         $scores = Score::with('hole')->where('round_id', $id)->get();
         $shots = Shot::with('disc')->where('round_id', $id)->get();
         $records = Record::where('course_id', $course_id)->where('tee_id', $round->tee_id)->where('type', $round->type)->where('status', 1)->get();

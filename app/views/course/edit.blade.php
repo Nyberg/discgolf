@@ -108,7 +108,7 @@
                          <div class="form-group">
                            <label class="col-sm-2 col-sm-2 control-label">Klubb</label>
                            <div class="col-sm-10">
-                               {{Form::select('club',$clubs ,null,array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
+                               {{Form::select('club',$clubs ,$course->club->name,array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
                                {{errors_for('club', $errors)}}</div>
 
                            <label class="col-sm-2 col-sm-2 control-label"></label>

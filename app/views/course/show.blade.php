@@ -57,6 +57,7 @@
 <p id="long">{{$course->long}}</p>
 <p id="lat">{{$course->lat}}</p>
 
+
 <div class="row">
 <div class="col-lg-12 main-chart">
 
@@ -454,9 +455,15 @@
         <h4 class="modal-title" id="myModalLabel">Väder i {{$course->city->city}}</h4>
       </div>
       <div class="modal-body text-center">
+      @if($course->state->state == 'Västra Götaland')
+      <script src="http://www.yr.no/sted/{{$course->country->country}}/Västra_Götaland/{{$course->city->city}}/ekstern_boks_tre_dager.js"></script><noscript><a href="http://www.yr.no/sted/{{$course->country->country}}/{{$course->state->state}}/{{$course->city->city}}/">yr.no: Værvarsel for Örebro</a></noscript>
+              <span class=""><script src="http://www.yr.no/sted/{{$course->country->country}}/{{$course->state->state}}/{{$course->city->city}}/ekstern_boks_time_for_time.js"></script><noscript><a href="http://www.yr.no/sted/{{$course->country->country}}/{{$course->state->state}}/{{$course->city->city}}/">yr.no: Værvarsel for Örebro</a></noscript>
+              </span>
+      @else
       <script src="http://www.yr.no/sted/{{$course->country->country}}/{{$course->state->state}}/{{$course->city->city}}/ekstern_boks_tre_dager.js"></script><noscript><a href="http://www.yr.no/sted/{{$course->country->country}}/{{$course->state->state}}/{{$course->city->city}}/">yr.no: Værvarsel for Örebro</a></noscript>
         <span class=""><script src="http://www.yr.no/sted/{{$course->country->country}}/{{$course->state->state}}/{{$course->city->city}}/ekstern_boks_time_for_time.js"></script><noscript><a href="http://www.yr.no/sted/{{$course->country->country}}/{{$course->state->state}}/{{$course->city->city}}/">yr.no: Værvarsel for Örebro</a></noscript>
         </span>
+        @endif
      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>

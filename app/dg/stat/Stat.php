@@ -91,7 +91,7 @@ class Stat{
        return $avg = $total / $num;
     }
 
-    public function generateAvg($tees, $rounds){
+    public function generateCourseAvg($tees, $rounds){
 
         $total = 0;
         $dirArray = [];
@@ -138,6 +138,51 @@ class Stat{
         return $dirArray;
     }
 
+    public function generateAvg($tees, $rounds){
+
+        $total = 0;
+        $dirArray = [];
+        $j = 1;
+
+        foreach($tees as $tee){
+
+            $k = 1;
+            $rounds_num = 1;
+
+            foreach($tee->hole as $hole){
+                $avg = 0;
+                $total = 0;
+                $rounds_num = 0;
+
+                if(count($hole->score) == 0){
+                    $total = 0;
+                    $rounds_num = 1;
+
+                }else{
+
+                    foreach($hole->score as $score){
+
+                        if($score->score != 0){
+
+                            $total = $total + $score->score;
+                            $rounds_num++;
+
+                        }else{
+
+                        }
+                    }
+                }
+                $avg = $total / $rounds_num;
+                array_push($dirArray, round($avg,2));
+                $k++;
+            }
+
+            $j++;
+        }
+
+        return $dirArray;
+    }
+
     public function generateUserAvg($tee, $rounds){
 
         $total = 0;
@@ -146,20 +191,20 @@ class Stat{
         $total = [];
 
         foreach($tee->hole as $hole){
-            $dirArray[$hole->tee_id][$hole->number] = 0;
-            $total[$hole->tee_id][$hole->number] = 0;
+            $total[$hole->number] = 0;
         }
 
         foreach($rounds as $round){
 
             foreach($round->score as $score){
-                $total[$round->tee_id][$score->hole->number] = $total[$round->tee_id][$score->hole->number] + $score->score;
+                $total[$score->hole->number] = $total[$score->hole->number] + $score->score;
             }
             $num++;
         }
 
             foreach($tee->hole as $hole) {
-                $dirArray[$hole->tee_id][$hole->number] = $total[$hole->tee_id][$hole->number] / $num;
+                $sum = $total[$hole->number] / $num;
+                array_push($dirArray, round($sum, 2));
             }
 
         return $dirArray;
@@ -170,7 +215,7 @@ class Stat{
         $dirArray = [];
 
         foreach($tee->hole as $hole){
-            $dirArray[$hole->tee_id][$hole->number] = 0;
+            array_push($dirArray, 0);
         }
 
         return $dirArray;
@@ -274,14 +319,14 @@ class Stat{
 
         $dirArray = [];
 
-        foreach($tee->hole as $hole){
+     /*   foreach($tee->hole as $hole){
             $dirArray[$hole->number] = 0;
-        }
+        } */
 
         foreach($rounds->score as $s)
         {
-                $dirArray[$s->hole->number]= $s->score;
-
+                #$dirArray[$s->hole->number]= $s->score;
+                array_push($dirArray, $s->score);
         }
         return $dirArray;
     }

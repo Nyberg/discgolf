@@ -15,7 +15,7 @@ class DiscController extends \BaseController {
         $disc->bag_id = Input::get('id');
         $disc->type = Input::get('type');
         $disc->mixed = $disc->plastic . ' ' . $disc->name . ' ' . $disc->weight . 'g';
-        $disc->user_id = Auth::id();
+        $disc->user_id = Auth::User()->id;
 
         $disc->save();
         $bag = Bag::whereId($id)->firstOrFail();

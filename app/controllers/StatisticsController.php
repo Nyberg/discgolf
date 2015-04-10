@@ -404,9 +404,17 @@ class StatisticsController extends BaseController {
             $user = $this->stat->generateUserAvg($tee, $user_rounds);
         }
 
+        $holearray = [];
+        foreach($tee->hole as $hole){
+            array_push($holearray, $hole->number);
+        }
+
         $stats = $this->stat->generateRound($round, $tee);
         $avg = $this->stat->generateAvg($tees,$rounds);
 
+        $message = [$holearray, $user, $stats, $avg];
+
+        /*
         $message = [
             'msg' => 'success',
             'holes' => $tee->holes,
@@ -464,7 +472,7 @@ class StatisticsController extends BaseController {
             'u16'    => $user[$tee->id]['16'],
             'u17'    => $user[$tee->id]['17'],
             'u18'    => $user[$tee->id]['18']
-        ];
+        ]; */
 
         return Response::json($message);
 
