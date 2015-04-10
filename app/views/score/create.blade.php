@@ -83,7 +83,7 @@
 
             {{Form::hidden('hole_id-'.$hole->id.'', $hole->id)}}
             {{Form::hidden('par-'.$hole->id.'', $hole->par)}}
-            {{Form::hidden('hole-number-'.$hole->id.'', $hole->par)}}
+            {{Form::hidden('hole-number-'.$hole->number.'', $hole->number)}}
 
               <div class="col-sm-2 col-md-2">
                 <div class="thumbnail">

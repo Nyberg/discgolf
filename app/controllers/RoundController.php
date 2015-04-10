@@ -147,14 +147,15 @@ class RoundController extends BaseController {
 	{
         $id = Input::get('round_id');
         $round = Round::whereId($id)->firstOrFail();
-        $holes = Hole::where('tee_id', $round->tee_id)->get();
-
+        $holes = Hole::where('tee_id', $round->tee_id)->orderBy('number', 'asc')->get();
+        $tee = Tee::with('hole')->whereId($round->tee_id)->firstOrFail();
+        
         if(Auth::id() == $round->user_id){
 
             $total = 0;
             $number = Input::get('holes');
 
-            foreach($holes as $hole){
+            foreach($tee->hole as $hole){
 
                 $score = new Score();
 
