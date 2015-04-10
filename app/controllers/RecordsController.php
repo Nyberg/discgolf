@@ -111,4 +111,10 @@ class RecordsController extends \BaseController {
         }
 	}
 
+    public function destroy($id){
+        $record = Record::whereId($id)->firstOrFail();
+        $record->delete();
+        return Redirect::back()->with('success', 'Runda borttagen!');
+    }
+
 }

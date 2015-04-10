@@ -348,3 +348,4 @@ Route::resource('links', 'LinksController');
 Route::resource('activation', 'ActivationController');
 Route::resource('friend', 'FriendsController');
 Route::resource('tour', 'TourController');
+Route::resource('record', 'RecordsController');

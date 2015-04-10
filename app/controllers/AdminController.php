@@ -4,7 +4,8 @@ class AdminController extends \BaseController {
 
 	public function rounds(){
         $rounds = Round::get();
-        return View::make('admin.rounds', compact('rounds'));
+        $records = Record::get();
+        return View::make('admin.rounds', compact('rounds'), ['records'=>$records]);
     }
 
     public function index()
