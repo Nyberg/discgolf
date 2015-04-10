@@ -12,7 +12,7 @@ class RoundController extends BaseController {
 	{
         #$date = date('Y-m-d', strtotime('-1 week'));
 		#$rounds = Round::with('course', 'user')->where('status', 1)->where('date', '>=' , $date)->orderBy('created_at', 'desc')->paginate(15);
-        $rounds = Round::where('status', 1)->orderBy('date', 'desc')->paginate(30);
+        $rounds = Round::where('status', 1)->orderBy('date', 'desc')->paginate(28);
         return View::make('round.index',compact('rounds'));
 	}
 
@@ -300,9 +300,9 @@ class RoundController extends BaseController {
     }
 
     public function records(){
-        $records = Record::where('status', 1)->orderBy('date', 'desc')->paginate(15);
+        $records = Record::orderBy('date', 'desc')->get();
 
-        return View::make('round.records', compact('records'));
+        return View::make('round.records', ['records'=>$records]);
     }
 
     public function getGroupRounds(){

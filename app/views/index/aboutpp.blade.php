@@ -25,6 +25,12 @@
     </div>
 
     <div class="row">
+        <div class="col-sm-12 text-center">
+            <a href="/alfa" class="btn btn-success btn-lg">Anmäl dig till alfatester!</a>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-10 col-md-offset-1 col-md-offset-right-1">
 
         <h2 class="text-center page-header-custom">Lite av det som finns:</h2>

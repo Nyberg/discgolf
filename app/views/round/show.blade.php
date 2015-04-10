@@ -32,15 +32,17 @@
        <div class="row">
         <br/>
             <div class="col-sm-8">
-            @if($round->comment == null)
+              @if($round->comment == null)
                 <blockquote>
                   <p class="">Ingen kommentar skriven.</p>
                 </blockquote>
+
             @else
                 <blockquote>
                   <p class="">{{$round->comment}}</p>
                 </blockquote>
             @endif
+
             </div>
             <div class="col-sm-2 text-center weather-icon" data-toggle="tooltip" data-placement="top" title="Klicka på ikonen för att se andra rundor med samma väder.">
             <a href="/rounds/weather/{{$round->weather_id}}/show">
@@ -58,6 +60,7 @@
          <div class="panel panel-default">
            <!-- Default panel contents -->
            <div class="panel-heading" id="compare_result">  Resultat: {{calcScore($round->total, $round->tee->par)}}
+                        <div class="fb-like pull-right" data-href="{{Route::current()->getName()}}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 
            </div>
     <table class="table table-hover text-center hidden-phone hidden-tablet">
