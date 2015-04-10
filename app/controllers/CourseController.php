@@ -113,9 +113,9 @@ class CourseController extends \BaseController {
         if($course->status == 1){
 
         $tees = Tee::where('course_id', $id)->get();
-        $rounds = Round::where('course_id', $id)->where('status', 1)->get();
+        $rounds = Round::where('course_id', $id)->where('status', 1)->orderby('date', 'desc')->get();
         $club = Club::whereId($course->club_id)->firstOrFail();
-        $reviews = Review::where('course_id', $id)->get();
+        $reviews = Review::where('course_id', $id)->orderBy('created_at', 'desc')->get();
 
         $holes = Hole::where('course_id', $id)->get();
         $records = Record::where('course_id', $id)->where('status', 1)->get();
@@ -168,6 +168,7 @@ class CourseController extends \BaseController {
             $course->long = Input::get('long');
             $course->lat = Input::get('lat');
             $course->club_id = Input::get('club');
+            $course->fee = Input::get('fee');
 
             $course->save();
 

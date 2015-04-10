@@ -16,7 +16,11 @@
             <small class="text-center margin-top">{{$user->profile->info}}</small>
         </div>
         <div class="col-md-12 text-center">
-            <p><i class="fa fa-map-marker fa-1-5x red"></i>{{$user->profile->city->city . ', ' . $user->profile->state->state}} <i class="fa fa-envelope fa-1-5x red"></i>{{$user->email}} <i class="fa fa-desktop fa-1-5x red"></i>{{$user->profile->website}}
+            <p><i class="fa fa-map-marker fa-1-5x red"></i>{{$user->profile->city->city . ', ' . $user->profile->state->state}} <i class="fa fa-envelope fa-1-5x red"></i>{{$user->email}}
+                @if($user->website == '' || $user->website = null)
+                @else
+                <i class="fa fa-desktop fa-1-5x red"></i>{{$user->profile->website}}
+                @endif
                 @if(Auth::check() && Auth::id() != $user->id)
 
                 @if(getFriend(Auth::id(), $user->id) == false)
