@@ -38,7 +38,7 @@ class UserController extends \BaseController {
 
         $user = User::with('profile')->whereId($id)->firstOrFail();
 
-        $rounds = Round::with('tee')->where('user_id', $id)->where('status', 1)->orWhere('type_id', $id)->orderBy('date', 'desc')->limit(5)->get();
+        $rounds = Round::with('tee')->where('user_id', $id)->where('status', 1)->orderBy('date', 'desc')->limit(5)->get();
         $club = Club::whereId($user->club_id)->firstOrFail();
         $bags = Bag::with('disc')->where('user_id', $id)->get();
         $sponsors = Sponsor::where('user_id', $id)->get();

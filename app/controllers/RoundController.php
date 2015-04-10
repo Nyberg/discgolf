@@ -162,9 +162,9 @@ class RoundController extends BaseController {
                 $score->hole_id = Input::get('hole_id-'.$hole->id.'');
                 $score->round_id = Input::get('round_id');
                 $score->course_id = $round->course_id;
-                $score->score = Input::get('score-'.$hole->number.'');
-                $score->par = Input::get('par-'.$hole->number.'');
-                $x = Input::get('score-'.$hole->number.'');
+                $score->score = Input::get('score-'.$hole->id.'');
+                $score->par = Input::get('par-'.$hole->id.'');
+                $x = Input::get('score-'.$hole->id.'');
 
                 $total = (int)$total + (int)$x;
                 $score->save();

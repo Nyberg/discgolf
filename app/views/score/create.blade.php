@@ -82,14 +82,14 @@
             @foreach($tee->hole as $hole)
 
             {{Form::hidden('hole_id-'.$hole->id.'', $hole->id)}}
-            {{Form::hidden('par-'.$hole->number.'', $hole->par)}}
-            {{Form::hidden('hole-number-'.$hole->number.'', $hole->par)}}
+            {{Form::hidden('par-'.$hole->id.'', $hole->par)}}
+            {{Form::hidden('hole-number-'.$hole->id.'', $hole->par)}}
 
               <div class="col-sm-2 col-md-2">
                 <div class="thumbnail">
                   <div class="caption">
-                    {{Form::number('number-'.$hole->number.'', $hole->number, array('class'=>'form-control text-center', 'readonly'))}}
-                    {{Form::number('score-'.$hole->number.'', null, ['class'=>'form-control', 'placeholder'=>'Resultat', 'data-validation'=>'number', 'data-validation-allowing'=>'range[1;100]', 'data-validation-error-msg'=>'Du måste ange ett nummer mellan 1 och 100'])}}
+                    {{Form::number('number-'.$hole->id.'', $hole->number, array('class'=>'form-control text-center', 'readonly'))}}
+                    {{Form::number('score-'.$hole->id.'', null, ['class'=>'form-control', 'placeholder'=>'Resultat', 'data-validation'=>'number', 'data-validation-allowing'=>'range[1;100]', 'data-validation-error-msg'=>'Du måste ange ett nummer mellan 1 och 100'])}}
                   </div>
                 </div>
               </div>
