@@ -24,8 +24,12 @@
         </div>
       </div>
 
-    {{Form::submit('Nästa hål', ['class'=>'btn btn-primary pull-right'])}}
+<div class="form-group">
+    <div class="col-xs-12">
+    {{Form::submit('Nästa hål', ['class'=>'btn btn-primary'])}}
     {{Form::close()}}
+    </div>
+</div>
 
 @stop
 

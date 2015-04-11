@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
     <meta name="description" content="">
     <meta name="author" content="Johannes Nyberg">
     <meta name="keyword" content="">
@@ -32,7 +32,7 @@
     {{HTML::script('admin_js/jquery.flexslider.js')}}
     {{HTML::script('packages/jleach/laravelmce/js/tinymce/tinymce.min.js')}}
     {{HTML::script('//tinymce.cachefly.net/4.1/tinymce.min.js')}}
-
+    {{HTML::script('https://maps.googleapis.com/maps/api/js?key=AIzaSyCMaFerIs2B3QmhCTjer-s1x_8THiBDYSs')}}
 
 <script type="text/javascript">
 
