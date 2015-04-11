@@ -327,4 +327,103 @@ class RoundController extends BaseController {
         return Response::json($message);
     }
 
+    #       APP         #
+
+    public function appRound(){
+        $courses = Course::whereStatus(1)->get();
+        $weathers = Weather::get();
+        $winds = Wind::get();
+
+        return View::make('app.app',['courses'=>$courses, 'weathers'=>$weathers, 'winds'=>$winds]);
+    }
+
+    public function appCreate(){
+
+        $user = User::whereId(Auth::id())->firstOrFail();
+        $date = new DateTime();
+        $round = new Round();
+
+        $round->user_id = Auth::id();
+        $round->type = 'Singel';
+        $round->date = $date->format('Y-m-d');
+        $round->course_id = Input::get('course');
+        $round->tee_id = Input::get('teepad');
+        $round->status = 0;
+        $round->group_id = 0;
+        $round->type_id = 0;
+
+        $round->username = $user->first_name;
+
+        $round->save();
+
+        $hole = Hole::where('tee_id', $round->tee_id)->where('number', 1)->firstOrFail();
+
+        return Redirect::to('/account/app/round/'.$round->id.'/start/'.$hole->id.'')->with('headsup', 'Rundan är startad. Lycka till!');
+    }
+
+    public function appStart($id, $hole){
+        $round = Round::whereId($id)->firstOrFail();
+        $hole = Hole::where('id', $hole)->where('tee_id', $round->tee_id)->firstOrFail();
+
+        $par = 0;
+        $total = 0;
+        $scores = Score::where('round_id', $round->id)->get();
+
+        foreach($scores as $s){
+            $par = $par + $s->par;
+            $total = $total + $s->score;
+        }
+
+        return View::make('app.start', ['round'=>$round, 'hole'=>$hole, 'par'=>$par, 'total'=>$total]);
+    }
+
+    public function appScore($id, $hole){
+
+        $round = Round::whereId($id)->firstOrFail();
+        $hole = Hole::whereId($hole)->firstOrFail();
+
+        $score = new Score();
+        $score->user_id = Auth::id();
+        $score->round_id = $round->id;
+        $score->hole_id = $hole->id;
+        $score->score = Input::get('score-'.$hole->id.'');
+        $score->par = $hole->par;
+        $score->course_id = $round->course_id;
+
+        $score->save();
+
+        $round->total = $round->total + $score->score;
+        $round->save();
+
+        if($hole->number < $round->tee->holes){
+
+            $x = $hole->number + 1;
+            $next = Hole::where('number', $x)->where('tee_id', $round->tee_id)->firstOrFail();
+            $nexthole = $next->id;
+            return Redirect::to('/account/app/round/'.$round->id.'/start/'.$nexthole.'');
+        }else{
+            return Redirect::to('/account/app/round/'.$round->id.'/finish');
+        }
+    }
+
+    public function appFinish($id){
+        $round = Round::whereId($id)->firstOrFail();
+        $weathers = Weather::get();
+        $winds = Wind::get();
+
+        return View::make('app.finish', ['round'=>$round,'weathers'=>$weathers, 'winds'=>$winds])->with('success', 'Bra jobbat!');
+    }
+
+    public function appStore($id){
+        $round = Round::whereId($id)->firstOrFail();
+
+        $round->weather_id = Input::get('weather');
+        $round->wind_id = Input::get('wind');
+        $round->comment = Input::get('comment');
+
+        $round->save();
+
+        return Redirect::to('/account/rounds/'.$round->user_id.'/user')->with('success', 'Rundan är sparad!');
+    }
+
 }

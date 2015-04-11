@@ -12,4 +12,16 @@
             </div>
         </div>
     </div>
+
+        @if(Auth::user()->hasRole('Admin'))
+        <div class="row">
+        <br/>
+            <div class="col-sm-12">
+                <div class="col-sm-12">
+                <a href="/account/app/start" class="btn btn-sm btn-success center-block">Webbapp!</a>
+                </div>
+            </div>
+        </div>
+        @else
+        @endif
 @stop
