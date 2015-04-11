@@ -181,38 +181,47 @@
                    </div>
 
                <div class="col-md-12 collapse well well-sm"  id="collapseExample">
-                         <div class="col-lg-3">
-                           <p>Putters</p>
+               <div class="row">
+                    <div class="col-md-12">
+                         <div class="col-lg-6">
+                           <p class="green">Putters</p>
                                @foreach($bag->disc as $disc)
                                @if($disc->type == 'Putter')
                                <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
                                @endif
                                @endforeach
                          </div>
-                         <div class="col-lg-3">
-                           <p>Midranges</p>
+                         <div class="col-lg-6">
+                           <p class="green">Midranges</p>
                                @foreach($bag->disc as $disc)
                                @if($disc->type == 'Midrange')
                                 <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
                                @endif
                                @endforeach
                          </div>
-                         <div class="col-lg-3">
-                           <p>Fairway Drivers</p>
+                     </div>
+                     </div>
+                     <br/>
+                <div class="row">
+                     <div class="col-md-12">
+                         <div class="col-lg-6">
+                           <p class="green">Fairway Drivers</p>
                                @foreach($bag->disc as $disc)
                                @if($disc->type == 'Fairway Driver')
                                 <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
                                @endif
                                @endforeach
                          </div>
-                         <div class="col-lg-3">
-                           <p>Drivers</p>
+                         <div class="col-lg-6">
+                           <p class="green">Drivers</p>
                                @foreach($bag->disc as $disc)
                                @if($disc->type == 'Driver')
                                 <p><span data-toggle="tooltip" data-placement="top" title="{{$disc->author.', '.$disc->weight . 'g'}}">{{$disc->plastic.' '. $disc->name}}</span></p>
                                @endif
                                @endforeach
                          </div>
+                     </div>
+               </div>
                </div>
                    @endforeach
            </div>

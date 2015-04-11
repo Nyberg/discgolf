@@ -707,7 +707,7 @@ function getRoundAvg(){
                         },
                         {
                             name: data['user'],
-                            data: [data['u_jan'], data['u_feb'], data['mar'], data['apr'], data['maj'], data['jun'], data['jul'], data['aug'], data['sep'], data['okt'], data['nov'], data['dec']]
+                            data: [data['u_jan'], data['u_feb'], data['u_mar'], data['u_apr'], data['u_maj'], data['u_jun'], data['u_jul'], data['u_aug'], data['u_sep'], data['u_okt'], data['u_nov'], data['u_dec']]
                         }]
                 });
 

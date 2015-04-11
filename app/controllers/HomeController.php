@@ -8,7 +8,7 @@ class HomeController extends BaseController {
 
             $date = date('Y-m-d', strtotime('-2 week'));
 
-            $rounds = Round::where('status', 1)->orderBy('created_at', 'desc')->limit(8)->get();
+            $rounds = Round::where('status', 1)->orderBy('date', 'desc')->limit(8)->get();
             $reviews = Review::with('course')->limit(3)->get();
             $news = News::orderBy('created_at', 'desc')->limit(4)->get();
             $num = Round::where('status', 1)->where('date', '>=' , $date)->orderBy('created_at', 'desc')->count();

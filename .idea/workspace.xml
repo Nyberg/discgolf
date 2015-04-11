@@ -28,51 +28,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="stats.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/admin_js/stats/stats.js">
+      <file leaf-file-name="HomeController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/HomeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="18026" max-vertical-offset="22000">
-              <caret line="828" column="80" selection-start-line="828" selection-start-column="80" selection-end-line="828" selection-end-column="80" />
+            <state vertical-scroll-proportion="-9.166667" vertical-offset="0" max-vertical-offset="1474">
+              <caret line="10" column="62" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RoundController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/RoundController.php">
+      <file leaf-file-name="show.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/course/show.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.166667" vertical-offset="0" max-vertical-offset="7304">
-              <caret line="14" column="81" selection-start-line="14" selection-start-column="81" selection-end-line="14" selection-end-column="81" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="master.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/master.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.75" vertical-offset="3816" max-vertical-offset="4466">
-              <caret line="195" column="0" selection-start-line="195" selection-start-column="0" selection-end-line="195" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="aboutpp.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/index/aboutpp.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.833333" vertical-offset="286" max-vertical-offset="3520">
-              <caret line="27" column="41" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="show.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/round/show.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7260726" vertical-offset="924" max-vertical-offset="6468">
-              <caret line="62" column="54" selection-start-line="62" selection-start-column="54" selection-end-line="62" selection-end-column="54" />
+            <state vertical-scroll-proportion="42.541668" vertical-offset="11075" max-vertical-offset="11792">
+              <caret line="457" column="47" selection-start-line="457" selection-start-column="47" selection-end-line="457" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -88,41 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CourseController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/CourseController.php">
+      <file leaf-file-name="stats.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/admin_js/stats/stats.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.583333" vertical-offset="2266" max-vertical-offset="5522">
-              <caret line="122" column="42" selection-start-line="122" selection-start-column="42" selection-end-line="122" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="records.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/round/records.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.375" vertical-offset="669" max-vertical-offset="1430">
-              <caret line="33" column="48" selection-start-line="33" selection-start-column="48" selection-end-line="33" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RecordsController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/RecordsController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="7.3333335" vertical-offset="2376" max-vertical-offset="3058">
-              <caret line="101" column="3" selection-start-line="101" selection-start-column="3" selection-end-line="101" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Stat.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/dg/stat/Stat.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.42" vertical-offset="3357" max-vertical-offset="16214">
-              <caret line="175" column="50" selection-start-line="175" selection-start-column="50" selection-end-line="175" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.7894737" vertical-offset="15103" max-vertical-offset="22000">
+              <caret line="709" column="208" selection-start-line="709" selection-start-column="208" selection-end-line="709" selection-end-column="208" />
               <folding />
             </state>
           </provider>
@@ -138,8 +78,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/dg/Rounds/PostGroupRoundsCommandHandler.php" />
-        <option value="$PROJECT_DIR$/app/models/Round.php" />
         <option value="$PROJECT_DIR$/app/dg/Rounds/PostRoundsCommand.php" />
         <option value="$PROJECT_DIR$/app/dg/Rounds/PostRoundsCommandHandler.php" />
         <option value="$PROJECT_DIR$/app/database/migrations/2015_03_07_202505_create_tours_table.php" />
@@ -167,7 +105,6 @@
         <option value="$PROJECT_DIR$/app/controllers/RegistrationController.php" />
         <option value="$PROJECT_DIR$/app/views/users/users.blade.php" />
         <option value="$PROJECT_DIR$/app/views/emails/activation/activation.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/users/show.blade.php" />
         <option value="$PROJECT_DIR$/.env.php" />
         <option value="$PROJECT_DIR$/app/controllers/AdminController.php" />
         <option value="$PROJECT_DIR$/app/routes.php" />
@@ -182,13 +119,16 @@
         <option value="$PROJECT_DIR$/app/views/course/show.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/CourseController.php" />
         <option value="$PROJECT_DIR$/app/controllers/StatisticsController.php" />
-        <option value="$PROJECT_DIR$/public/admin_js/stats/stats.js" />
         <option value="$PROJECT_DIR$/app/dg/stat/Stat.php" />
         <option value="$PROJECT_DIR$/app/views/round/records.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/RoundController.php" />
         <option value="$PROJECT_DIR$/app/views/master.blade.php" />
         <option value="$PROJECT_DIR$/app/views/index/aboutpp.blade.php" />
         <option value="$PROJECT_DIR$/app/views/round/show.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/index/links.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/users/show.blade.php" />
+        <option value="$PROJECT_DIR$/app/controllers/HomeController.php" />
+        <option value="$PROJECT_DIR$/public/admin_js/stats/stats.js" />
       </list>
     </option>
   </component>
@@ -346,6 +286,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="users" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="discgolf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="discgolf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="score" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -391,6 +353,54 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="index" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="discgolf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="discgolf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="emails" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="discgolf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="discgolf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="emails" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activation" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -622,55 +632,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/controllers/ScoreController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="396" max-vertical-offset="3344">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/users/users.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1650165" vertical-offset="208" max-vertical-offset="814">
-          <caret line="14" column="79" selection-start-line="14" selection-start-column="79" selection-end-line="14" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/round/round.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2420">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/RegistrationController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.083333" vertical-offset="1188" max-vertical-offset="2222">
-          <caret line="67" column="8" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/app.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="11.0" vertical-offset="264" max-vertical-offset="4576">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/auth.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="44.916668" vertical-offset="1078" max-vertical-offset="1694">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/cache.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2090">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/compile.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
@@ -903,14 +864,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/course/show.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5596184" vertical-offset="9702" max-vertical-offset="11792">
-          <caret line="457" column="47" selection-start-line="457" selection-start-column="47" selection-end-line="457" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/round/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.76947534" vertical-offset="484" max-vertical-offset="2816">
@@ -919,26 +872,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/admin_js/stats/stats.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="18026" max-vertical-offset="22000">
-          <caret line="828" column="80" selection-start-line="828" selection-start-column="80" selection-end-line="828" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/dg/stat/Stat.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.42" vertical-offset="3357" max-vertical-offset="16214">
           <caret line="175" column="50" selection-start-line="175" selection-start-column="50" selection-end-line="175" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/StatisticsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.541666" vertical-offset="8567" max-vertical-offset="12760">
-          <caret line="414" column="51" selection-start-line="414" selection-start-column="51" selection-end-line="414" selection-end-column="51" />
           <folding />
         </state>
       </provider>
@@ -993,8 +930,88 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/round/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7260726" vertical-offset="924" max-vertical-offset="6468">
+        <state vertical-scroll-proportion="-18.333334" vertical-offset="924" max-vertical-offset="6468">
           <caret line="62" column="54" selection-start-line="62" selection-start-column="54" selection-end-line="62" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/index/rules.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/index/loggedin.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3718">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/index/links.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.166666" vertical-offset="264" max-vertical-offset="1232">
+          <caret line="34" column="28" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/users/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.166667" vertical-offset="4246" max-vertical-offset="6446">
+          <caret line="203" column="26" selection-start-line="203" selection-start-column="26" selection-end-line="203" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/emails/activation/activation.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/emails/activation/alfa.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.166667" vertical-offset="0" max-vertical-offset="1474">
+          <caret line="10" column="62" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/StatisticsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.541666" vertical-offset="8567" max-vertical-offset="12760">
+          <caret line="414" column="51" selection-start-line="414" selection-start-column="51" selection-end-line="414" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/course/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="42.541668" vertical-offset="11075" max-vertical-offset="11792">
+          <caret line="457" column="47" selection-start-line="457" selection-start-column="47" selection-end-line="457" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/admin_js/stats/stats.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7894737" vertical-offset="15103" max-vertical-offset="22000">
+          <caret line="709" column="208" selection-start-line="709" selection-start-column="208" selection-end-line="709" selection-end-column="208" />
           <folding />
         </state>
       </provider>
