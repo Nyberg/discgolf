@@ -16,11 +16,11 @@
                 </div>
     </div>
 
-   {{Form::open(['method'=>'POST', 'route'=>['app-store-score', $round->id, $hole->id], 'class'=>'form-horizontal style-form', 'id'=>'round_form'])}}
+   {{Form::open(['method'=>'POST', 'route'=>['app-store-score', $round->id, $hole->id], 'class'=>'form-horizontal style-form', 'id'=>'score'])}}
 
       <div class="form-group">
           <div class="col-sm-12">
-              {{Form::number('score-'.$hole->id.'', null, ['class'=>'form-control', 'placeholder'=>'Resultat', 'data-validation'=>'number', 'data-validation-allowing'=>'range[1;100]', 'data-validation-error-msg'=>'Du måste ange ett nummer mellan 1 och 100'])}}
+              {{Form::number('score-'.$hole->id.'', '', ['class'=>'form-control', 'placeholder'=>'Resultat', 'data-validation'=>'number', 'data-validation-allowing'=>'range[1;100]', 'data-validation-error-msg'=>'Du måste ange ett nummer mellan 1 och 100'])}}
         </div>
       </div>
 
@@ -36,11 +36,12 @@
 
 @section('scripts')
 
-<script>
-        $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
-            event.preventDefault();
-            $(this).ekkoLightbox();
-        });
-</script>
+    <script>
+
+    $.validate({
+      form : '#score'
+    });
+
+    </script>
 
 @stop

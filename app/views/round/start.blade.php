@@ -13,7 +13,7 @@
         </div>
     </div>
 
-        @if(Auth::user()->hasRole('Admin'))
+        @if(Auth::user()->hasRole('Admin') || Auth::user()->hasRole('ClubOwner'))
         <div class="row">
         <br/>
             <div class="col-sm-12">

@@ -10,15 +10,6 @@ Route::get('/logout', 'SessionController@destroy');
 
 Route::group(['before'=>'checkAdmin'], function(){
 
-        #   App         #
-        Route::get('/account/app/start', 'RoundController@appRound');
-        Route::get('/account/app/round/{id}/start/{hole}', 'RoundController@appStart');
-        Route::get('/account/app/round/{id}/finish', 'RoundController@appFinish');
-        Route::post('/account/app/start/round', array('as'=>'start-app-round','uses' => 'RoundController@appCreate'));
-        Route::post('/account/app/round/{id}/score/{hole}', array('as'=>'app-store-score','uses' => 'RoundController@appScore'));
-        Route::post('/account/app/round/{id}/store', array('as'=>'app-store','uses' => 'RoundController@appStore'));
-
-
         #   Test        #
         Route::get('/test/{id}', 'StatisticsController@test');
 
@@ -98,6 +89,14 @@ Route::group(['before'=>'checkAdmin'], function(){
 );
 
 Route::group(['before'=>'checkClubOwner'], function(){
+
+        #   App         #
+        Route::get('/account/app/start', 'RoundController@appRound');
+        Route::get('/account/app/round/{id}/start/{hole}', 'RoundController@appStart');
+        Route::get('/account/app/round/{id}/finish', 'RoundController@appFinish');
+        Route::post('/account/app/start/round', array('as'=>'start-app-round','uses' => 'RoundController@appCreate'));
+        Route::post('/account/app/round/{id}/score/{hole}', array('as'=>'app-store-score','uses' => 'RoundController@appScore'));
+        Route::post('/account/app/round/{id}/store', array('as'=>'app-store','uses' => 'RoundController@appStore'));
 
         #   Course      #
         Route::get('/admin/course/add', 'CourseController@create');
