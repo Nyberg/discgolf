@@ -20,8 +20,8 @@
 
       <div class="form-group">
           <div class="col-sm-12">
-              {{Form::number('score-'.$hole->id.'', '', ['class'=>'form-control', 'placeholder'=>'Resultat', 'data-validation'=>'number', 'data-validation-allowing'=>'range[1;100]', 'data-validation-error-msg'=>'Du måste ange ett nummer mellan 1 och 100'])}}
-        </div>
+               {{Form::select('score-'.$hole->id.'', ['1'=>'1','2'=>'2', '3'=>'3','4'=>'4','5'=>'5', '6'=>'6', '7'=>'7', '8'=>'8', '9'=>'9','10'=>'10', '11'=>'11', '12'=>'12', '13'=>'13','14'=>'14'],$hole->par,array('data-toggle'=>'dropdown-select', 'data-style'=>'primary', 'class'=>'form-control'))}}
+          </div>
       </div>
 
 <div class="form-group">
