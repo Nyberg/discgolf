@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <p><i class="fa fa-tree green"></i> {{$round->course->name . ' - ' . $round->tee->color . ' tee ('.$round->tee->par.')'}} <span class="pull-right">Hål {{$hole->number}}</span></p>
+    <p><i class="fa fa-tree green"></i> {{$round->course->name . ' - ' . $round->tee->color . ' tee ('.$round->tee->par.')'}}</p>
             <h2 class="text-center">{{calcScore($total, $par)}}</h2>
     <div class="row text-center">
                 <div class="col-xs-4">

@@ -91,10 +91,10 @@
       <file leaf-file-name="start.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/app/start.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6006601" vertical-offset="98" max-vertical-offset="1144">
-              <caret line="21" column="33" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.09240924" vertical-offset="32" max-vertical-offset="1144">
+              <caret line="4" column="125" selection-start-line="4" selection-start-column="125" selection-end-line="4" selection-end-column="125" />
               <folding>
-                <marker date="1428820414000" expanded="true" signature="965:1234" placeholder="..." />
+                <marker date="1428820585000" expanded="true" signature="911:1180" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -1111,10 +1111,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/app/start.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6006601" vertical-offset="98" max-vertical-offset="1144">
-          <caret line="21" column="33" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.09240924" vertical-offset="32" max-vertical-offset="1144">
+          <caret line="4" column="125" selection-start-line="4" selection-start-column="125" selection-end-line="4" selection-end-column="125" />
           <folding>
-            <marker date="1428820414000" expanded="true" signature="965:1234" placeholder="..." />
+            <marker date="1428820585000" expanded="true" signature="911:1180" placeholder="..." />
           </folding>
         </state>
       </provider>
