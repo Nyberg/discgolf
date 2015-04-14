@@ -16,7 +16,7 @@
 {{HTML::style('front/css/owl.carousel.css')}}
 {{HTML::style('front/css/nivo-lightbox.css')}}
 {{HTML::style('front/css/styles.css')}}
-{{HTML::style('front/assets/ionicons/ionicons.css')}}
+{{HTML::style('front/assets/ionicons/css/ionicons.css')}}
 {{HTML::style('front/assets/elegant-icons/style.css')}}
 {{HTML::style('front/css/responsive.css')}}
 

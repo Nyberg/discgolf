@@ -60,7 +60,7 @@
 			<div class="container">
 
 				<div class="navbar-header">
-					<img src="images/logo.png" alt="">
+					<img src="/img/front/logo.png" alt="">
 				</div>
 
 				<ul class="nav navbar-nav navbar-right social-navigation hidden-xs">
