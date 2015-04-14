@@ -381,7 +381,7 @@
 	</div>
 
 	<div class="sub-heading">
-		Term sheet convertible note colluding bootstrapping.
+		Ta en rundtur på sidan!
 	</div>
 
 	<!-- SCREENSHOTS -->
