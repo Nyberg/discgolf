@@ -1,0 +1,83 @@
+/* --------------------------------------
+=========================================
+COLOR : GREEN 
+
+MAIN COLOR CODE: #00ab66
+
+DEEP COLOR CODE: #01995c
+=========================================
+----------------------------------------- */
+.colored-line {
+  background: #87D37C;
+}
+.colored-text {
+  color: #87D37C !important;
+}
+.color-bg {
+  background: #87D37C;
+}
+a {
+  color: #87D37C;
+}
+.non-sticky .navbar-nav > li > a:hover {
+  color: #87D37C;
+}
+.standard-button {
+  background: #87D37C;
+  color: #ffffff;
+}
+.standard-button:hover {
+  color: #ffffff;
+  background: #87D37C;
+}
+.secondary-button:hover {
+  color: #87D37C;
+  border-color: #87D37C;
+}
+.sticky-navigation .main-navigation .current a {
+  color: #87D37C !important;
+}
+.sticky-navigation .navbar-nav > li > a:hover {
+  color: #87D37C;
+}
+.feature-list-1 li .icon-container {
+  background: #87D37C;
+}
+.feature-list-2 li .icon-container {
+  background: #87D37C;
+}
+.feature .icon {
+  color: #87D37C;
+}
+.vertical-registration-form .input-box {
+  border-top: 1px solid rgba(0, 171, 102, 0.4);
+  border-bottom: 1px solid rgba(0, 171, 102, 0.4);
+  border-right: 1px solid rgba(0, 171, 102, 0.4);
+  border-left: 3px solid #00ab66;
+}
+.vertical-registration-form .input-box:focus,
+.vertical-registration-form .input-box:active {
+  border-color: #87D37C;
+}
+.subscription-form .input-box:focus,
+.subscription-form .input-box:active {
+  border-left: 3px solid #87D37C !important;
+}
+.input-box:active,
+.textarea-box:active,
+.input-box:focus,
+.textarea-box:focus {
+  border-left: 3px solid #87D37C !important;
+}
+.screenshots .owl-theme .owl-controls .owl-page span {
+  background: #87D37C;
+}
+.contact-link {
+  color: #87D37C;
+}
+.contact-link:hover {
+  color: #87D37C;
+}
+.social-icons li a:hover {
+  color: #87D37C;
+}
