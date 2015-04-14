@@ -371,7 +371,7 @@ h6 {
    4.2.1 BASIC STYLES               
 -----------------------------------------*/
 header {
-	background: url(../images/bg.jpg) no-repeat center top fixed;
+	background: url(../images/bg1.jpg) no-repeat center top fixed;
 	-webkit-background-size: cover;
 	background-size: cover;
 }
@@ -799,7 +799,7 @@ object {
    4.9.1 CALL TO ACTION WITH TEXT/BUTTON          
 -----------------------------------------*/
 .cta-section {
-	background: url(../images/bg.jpg) no-repeat center fixed;
+	background: url(../images/bg1.jpg) no-repeat center fixed;
 	-webkit-background-size: cover;
 	background-size: cover;
 }
