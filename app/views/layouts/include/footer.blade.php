@@ -22,7 +22,7 @@
                     <li class="footer-heading">Villkor</li>
                     <li class="footer-child"><a href="#">Användarvillkor</a></li>
                     <li class="footer-child"><a href="#">Rättigheter</a></li>
-                    <li class="footer-child"><a href="#">Medlemskap</a></li>
+                    <li class="footer-child"><a href="/membership">Medlemskap</a></li>
                 </ul>
             </div>
             <div class="col-md-3 footer-section">

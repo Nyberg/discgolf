@@ -52,7 +52,7 @@ function getScore(score, par){
         }if(num == -1){
             return 'birdie';
         }if(num == 0){
-            return '';
+            return 'par';
         }if(num == +1){
             return 'bogey';
         }if(num == +2){
@@ -71,7 +71,7 @@ function getScore(score, par){
         }if(num == -1){
             return 'birdie';
         }if(num == 0){
-            return '';
+            return 'par';
         }if(num == +1){
             return 'bogey';
         }if(num == +2){

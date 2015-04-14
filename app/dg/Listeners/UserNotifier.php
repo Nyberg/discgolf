@@ -12,6 +12,7 @@ use dg\Rounds\GroupRoundWasPosted;
 use dg\Rounds\RoundWasActivated;
 use dg\Rounds\RoundWasPosted;
 use dg\Tours\TourWasPosted;
+use Friend;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Round;
@@ -79,7 +80,6 @@ class UserNotifier extends EventListener{
 
         $user = User::whereId(Auth::id())->first();
 
-
             $user->newNotification()
                 ->from(Auth::user())
                 ->withType('RoundWasPosted')
@@ -128,11 +128,13 @@ class UserNotifier extends EventListener{
 
     public function whenRoundWasActivated(RoundWasActivated $event){
 
-        $users = User::get();
+        $users = Friend::where('friend_id', Auth::id())->get();
 
         foreach($users as $user) {
 
-            $user->newNotification()
+            $u = User::whereId($user->id)->firstOrFail();
+
+            $u->newNotification()
                 ->from(Auth::user())
                 ->withType('RoundWasActivated')
                 ->withSubject('Ny runda!')
@@ -141,7 +143,6 @@ class UserNotifier extends EventListener{
                 ->withUrl('/round/' . $event->round->id . '/course/' . $event->round->course_id . '')
                 ->deliver();
         }
-
     }
 
     public function whenFriendWasPosted(FriendWasPosted $event){
@@ -156,7 +157,6 @@ class UserNotifier extends EventListener{
             ->regarding($event->friend)
             ->withUrl('/user/' . $event->friend->user_id . '/show/')
             ->deliver();
-
     }
 
     public function whenTourWasPosted(TourWasPosted $event){

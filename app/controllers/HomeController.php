@@ -56,6 +56,8 @@ class HomeController extends BaseController {
         return View::make('index.discdb');
     }
 
-
+    public function membership(){
+        return View::make('index.medlemskap');
+    }
 
 }

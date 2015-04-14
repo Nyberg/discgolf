@@ -126,7 +126,8 @@ Route::group(['before'=>'auth'], function(){
     #   Dashboard   #
     Route::get('/dashboard', 'HomeController@dashboard');
 
-
+    # Statistik     #
+    Route::get('/statistics', 'StatisticsController@index');
 
     #   Round       #
     Route::get('/round/start', 'RoundController@startRound');
@@ -258,6 +259,7 @@ Route::get('/about/', 'HomeController@about');
 Route::get('/about-pp/', 'HomeController@about_pp');
 Route::get('/link','LinksController@index');
 Route::get('/disc-db','HomeController@discdb');
+Route::get('/membership','HomeController@membership');
 
 // Course
 Route::get('/course/{id}/show' , 'CourseController@show');
@@ -288,7 +290,7 @@ Route::get('/hole/{id}/show', 'HoleController@show');
 
 
 #   Statistik   #
-Route::get('/statistics', 'StatisticsController@index');
+
 Route::post('/stats/hole/', ['as' => 'hole.stats', 'uses' => 'StatisticsController@getStats']);
 Route::get('/getHoleStats', 'StatisticsController@getHoleStats');
 Route::get('/getRoundsPerMonth', 'StatisticsController@getRoundsPerMonth');

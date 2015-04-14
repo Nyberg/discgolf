@@ -65,7 +65,7 @@ function checkScore($id, $par){
             return 'birdie';
         }
         if($sum == 0){
-            return '';
+            return 'par';
         }
         if($sum == 1){
             return 'bogey';
@@ -78,6 +78,9 @@ function checkScore($id, $par){
         }
         if($sum == 4){
             return 'quad';
+        }
+        if($sum >= 5){
+            return 'other';
         }
 
     }if($par == 3){
@@ -89,7 +92,7 @@ function checkScore($id, $par){
             return 'birdie';
         }
         if($sum == 0){
-            return '';
+            return 'par';
         }
         if($sum == 1){
             return 'bogey';
@@ -102,6 +105,9 @@ function checkScore($id, $par){
         }
         if($sum == 4){
             return 'quad';
+        }
+        if($sum >= 5){
+            return 'other';
         }
     }
 }

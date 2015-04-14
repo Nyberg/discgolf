@@ -144,17 +144,9 @@
               <hr/>
             </div>
      @else
-            <div class="row">
-              <div class="col-md-12">
-                <h2 class="text-center page-header-custom">Statistik</h2>
-                 <p class="text-center">Som medlem eller licensierad spelare får du extra statistik. Här kan du bland annat se resultatet jämfört med banans snitt för varje hål. </p>
-                 <p class="text-center"><a href="#">Läs mer om medlemskap här!</a></p>
-                <div class="divider-header"></div>
-              </div>
-              <div class="col-md-12">
-              </div>
-              <hr/>
-            </div>
+
+        @include('layouts/include/membership')
+
      @endif
 
     </div>

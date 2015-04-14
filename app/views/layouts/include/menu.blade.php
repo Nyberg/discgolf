@@ -91,7 +91,11 @@
                      <li class="dropdown-header">Banor</li>
                     <li><a href="/courses">Alla Banor</a></li>
                     <li class="divider"></li>
+                    @if(Auth::check())
                     <li><a href="/statistics">Statistik</a></li>
+                    @else
+                    <li data-toggle="tooltip" data-placement="left" title="Du måste vara medlem för att kunna besöka denna sidan! Klicka här för mer info."><a href="/membership">Statistik</a></li>
+                    @endif
                   </ul>
                 </li>
 

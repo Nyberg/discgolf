@@ -172,7 +172,7 @@ body {
 }
 
 .hole-in-one{
-    background: #FFCE00;
+    background: #87C6FF;
 }
 
 .birdie{
@@ -184,7 +184,7 @@ body {
 }
 
 .par{
-    background-color: #F5F5F5;
+    background-color: #FFFFEC;
 }
 
 .bogey{
@@ -200,7 +200,11 @@ body {
 }
 
 .dblbogey{
-    background-color: #f99090   ;
+    background-color: #f99090;
+}
+
+.other{
+    background-color: #ECF0F1;
 }
 
 .image {

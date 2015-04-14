@@ -226,7 +226,7 @@
 
 </div></div></div>
 
-
+@if(Auth::check())
 <!-- Nav-pills -->
 <div class="showback hidden-phone">
 <div class="row">
@@ -236,6 +236,8 @@
 
         </div>
     </div>
+
+
 
     <div class="col-md-12">
         <div class="row">
@@ -249,6 +251,8 @@
 </div>
 
 <div id="sectionA" class="tab-pane fade in active">
+
+
 
     <div class="row">
        <div id="chart-round-avg" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
@@ -294,10 +298,14 @@
     </div>
     <!-- Slut sidomeny -->
     </div>
-
-
 </div>
 </div>
+
+    @else
+    <div class="showback">
+            @include('layouts/include/membership')
+    </div>
+    @endif
 
 <div class="row">
 <div class="col-lg-12 main-chart">
