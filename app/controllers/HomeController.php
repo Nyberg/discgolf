@@ -60,4 +60,8 @@ class HomeController extends BaseController {
         return View::make('index.medlemskap');
     }
 
+    public function design(){
+        return View::make('index.design');
+    }
+
 }

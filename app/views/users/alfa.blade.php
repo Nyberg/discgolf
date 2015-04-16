@@ -17,7 +17,9 @@
 
                     {{Form::email('email', '',['class'=>'input-fw input-flat form-control', 'placeholder'=>'Email', 'autofocus', 'data-validation'=>'email', 'data-validation-error-msg'=>'Du måste ange en korrekt email..'])}}
                     <br>
-                    {{Form::text('name', '',['class'=>'input-fw input-flat form-control', 'placeholder'=>'Namn', 'autofocus', 'data-validation'=>'required', 'data-validation-error-msg'=>'Du måste fylla i detta fältet..'])}}
+                    {{Form::text('name', '',['class'=>'input-fw input-flat form-control', 'placeholder'=>'Namn', 'data-validation'=>'required', 'data-validation-error-msg'=>'Du måste fylla i detta fältet..'])}}
+                    <br>
+                    {{Form::text('course', '',['class'=>'input-fw input-flat form-control', 'placeholder'=>'Hemmabana/Hemmabanor', 'data-validation'=>'required', 'data-validation-error-msg'=>'Du måste fylla i detta fältet..'])}}
                     <br>
 		            {{Form::submit('Skicka anmälan', ['class'=>'btn btn-primary btn-block'])}}
 		            {{Form::close()}}

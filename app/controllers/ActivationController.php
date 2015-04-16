@@ -7,17 +7,8 @@ use dg\Mailer\NotificationEmail;
 
 class ActivationController extends \BaseController {
 
-    /**
-     * @var AlfaEmail
-     */
     private $alfaEmail;
-    /**
-     * @var ActivationEmail
-     */
     private $activationEmail;
-    /**
-     * @var NotificationEmail
-     */
     private $notificationEmail;
 
     public function __construct(AlfaEmail $alfaEmail, ActivationEmail $activationEmail, NotificationEmail $notificationEmail){
@@ -97,29 +88,18 @@ class ActivationController extends \BaseController {
 
     }
 
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
 	public function create()
 	{
 		//
 	}
 
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function store()
 	{
 		$alfa = new Registration;
 
         $alfa->email = Input::get('email');
         $alfa->first_name = Input::get('name');
+        $alfa->last_name = Input::get('course');
 
         $alfa->save();
 
@@ -132,7 +112,7 @@ class ActivationController extends \BaseController {
         $this->activationEmail->activate($alfa);
         $this->notificationEmail->sendMail($alfa);
 
-        return Redirect::back()->with('success', 'Din anmälan är nu skickad!');
+        return Redirect::back()->with('success', 'Din anmälan är nu skickad! Glöm inte kolla skräpposten (många emailprogram lägger mina mail där)!');
 
 	}
 
@@ -148,49 +128,21 @@ class ActivationController extends \BaseController {
         return $randomString;
     }
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function show($id)
 	{
 		//
 	}
 
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function edit($id)
 	{
 		//
 	}
 
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function update($id)
 	{
 		//
 	}
 
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
 		//

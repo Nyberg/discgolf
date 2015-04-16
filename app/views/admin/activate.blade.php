@@ -10,6 +10,7 @@
              <thead>
                  <th>Namn</th>
                  <th>Email</th>
+                 <th>Hemmabana</th>
                   <th>Skicka inbjudan</th>
              </thead>
          <tbody>
@@ -18,6 +19,7 @@
             <tr>
                 <td>{{$acti->first_name}}</td>
                 <td>{{$acti->email}}</td>
+                <td>{{$acti->last_name}}</td>
                 <td>
                 {{Form::open(['method'=>'POST', 'route'=>['alfa.send', $acti->id]])}}
                 {{Form::submit('Skicka inbjudan', ['class'=>'btn btn-danger btn-xs'])}}
@@ -37,6 +39,7 @@
                    <thead>
                        <th>Namn</th>
                        <th>Email</th>
+                       <th>Hemmabana</th>
                         <th>Skickad</th>
                    </thead>
                <tbody>
@@ -45,6 +48,7 @@
                   <tr>
                       <td>{{$acti->first_name}}</td>
                       <td>{{$acti->email}}</td>
+                      <td>{{$acti->last_name}}</td>
                       <td>{{$acti->updated_at}}</td>
                   </tr>
                   @else

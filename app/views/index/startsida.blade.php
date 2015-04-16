@@ -84,7 +84,7 @@
 			<div class="col-md-12 intro-section">
 
 				<h1 class="intro text-left">
-				<span class="strong colored-text">Förbättra</span> ditt spel med <strong class="strong colored-text">Penguin Project! (alfa)</strong>
+				<span class="strong colored-text">Upptäck</span> en ny värld av <span class="strong colored-text">discgolf</span> med <strong class="strong colored-text">Penguin Project! (alfa)</strong>
 				</h1>
 
 				<p class="sub-heading text-left">
@@ -456,7 +456,7 @@
 				</div>
 				<div class="box">
 					<p class="message">
-						 Penguin Project är ett för discgolfare i Sverige där spelare ska kunna utveckla sitt spel. Jag vet själv inte hur sidan kommer se ut om ett år (jag har planer), men mycket beror på användarna och deras ideér. Vet du något som du saknar?
+						 Penguin Project är ett projekt för discgolfare i Sverige där spelare ska kunna utveckla sitt spel. Jag vet själv inte hur sidan kommer se ut om ett år (jag har planer), men mycket beror på användarna och deras ideér. Vet du något som du saknar?
 					</p>
 				</div>
 			</div>
@@ -468,7 +468,7 @@
 				</div>
 				<div class="box">
 					<p class="message">
-						 Jag, Johannes Nyberg, är en interaktionsdesigner och webbutvecklare som älskar discgolf. Jag är utbildad vid Karlstads Universitet och letar just nu ett jobb. Under tiden utvecklare jag Penguin Project för att utveckla mina kunskaper.
+						 Jag, Johannes Nyberg, är en interaktionsdesigner och webbutvecklare som älskar discgolf. Jag är utbildad vid Karlstads Universitet och letar just nu ett jobb. Under tiden utvecklar jag Penguin Project för att utveckla mina kunskaper.
 					</p>
 				</div>
 				<div class="client-info">
@@ -512,7 +512,7 @@
 		<h4>Är du redo att förbättra ditt spel?</h4>
 		<h2>Få de bästa möjligheterna med Penguin Project</h2>
 		<div id="cta-4">
-			<a href="/alfa" class="btn standard-button"> Bli medlem (beta)!</a>
+			<a href="/alfa" class="btn standard-button"> Bli medlem (alfa)!</a>
 		</div>
 
 

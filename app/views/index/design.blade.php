@@ -1,4 +1,4 @@
-@extends('master')
+@extends('pp')
 
 @section('content')
 

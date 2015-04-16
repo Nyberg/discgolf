@@ -12,6 +12,7 @@ Route::group(['before'=>'checkAdmin'], function(){
 
         #   Test        #
         Route::get('/test/{id}', 'StatisticsController@test');
+        Route::get('/design', 'HomeController@design');
 
         #   Forum       #
         Route::group(['prefix' => '/forum'], function(){
