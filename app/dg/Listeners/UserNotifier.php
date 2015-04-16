@@ -128,7 +128,7 @@ class UserNotifier extends EventListener{
 
     public function whenRoundWasActivated(RoundWasActivated $event){
 
-        $users = Friend::where('friend_id', Auth::id())->get();
+        $users = User::where('club_id', Auth::user()->club_id)->get();
 
         foreach($users as $user) {
 
