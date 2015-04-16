@@ -17,8 +17,8 @@ class RoundController extends BaseController {
 	}
 
     public function user_round($id){
-        $rounds = Round::with('course')->where('user_id', $id)->where('status', 0)->orderBy('date', 'asc')->get();
-        $actives = Round::with('course')->where('user_id', $id)->where('status', 1)->orderBy('date', 'asc')->get();
+        $rounds = Round::with('course')->where('user_id', $id)->where('status', 0)->orderBy('date', 'desc')->get();
+        $actives = Round::with('course')->where('user_id', $id)->where('status', 1)->orderBy('date', 'desc')->get();
         return View::make('round.user_round', ['rounds'=>$rounds, 'actives'=>$actives]);
     }
 

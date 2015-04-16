@@ -3,8 +3,8 @@
 class AdminController extends \BaseController {
 
 	public function rounds(){
-        $rounds = Round::get();
-        $records = Record::get();
+        $rounds = Round::orderBy('date', 'desc')->get();
+        $records = Record::orderBy('date', 'desc')->get();
         return View::make('admin.rounds', compact('rounds'), ['records'=>$records]);
     }
 
