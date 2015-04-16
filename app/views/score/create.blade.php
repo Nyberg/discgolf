@@ -6,6 +6,7 @@
 
     <div class="col-md-12">
         <h2 class="text-center page-header-custom">Runda - {{$tee->course['name'] . ' - ' . $tee->color}} - {{$round->created_at->format('Y-m-d')}}</h2>
+         <p class="text-center">För tillfället kan man inte komma åt denna sidan, förutom när man skickas hit. Så fyll i era resultat direkt!</p>
         <div class="divider-header"></div>
         @if($round->type == 'Group')
         <p class="text-center">Detta är en grupprunda med:
