@@ -16,7 +16,7 @@
                                 <h4 class="">
                                     {{$round->course->name . ' - ' . $round->tee->color}}
                                 </h4>
-                                <p>{{$round->created_at->format('Y-m-d') . ' av ' . $round->user->first_name . ' ' . $round->user->last_name}}</p>
+                                <p>{{$round->date . ' av ' . $round->user->first_name . ' ' . $round->user->last_name}}</p>
                            </div>
                           </div>
                     </div>
@@ -44,7 +44,7 @@
                                     <h4 class="">
                                         {{$round->course->name . ' - ' . $round->tee->color}}
                                     </h4>
-                                    <p>{{$round->created_at->format('Y-m-d') . ' av ' . $round->user->first_name . ' ' . $round->user->last_name}}</p>
+                                    <p>{{$round->date . ' av ' . $round->user->first_name . ' ' . $round->user->last_name}}</p>
                                </div>
                               </div>
                         </div>

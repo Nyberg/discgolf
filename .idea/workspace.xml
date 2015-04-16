@@ -28,16 +28,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="startsida.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/index/startsida.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.916667" vertical-offset="11022" max-vertical-offset="12122">
-              <caret line="514" column="73" selection-start-line="514" selection-start-column="73" selection-end-line="514" selection-end-column="73" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="alfa.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/users/alfa.blade.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -121,14 +111,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/score/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29042906" vertical-offset="0" max-vertical-offset="2728">
+            <state vertical-scroll-proportion="-7.3333335" vertical-offset="0" max-vertical-offset="2728">
               <caret line="8" column="145" selection-start-line="8" selection-start-column="145" selection-end-line="8" selection-end-column="145" />
               <folding>
                 <marker date="1429184632000" expanded="true" signature="2993:3221" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="records.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/round/records.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4719472" vertical-offset="726" max-vertical-offset="1430">
+              <caret line="46" column="53" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -152,7 +152,6 @@
         <option value="$PROJECT_DIR$/app/controllers/CourseController.php" />
         <option value="$PROJECT_DIR$/app/controllers/StatisticsController.php" />
         <option value="$PROJECT_DIR$/app/dg/stat/Stat.php" />
-        <option value="$PROJECT_DIR$/app/views/round/records.blade.php" />
         <option value="$PROJECT_DIR$/app/views/index/aboutpp.blade.php" />
         <option value="$PROJECT_DIR$/app/views/index/links.blade.php" />
         <option value="$PROJECT_DIR$/app/views/users/show.blade.php" />
@@ -194,6 +193,7 @@
         <option value="$PROJECT_DIR$/app/controllers/RegistrationController.php" />
         <option value="$PROJECT_DIR$/app/views/round/create.blade.php" />
         <option value="$PROJECT_DIR$/app/views/score/create.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/round/records.blade.php" />
       </list>
     </option>
   </component>
@@ -855,13 +855,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/app/app.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32673267" vertical-offset="0" max-vertical-offset="1562">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/round/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.083333" vertical-offset="0" max-vertical-offset="924">
@@ -1225,11 +1218,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/score/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29042906" vertical-offset="0" max-vertical-offset="2728">
+        <state vertical-scroll-proportion="-7.3333335" vertical-offset="0" max-vertical-offset="2728">
           <caret line="8" column="145" selection-start-line="8" selection-start-column="145" selection-end-line="8" selection-end-column="145" />
           <folding>
             <marker date="1429184632000" expanded="true" signature="2993:3221" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/round/records.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4719472" vertical-offset="726" max-vertical-offset="1430">
+          <caret line="46" column="53" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
