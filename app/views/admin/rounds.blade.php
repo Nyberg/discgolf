@@ -14,6 +14,7 @@
             <th>Bana</th>
             <th>Typ</th>
             <th>Resultat</th>
+            <th>Status</th>
             <th>Ta bort</th>
 
           </tr>
@@ -33,6 +34,7 @@
             @endif
             </td>
             <td>{{calcScore($round->total, $round->tee['par'])}}</td>
+            <td>{{$round->status}}</td>
            <td>
 
              {{Form::open(['method'=>'DELETE', 'route'=>['round.destroy', $round->id]])}}
@@ -58,6 +60,7 @@
                   <th>Bana</th>
                   <th>Typ</th>
                   <th>Resultat</th>
+                  <th>Status</th>
                   <th>Ta bort</th>
 
                 </tr>
@@ -77,6 +80,7 @@
                   @endif
                   </td>
                   <td>{{calcScore($round->total, $round->tee['par'])}}</td>
+                  <td>{{$round->status}}</td>
                  <td>
 
                    {{Form::open(['method'=>'DELETE', 'route'=>['record.destroy', $round->id]])}}
