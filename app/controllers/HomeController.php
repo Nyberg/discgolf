@@ -10,7 +10,7 @@ class HomeController extends BaseController {
 
             $rounds = Round::where('status', 1)->orderBy('date', 'desc')->limit(8)->get();
             $reviews = Review::with('course')->limit(3)->get();
-            $news = News::orderBy('created_at', 'desc')->limit(4)->get();
+            $news = News::orderBy('created_at', 'desc')->limit(6)->get();
             $num = Round::where('status', 1)->where('date', '>=' , $date)->orderBy('created_at', 'desc')->count();
             $latest = User::orderBy('created_at', 'desc')->limit(1)->first();
 

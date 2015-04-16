@@ -77,19 +77,19 @@
 
                 </thead>
                 <tbody>
-                @foreach($actives as $round)
+                @foreach($actives as $ac)
                  <tr>
-                  <td><a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->created_at->format('Y-m-d')}}</a></td>
-                  <td><a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a></td>
-                  <td><a href="/course/{{$round->course_id}}/show">{{$round->course['name'] . ' - ' . $round->tee['color']}}</a></td>
-                  <td>{{$round->type}}
+                  <td><a href="/round/{{$ac->id}}/course/{{$ac->course_id}}">{{$ac->created_at->format('Y-m-d')}}</a></td>
+                  <td><a href="/user/{{$ac->user_id}}/show">{{$ac->user->first_name . ' ' . $ac->user->last_name}}</a></td>
+                  <td><a href="/course/{{$ac->course_id}}/show">{{$ac->course['name'] . ' - ' . $ac->tee['color']}}</a></td>
+                  <td>{{$ac->type}}
 
-                  @if($round->type == 'Par')
+                  @if($ac->type == 'Par')
 
                   @else
                   @endif
                   </td>
-                  <td>{{calcScore($round->total, $round->tee['par'])}}</td>
+                  <td>{{calcScore($ac->total, $ac->tee['par'])}}</td>
                   </tr>
                  @endforeach
                 </tbody>

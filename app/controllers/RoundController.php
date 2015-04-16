@@ -261,6 +261,13 @@ class RoundController extends BaseController {
 
         if($round->user_id == Auth::user()->id || Auth::user()->hasRole('Admin')){
 
+            $records = Record::where('round_id', $round->id)->get();
+
+
+            foreach($records as $record){
+                $record->delete();
+            }
+
         $id = $round->id;
 
             $command = new RemoveRoundCommand($id);
