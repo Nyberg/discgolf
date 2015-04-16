@@ -5,6 +5,7 @@
 	<div class="showback">
 
  <h4 class="tab-rub text-center page-header-custom">Skapa Runda</h4>
+ <p class="text-center">För tillfället kan man inte komma åt denna sidan, förutom när man skickas hit. Så fyll i era resultat direkt!</p>
         <div class="divider-header"></div>
 
    {{Form::open(['method'=>'POST', 'route'=>['account-round-add-score'], 'class'=>'form-horizontal style-form', 'id'=>'round_form'])}}

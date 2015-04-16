@@ -17,15 +17,15 @@ class RoundController extends BaseController {
 	}
 
     public function user_round($id){
-        $rounds = Round::with('course')->where('user_id', $id)->where('status', 0)->get();
-        $actives = Round::with('course')->where('user_id', $id)->where('status', 1)->get();
+        $rounds = Round::with('course')->where('user_id', $id)->where('status', 0)->orderBy('date', 'asc')->get();
+        $actives = Round::with('course')->where('user_id', $id)->where('status', 1)->orderBy('date', 'asc')->get();
         return View::make('round.user_round', ['rounds'=>$rounds, 'actives'=>$actives]);
     }
 
     public function weather($id){
         $winds = Wind::get();
         $weathers = Weather::get();
-        $courses = Course::get();
+        $courses = Course::orderBy('name', 'asc')->get();
         $weather = Weather::whereId($id)->firstOrFail();
         $rounds = Round::where('weather_id', $id)->where('status', 1)->orderBy('date', 'desc')->get();
         return View::make('round.weather', ['rounds'=>$rounds, 'weather'=>$weather, 'winds'=>$winds, 'weathers'=>$weathers, 'courses'=>$courses]);
@@ -136,7 +136,7 @@ class RoundController extends BaseController {
 
     public function getCourse(){
 
-        $courses = Course::whereStatus(1)->get();
+        $courses = Course::whereStatus(1)->orderBy('name', 'asc')->get();
         $weathers = Weather::get();
         $winds = Wind::get();
 

@@ -2,7 +2,7 @@
 
 @section('content')
 
- @include('layouts/include/flash')
+@include('layouts/include/flash')
 
 
 

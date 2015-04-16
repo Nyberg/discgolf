@@ -11,6 +11,7 @@
         <div class="divider-header"></div>
 
         <p class="text-center">Välkommen till Penguin Projects forum! Har ni hittat en bugg eller vill skriva något som är relaterat till alfatester? Då ska ni använda er av delforumet "Alfatester".</p>
+        <p class="text-center"><strong>Forumet är fortfarande under upprustning. En rad olika funktioner ska till så det blir lättare att använda.</strong></p>
     <hr>
     </div>
     <div class="col-md-12">

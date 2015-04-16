@@ -20,7 +20,7 @@ class UserController extends \BaseController {
 
 	public function index()
 	{
-        $users = User::orderBy('username', 'asc')->paginate(50);
+        $users = User::orderBy('last_name', 'asc')->paginate(50);
         $clubs = Club::get();
 
         return View::make('users.users',compact('users'), ['clubs'=>$clubs]);
