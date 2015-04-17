@@ -12,7 +12,7 @@ class RoundController extends BaseController {
 	{
         #$date = date('Y-m-d', strtotime('-1 week'));
 		#$rounds = Round::with('course', 'user')->where('status', 1)->where('date', '>=' , $date)->orderBy('created_at', 'desc')->paginate(15);
-        $rounds = Round::where('status', 1)->orderBy('date', 'desc')->paginate(28);
+        $rounds = Round::where('status', 1)->orderBy('date', 'desc')->paginate(16);
         return View::make('round.index',compact('rounds'));
 	}
 
