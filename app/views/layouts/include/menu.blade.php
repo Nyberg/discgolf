@@ -115,7 +115,7 @@
           </ul>
 
         <ul class="nav navbar-nav navbar-right pull-right col-lg-offset-right-1">
-                @if(Auth::user() && Auth::user()->hasRole('Admin'))
+                @if(Auth::user())
                 <li>
                     <a href="/account/user/{{Auth::id()}}/compare" id="compareCart">
                     <span class="fa fa-binoculars">
