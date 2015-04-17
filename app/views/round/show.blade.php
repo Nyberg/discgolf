@@ -113,7 +113,7 @@
 
    <span class="input-group-sm hidden-phone">
        <div class="row">
-       @if(Auth::check() && Auth::user()->hasRole('Admin'))
+       @if(Auth::check())
        <div class="col-sm-4">
             {{Form::open(['method' => 'POST','route' => ['add-to-compare'], 'id'=>'add_to_compare'])}}
             {{Form::hidden('round_id', $round->id, ['id'=>'round_id'])}}

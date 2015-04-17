@@ -127,7 +127,7 @@
 
 @yield('scripts')
 
-@if(Auth::check() && Auth::user()->hasRole('Admin'))
+@if(Auth::check())
 <script>
     $(document).ready(function() {
         getCompareNumber();

@@ -80,6 +80,10 @@ class RegistrationController extends \BaseController
         $user->roles()->attach($role);
         $user->profile()->save($profile);
 
+        $compare = new Compare();
+        $compare->user_id = $user->id;
+        $compare->save();
+
         $reg = Registration::where('id', $token->user_id)->firstOrFail();
 
         $reg->delete();
