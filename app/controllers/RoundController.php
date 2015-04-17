@@ -358,6 +358,8 @@ class RoundController extends BaseController {
         $round->status = 0;
         $round->group_id = 0;
         $round->type_id = 0;
+        $round->weather_id = 1;
+        $round->wind_id = 1;
 
         $round->username = $user->first_name;
 

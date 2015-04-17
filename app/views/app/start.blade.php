@@ -31,6 +31,25 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-xs-12 text-center">
+    <table class="table table-hover text-center">
+        <thead class="text-center">
+            <td>Hål</td>
+            <td>Johannes</td>
+        </thead>
+        <tbody>
+        @foreach($round->score as $score)
+        <tr>
+            <td>{{$score->hole->number}}</td>
+            <td class="{{checkScore($score->score, $score->par)}}">{{$score->score}} ({{$score->par}})</td>
+        </tr>
+        @endforeach
+        </tbody>
+        </table>
+    </div>
+</div>
+
 @stop
 
 
