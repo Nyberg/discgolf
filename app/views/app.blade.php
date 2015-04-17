@@ -2,11 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- CONFIGURATION -->
 
-    <meta name="description" content="">
-    <meta name="author" content="Johannes Nyberg">
-    <meta name="keyword" content="">
+        <!-- Allow web app to be run in full-screen mode. -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+        <!-- Make the app title different than the page title. -->
+        <meta name="apple-mobile-web-app-title" content="iOS 8 web app">
+
+        <!-- Configure the status bar. -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <!-- Set the viewport. -->
+        <meta name="viewport" content="initial-scale=1">
+
+        <!-- Disable automatic phone number detection. -->
+        <meta name="format-detection" content="telephone=no">
     <link rel="shortcut icon" type="image/png" href="/img/penguin-png.png"/>
     <title>Penguin Project | Alfa</title>
 
