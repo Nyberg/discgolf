@@ -18,6 +18,7 @@
 
         <!-- Disable automatic phone number detection. -->
         <meta name="format-detection" content="telephone=no">
+
     <link rel="shortcut icon" type="image/png" href="/img/penguin-png.png"/>
     <title>Penguin Project | Alfa</title>
 

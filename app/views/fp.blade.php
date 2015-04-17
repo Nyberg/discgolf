@@ -2,7 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+        <!-- CONFIGURATION -->
+
+            <!-- Allow web app to be run in full-screen mode. -->
+            <meta name="apple-mobile-web-app-capable" content="yes">
+
+            <!-- Make the app title different than the page title. -->
+            <meta name="apple-mobile-web-app-title" content="iOS 8 web app">
+
+            <!-- Configure the status bar. -->
+            <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+            <!-- Set the viewport. -->
+            <meta name="viewport" content="initial-scale=1">
+
+            <!-- Disable automatic phone number detection. -->
+            <meta name="format-detection" content="telephone=no">
+
     <meta name="description" content="">
     <meta name="author" content="Johannes Nyberg">
     <meta name="keyword" content="">
