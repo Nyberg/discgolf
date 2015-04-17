@@ -145,4 +145,7 @@ class Round extends Eloquent{
         return $this->belongsTo('Wind');
     }
 
+    public function compare(){
+        return $this->belongsTo('Compare', 'id');
+    }
 }

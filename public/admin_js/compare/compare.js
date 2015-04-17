@@ -30,6 +30,37 @@ function getCompareRound(){
     return false;
 }
 
+function addToCompare(){
+
+    $.post(
+        $(this).prop('action'),
+        {
+            "id": $('#round_id').val()
+        },
+        function (data) {
+            console.log(data);
+            if(data != 0)
+            {
+                $('.badge-compare').html(data);
+                $('#add_to_compare_btn').addClass('disabled');
+                $('#add_to_compare_btn').val('Rundan sparad!');
+            }
+        },'json'
+    );
+    return false;
+}
+
+function getCompareNumber(){
+
+    $.get('/getCompareNumber', function(data){
+        console.log(data);
+        if(data != 0)
+        {
+            $('.badge-compare').append(data);
+        }
+    })
+}
+
 function getScore(score, par){
     var num = score - par;
 

@@ -115,8 +115,16 @@
           </ul>
 
         <ul class="nav navbar-nav navbar-right pull-right col-lg-offset-right-1">
+                @if(Auth::user() && Auth::user()->hasRole('Admin'))
+                <li>
+                    <a href="/account/user/{{Auth::id()}}/compare" id="compareCart">
+                    <span class="fa fa-binoculars">
+                    <span class="badge badge-compare"></span>
+                    </span>
+                    </a></li>
+                @else
+                @endif
                 @if(Auth::user())
-
                 <li class="dropdown">
                     <a href="#" class="" id="notification" data-toggle="dropdown">
                     <span class="fa fa-bell"> </span>

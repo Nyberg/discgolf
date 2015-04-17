@@ -59,8 +59,10 @@
 
          <div class="panel panel-default">
            <!-- Default panel contents -->
-           <div class="panel-heading" id="compare_result">  Resultat: {{calcScore($round->total, $round->tee->par)}}
-                        <div class="fb-like pull-right" data-href="{{Route::current()->getName()}}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+           <div class="panel-heading">
+
+           <span id="compare_result">Resultat: {{calcScore($round->total, $round->tee->par)}}</span>
+            <div class="fb-like pull-right" data-href="{{Route::current()->getName()}}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 
            </div>
     <table class="table table-hover text-center hidden-phone hidden-tablet">
@@ -111,9 +113,18 @@
 
    <span class="input-group-sm hidden-phone">
        <div class="row">
+       @if(Auth::check() && Auth::user()->hasRole('Admin'))
+       <div class="col-sm-4">
+            {{Form::open(['method' => 'POST','route' => ['add-to-compare'], 'id'=>'add_to_compare'])}}
+            {{Form::hidden('round_id', $round->id, ['id'=>'round_id'])}}
+            {{Form::submit('Lägg till i rundpool', ['class' => 'btn btn-primary btn-sm btn-block', 'id'=>'add_to_compare_btn'])}}
+            {{Form::close()}}
+       </div>
+       @else
+       @endif
        @if($round->type == 'Group')
 
-           <div class="col-sm-6">
+           <div class="col-sm-4">
                 {{Form::open(['method' => 'POST','route' => ['group.rounds'], 'id'=>'group_form'])}}
                 {{Form::hidden('id', $round->group_id, ['id'=>'group_id'])}}
                 {{Form::hidden('round_id', $round->id, ['id'=>'round_id'])}}
@@ -123,7 +134,7 @@
        @else
        @endif
        @if(Auth::check() && count($u_rounds) >= 1)
-       <div class="col-sm-6">
+       <div class="col-sm-4">
           <button type="button" class="btn btn-sm btn-primary btn-block" id="submit_compare" data-toggle="modal" data-target="#compare">Jämför runda</button>
         </div>
        @else
@@ -262,6 +273,7 @@
         getRoundAvgScore();
         $('#group_form').submit(getGroupRounds);
         $('#compare_form').submit(getCompareRound);
+        $('#add_to_compare').submit(addToCompare);
 
         });
 </script>

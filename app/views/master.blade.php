@@ -120,19 +120,25 @@
 {{HTML::script('admin_js/app.js')}}
 {{HTML::script('admin_js/round/lost.js')}}
 {{HTML::script('admin_js/notifications/notiser.js')}}
+{{HTML::script('admin_js/compare/compare.js')}}
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
 
 @yield('scripts')
 
+@if(Auth::check() && Auth::user()->hasRole('Admin'))
+<script>
+    $(document).ready(function() {
+        getCompareNumber();
+    });
+</script>
+@else
+@endif
+
 <script>
 
-    $(window).load(function() {
-      $('.flexslider').flexslider({
-        animation: "fade"
-      });
-    });
+
 
     $('#auto').autocomplete({
         source: '/query',

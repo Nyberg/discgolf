@@ -144,6 +144,11 @@ Route::group(['before'=>'auth'], function(){
     Route::get('/account/round/{id}/edit-score', 'RoundController@editScore');
     Route::get('/account/group-round/add', 'RoundController@group');
     Route::get('/rounds/weather/{id}/show', 'RoundController@weather');
+    Route::post('/addToCompare', ['as' => 'add-to-compare', 'uses'=>'StatisticsController@addToCompare']);
+    Route::get('/account/user/{id}/compare', 'RoundController@userCompare');
+    Route::get('/getCompareNumber', 'StatisticsController@getCompareNumber');
+    Route::get('/account/user/{user_id}/remove/{id}/compare', 'RoundController@removeCompare');
+    Route::get('/account/clear/pool', 'RoundController@clearPool');
 
     Route::post('/getCompareRounds', ['as' => 'round.compare', 'uses'=>'StatisticsController@getRoundCompare']);
 

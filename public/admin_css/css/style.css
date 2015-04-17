@@ -137,7 +137,11 @@ body {
 .badge-notify{
     background: #87D37C;
     position:relative;
+}
 
+.badge-compare{
+    background: #87D37C;
+    position:relative;
 }
 
 .course{

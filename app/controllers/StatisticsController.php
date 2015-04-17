@@ -545,6 +545,32 @@ class StatisticsController extends BaseController {
         return Response::json($message);
     }
 
+    public function addToCompare(){
+        $id = Input::get('id');
+
+        $compare = Compare::where('user_id', Auth::id())->first();
+
+        $item = new CompareItems();
+        $item->user_id = Auth::id();
+        $item->round_id = $id;
+        $item->compare_id = $compare->id;
+
+        $item->save();
+
+        $message = [count($compare->items)];
+
+        return Response::json($message);
+    }
+
+    public function getCompareNumber(){
+
+        $compare = Compare::where('user_id', Auth::id())->first();
+
+        $message = count($compare->items);
+
+        return Response::json($message);
+    }
+
     public function test($id){
 
         $id = $id;

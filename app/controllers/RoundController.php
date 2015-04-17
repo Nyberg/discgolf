@@ -433,4 +433,45 @@ class RoundController extends BaseController {
         return Redirect::to('/account/rounds/'.$round->user_id.'/user')->with('success', 'Rundan är sparad!');
     }
 
+    public function userCompare($id){
+        $compare = Compare::where('user_id', $id)->firstOrFail();
+
+        $array = [];
+        foreach($compare->items as $item){
+            $array[] = $item->round->tee_id;
+        }
+
+        $array = array_unique($array, SORT_REGULAR);
+        $courses = [];
+        foreach($array as $ar){
+            $course = Tee::with('course')->whereId($ar)->firstOrFail();
+            $courses[] = $course;
+        }
+
+        return View::make('round.compare', ['compare'=>$compare, 'courses'=>$courses]);
+    }
+
+    public function removeCompare($user_id, $id){
+
+        $compare = Compare::where('user_id', $user_id)->firstOrFail();
+
+        if($compare->user_id == Auth::id()){
+            $item = CompareItems::whereId($id)->first();
+            $item->delete();
+            return Redirect::back()->with('success', 'Runda borttagen ur poolen!');
+        }else{
+            return Redirect::back()->with('danger', 'Du kan inte redigera detta!');
+        }
+    }
+
+    public function clearPool(){
+        $items = CompareItems::where('user_id', Auth::id())->get();
+
+        foreach($items as $item){
+            $item->delete();
+        }
+
+        return Redirect::to('/')->with('success', 'Din rundpool är nu rensad!');
+    }
+
 }
