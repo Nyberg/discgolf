@@ -66,6 +66,7 @@
                             @endforeach
                             </select>
                         {{errors_for('city', $errors)}}
+                         <span class="help-block">Hittar du inte din stad? Ta någon i närheten!</span>
                         </div>
                    </div>
 

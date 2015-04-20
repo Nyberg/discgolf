@@ -108,6 +108,7 @@
 
 <h4 class="tab-rub text-center page-header-custom" id="hole-gallery-{{$tee->id}}">{{$tee->color . ' tee - ' .$course->name}}</h4>
 <p class="text-center">Klicka på varje korgs nummer för att se en bild på banan. Hoovra över banans par för att se snittresultat för varje hål.</p>
+<p class="text-center">Alla bankartor och rättigheter tillhör {{$course->club->name}}. </p>
      <div class="divider-header"></div>
 
     <table class="table table-hover">
