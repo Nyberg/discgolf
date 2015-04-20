@@ -158,7 +158,7 @@
 
     $('#auto').autocomplete({
         source: '/query',
-        minLength: 1
+        minLength: 2
     });
 
     $('#getPlayer').autocomplete({
