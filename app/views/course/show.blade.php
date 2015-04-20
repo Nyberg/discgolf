@@ -325,7 +325,7 @@
 <div class="row">
 <div class="col-sm-12">
 <h4 class="text-center">De 10 senaste rundorna spelade vid {{$course->name}}</h4>
-                @foreach($records as $round)
+                @foreach($rounds as $round)
 
                 <a href="/round/{{$round->round_id}}/course/{{$round->course_id}}">
                     <div class="col-sm-3 col-md-3">
