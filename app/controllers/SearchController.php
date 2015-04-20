@@ -77,7 +77,7 @@ class SearchController extends Controller {
 
     public function search($result){
 
-        $courses = Course::where('name', 'LIKE', "%$result%")->paginate(3);
+        $courses = Course::where('name', 'LIKE', "%$result%")->get();
         $y = Course::where('name', 'LIKE', "%$result%")->get();
         $num = count($y);
 
