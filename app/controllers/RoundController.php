@@ -477,7 +477,7 @@ class RoundController extends BaseController {
     }
 
     public function userRounds($id){
-        $rounds = Round::where('user_id', $id)->where('status', 1)->orderBy('date', 'asc')->paginate(24);
+        $rounds = Round::where('user_id', $id)->where('status', 1)->orderBy('date', 'desc')->paginate(24);
         return View::make('round.index',compact('rounds'));
     }
 
