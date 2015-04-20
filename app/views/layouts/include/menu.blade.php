@@ -84,6 +84,7 @@
                     <li><a href="/rounds">Alla rundor</a></li>
                     <li><a href="/records">Alla rekordrundor</a></li>
                     @if(Auth::check())
+                    <li><a href="/account/user/{{Auth::id()}}/rounds">Dina rundor</a></li>
                     <li><a href="/round/start">Lägg till runda</a></li>
                     @else
                     @endif

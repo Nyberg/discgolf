@@ -33,7 +33,11 @@
             <select name="" class="form-control form-2" id="form-control-1">
                 <option class="filter" data-filter=".category-none">Välj Landskap</option>
                 @foreach($states as $state)
-                <option class="filter" data-filter=".category-{{$state->state}}">{{$state->state}}</option>
+                    @if($state->state == 'Västra Götaland')
+                    <option class="filter" data-filter=".category-västragötaland">{{$state->state}}</option>
+                    @else
+                    <option class="filter" data-filter=".category-{{$state->state}}">{{$state->state}}</option>
+                    @endif
                 @endforeach
                 </select>
     </div>
@@ -51,8 +55,11 @@
         <div class="col-md-12" id="Container">
 
         @foreach($courses as $course)
+        @if($course->state->state == 'Västra Götaland')
+        <div class="col-sm-4 text-center thread mix category-none category-{{$course->country->country}} category-västragötaland category-{{$course->city->city}}" data-myorder="2">
+        @else
         <div class="col-sm-4 text-center thread mix category-none category-{{$course->country->country}} category-{{$course->state->state}} category-{{$course->city->city}}" data-myorder="2">
-
+        @endif
         @foreach($course->photos as $photo)
            <a href="/course/{{$course->id}}/show"><img src="{{$photo->url}}" class="img-responsive thumbnail center-block" width="100%;" height="60px;"/></a>
         @endforeach

@@ -162,6 +162,15 @@
 
     </div>
 
+    <div class="showback hidden-phone">
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+             <input hidden="pie-id" id="pie_id" value="{{$round->id}}"/>
+             <div id="chart-three" style="min-width: 310px; height: 400px; width: 100%; margin: 0 auto"></div>
+          </div>
+        </div>
+    </div>
+
     <div class="row">
 
     <div class="col-lg-12">
@@ -275,7 +284,8 @@
         $('#compare_form').submit(getCompareRound);
         $('#add_to_compare').submit(addToCompare);
 
-        });
+    });
+
 </script>
 
 <script>

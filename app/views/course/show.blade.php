@@ -320,38 +320,38 @@
 
 <div id="sectionD" class="tab-pane fade in active">
     <br/>
-    <div class="panel panel-default">
-                    <div class="panel-heading">De 10 senaste rundorna spelade vid {{$course->name}}</div>
 
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Datum</th>
-                    <th>Användare</th>
-                    <th class="hidden-phone">Tee</th>
-                    <th class="hidden-phone">Typ</th>
-                    <th>Resultat</th>
-                </tr>
 
-            </thead>
-            <tbody>
-                @foreach($rounds as $round)
-                <tr>
-                    <td><a href="/round/{{$round->id}}/course/{{$round->course_id}}">{{$round->date}}</a></td>
-                    @if($round->type == 'Singel' || $round->type == 'Group')
-                    <td><a href="/user/{{$round->user_id}}/show">{{$round->user->first_name . ' ' . $round->user->last_name}}</a></td>
-                    @else
-                    <td>{{showPar($round->type_id, $round->user_id)}}</td>
-                    @endif
-                    <td class="hidden-phone">{{$round->tee['color']}}</td>
-                    <td class="hidden-phone">{{$round->type}}</td>
-                    <td>{{calcScore($round->total, $round->tee->par)}}</td>
-                </tr>
+<div class="row">
+<div class="col-sm-12">
+<h4 class="text-center">De 10 senaste rundorna spelade vid {{$course->name}}</h4>
+                @foreach($records as $round)
+
+                <a href="/round/{{$round->round_id}}/course/{{$round->course_id}}">
+                    <div class="col-sm-3 col-md-3">
+                          <div class="thumbnail">
+                            <div class="caption text-center">
+                                <h1 class="green">{{calcScore($round->total, $round->tee->par)}}</h1>
+                                <h4 class="">
+                                    {{$round->course->name . ' - ' . $round->tee->color}}
+                                </h4>
+                                <p>{{$round->date . ' av ' . $round->user->first_name . ' ' . $round->user->last_name}}</p>
+                           </div>
+                          </div>
+                    </div>
+                </a>
+
                 @endforeach
-            </tbody>
-            </table>
-        </div>
-        <a href="/course/{{$course->id}}/rounds" class="btn btn-primary btn-sm">Visa alla rundor</a>
+
+</div>
+<div class="col-sm-12">
+<div class="col-sm-12">
+<a href="/course/{{$course->id}}/rounds" class="btn btn-primary btn-sm">Visa alla rundor</a>
+</div>
+</div>
+</div>
+
+
 
 </div>
 

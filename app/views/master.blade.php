@@ -18,6 +18,7 @@
 
         <!-- Disable automatic phone number detection. -->
         <meta name="format-detection" content="telephone=no">
+
     <meta name="description" content="">
     <meta name="author" content="Johannes Nyberg">
     <meta name="keyword" content="">

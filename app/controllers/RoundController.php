@@ -476,4 +476,9 @@ class RoundController extends BaseController {
         return Redirect::to('/')->with('success', 'Din rundpool är nu rensad!');
     }
 
+    public function userRounds($id){
+        $rounds = Round::where('user_id', $id)->where('status', 1)->orderBy('date', 'asc')->paginate(24);
+        return View::make('round.index',compact('rounds'));
+    }
+
 }

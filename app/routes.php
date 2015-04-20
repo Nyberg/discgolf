@@ -149,6 +149,7 @@ Route::group(['before'=>'auth'], function(){
     Route::get('/getCompareNumber', 'StatisticsController@getCompareNumber');
     Route::get('/account/user/{user_id}/remove/{id}/compare', 'RoundController@removeCompare');
     Route::get('/account/clear/pool', 'RoundController@clearPool');
+    Route::get('/account/user/{id}/rounds', 'RoundController@userRounds');
 
     Route::post('/getCompareRounds', ['as' => 'round.compare', 'uses'=>'StatisticsController@getRoundCompare']);
 
