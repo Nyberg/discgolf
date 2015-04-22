@@ -198,7 +198,7 @@ class UserController extends \BaseController {
 
     public function getPlayers()
     {
-        $users = User::get();
+        $users = User::orderBy('first_name', 'asc')->get();
 
         return Response::json($users);
     }
