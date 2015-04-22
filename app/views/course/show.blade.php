@@ -328,7 +328,7 @@
 <h4 class="text-center">De 8 senaste rundorna spelade vid {{$course->name}}</h4>
                 @foreach($rounds as $round)
 
-                <a href="/round/{{$round->round_id}}/course/{{$round->course_id}}">
+                <a href="/round/{{$round->id}}/course/{{$round->course_id}}">
                     <div class="col-sm-3 col-md-3">
                           <div class="thumbnail">
                             <div class="caption text-center">
