@@ -53,7 +53,9 @@
            <div class="col-sm-5">
            <select name="players" class="form-control players" id="players">
            <option value="0" selected="selected">Välj spelare</option>
-           </select></div>
+           </select>
+           <span class="help-block">Hittar du inte din medspelare? Väl användaren Vakant Spelare.</span>
+           </div>
            </div>
         </div>
 

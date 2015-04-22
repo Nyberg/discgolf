@@ -326,23 +326,24 @@
 <div class="row">
 <div class="col-sm-12">
 <h4 class="text-center">De 8 senaste rundorna spelade vid {{$course->name}}</h4>
-                @foreach($rounds as $round)
 
-                <a href="/round/{{$round->id}}/course/{{$round->course_id}}">
-                    <div class="col-sm-3 col-md-3">
-                          <div class="thumbnail">
-                            <div class="caption text-center">
-                                <h1 class="green">{{calcScore($round->total, $round->tee->par)}}</h1>
-                                <h4 class="">
-                                    {{$round->course->name . ' - ' . $round->tee->color}}
-                                </h4>
-                                <p>{{$round->date . ' av ' . $round->user->first_name . ' ' . $round->user->last_name}}</p>
-                           </div>
-                          </div>
-                    </div>
-                </a>
+    @foreach($rounds as $round)
 
-                @endforeach
+    <a href="/round/{{$round->id}}/course/{{$round->course_id}}">
+        <div class="col-sm-3 col-md-3">
+              <div class="thumbnail">
+                <div class="caption text-center">
+                    <h1 class="green">{{calcScore($round->total, $round->tee->par)}}</h1>
+                    <h4 class="">
+                        {{$round->course->name . ' - ' . $round->tee->color}}
+                    </h4>
+                    <p>{{$round->date . ' av ' . $round->user->first_name . ' ' . $round->user->last_name}}</p>
+               </div>
+              </div>
+        </div>
+    </a>
+
+    @endforeach
 
 </div>
 <div class="col-sm-12">
